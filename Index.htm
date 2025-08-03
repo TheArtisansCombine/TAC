@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Artisans Combine</title>
-    <!-- Use the Inter font from Google Fonts -->
+    <!-- Use the Inter font from Google Fonts for a modern, clean look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,20 +14,32 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Custom background gradient for an artsy feel */
+        .bg-artsy-gradient {
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
+        }
+        /* Subtle card hover effect */
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-artsy-gradient text-gray-800">
 
     <!-- Header & Navigation -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
-            <!-- Add a logo instead of text -->
-            <a href="#" class="h-10 w-10">
-                <!-- Assuming the logo is hosted, otherwise you'd need to upload it -->
-                <img src="https://placehold.co/40x40/f0abfc/1f2937?text=TAC" alt="The Artisans Combine Logo" class="h-full w-full object-contain">
+            <!-- The actual logo from the user's file -->
+            <a href="#" class="h-10">
+                <img src="uploaded:TAC-1_2_2.png-f0aa0a95-601b-47f3-9e69-fafa4b8a64f7" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
             <nav class="hidden md:flex space-x-6">
                 <a href="#about" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Our Mission</a>
+                <a href="#profiles" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Artisan Profiles</a>
                 <a href="#gallery" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Artisan Gallery</a>
                 <a href="#contact" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Contact</a>
             </nav>
@@ -67,13 +79,60 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Artisan Profiles Section (New Section) -->
+        <section id="profiles" class="py-16 bg-gray-100">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Meet Our Artisans</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Profile Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <img src="https://placehold.co/150x150/f472b6/ffffff?text=Jane" alt="Jane's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Jane Doe</h3>
+                    <p class="text-fuchsia-600 font-medium">Potter</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        Jane specializes in wheel-thrown and hand-built ceramics, drawing inspiration from natural landscapes.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
+                </div>
+                <!-- Profile Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <img src="https://placehold.co/150x150/60a5fa/ffffff?text=John" alt="John's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">John Smith</h3>
+                    <p class="text-fuchsia-600 font-medium">Woodworker</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        John creates custom furniture and intricate carvings using sustainable, reclaimed wood.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
+                </div>
+                <!-- Profile Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <img src="https://placehold.co/150x150/4ade80/ffffff?text=Sara" alt="Sara's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Sara Chen</h3>
+                    <p class="text-fuchsia-600 font-medium">Textile Artist</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        Sara weaves vibrant tapestries and designs unique, hand-dyed fabrics for home decor.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
+                </div>
+                <!-- Profile Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <img src="https://placehold.co/150x150/a855f7/ffffff?text=Alex" alt="Alex's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Alex Rivera</h3>
+                    <p class="text-fuchsia-600 font-medium">Jeweler</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        Alex designs and crafts elegant jewelry from recycled metals and ethically sourced gems.
+                    </p>
+                    <a href="#" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
+                </div>
+            </div>
+        </section>
 
         <!-- Artisan Gallery Section -->
         <section id="gallery" class="py-16">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Featured Artisans</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Artisan Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <img src="https://placehold.co/600x400/94a3b8/ffffff?text=Pottery" alt="Pottery by an artisan" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-900">Earthenware Pottery</h3>
@@ -81,7 +140,7 @@
                     </div>
                 </div>
                 <!-- Artisan Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <img src="https://placehold.co/600x400/cbd5e1/1e293b?text=Woodworking" alt="Woodworking art by an artisan" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-900">Hand-Carved Woodwork</h3>
@@ -89,7 +148,7 @@
                     </div>
                 </div>
                 <!-- Artisan Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <img src="https://placehold.co/600x400/334155/f1f5f9?text=Textiles" alt="Textile art by an artisan" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-900">Woven Textiles</h3>
