@@ -37,12 +37,12 @@
                 IMPORTANT: To make this work on your live site, create a folder named 'images' in your GitHub repository
                 and upload your 'TAC-1_2_2.png' file there.
             -->
-            <a href="#" class="h-10">
+            <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
             <nav class="hidden md:flex space-x-6">
                 <a href="#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
-                <a href="#profiles" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
+                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
                 <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
                 <a href="#contact" class="text-white hover:text-gray-200 transition-colors">Contact</a>
             </nav>
@@ -83,44 +83,29 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Artisan Profiles Section -->
-        <section id="profiles" class="py-16 bg-gray-100">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Meet Our Artisans</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Profile Card for Jesus Alicea -->
-                <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
-                    <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full mx-auto mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
-                    <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        Based in Springfield, Massachusetts, Jesus specializes in digital media and visual storytelling, using a blend of modern techniques and artistic flair.
-                    </p>
-                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
-                </a>
-                <!-- Profile Card for Bobby Diesel -->
-                <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
-                    <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full mx-auto mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
-                    <p class="text-fuchsia-600 font-medium">notbobbydiesel.com</p>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        A multidisciplinary artist specializing in painting and mixed media, with a focus on vibrant colors and abstract expression.
-                    </p>
-                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
+
+        <!-- Artisan Profiles and Gallery sections now link to new pages -->
+        <div class="py-16 text-center space-y-12">
+            <div class="space-y-4">
+                <h2 class="text-3xl font-bold text-gray-900">Meet Our Artisans</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover the talented creators who make up our vibrant community.
+                </p>
+                <a href="artisans.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    View Artisan Profiles
                 </a>
             </div>
-        </section>
 
-        <!-- The Artisan Gallery section has been moved to a new page (gallery.html) -->
-        <section id="gallery" class="py-16 text-center">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Showcase of Artistry</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                Explore the diverse range of creative disciplines our artisans specialize in.
-            </p>
-            <a href="gallery.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                View Gallery
-            </a>
-        </section>
+            <div class="space-y-4">
+                <h2 class="text-3xl font-bold text-gray-900">Showcase of Artistry</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Explore the diverse range of creative disciplines our artisans specialize in.
+                </p>
+                <a href="gallery.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    View Gallery
+                </a>
+            </div>
+        </div>
 
         <!-- Call to Action / Contact Form -->
         <section id="contact" class="py-16 text-center">
@@ -188,7 +173,7 @@
                     <h3 class="text-white font-bold mb-4">Navigation</h3>
                     <ul class="text-sm">
                         <li><a href="#about" class="hover:text-white transition-colors">Our Mission</a></li>
-                        <li><a href="#profiles" class="hover:text-white transition-colors">Artisan Profiles</a></li>
+                        <li><a href="artisans.html" class="hover:text-white transition-colors">Artisan Profiles</a></li>
                         <li><a href="gallery.html" class="hover:text-white transition-colors">Artisan Gallery</a></li>
                         <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
                     </ul>
