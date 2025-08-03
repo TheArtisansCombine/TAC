@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Zeo | Musician, Model & Author</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-artsy-gradient {
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
+        }
+        .banner-bg {
+            background-image: url('images/thaizeo_banner.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            position: relative;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-artsy-gradient text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="index.html" class="text-2xl font-bold text-white hover:text-gray-200 transition-colors">The Artisans Combine</a>
+            <span class="text-white text-lg font-semibold">Thai Zeo</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
+
+        <!-- Banner Section -->
+        <section class="banner-bg rounded-lg shadow-xl mb-12"></section>
+
+        <!-- Artisan Profile Bio Section -->
+        <section class="text-center md:flex md:items-center md:text-left md:space-x-12 -mt-32 relative z-10">
+            <div class="mb-8 md:mb-0">
+                <img src="images/thaizeo_profile.jpg" alt="Thai Zeo's Profile Picture" class="rounded-full w-48 h-48 mx-auto md:mx-0 object-cover border-4 border-fuchsia-600 shadow-lg">
+            </div>
+            <div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
+                    Thai Zeo
+                </h1>
+                <p class="text-2xl font-medium text-fuchsia-600 mb-4">Musician, Model & Author</p>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
+                    Thai is a versatile and expressive artist whose work spans multiple creative fields. As a musician, she crafts lyrical narratives and melodies that resonate with raw emotion. Her work as a model and in publications allows her to explore visual storytelling, bringing a powerful and dynamic presence to every project.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Showcase Section for Thai Zeo's Work -->
+        <section class="mt-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">My Work</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Music -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="images/thaizeo_music.jpg" alt="Thai Zeo Music" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Music</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Lyrical narratives and melodic compositions.</p>
+                    </div>
+                </div>
+                <!-- Modeling -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="images/thaizeo_model.jpg" alt="Thai Zeo Modeling" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Modeling</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Visual storytelling and dynamic presence.</p>
+                    </div>
+                </div>
+                <!-- Publications -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="images/thaizeo_books.jpg" alt="Thai Zeo Publications" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Publications</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Authored work and collaborations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="mt-16 text-center">
+            <a href="artisans.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to Artisans</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-10">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 The Artisans Combine. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
