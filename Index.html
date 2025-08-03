@@ -84,28 +84,81 @@
             </div>
         </section>
 
-        <!-- Artisan Profiles and Gallery sections now link to new pages -->
-        <div class="py-16 text-center space-y-12">
-            <div class="space-y-4">
-                <h2 class="text-3xl font-bold text-gray-900">Meet Our Artisans</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Discover the talented creators who make up our vibrant community.
-                </p>
+        <!-- Artisan Profiles Preview Section (New) -->
+        <section class="py-16 bg-gray-100">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Meet Our Artisans</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+                <!-- Profile Card for Jesus Alicea -->
+                <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect max-w-sm">
+                    <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
+                    <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        Based in Springfield, Massachusetts, Jesus specializes in digital media and visual storytelling, using a blend of modern techniques and artistic flair.
+                    </p>
+                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
+                </a>
+                <!-- Profile Card for Bobby Diesel -->
+                <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect max-w-sm">
+                    <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
+                    <p class="text-fuchsia-600 font-medium">notbobbydiesel.com</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        A multidisciplinary artist specializing in painting and mixed media, with a focus on vibrant colors and abstract expression.
+                    </p>
+                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
+                </a>
+            </div>
+            <div class="mt-12 text-center">
                 <a href="artisans.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                    View Artisan Profiles
+                    View All Artisans
                 </a>
             </div>
-
-            <div class="space-y-4">
-                <h2 class="text-3xl font-bold text-gray-900">Showcase of Artistry</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Explore the diverse range of creative disciplines our artisans specialize in.
-                </p>
+        </section>
+        
+        <!-- Gallery Preview Section (New) -->
+        <section class="py-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Featured Artistry</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Music and Poetry Preview -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/a855f7/ffffff?text=Music+%26+Poetry" alt="Music and Poetry" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Music & Poetry</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Lyrical compositions and spoken word performances.</p>
+                    </div>
+                </div>
+                <!-- Art and Wall Art Preview -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/f472b6/ffffff?text=Art+%26+Wall+Art" alt="Art and Wall Art" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Art & Wall Art</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Painters, illustrators, and sculptors.</p>
+                    </div>
+                </div>
+                <!-- Performance Art Preview -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/20c997/ffffff?text=Performance+Art" alt="Performance Art" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Performance Art</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Creative works that challenge and inspire audiences.</p>
+                    </div>
+                </div>
+                <!-- Photography Preview -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Photography" alt="Photography" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Photography</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Capturing moments and perspectives in stunning detail.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
                 <a href="gallery.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                    View Gallery
+                    View All Artistry
                 </a>
             </div>
-        </div>
+        </section>
 
         <!-- Call to Action / Contact Form -->
         <section id="contact" class="py-16 text-center">
