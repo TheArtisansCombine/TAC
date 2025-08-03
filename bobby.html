@@ -15,6 +15,12 @@
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
         }
+        .hero-bg-graffiti {
+            background-image: url('https://placehold.co/1200x800/22d3ee/1e293b?text=Graffiti+Art+Background');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
@@ -40,11 +46,11 @@
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
         <!-- Artisan Profile Hero Section -->
-        <section class="text-center md:flex md:items-center md:text-left md:space-x-12">
-            <div class="mb-8 md:mb-0">
+        <section class="hero-bg-graffiti text-center md:flex md:items-center md:text-left md:space-x-12 p-8 rounded-lg shadow-xl">
+            <div class="mb-8 md:mb-0 bg-white/70 p-6 rounded-lg backdrop-blur-sm">
                 <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full w-48 h-48 mx-auto md:mx-0 object-cover border-4 border-fuchsia-600 shadow-lg">
             </div>
-            <div>
+            <div class="bg-white/70 p-6 rounded-lg backdrop-blur-sm">
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
                     Bobby Diesel
                 </h1>
@@ -70,22 +76,25 @@
         <section class="mt-16">
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Featured Work</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Exterior Art -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/94a3b8/ffffff?text=Abstract+Painting" alt="Abstract painting" class="w-full h-48 object-cover">
+                    <img src="https://placehold.co/600x400/94a3b8/ffffff?text=Exterior+Art" alt="Exterior art" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Abstract Painting</h3>
+                        <h3 class="text-xl font-semibold text-gray-900">Exterior Art</h3>
                     </div>
                 </div>
+                <!-- Interior Art -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/334155/f1f5f9?text=Mixed+Media" alt="Mixed media artwork" class="w-full h-48 object-cover">
+                    <img src="https://placehold.co/600x400/334155/f1f5f9?text=Interior+Art" alt="Interior art" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Mixed Media Collage</h3>
+                        <h3 class="text-xl font-semibold text-gray-900">Interior Art</h3>
                     </div>
                 </div>
+                <!-- Canvases -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/fuchsia-600/ffffff?text=Digital+Art" alt="Digital art piece" class="w-full h-48 object-cover">
+                    <img src="https://placehold.co/600x400/fuchsia-600/ffffff?text=Canvases" alt="Canvases" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Digital Art</h3>
+                        <h3 class="text-xl font-semibold text-gray-900">Canvases</h3>
                     </div>
                 </div>
             </div>
