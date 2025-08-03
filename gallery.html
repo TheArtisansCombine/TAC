@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Artisans</title>
+    <title>The Artisans Combine | Gallery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,13 +14,6 @@
         }
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
-        }
-        .card-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -35,7 +28,7 @@
             <nav class="hidden md:flex space-x-6">
                 <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
                 <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
-                <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
+                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
             </nav>
             <a href="index.html#contact" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity">Join Us</a>
         </div>
@@ -43,34 +36,49 @@
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 text-center mb-8">
-            Our Artisans
+            The Artisan Gallery
         </h1>
         <p class="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            Meet the talented creators who form the heart of our community.
+            A showcase of the diverse art forms and creative disciplines our community specializes in.
         </p>
-        
-        <!-- Artisan Profiles Section -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
-            <!-- Profile Card for Jesus Alicea -->
-            <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect max-w-sm">
-                <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full mx-auto mb-4">
-                <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
-                <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
-                <p class="text-gray-600 mt-2 text-sm">
-                    Based in Springfield, Massachusetts, Jesus specializes in digital media and visual storytelling, using a blend of modern techniques and artistic flair.
+
+        <!-- Gallery Categories Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Music and Poetry Section -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Music & Poetry</h2>
+                <p class="text-gray-600 mb-6">
+                    From lyrical compositions to powerful spoken word, explore the artists who weave sound and language into captivating performances.
                 </p>
-                <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
-            </a>
-            <!-- Profile Card for Bobby Diesel -->
-            <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect max-w-sm">
-                <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full mx-auto mb-4">
-                <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
-                <p class="text-fuchsia-600 font-medium">notbobbydiesel.com</p>
-                <p class="text-gray-600 mt-2 text-sm">
-                    A multidisciplinary artist specializing in painting and mixed media, with a focus on vibrant colors and abstract expression.
+                <img src="https://placehold.co/600x350/a855f7/ffffff?text=Music+and+Poetry" alt="Music and Poetry" class="w-full h-auto rounded-lg shadow-md">
+            </div>
+
+            <!-- Art and Wall Art Section -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Art & Wall Art</h2>
+                <p class="text-gray-600 mb-6">
+                    Discover painters, illustrators, and sculptors who create stunning visual pieces that transform spaces and tell stories.
                 </p>
-                <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
-            </a>
+                <img src="https://placehold.co/600x350/f472b6/ffffff?text=Art+and+Wall+Art" alt="Art and Wall Art" class="w-full h-auto rounded-lg shadow-md">
+            </div>
+
+            <!-- Performance Art Section -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Performance Art</h2>
+                <p class="text-gray-600 mb-6">
+                    Meet the performers who use their bodies and space to create powerful, ephemeral works that challenge and inspire audiences.
+                </p>
+                <img src="https://placehold.co/600x350/20c997/ffffff?text=Performance+Art" alt="Performance Art" class="w-full h-auto rounded-lg shadow-md">
+            </div>
+
+            <!-- Photography Section -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Photography</h2>
+                <p class="text-gray-600 mb-6">
+                    Explore the world through the lens of our talented photographers, capturing moments and perspectives in stunning detail.
+                </p>
+                <img src="https://placehold.co/600x350/60a5fa/ffffff?text=Photography" alt="Photography" class="w-full h-auto rounded-lg shadow-md">
+            </div>
         </div>
 
         <div class="mt-16 text-center">
