@@ -3,28 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine</title>
-    <!-- Use the Inter font from Google Fonts for a modern, clean look -->
+    <title>Jesus Alicea | Alicea Media Arts</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom background gradient for an artsy feel */
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
-        }
-        /* Subtle card hover effect */
-        .card-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -33,132 +22,46 @@
     <!-- Header & Navigation -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
-            <!--
-                IMPORTANT: To make this work on your live site, create a folder named 'images' in your GitHub repository
-                and upload your 'TAC-1_2_2.png' file there.
-            -->
-            <a href="#" class="h-10">
-                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            <a href="index.html" class="text-2xl font-bold text-gray-900 hover:text-fuchsia-600 transition-colors">The Artisans Combine</a>
+            <!-- Logo for Jesus Alicea's profile -->
+            <a href="https://www.aliceamediaarts.com" class="h-10">
+                <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
             </a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Our Mission</a>
-                <a href="#profiles" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Artisan Profiles</a>
-                <a href="#gallery" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Artisan Gallery</a>
-                <a href="#contact" class="text-gray-600 hover:text-fuchsia-600 transition-colors">Contact</a>
-            </nav>
-            <a href="#contact" class="md:hidden bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white px-4 py-2 rounded-md hover:opacity-90 transition-opacity">Join Us</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 max-w-7xl">
+    <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
-        <!-- Hero Section -->
-        <section class="text-center py-20 md:py-32">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                Where Creativity Finds Community
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                The Artisans Combine is a collective dedicated to showcasing, supporting, and celebrating local craftspeople and their unique creations.
-            </p>
-            <a href="#gallery" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                Explore Our Gallery
-            </a>
-        </section>
-
-        <!-- Our Mission Section -->
-        <section id="about" class="py-16">
-            <div class="grid md:grid-cols-2 gap-10 items-center">
-                <div class="space-y-6">
-                    <h2 class="text-3xl font-bold text-gray-900">Our Mission</h2>
-                    <p class="text-gray-700 leading-relaxed">
-                        We believe in the power of handmade goods to tell a story and connect people. The Artisans Combine was founded to create a vibrant platform where talented artisans can share their craft with a wider audience. We host events, workshops, and markets to foster a supportive and collaborative environment.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed">
-                        Our goal is to preserve and promote traditional skills while also embracing modern innovation in craftsmanship. Join us in celebrating the beauty of unique, handcrafted products.
-                    </p>
-                </div>
-                <div>
-                    <img src="images/community-placeholder.jpg" alt="A community of artisans" class="w-full h-auto rounded-lg shadow-xl">
-                </div>
+        <!-- Artisan Profile Hero Section -->
+        <section class="text-center md:flex md:items-center md:text-left md:space-x-12">
+            <div class="mb-8 md:mb-0">
+                <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full w-48 h-48 mx-auto md:mx-0 object-cover border-4 border-fuchsia-600 shadow-lg">
             </div>
-        </section>
-        
-        <!-- Artisan Profiles Section -->
-        <section id="profiles" class="py-16 bg-gray-100">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Meet Our Artisans</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Profile Card for Jesus Alicea -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
-                    <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full mx-auto mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
-                    <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        Based in Springfield, Massachusetts, Jesus specializes in digital media and visual storytelling, using a blend of modern techniques and artistic flair.
-                    </p>
-                    <a href="jesus.html" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
-                </div>
-                <!-- Profile Card for Bobby Diesel -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
-                    <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full mx-auto mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
-                    <p class="text-fuchsia-600 font-medium">notbobbydiesel.com</p>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        A multidisciplinary artist specializing in painting and mixed media, with a focus on vibrant colors and abstract expression.
-                    </p>
-                    <a href="bobby.html" class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Artisan Gallery Section -->
-        <section id="gallery" class="py-16">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Featured Artisans</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Artisan Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/pottery-placeholder.jpg" alt="Pottery by an artisan" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Earthenware Pottery</h3>
-                        <p class="text-gray-600 mt-2">Beautifully crafted ceramics inspired by nature.</p>
-                    </div>
-                </div>
-                <!-- Artisan Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/woodworking-placeholder.jpg" alt="Woodworking art by an artisan" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Hand-Carved Woodwork</h3>
-                        <p class="text-gray-600 mt-2">Intricate carvings and furniture that tell a story.</p>
-                    </div>
-                </div>
-                <!-- Artisan Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/textiles-placeholder.jpg" alt="Textile art by an artisan" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Woven Textiles</h3>
-                        <p class="text-gray-600 mt-2">Vibrant and cozy hand-woven blankets and fabrics.</p>
-                    </div>
-                </div>
-                <!-- Add more artisan cards here -->
-            </div>
-        </section>
-
-        <!-- Call to Action / Contact Form -->
-        <section id="contact" class="py-16 text-center">
-            <div class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white rounded-lg p-10 md:p-16 shadow-xl">
-                <h2 class="text-3xl font-bold mb-4">Join The Artisans Combine</h2>
-                <p class="text-lg mb-8 max-w-xl mx-auto">
-                    Are you a local artisan looking to connect with a community of fellow creators and reach new customers? We'd love to hear from you.
+            <div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
+                    Jesus Alicea
+                </h1>
+                <p class="text-2xl font-medium text-fuchsia-600 mb-4">Alicea Media Arts</p>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
+                    Based in Springfield, Massachusetts, Jesus specializes in digital media and visual storytelling, using a blend of modern techniques and artistic flair. His work combines photography, graphic design, and video production to create compelling narratives.
                 </p>
-                <form class="space-y-4 max-w-md mx-auto">
-                    <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-300">
-                    <input type="email" placeholder="Your Email Address" class="w-full px-4 py-3 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-fuchsia-300">
-                    <textarea placeholder="Tell us about your craft..." rows="4" class="w-full px-4 py-3 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-fuchsia-300"></textarea>
-                    <button type="submit" class="w-full bg-white text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors">
-                        Submit
-                    </button>
-                </form>
+                <a href="https://www.aliceamediaarts.com" target="_blank" class="mt-6 inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    Visit My Website
+                </a>
             </div>
         </section>
+
+        <!-- A section to showcase work can be added here -->
+        <!-- For example, a gallery of images or embedded videos -->
+
+        <div class="mt-16 text-center">
+            <a href="index.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to The Artisans Combine</span>
+            </a>
+        </div>
 
     </main>
 
