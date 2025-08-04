@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Morrison-Lemay | Legacy Artist Productions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-artsy-gradient {
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-artsy-gradient text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="index.html" class="h-10">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
+                <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
+                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
+                <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
+                <a href="index.html#contact" class="text-white hover:text-gray-200 transition-colors">Contact</a>
+            </nav>
+            <a href="index.html#contact" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity">Join Us</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
+
+        <!-- Mark's Personal Bio Section -->
+        <section id="personal-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12">
+            <div class="mb-8 md:mb-0">
+                <img src="images/mark_profile.jpg" alt="Mark Morrison-Lemay's Profile Picture" class="rounded-full w-48 h-48 mx-auto md:mx-0 object-cover border-4 border-fuchsia-600 shadow-lg">
+            </div>
+            <div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
+                    Mark Morrison-Lemay
+                </h1>
+                <p class="text-2xl font-medium text-fuchsia-600 mb-4">Poet | Photographer | Talent Organizer</p>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
+                    From Syracuse, New York, Mark is a versatile artist known for his evocative poetry and captivating photography. His personal work delves into themes of connection, observation, and the beauty found in everyday moments.
+                </p>
+                <!-- Placeholder for personal social media or website if applicable -->
+                <div class="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <!-- Add personal social links here if available -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Legacy Artist Productions Section -->
+        <section id="legacy-productions" class="mt-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Legacy Artist Productions</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                As the driving force behind Legacy Artist Productions, Mark is dedicated to uniting and promoting talented musicians and artists across Syracuse and Utica, NY. His work fosters a collaborative environment, creating opportunities for local creatives to showcase their unique voices and build a stronger artistic community.
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mx-auto max-w-lg">
+                <!-- Placeholder for Legacy Artist Productions website/socials -->
+                <a href="#" target="_blank" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    Learn More about Legacy Artist Productions
+                </a>
+                <!-- Add Legacy Artist Productions social links here if available -->
+            </div>
+        </section>
+
+        <div class="mt-16 text-center">
+            <a href="artisans.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to Artisans</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-10">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 The Artisans Combine. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
