@@ -1,0 +1,5 @@
+[forms]
+  # This tells Netlify to redirect to /success.html after any form submission
+  # You can customize the success page URL if needed
+  # This applies to all forms on the site
+  success_redirect = "/success.html"
