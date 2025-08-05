@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -21,6 +22,10 @@
         .card-hover-effect:hover {
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+        /* Specific hover effect for the Join card */
+        .card-effect-join:hover {
+            transform: scale(1.03) rotate(-1deg);
         }
     </style>
 </head>
@@ -38,6 +43,7 @@
                 <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
                 <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
                 <a href="events.html" class="text-white hover:text-gray-200 transition-colors">Events</a>
+                <a href="index.html#contact" class="text-white hover:text-gray-200 transition-colors">Contact</a>
             </nav>
             <a href="index.html#contact" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity">Join Us</a>
         </div>
@@ -48,20 +54,76 @@
             Artisan Opportunities
         </h1>
         <p class="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            Explore exclusive deals, custom commission slots, and special offers from our community of artists.
+            Explore unique opportunities designed to support and empower local craftspeople and artists.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Opportunity Card for the Canvas Book Artist Partnership Program -->
-            <a href="https://www.aliceamediaarts.com/canvas-books/artist-partnership" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                <img src="images/AMA_logo.png" alt="AMA Logo" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Canvas Book Artist Partnership Program</h3>
-                    <p class="text-fuchsia-600 font-medium mb-4">Limited slots available</p>
-                    <p class="text-gray-600 text-sm">Join a new chapter in artistry and storytelling. The Canvas Book Artist Partnership is designed to empower artists and expand their reach through a unique book format. Learn more about how you can become a partner and showcase your work.</p>
-                </div>
-            </a>
-        </div>
+        <!-- Outside Opportunities Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 text-center md:text-left mb-8">Outside Opportunities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- ARToberFEST Westfield 2025 -->
+                <a href="https://www.artshubwma.org/opportunities/calls-for-art/details/call-for-artists-authors-artoberfest-2025" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
+                    <img src="https://placehold.co/300x200/fuchsia-600/ffffff?text=ARToberFEST" alt="ARToberFEST Westfield" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">ARToberFEST Westfield 2025</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: September 13, 2025 | Event: September 27, 2025</p>
+                        <p class="text-gray-600 text-sm">A juried outdoor exhibition for fine artists, artisans, and authors in downtown Westfield, MA. Cash prizes awarded!</p>
+                    </div>
+                </a>
+                <!-- "Theme in Yellow" Call for Entry (Ware, MA) -->
+                <a href="https://www.entrythingy.com/forartists_calls?month=0&region=5&state=0&type=1" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
+                    <img src="https://placehold.co/300x200/teal-400/ffffff?text=Yellow+Theme" alt="Theme in Yellow" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">"Theme in Yellow" Call for Entry</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: August 7, 2025 | Exhibition: September 20, 2025</p>
+                        <p class="text-gray-600 text-sm">An open call for artists in all mediums, inspired by Carl Sandburg's poem. Poetry will be paired with selected artwork. Location: Workshop13, Ware, MA.</p>
+                    </div>
+                </a>
+                <!-- Grants to USA Writers and Translators (GrantWatch) -->
+                <a href="https://connecticut.grantwatch.com/cat/2/arts-and-culture-grants.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
+                    <img src="https://placehold.co/300x200/a855f7/ffffff?text=Writer+Grant" alt="Writer Grant" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Grants for Writers & Translators</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: August 1, 2025</p>
+                        <p class="text-gray-600 text-sm">Grants of $1,500-$5,000 to USA writers and translators for literary projects (memoirs, novels, essays, poetry, etc.).</p>
+                    </div>
+                </a>
+                <!-- Syracuse Cultural Workers - 2026 Peace Calendar Call -->
+                <a href="https://syracuseculturalworkers.com/pages/call-for-art" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
+                    <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Peace+Art" alt="Peace Calendar Call" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Syracuse Cultural Workers: 2026 Peace Calendar</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: March 21, 2025</p>
+                        <p class="text-gray-600 text-sm">Submit artwork or poetry for their 55th annual wall calendar celebrating peace, justice, and hope. Location: Syracuse, NY.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- TAC Opportunities Section -->
+        <section class="py-12 bg-gray-100 rounded-lg">
+            <h2 class="text-3xl font-bold text-gray-900 text-center md:text-left mb-8">TAC Opportunities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Join The Artisans Combine Opportunity -->
+                <a href="index.html#contact" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect card-effect-join">
+                    <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Join The Artisans Combine</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Become a part of our community!</p>
+                        <p class="text-gray-600 text-sm">Are you a local artisan looking to connect with fellow creators and reach new customers? Learn how to join our vibrant collective.</p>
+                    </div>
+                </a>
+                <!-- Canvas Book Artist Partnership Program -->
+                <a href="#" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
+                    <img src="images/AMA_logo.png" alt="AMA Logo" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Canvas Book Artist Partnership Program</h3>
+                        <p class="text-fuchsia-600 font-medium mb-4">Limited slots available</p>
+                        <p class="text-gray-600 text-sm">Join a new chapter in artistry and storytelling. The Canvas Book Artist Partnership is designed to empower artists and expand their reach through a unique book format. Learn more about how you can become a partner and showcase your work.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
 
         <div class="mt-16 text-center">
             <a href="index.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
@@ -76,7 +138,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-8 mt-10">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 The Artisans Combine. All rights reserved.</p>
+            <p>&copy; 2025 The Artisans Combine. All rights reserved.</p>
         </div>
     </footer>
 
