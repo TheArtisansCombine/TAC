@@ -77,100 +77,532 @@
             <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
                 Discover a curated selection of calls for artists, grants, and creative projects from various organizations and institutions.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div id="opportunitiesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- ARToberFEST Westfield 2025 -->
-                <a href="https://www.artshubwma.org/opportunities/calls-for-art/details/call-for-artists-authors-artoberfest-2025" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/300x200/fuchsia-600/ffffff?text=ARToberFEST" alt="ARToberFEST Westfield" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">ARToberFEST Westfield 2025</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: September 13, 2025 | Event: September 27, 2025</p>
-                        <p class="text-gray-600 text-sm">A juried outdoor exhibition for fine artists, artisans, and authors in downtown Westfield, MA. Cash prizes awarded!</p>
+                <a href="https://www.artshubwma.org/opportunities/calls-for-art/details/call-for-artists-authors-artoberfest-2025" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Westfield, MA" data-title="ARToberFEST Westfield 2025">
+                    <img src="https://placehold.co/300x200/fuchsia-600/ffffff?text=Local+Art+Fair" alt="ARToberFEST Westfield" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">ARToberFEST Westfield 2025</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: September 13, 2025 | Event: September 27, 2025</p>
+                            <p class="text-gray-600 text-sm">A juried outdoor exhibition for fine artists, artisans, and authors in downtown Westfield, MA. Cash prizes awarded!</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
                 <!-- "Theme in Yellow" Call for Entry (Ware, MA) -->
-                <a href="https://www.entrythingy.com/forartists_calls?month=0&region=5&state=0&type=1" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="https://placehold.co/300x200/teal-400/ffffff?text=Call+for+Artists" alt="Theme in Yellow" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">"Theme in Yellow" Call for Entry</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: August 7, 2025 | Exhibition: September 20, 2025</p>
-                        <p class="text-gray-600 text-sm">An open call for artists in all mediums, inspired by Carl Sandburg's poem. Poetry will be paired with selected artwork. Location: Workshop13, Ware, MA.</p>
+                <a href="https://www.entrythingy.com/forartists_calls?month=0&region=5&state=0&type=1" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Ware, MA" data-title="Theme in Yellow Call for Entry">
+                    <img src="https://placehold.co/300x200/teal-400/ffffff?text=Call+for+Artists" alt="Theme in Yellow" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">"Theme in Yellow" Call for Entry</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 7, 2025 | Exhibition: September 20, 2025</p>
+                            <p class="text-gray-600 text-sm">An open call for artists in all mediums, inspired by Carl Sandburg's poem. Poetry will be paired with selected artwork. Location: Workshop13, Ware, MA.</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
-                <!-- Grants to USA Writers and Translators (GrantWatch) -->
-                <a href="https://connecticut.grantwatch.com/cat/2/arts-and-culture-grants.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="https://placehold.co/300x200/a855f7/ffffff?text=Writer+Grants" alt="Writer Grant" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Grants for Writers & Translators</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: August 1, 2025</p>
-                        <p class="text-gray-600 text-sm">Grants of $1,500-$5,000 to USA writers and translators for literary projects (memoirs, novels, essays, poetry, etc.).</p>
+                <!-- Grants for Writers & Translators (GrantWatch) -->
+                <a href="https://connecticut.grantwatch.com/cat/2/arts-and-culture-grants.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="USA" data-title="Grants for Writers & Translators">
+                    <img src="https://placehold.co/300x200/a855f7/ffffff?text=Writer+Grants" alt="Writer Grant" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Grants for Writers & Translators</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 1, 2025</p>
+                            <p class="text-gray-600 text-sm">Grants of $1,500-$5,000 to USA writers and translators for literary projects (memoirs, novels, essays, poetry, etc.).</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
                 <!-- Syracuse Cultural Workers - 2026 Peace Calendar Call -->
-                <a href="https://syracuseculturalworkers.com/pages/call-for-art" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Peace+Calendar" alt="Peace Calendar Call" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Syracuse Cultural Workers: 2026 Peace Calendar</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Deadline: March 21, 2025</p>
-                        <p class="text-gray-600 text-sm">Submit artwork or poetry for their 55th annual wall calendar celebrating peace, justice, and hope. Location: Syracuse, NY.</p>
+                <a href="https://syracuseculturalworkers.com/pages/call-for-art" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="Syracuse Cultural Workers: Peace Calendar">
+                    <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Peace+Calendar" alt="Peace Calendar Call" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Syracuse Cultural Workers: 2026 Peace Calendar</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: March 21, 2025</p>
+                            <p class="text-gray-600 text-sm">Submit artwork or poetry for their 55th annual wall calendar celebrating peace, justice, and hope. Location: Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Interiors: A National Call for Entries (Montgomery, NY) -->
+                <a href="https://artshow.com/juriedshows/northeast.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Montgomery, NY" data-title="Interiors: National Call for Entries">
+                    <img src="https://placehold.co/300x200/ef9a9a/ffffff?text=Interior+Art" alt="Interiors Call for Entries" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Interiors: A National Call for Entries</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 6, 2025 | Exhibition: September 5 – October 26, 2025</p>
+                            <p class="text-gray-600 text-xs">Juried exhibition for 2D and 3D works in all media. Location: Wallkill River Center for the Arts, Montgomery, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Trees and Seasons Photography Call (Middlebury, VT) -->
+                <a href="https://artshow.com/juriedshows/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Middlebury, VT" data-title="Trees and Seasons Photography">
+                    <img src="https://placehold.co/300x200/9ccc65/ffffff?text=Nature+Photography" alt="Trees and Seasons Photography" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Trees and Seasons Photography Call</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 11, 2025 | Exhibition: October 3-31, 2025</p>
+                            <p class="text-gray-600 text-xs">PhotoPlace Gallery seeks photography for a juried exhibition on the theme of trees and seasons. Location: Middlebury, VT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- "Botanicals" 2025 Call for Entry (Online) -->
+                <a href="https://artshow.com/juriedshows/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Online" data-title="Botanicals Call for Entry">
+                    <img src="https://placehold.co/300x200/4db6ac/ffffff?text=Botanical+Art" alt="Botanicals Call for Entry" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">"Botanicals" 2025 Call for Entry</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 15, 2025 | Exhibition: September 1-30, 2025</p>
+                            <p class="text-gray-600 text-xs">Colors of Humanity Art Gallery seeks entries for an online art exhibition. Open to any subject matter related to botanicals.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- 2025 American Art Awards (International) -->
+                <a href="https://artshow.com/juriedshows/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="International" data-title="American Art Awards">
+                    <img src="https://placehold.co/300x200/ef6c00/ffffff?text=Art+Competition" alt="American Art Awards" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">2025 American Art Awards</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 31, 2025</p>
+                            <p class="text-gray-600 text-xs">International art competition with cash prizes across 50 categories including painting, sculpture, photography, and digital art.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- New England Watercolor Society 2025 Regional Open Juried Exhibition (Watertown, MA) -->
+                <a href="https://artshow.com/juriedshows/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Watertown, MA" data-title="New England Watercolor Society">
+                    <img src="https://placehold.co/300x200/90a4ae/ffffff?text=Watercolor+Art" alt="New England Watercolor Society" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">New England Watercolor Society 2025 Exhibition</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 28, 2025 | Exhibition: November 14, 2025 – January 9, 2026</p>
+                            <p class="text-gray-600 text-xs">Juried art exhibition open to artists 18+ residing in New England, working with aqua media. Location: The Mosesian Center, Watertown, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Bread Loaf Writers' Conference (Hamilton, NY) -->
+                <a href="https://www.middlebury.edu/writers-conferences/writers-conference" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Hamilton, NY" data-title="Bread Loaf Writers' Conference">
+                    <img src="https://placehold.co/300x200/6a1b9a/ffffff?text=Writing+Conference" alt="Bread Loaf Writers' Conference" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Bread Loaf Writers' Conference</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Application: Nov 15 - Feb 1 | Conference: Aug 13-23, 2025</p>
+                            <p class="text-gray-600 text-xs">A renowned conference for emerging writers to work with diverse faculty in fiction, poetry, and nonfiction. Location: Middlebury College, Hamilton, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- The Soliloquist Journal Call for Submissions -->
+                <a href="https://call-for-papers.sas.upenn.edu/category/poetry" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Online" data-title="Soliloquist Journal">
+                    <img src="https://placehold.co/300x200/f57c00/ffffff?text=Poetry+Journal" alt="The Soliloquist Journal" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">The Soliloquist Journal: Fall 2025 Call</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: October 15, 2025</p>
+                            <p class="text-gray-600 text-xs">Seeking submissions of poems and soliloquies for their Fall 2025 issue on the theme "Voices in Transition."</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- New England Foundation for the Arts (NEFA) - Mass MoCA Residencies -->
+                <a href="https://www.nefa.org/news/may-2025-jobs-opportunities" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="North Adams, MA" data-title="NEFA Mass MoCA Residencies">
+                    <img src="https://placehold.co/300x200/004d40/ffffff?text=Residency" alt="NEFA Mass MoCA Residencies" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">NEFA: MASS MoCA Residencies</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Application opens: August 15, 2025 | Residencies: Jan - June 2026</p>
+                            <p class="text-gray-600 text-xs">Residency opportunities for artists in various disciplines at MASS MoCA. Location: North Adams, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Mineral School Residencies (Mineral, WA - but open to MA/NY writers) -->
+                <a href="https://artistcommunities.org/directory/open-calls/mineral-school-residencies-2025-2026" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Mineral, WA (open to MA/NY)" data-title="Mineral School Residencies">
+                    <img src="https://placehold.co/300x200/4e342e/ffffff?text=Writer+Residency" alt="Mineral School Residencies" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Mineral School Residencies 2025-2026</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Application: April 6 – May 15, 2025 | Residencies: Nov 2025 - Apr 2026</p>
+                            <p class="text-gray-600 text-xs">Residency program for writers and artists, offering time, space, and community. Fellowships available for BIPOC and women-identifying writers from MA/NY. Location: Mineral, WA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- New England Watercolor Society 2025 Annual Awards Show (Montpelier, VT) -->
+                <a href="https://www.entrythingy.com/forartists_calls?month=0&region=5&state=0&type=1" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Montpelier, VT" data-title="VT Watercolor Show">
+                    <img src="https://placehold.co/300x200/ffc107/000000?text=Watercolor" alt="VT Watercolor Show" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">VT Watercolor Society 2025 Annual Awards Show</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 26, 2025 | Exhibition: October 3 – December 29, 2025</p>
+                            <p class="text-gray-600 text-xs">Annual juried exhibition for watercolor artists. Location: Vermont Supreme Court Gallery, Montpelier, VT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Still Lifes Exhibition (Vernon, CT) -->
+                <a href="https://www.entrythingy.com/forartists_calls?month=0&region=5&state=0&type=1" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Vernon, CT" data-title="Still Lifes Exhibition">
+                    <img src="https://placehold.co/300x200/7986cb/ffffff?text=Still+Life+Art" alt="Still Lifes Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Still Lifes Exhibition</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 29, 2025</p>
+                            <p class="text-gray-600 text-xs">An exhibit celebrating the legacy of still life art. All wall-hung artwork in various media welcome. Location: Arts Center East, Vernon, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- CraftForms 2025 International Juried Exhibition (Wayne, PA) -->
+                <a href="https://artshow.com/juriedshows/northeast.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Wayne, PA" data-title="CraftForms 2025">
+                    <img src="https://placehold.co/300x200/ff6f00/ffffff?text=Craft+Show" alt="CraftForms 2025" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">CraftForms 2025 International Juried Exhibition</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: September 10, 2025 | Exhibition: Dec 7, 2025 – Jan 24, 2026</p>
+                            <p class="text-gray-600 text-xs">International juried exhibition of contemporary fine craft. Location: Wayne Art Center, Wayne, PA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Printmaking Exhibition Call (Philadelphia, PA) -->
+                <a href="https://artshow.com/juriedshows/northeast.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Philadelphia, PA" data-title="Printmaking Exhibition">
+                    <img src="https://placehold.co/300x200/424242/ffffff?text=Printmaking" alt="Printmaking Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Printmaking Exhibition Call</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: September 12, 2025</p>
+                            <p class="text-gray-600 text-xs">Open to all forms of original printmaking mediums and techniques. Location: Philadelphia, PA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- ARRIVAL Gallery 2025 (Brooklyn, NY) -->
+                <a href="https://artshow.com/juriedshows/northeast.html" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Brooklyn, NY" data-title="ARRIVAL Gallery">
+                    <img src="https://placehold.co/300x200/7e57c2/ffffff?text=Gallery+Show" alt="ARRIVAL Gallery" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">ARRIVAL Gallery 2025</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: October 3, 2025 | Exhibition: October 16-19, 2025</p>
+                            <p class="text-gray-600 text-xs">Call to artists for an upcoming art exhibition, all mediums accepted. Location: Brooklyn, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Illuminated Winter Public Art - Festival of Lights 2025-2026 (Worcester, MA) -->
+                <a href="https://www.worcesterma.gov/announcements/worcester-cultural-development-division-downtown-bid-announce-artist-call-festival-lights-2025-2026" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Worcester, MA" data-title="Festival of Lights Call">
+                    <img src="https://placehold.co/300x200/009688/ffffff?text=Light+Art" alt="Festival of Lights Call" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Illuminated Public Art: Festival of Lights</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">Deadline: August 1, 2025 | Exhibition: Dec 5, 2025 – March 1, 2026</p>
+                            <p class="text-gray-600 text-xs">Call for proposals for temporary illuminated public art installations for the Worcester Common. Location: Worcester, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- New England Holiday Craft Spectacular (Hanover, MA) -->
+                <a href="https://castleberryfairs.com/event-calendar/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Hanover, MA" data-title="NE Holiday Craft Spectacular">
+                    <img src="https://placehold.co/300x200/ff7043/ffffff?text=Craft+Fair" alt="NE Holiday Craft Spectacular" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">New England Holiday Craft Spectacular</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-4">November 1-2, 2025</p>
+                            <p class="text-gray-600 text-xs">A large-scale craft fair featuring a wide variety of handmade goods. Location: Hanover, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- New England Craft & Specialty Food Fair (Topsfield, MA) -->
+                <a href="https://castleberryfairs.com/event-calendar/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Topsfield, MA" data-title="NE Craft & Food Fair">
+                    <img src="https://placehold.co/300x200/ffca28/000000?text=Food+Craft" alt="NE Craft & Food Fair" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">New England Craft & Specialty Food Fair</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">November 14-16, 2025</p>
+                            <p class="text-gray-600 text-xs">A large fair showcasing crafts and specialty foods from local artisans. Location: Topsfield, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Original Castleberry Faire Arts & Craft Festival (Wilmington, MA) -->
+                <a href="https://castleberryfairs.com/event-calendar/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Wilmington, MA" data-title="Castleberry Faire">
+                    <img src="https://placehold.co/300x200/ab47bc/ffffff?text=Arts+Crafts" alt="Original Castleberry Faire" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Original Castleberry Faire Arts & Craft Festival</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">November 28-30, 2025</p>
+                            <p class="text-gray-600 text-xs">A popular arts and crafts festival featuring a wide array of handmade goods. Location: Wilmington, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Yale University Art Gallery: Nusantara: Six Centuries of Indonesian Textiles -->
+                <a href="https://artgallery.yale.edu/visit/exhibitions" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="New Haven, CT" data-title="Indonesian Textiles Exhibition">
+                    <img src="https://placehold.co/300x200/ef9a9a/ffffff?text=Textile+Art" alt="Indonesian Textiles Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Nusantara: Six Centuries of Indonesian Textiles</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">September 12, 2025 – January 11, 2026</p>
+                            <p class="text-gray-600 text-xs">An exhibition exploring the rich history and artistry of Indonesian textiles. Location: Yale University Art Gallery, New Haven, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Aldrich Contemporary Art Museum: Uman: After all the things... -->
+                <a href="https://thealdrich.org/exhibitions/uman-after-all-the-things" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Ridgefield, CT" data-title="Uman Exhibition">
+                    <img src="https://placehold.co/300x200/ff5722/ffffff?text=Contemporary+Art" alt="Uman Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Uman: After all the things...</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">October 19, 2025 – May 10, 2026</p>
+                            <p class="text-gray-600 text-xs">A new exhibition by artist Uman. Location: The Aldrich Contemporary Art Museum, Ridgefield, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse University - Corpórea Exhibit -->
+                <a href="https://lacasita.syr.edu/la-casita-art-gallery/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="Corpórea Exhibit">
+                    <img src="https://placehold.co/300x200/795548/ffffff?text=Mixed+Media" alt="Corpórea Exhibit" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Corpórea Exhibit: Body Maps</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">September 12, 2025 – April 17, 2026</p>
+                            <p class="text-gray-600 text-xs">A showcase of large-scale mixed media body maps by Latino artists, exploring themes of healing and identity. Location: La Casita Art Gallery, Syracuse University, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse Orchestra: Organ Extraordinaire -->
+                <a href="https://syracuseorchestra.org/2025-26-season/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Syracuse, NY" data-title="Syracuse Orchestra">
+                    <img src="https://placehold.co/300x200/5d4037/ffffff?text=Organ+Music" alt="Syracuse Orchestra" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Syracuse Orchestra: Organ Extraordinaire</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">September 19, 2025 | 7:30 PM</p>
+                            <p class="text-gray-600 text-xs">Organ prodigy Dominic Fiacco joins The Syracuse Orchestra for Saint-Saens' powerful Organ Symphony. Location: Most Holy Rosary Church, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse Orchestra: Prokofiev & Beethoven -->
+                <a href="https://syracuseorchestra.org/2025-26-season/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Syracuse, NY" data-title="Syracuse Orchestra">
+                    <img src="https://placehold.co/300x200/4e342e/ffffff?text=Classical+Music" alt="Syracuse Orchestra" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Syracuse Orchestra: Prokofiev & Beethoven</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">October 18, 2025 | 7:30 PM</p>
+                            <p class="text-gray-600 text-xs">An evening with classical dance themes featuring Prokofiev's Violin Concerto and Beethoven's Symphony No. 7. Location: Oncenter Crouse Hinds Theater, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- BSO: Joshua Bell and Mussorgsky Pictures at an Exhibition -->
+                <a href="https://www.bso.org/bso-2025-2026-season" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="BSO Concert">
+                    <img src="https://placehold.co/300x200/607d8b/ffffff?text=Orchestra+Music" alt="BSO Concert" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">BSO: Joshua Bell & Mussorgsky</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">November 20-22, 2025</p>
+                            <p class="text-gray-600 text-xs">Featuring Joshua Bell and Mussorgsky's Pictures at an Exhibition. Location: Symphony Hall, Boston, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- MFA: Of Light and Air: Winslow Homer in Watercolor -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="Winslow Homer Exhibition">
+                    <img src="https://placehold.co/300x200/b0bec5/ffffff?text=Watercolor+Art" alt="Winslow Homer Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Of Light and Air: Winslow Homer in Watercolor</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">November 2, 2025 – January 19, 2026</p>
+                            <p class="text-gray-600 text-xs">An exhibition showcasing the iconic watercolors of Winslow Homer. Location: Museum of Fine Arts, Boston, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- MFA: One Hundred Stitches, One Hundred Villages: Patchwork from Rural China -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="Chinese Patchwork Exhibition">
+                    <img src="https://placehold.co/300x200/ff8a65/ffffff?text=Textile+Art" alt="Chinese Patchwork Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">One Hundred Stitches: Patchwork from Rural China</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">December 6, 2025 – May 3, 2026</p>
+                            <p class="text-gray-600 text-xs">Discover the beauty of patchwork from rural China. Location: Museum of Fine Arts, Boston, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- BSO: Tchaikovsky Piano Concerto No. 1 with Seong-Jin Cho -->
+                <a href="https://www.bso.org/bso-2025-2026-season" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="BSO Tchaikovsky Concert">
+                    <img src="https://placehold.co/300x200/5e35b1/ffffff?text=Piano+Concert" alt="BSO Tchaikovsky Concert" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">BSO: Tchaikovsky Piano Concerto No. 1</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">January 15-17, 2026</p>
+                            <p class="text-gray-600 text-xs">Featuring Seong-Jin Cho and Bernstein's Chichester Psalms. Location: Symphony Hall, Boston, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- MFA: Divine Color: Hindu Prints from Modern Bengal -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="Hindu Prints Exhibition">
+                    <img src="https://placehold.co/300x200/ffd54f/000000?text=Hindu+Art" alt="Hindu Prints Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Divine Color: Hindu Prints from Modern Bengal</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">January 31 – May 31, 2026</p>
+                            <p class="text-gray-600 text-xs">An exhibition showcasing vibrant Hindu prints from modern Bengal. Location: Museum of Fine Arts, Boston, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- BSO: Esa-Pekka Salonen conducts Bruckner and Salonen -->
+                <a href="https://www.bso.org/bso-2025-2026-season" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect flex" data-location="Boston, MA" data-title="BSO Salonen Concert">
+                    <img src="https://placehold.co/300x200/424242/ffffff?text=Orchestra" alt="BSO Salonen Concert" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-1">BSO: Esa-Pekka Salonen conducts Bruckner & Salonen</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">February 12-14, 2026</p>
+                            <p class="text-gray-600 text-xs">Esa-Pekka Salonen conducts works by Bruckner and his own compositions. Location: Symphony Hall, Boston, MA.</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- TAC Opportunities Section -->
+        <!-- Ongoing or Recurring Events -->
         <section class="py-12 bg-gray-100 rounded-lg">
-            <h2 class="text-3xl font-bold text-gray-900 text-center md:text-left mb-4">TAC Opportunities</h2>
+            <h2 class="text-3xl font-bold text-gray-900 text-center md:text-left mb-4">Ongoing & Recurring Events</h2>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                Explore programs and partnerships offered directly by The Artisans Combine to support your artistic journey.
+                Explore continuous series and regular gatherings that foster creativity and community engagement.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Join The Artisans Combine Opportunity -->
-                <a href="index.html#contact" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect card-effect-join">
-                    <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Join The Artisans Combine</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Become a part of our community!</p>
-                        <p class="text-gray-600 text-sm">Are you a local artisan looking to connect with fellow creators and reach new customers? Learn how to join our vibrant collective.</p>
+            <div id="ongoingEventsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- First Friday ArtsWalk -->
+                <a href="https://www.firstfridaysartswalk.com/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Pittsfield, MA" data-title="First Friday ArtsWalk">
+                    <img src="images/artswalk.jpg" alt="ArtsWalk" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">First Friday ArtsWalk</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Every First Friday | 5:00 PM - 8:00 PM</p>
+                            <p class="text-gray-600 text-xs">Experience art openings, live music, and performances throughout downtown Pittsfield. Location: Downtown Pittsfield, MA.</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
-                <!-- Canvas Book Artist Partnership Program -->
-                <a href="#" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="images/AMA_logo.png" alt="AMA Logo" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Canvas Book Artist Partnership Program</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">Limited slots available</p>
-                        <p class="text-gray-600 text-sm">Join a new chapter in artistry and storytelling. The Canvas Book Artist Partnership is designed to empower artists and expand their reach through a unique book format. Learn more about how you can become a partner and showcase your work.</p>
+                <!-- The Mount Poetry & Performance -->
+                <a href="https://edithwharton.org/calendar/poetry-performance/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Lenox, MA" data-title="Poetry & Performance Series">
+                    <img src="images/mount.png" alt="Poetry Reading" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Poetry & Performance Series</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing Dates | Various times</p>
+                            <p class="text-gray-600 text-xs">A series of site-responsive programs incorporating poetry, spoken word, theater, and dance. Location: The Mount, Lenox, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Artist Sessions at Wistariahurst Museum -->
+                <a href="https://wistariahurst.org/event/artist-sessions-june-2025-3/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Holyoke, MA" data-title="Artist Sessions">
+                    <img src="https://placehold.co/300x200/ff9800/ffffff?text=Art+Sessions" alt="Artist Sessions" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Artist Sessions at Wistariahurst Museum</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Monthly | Various times</p>
+                            <p class="text-gray-600 text-xs">Workshops and sessions for artists to connect, focus on goals, and enhance practices. Culminates in an art show in January 2026. Location: Holyoke, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Brookline Poetry Series -->
+                <a href="https://www.brooklinelibrary.org/ongoing/brookline-poetry-series/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Brookline, MA" data-title="Brookline Poetry Series">
+                    <img src="https://placehold.co/300x200/673ab7/ffffff?text=Poetry+Series" alt="Brookline Poetry Series" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Brookline Poetry Series</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Monthly | 2:00 PM (Live/Zoom)</p>
+                            <p class="text-gray-600 text-xs">Ongoing poetry readings featuring various poets, held in-person and via Zoom. Location: Brookline Public Library, Brookline, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Yale University Art Gallery Exhibitions -->
+                <a href="https://artgallery.yale.edu/visit/exhibitions" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="New Haven, CT" data-title="Yale Art Gallery Exhibitions">
+                    <img src="https://placehold.co/300x200/00bcd4/ffffff?text=Art+Gallery" alt="Yale Art Gallery Exhibitions" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Yale University Art Gallery Exhibitions</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various times</p>
+                            <p class="text-gray-600 text-xs">Explore diverse art installations and collections throughout the year. Location: Yale University Art Gallery, New Haven, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Long Wharf Theatre Season -->
+                <a href="https://www.longwharf.org/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="New Haven, CT" data-title="Long Wharf Theatre">
+                    <img src="https://placehold.co/300x200/d81b60/ffffff?text=Theatre" alt="Long Wharf Theatre" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Long Wharf Theatre Season</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing Season | Various locations</p>
+                            <p class="text-gray-600 text-xs">Experience bold storytelling and vibrant theatre productions across Greater New Haven. Location: Various venues, New Haven, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- ArtRage Gallery Exhibitions (Syracuse) -->
+                <a href="https://artragegallery.org/exhibitions/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="ArtRage Gallery Exhibitions">
+                    <img src="https://placehold.co/300x200/ff5722/ffffff?text=Gallery" alt="ArtRage Gallery" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">ArtRage Gallery Exhibitions</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various dates</p>
+                            <p class="text-gray-600 text-xs">Committed to breaking boundaries and showcasing art for an open, just world. Location: ArtRage Gallery, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse University - La Casita Art Gallery -->
+                <a href="https://lacasita.syr.edu/la-casita-art-gallery/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="La Casita Art Gallery">
+                    <img src="https://placehold.co/300x200/795548/ffffff?text=Latin+Art" alt="La Casita Art Gallery" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">La Casita Art Gallery</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various dates</p>
+                            <p class="text-gray-600 text-xs">Showcases U.S. Latino and Latin American artists and civic-centered exhibitions. Location: Syracuse University, Syracuse, NY.</p>
+                        </div>
                         <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- Find Local Opportunities Section - Moved to bottom -->
+        <!-- Find Local Events Section - New Tool -->
         <section class="mt-12 bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">Find Local Opportunities 🔍</h2>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">Find Local Events 🔍</h2>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                Use our search tool to find calls for artists, commissions, and other creative opportunities in specific cities or regions.
+                Use our search tool to find upcoming art events, music performances, workshops, and festivals near you.
             </p>
             <div class="max-w-xl mx-auto space-y-4">
-                <input type="text" id="locationInput" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400" placeholder="e.g., 'Springfield, MA', 'New Haven, CT', 'Syracuse, NY'">
+                <input type="text" id="eventLocationInput" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400" placeholder="e.g., 'Northampton, MA', 'Springfield, MA', 'Pittsfield, MA'">
                 <div class="flex justify-center space-x-4">
-                    <button id="searchOpportunitiesBtn" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                        Search Opportunities
+                    <button id="searchEventsBtn" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                        Search Events
                     </button>
-                    <button id="clearSearchBtn" class="bg-gray-300 text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-400 transition-transform transform hover:scale-105">
+                    <button id="clearEventsSearchBtn" class="bg-gray-300 text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-400 transition-transform transform hover:scale-105">
                         Clear Search
                     </button>
                 </div>
-                <div id="loadingIndicator" class="hidden mt-4 text-fuchsia-600 font-semibold flex items-center justify-center">
+                <div id="loadingEventsIndicator" class="hidden mt-4 text-fuchsia-600 font-semibold flex items-center justify-center">
                     <i class="fas fa-spinner fa-spin mr-2"></i> Searching...
                 </div>
-                <div id="searchResults" class="mt-6 space-y-4 text-left">
+                <div id="eventSearchResults" class="mt-6 space-y-4 text-left">
                     <!-- Search results will be displayed here -->
                 </div>
             </div>
@@ -194,69 +626,71 @@
     </footer>
 
     <script>
-        document.getElementById('searchOpportunitiesBtn').addEventListener('click', async () => {
-            const locationInput = document.getElementById('locationInput');
-            const searchResultsDiv = document.getElementById('searchResults');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const location = locationInput.value.trim();
+        document.getElementById('searchEventsBtn').addEventListener('click', () => {
+            const locationInput = document.getElementById('eventLocationInput');
+            const searchResultsDiv = document.getElementById('eventSearchResults');
+            const loadingIndicator = document.getElementById('loadingEventsIndicator');
+            const searchTerm = locationInput.value.trim().toLowerCase();
 
-            if (!location) {
-                searchResultsDiv.innerHTML = '<p class="text-red-500">Please enter a location to search.</p>';
+            const timedEvents = document.querySelectorAll('#timedEventsGrid a');
+            const ongoingEvents = document.querySelectorAll('#ongoingEventsGrid a');
+
+            let foundResults = false;
+            let resultsHtml = '';
+
+            // Hide all events initially
+            timedEvents.forEach(event => event.style.display = 'none');
+            ongoingEvents.forEach(event => event.style.display = 'none');
+
+            if (searchTerm === '') {
+                // If search term is empty, show all events
+                timedEvents.forEach(event => event.style.display = 'flex');
+                ongoingEvents.forEach(event => event.style.display = 'flex');
+                searchResultsDiv.innerHTML = ''; // Clear search results message
                 return;
             }
 
-            loadingIndicator.classList.remove('hidden');
-            searchResultsDiv.innerHTML = ''; // Clear previous results
+            // Filter Timed Events
+            timedEvents.forEach(event => {
+                const title = event.querySelector('h3').textContent.toLowerCase();
+                const description = event.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
+                const location = event.dataset.location ? event.dataset.location.toLowerCase() : '';
 
-            const queries = [
-                `call to artists poets creators ${location}`,
-                `commissions for artists ${location}`,
-                `creative opportunities ${location}`
-            ];
-
-            try {
-                // Call the google_search tool
-                const searchResults = await google_search.search(queries);
-
-                loadingIndicator.classList.add('hidden');
-
-                if (searchResults && searchResults.length > 0) {
-                    let allResultsHtml = '';
-                    searchResults.forEach(searchResult => {
-                        if (searchResult.results && searchResult.results.length > 0) {
-                            allResultsHtml += `<h3 class="text-xl font-semibold text-gray-900 mt-4 mb-2">Results for: "${searchResult.query}"</h3>`;
-                            searchResult.results.forEach(item => {
-                                allResultsHtml += `
-                                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                                        <h4 class="text-lg font-semibold text-gray-800">${item.source_title || 'No Title'}</h4>
-                                        <p class="text-gray-600 text-sm">${item.snippet || 'No description available.'}</p>
-                                        ${item.url ? `<a href="${item.url}" target="_blank" class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></a>` : ''}
-                                    </div>
-                                `;
-                            });
-                        }
-                    });
-
-                    if (allResultsHtml === '') {
-                        searchResultsDiv.innerHTML = `<p class="text-gray-600">No opportunities found for "${location}". Try a different location or broader terms.</p>`;
-                    } else {
-                        searchResultsDiv.innerHTML = allResultsHtml;
-                    }
-                } else {
-                    searchResultsDiv.innerHTML = `<p class="text-gray-600">No opportunities found for "${location}". Try a different location or broader terms.</p>`;
+                if (title.includes(searchTerm) || description.includes(searchTerm) || location.includes(searchTerm)) {
+                    event.style.display = 'flex';
+                    foundResults = true;
                 }
+            });
 
-            } catch (error) {
-                loadingIndicator.classList.add('hidden');
-                searchResultsDiv.innerHTML = `<p class="text-red-500">An error occurred while searching for opportunities. Please try again later.</p>`;
-                console.error("Search API error:", error);
+            // Filter Ongoing Events
+            ongoingEvents.forEach(event => {
+                const title = event.querySelector('h3').textContent.toLowerCase();
+                const description = event.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
+                const location = event.dataset.location ? event.dataset.location.toLowerCase() : '';
+
+                if (title.includes(searchTerm) || description.includes(searchTerm) || location.includes(searchTerm)) {
+                    event.style.display = 'flex';
+                    foundResults = true;
+                }
+            });
+
+            if (!foundResults) {
+                searchResultsDiv.innerHTML = `<p class="text-gray-600">No events found matching "${locationInput.value}". Try a different location or broader terms.</p>`;
+            } else {
+                searchResultsDiv.innerHTML = ''; // Clear "no results" message if results are found
             }
+
+            loadingIndicator.classList.add('hidden');
         });
 
-        // Clear Search Button functionality
-        document.getElementById('clearSearchBtn').addEventListener('click', () => {
-            document.getElementById('locationInput').value = '';
-            document.getElementById('searchResults').innerHTML = '';
+        // Clear Search Button functionality for events
+        document.getElementById('clearEventsSearchBtn').addEventListener('click', () => {
+            document.getElementById('eventLocationInput').value = '';
+            document.getElementById('eventSearchResults').innerHTML = '';
+            
+            // Show all events again
+            document.querySelectorAll('#timedEventsGrid a').forEach(event => event.style.display = 'flex');
+            document.querySelectorAll('#ongoingEventsGrid a').forEach(event => event.style.display = 'flex');
         });
     </script>
 
