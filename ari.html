@@ -38,37 +38,22 @@
             justify-content: space-between; /* Pushes "Learn More" to bottom */
         }
 
-        /* Image Preview Overlay Styles */
-        #image-preview-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Portfolio Image Hover Effect */
+        .portfolio-image-container {
+            width: 100%;
+            height: 192px; /* h-48 equivalent */
+            overflow: hidden; /* Ensures image doesn't spill out */
+            position: relative;
+        }
+        .portfolio-image-container img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            cursor: zoom-out; /* Indicates it's clickable to close */
+            object-fit: cover; /* Default: covers the area, may crop */
+            transition: transform 0.3s ease-in-out, object-fit 0.3s ease-in-out;
         }
-
-        #image-preview-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #image-preview-overlay img {
-            max-width: 500px; /* Limit width to a smaller fixed size */
-            max-height: 500px; /* Limit height to a smaller fixed size */
-            width: auto; /* Allow natural width based on aspect ratio */
-            height: auto; /* Allow natural height based on aspect ratio */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
-            object-fit: contain; /* Ensure the whole image is visible within the bounds */
+        .card-hover-effect:hover .portfolio-image-container img {
+            object-fit: contain; /* On hover: reveals full image, may letterbox */
+            transform: scale(1.05); /* Slightly scales up for visual emphasis */
         }
     </style>
 </head>
@@ -80,17 +65,19 @@
             <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
-            <nav class="hidden md:flex space-x-6 ml-6">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
-                <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
-                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
-                <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
-                <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors">Opportunities</a>
-                <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
-                <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
-            </nav>
-            <!-- GetFabb Logo on top right for desktop -->
-            <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-auto hidden md:block">
+            <div class="hidden md:flex items-center ml-auto"> <!-- This div groups nav and GetFabb logo and pushes them right -->
+                <nav class="space-x-6">
+                    <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
+                    <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
+                    <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
+                    <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
+                    <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors">Opportunities</a>
+                    <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
+                    <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
+                </nav>
+                <!-- GetFabb Logo on top right for desktop, with spacing from nav -->
+                <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6">
+            </div>
             <!-- Mobile Join Us button -->
             <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity ml-auto">Join Us</a>
         </div>
@@ -140,21 +127,27 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Hair Sample 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Bold and expressive color transformations.</p>
                     </div>
                 </div>
                 <!-- Hair Sample 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Sharp, modern, and classic cuts tailored to individual style.</p>
                     </div>
                 </div>
                 <!-- Hair Sample 3 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">From everyday looks to special occasion updos.</p>
                     </div>
@@ -171,21 +164,27 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Fashion Design Sample 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Avant-Garde Designs</p>
                     </div>
                 </div>
                 <!-- Fashion Design Sample 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Custom Creations</p>
                     </div>
                 </div>
                 <!-- Fashion Design Sample 3 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="w-full h-48 object-cover rounded-lg shadow-sm cursor-zoom-in">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="rounded-lg shadow-sm">
+                    </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Textile Innovation</p>
                     </div>
@@ -280,36 +279,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const imageCards = document.querySelectorAll('.card-hover-effect img');
-            const previewOverlay = document.createElement('div');
-            previewOverlay.id = 'image-preview-overlay';
-            previewOverlay.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden';
-            previewOverlay.innerHTML = '<img id="preview-image" src="" alt="Image Preview" class="max-w-full max-h-full rounded-lg shadow-2xl">';
-            document.body.appendChild(previewOverlay);
+            // No longer need a separate overlay div, as the effect is within the card
+            // const previewOverlay = document.getElementById('image-preview-overlay');
+            // const previewImage = document.getElementById('preview-image');
 
-            const previewImage = document.getElementById('preview-image');
+            const portfolioImages = document.querySelectorAll('#getfabb-hair .portfolio-image-container img, #modeling-fashion .portfolio-image-container img');
 
-            imageCards.forEach(img => {
-                img.addEventListener('mouseover', (e) => {
-                    // Only show preview for actual portfolio images, not logos in headers/footers
-                    if (e.target.closest('#getfabb-hair') || e.target.closest('#modeling-fashion')) {
-                        previewImage.src = e.target.src;
-                        previewOverlay.classList.add('visible'); // Use class for visibility and transition
-                        document.body.style.overflow = 'hidden'; // Prevent scrolling when overlay is active
-                    }
-                });
-
-                img.addEventListener('mouseout', () => {
-                    previewOverlay.classList.remove('visible'); // Use class for visibility and transition
-                    document.body.style.overflow = ''; // Restore scrolling
-                });
+            portfolioImages.forEach(img => {
+                // Remove mouseover/mouseout listeners for the overlay effect
+                // The new effect is purely CSS-driven on the parent .card-hover-effect
             });
 
-            // Hide preview if clicked anywhere on the overlay
-            previewOverlay.addEventListener('click', () => {
-                previewOverlay.classList.remove('visible'); // Use class for visibility and transition
-                document.body.style.overflow = ''; // Restore scrolling
-            });
+            // No need for click listener on overlay as it's removed
+            // if (previewOverlay) {
+            //     previewOverlay.addEventListener('click', () => {
+            //         previewOverlay.classList.remove('visible');
+            //         document.body.style.overflow = '';
+            //     });
+            // }
         });
     </script>
 
