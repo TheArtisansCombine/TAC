@@ -25,17 +25,29 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
+        /* Ensure consistent height for cards within a row */
+        .grid > div {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Important for stretching */
+        }
+        .grid > div .p-4 {
+            flex-grow: 1; /* Allows content area to expand */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes "Learn More" to bottom */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
 
     <!-- Header & Navigation -->
     <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+        <div class="container mx-auto px-4 py-4 flex items-center max-w-7xl">
             <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
-            <nav class="hidden md:flex space-x-6">
+            <nav class="hidden md:flex space-x-6 ml-6">
                 <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
                 <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
                 <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
@@ -44,18 +56,21 @@
                 <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
                 <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
             </nav>
-            <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity">Join Us</a>
+            <!-- GetFabb Logo on top right for desktop -->
+            <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-auto hidden md:block">
+            <!-- Mobile Join Us button -->
+            <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity ml-auto">Join Us</a>
         </div>
     </header>
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
         <!-- Ariandra Lemus Personal Bio Section -->
-        <section id="personal-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12">
+        <section id="personal-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12 mb-16">
             <div class="mb-8 md:mb-0">
                 <img src="images/ari_model1.jpg" alt="Ariandra Lemus Profile Picture" class="rounded-full w-56 h-56 mx-auto md:mx-0 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
                 <!-- Image as an underlining banner -->
-                <img src="images/ari_flower.png" alt="Ariandra Lemus Floral Design Element" class="block w-48 mx-auto mt-4">
+                <img src="images/ari_flower.png" alt="Ariandra Lemus Floral Design Element" class="block w-48 mx-auto mt-4 object-contain">
             </div>
             <div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
@@ -81,10 +96,10 @@
         </section>
         
         <!-- GetFabb with Ari: Hair Styling Brand Section -->
-        <section id="getfabb-hair" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8">
+        <section id="getfabb-hair" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
             <div class="flex items-center justify-center md:justify-start mb-6">
                 <h2 class="text-3xl font-bold text-gray-900 mr-4">GetFabb with Ari</h2>
-                <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="h-12 w-auto object-contain">
+                <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="h-20 w-auto object-contain"> <!-- Increased size -->
             </div>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 Beyond design, Ari is a skilled hairdresser, viewing each hairstyle as a unique piece of art. She specializes in transforming hair into stunning expressions of personal style, blending technical precision with creative vision to sculpt and color hair into beautiful, wearable masterpieces.
@@ -92,21 +107,21 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Hair Sample 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="w-full h-48 object-cover">
+                    <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Bold and expressive color transformations.</p>
                     </div>
                 </div>
                 <!-- Hair Sample 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="w-full h-48 object-cover">
+                    <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Sharp, modern, and classic cuts tailored to individual style.</p>
                     </div>
                 </div>
                 <!-- Hair Sample 3 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="w-full h-48 object-cover">
+                    <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">From everyday looks to special occasion updos.</p>
                     </div>
@@ -115,29 +130,29 @@
         </section>
 
         <!-- Modeling and Fashion Design Section -->
-        <section id="modeling-fashion" class="mt-16 text-center">
+        <section id="modeling-fashion" class="mt-16 text-center mb-16">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Modeling & Fashion Design</h2>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 Ari's creative vision extends to the runway and beyond, where she excels in modeling and brings her unique aesthetic to fashion design. Her work in this realm showcases innovative concepts and a deep understanding of visual storytelling through attire.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Fashion Design Sample 1 (was ari_model1.jpg, now placeholder for consistency) -->
+                <!-- Fashion Design Sample 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="w-full h-48 object-cover">
+                    <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Avant-Garde Designs</p>
                     </div>
                 </div>
                 <!-- Fashion Design Sample 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="w-full h-48 object-cover">
+                    <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Custom Creations</p>
                     </div>
                 </div>
                 <!-- Fashion Design Sample 3 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="w-full h-48 object-cover">
+                    <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="w-full h-48 object-cover rounded-lg shadow-sm">
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Textile Innovation</p>
                     </div>
@@ -146,10 +161,10 @@
         </section>
 
         <!-- Ari Jays Designs Section -->
-        <section id="ari-jays-designs" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8">
+        <section id="ari-jays-designs" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
             <div class="flex items-center justify-center md:justify-start mb-6">
                 <h2 class="text-3xl font-bold text-gray-900 mr-4">Ari Jays Designs</h2>
-                <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="h-12 w-auto object-contain">
+                <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="h-20 w-auto object-contain"> <!-- Increased size -->
             </div>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 Ari Jays Designs is a collaborative venture where Ari's expertise in fashion design and hairdressing converges with like-minded partners. This salon is a hub for transformative beauty, offering bespoke styling and a unique artistic approach to hair, reflecting a joint passion for innovative aesthetics.
