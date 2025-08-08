@@ -122,8 +122,7 @@
                 <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors nav-link">Partners</a>
                 <a href="contact.html" class="text-white hover:text-gray-200 transition-colors nav-link">Contact</a>
             </nav>
-            <!-- GetFabb Logo on top right for desktop -->
-            <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6 hidden md:block"> <!-- Ensure it's hidden on mobile -->
+            <!-- Removed GetFabb Logo from header as it's not part of main navigation -->
             <!-- Mobile Hamburger Icon -->
             <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none ml-auto"> <!-- ml-auto to push to right on mobile -->
                 <i class="fas fa-bars"></i>
@@ -388,8 +387,10 @@
                 link.classList.remove('active');
 
                 // Add active class to the link that matches the current page
-                // Handle both direct file match and index.html for root
-                if (link.getAttribute('href').includes(currentPath) && currentPath !== '') {
+                // For profile pages like ari.html, highlight 'Artisan Profiles'
+                if (currentPath === 'ari.html' && link.getAttribute('href') === 'artisans.html') {
+                    link.classList.add('active');
+                } else if (link.getAttribute('href').includes(currentPath) && currentPath !== '') {
                     link.classList.add('active');
                 } else if (currentPath === '' && link.getAttribute('href') === 'index.html') {
                     link.classList.add('active');
