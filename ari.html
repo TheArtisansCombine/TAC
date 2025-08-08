@@ -38,22 +38,20 @@
             justify-content: space-between; /* Pushes "Learn More" to bottom */
         }
 
-        /* Portfolio Image Hover Effect */
+        /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
         .portfolio-image-container {
             width: 100%;
             height: 192px; /* h-48 equivalent */
             overflow: hidden; /* Ensures image doesn't spill out */
             position: relative;
         }
+        /* Portfolio Image: Always covers the container and maintains its size */
         .portfolio-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Default: covers the area, may crop */
-            transition: transform 0.3s ease-in-out, object-fit 0.3s ease-in-out;
-        }
-        .card-hover-effect:hover .portfolio-image-container img {
-            object-fit: contain; /* On hover: reveals full image, may letterbox */
-            transform: scale(1.05); /* Slightly scales up for visual emphasis */
+            object-fit: cover; /* Image will always cover the container, cropping if necessary */
+            transition: none; /* Removed transition for object-fit and transform */
+            transform: none; /* Ensure no residual transform */
         }
     </style>
 </head>
@@ -98,7 +96,7 @@
                 </h1>
                 <p class="text-2xl font-medium text-fuchsia-600 mb-4">Fashion Designer • Hairdresser • DIY Creator</p>
                 <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
-                    Ariandra's passion lies in the art of fashion design, the joy of making things by hand, and the magic of transforming raw materials into beautiful creations. Her work is a testament to her dedication and artistic growth, elevating ideas from initial concept to stunning, tangible realities.
+                    Ari is a passionate creator whose artistry spans the realms of fashion design, hairdressing, and DIY projects. She finds immense joy in transforming raw materials into beautiful, tangible creations and believes in the power of art to bring people together. Her work, whether on the runway, in the salon chair, or crafted by hand, is a testament to her dedication to artistic growth and her ability to elevate ideas from initial concept to stunning realities that connect and inspire.
                 </p>
                 <div class="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="flex space-x-4">
@@ -114,94 +112,105 @@
                 </div>
             </div>
         </section>
-        
-        <!-- GetFabb with Ari: Hair Styling Brand Section -->
-        <section id="getfabb-hair" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
-            <div class="flex items-center justify-center md:justify-start mb-6">
-                <h2 class="text-3xl font-bold text-gray-900 mr-4">GetFabb with Ari</h2>
-                <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="h-20 w-auto object-contain"> <!-- Increased size -->
+
+        <!-- New Call to Action Card for Ari's Services (Prominent) -->
+        <section class="py-12">
+            <div class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white rounded-lg p-10 md:p-16 shadow-xl text-center card-hover-effect">
+                <h2 class="text-3xl font-bold mb-4">Discover Ari's Full Range of Services</h2>
+                <p class="text-lg mb-8 max-w-xl mx-auto">
+                    From transformative hair styling to innovative fashion designs and bespoke DIY creations, explore everything Ari has to offer.
+                </p>
+                <a href="ari_services.html" class="bg-white text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors">
+                    Explore Services & Designs
+                </a>
             </div>
+        </section>
+        
+        <!-- Hair Styling Artistry Section - Links updated -->
+        <section id="getfabb-hair" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Hair Styling Artistry</h2>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-                Beyond design, Ari is a skilled hairdresser, viewing each hairstyle as a unique piece of art. She specializes in transforming hair into stunning expressions of personal style, blending technical precision with creative vision to sculpt and color hair into beautiful, wearable masterpieces.
+                As a skilled hairdresser, Ari approaches each hairstyle as a unique piece of art. She excels in transforming hair into stunning expressions of personal style, blending technical precision with creative vision to sculpt and color hair into beautiful, wearable masterpieces.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Hair Sample 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#getfabb-salon" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Bold and expressive color transformations.</p>
                     </div>
-                </div>
+                </a>
                 <!-- Hair Sample 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#getfabb-salon" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Sharp, modern, and classic cuts tailored to individual style.</p>
                     </div>
-                </div>
+                </a>
                 <!-- Hair Sample 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#getfabb-salon" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">From everyday looks to special occasion updos.</p>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
-        <!-- Modeling and Fashion Design Section -->
+        <!-- Modeling and Fashion Design Section - Links updated -->
         <section id="modeling-fashion" class="mt-16 text-center mb-16">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Modeling & Fashion Design</h2>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-                Ari's creative vision extends to the runway and beyond, where she excels in modeling and brings her unique aesthetic to fashion design. Her work in this realm showcases innovative concepts and a deep understanding of visual storytelling through attire.
+                Ari's creative vision extends to the runway and beyond. Her work in modeling and fashion design showcases innovative concepts and a deep understanding of visual storytelling through attire, reflecting her passion for aesthetics and bespoke artistry.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Fashion Design Sample 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#ari-jays-designs" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Avant-Garde Designs</p>
                     </div>
-                </div>
+                </a>
                 <!-- Fashion Design Sample 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#ari-jays-designs" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Custom Creations</p>
                     </div>
-                </div>
+                </a>
                 <!-- Fashion Design Sample 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                <a href="ari_services.html#ari-jays-designs" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
                         <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
                         <p class="text-gray-600 mt-2 text-sm">Textile Innovation</p>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
-        <!-- Ari Jays Designs Section -->
-        <section id="ari-jays-designs" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
-            <div class="flex items-center justify-center md:justify-start mb-6">
-                <h2 class="text-3xl font-bold text-gray-900 mr-4">Ari Jays Designs</h2>
-                <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="h-20 w-auto object-contain"> <!-- Increased size -->
+        <!-- Subtle Call to Action at the bottom -->
+        <section class="py-12 mt-16 text-center">
+            <div class="bg-gradient-to-r from-teal-200 to-fuchsia-200 text-gray-800 rounded-lg p-8 shadow-sm border border-gray-200 max-w-xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4">Ready to Experience Ari's Artistry?</h3>
+                <p class="text-md mb-6">
+                    Click below to explore her detailed hair styling services and unique fashion designs.
+                </p>
+                <a href="ari_services.html" class="inline-block bg-white text-gray-800 font-semibold py-2 px-6 rounded-full hover:bg-gray-200 transition-colors">
+                    Learn More About Ari's Work
+                </a>
             </div>
-            <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-                "Ari Jays Designs" is a brand dedicated to showcasing Ariandra's individual creativity. This is her personal portfolio, a space where her fashion and hair design expertise converge to present her unique artistic approach. Each design is a reflection of her passion for innovative aesthetics and bespoke artistry.
-            </p>
-            <!-- Add specific services or booking links here if applicable -->
         </section>
 
         <div class="mt-16 text-center">
@@ -235,7 +244,7 @@
                         </a>
                         <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-400 hover:text-white transition-colors">
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.44.675.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.675.44.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
                             </svg>
                         </a>
                     </div>
@@ -276,29 +285,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // No longer need a separate overlay div, as the effect is within the card
-            // const previewOverlay = document.getElementById('image-preview-overlay');
-            // const previewImage = document.getElementById('preview-image');
-
-            const portfolioImages = document.querySelectorAll('#getfabb-hair .portfolio-image-container img, #modeling-fashion .portfolio-image-container img');
-
-            portfolioImages.forEach(img => {
-                // Remove mouseover/mouseout listeners for the overlay effect
-                // The new effect is purely CSS-driven on the parent .card-hover-effect
-            });
-
-            // No need for click listener on overlay as it's removed
-            // if (previewOverlay) {
-            //     previewOverlay.addEventListener('click', () => {
-            //         previewOverlay.classList.remove('visible');
-            //         document.body.style.overflow = '';
-            //     });
-            // }
-        });
-    </script>
 
 </body>
 </html>
