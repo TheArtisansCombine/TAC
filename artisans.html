@@ -16,7 +16,7 @@
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
         }
-        /* General card hover effect */
+        /* General card hover effect applied to all */
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
@@ -24,28 +24,7 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
-        /* Specific hover effects for each artisan to add variety */
-        .card-effect-jesus:hover {
-            transform: rotate(-3deg) scale(1.05);
-        }
-        .card-effect-bobby:hover {
-            transform: rotate(3deg) scale(1.05);
-        }
-        .card-effect-thai:hover {
-            transform: rotate(-2deg) scale(1.05);
-        }
-        .card-effect-mark:hover {
-            transform: scale(1.05);
-        }
-        .card-effect-zach:hover {
-            transform: rotate(1deg) scale(1.05);
-        }
-        .card-effect-go:hover {
-            transform: scale(1.05);
-        }
-        .card-effect-ari:hover { /* New hover effect for Ari */
-            transform: rotate(-1deg) scale(1.05);
-        }
+        /* Removed specific card-effect-* classes as requested */
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -79,7 +58,7 @@
         <!-- Artisan Profiles Section -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             <!-- Profile Card for Jesus Alicea -->
-            <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-jesus w-full max-w-sm">
+            <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
                 <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
@@ -89,7 +68,7 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for Bobby Diesel -->
-            <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-bobby w-full max-w-sm">
+            <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
                 <p class="text-fuchsia-600 font-medium">Muralist | Artist | Letterer</p>
@@ -99,7 +78,7 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for Thai Zeo -->
-            <a href="thaizeo.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-thai w-full max-w-sm">
+            <a href="thaizeo.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/thaizeo_profile.jpg" alt="Thai Zeo's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Thai Zeo</h3>
                 <p class="text-fuchsia-600 font-medium">Musician, Model & Author</p>
@@ -109,7 +88,7 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for Mark Morrison-Lemay -->
-            <a href="mark.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-mark w-full max-w-sm">
+            <a href="mark.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/mark_profile.jpg" alt="Mark Morrison-Lemay's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Mark Morrison-Lemay</h3>
                 <p class="text-fuchsia-600 font-medium">Poet | Photographer | Talent Organizer</p>
@@ -119,7 +98,7 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for Zachariah Perkett -->
-            <a href="zach.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-zach w-full max-w-sm">
+            <a href="zach.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/zach_profile.png" alt="Zachariah Perkett's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Zachariah Perkett</h3>
                 <p class="text-fuchsia-600 font-medium">Vocalist • Lyricist • Poet</p>
@@ -129,7 +108,7 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for GO from the 413 -->
-            <a href="go.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-go w-full max-w-sm">
+            <a href="go.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
                 <img src="images/go_profile.jpg" alt="GO from the 413 Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">GO from the 413</h3>
                 <p class="text-fuchsia-600 font-medium">Street Artist • Writer • Urban Spelunker</p>
@@ -139,8 +118,8 @@
                 <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
             </a>
             <!-- Profile Card for Ariandra Lemus -->
-            <a href="ari.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect card-effect-ari w-full max-w-sm">
-                <img src="images/ari.flower.jpg" alt="Ariandra Lemus Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+            <a href="ari.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
+                <img src="images/ari_model1.jpg" alt="Ariandra Lemus Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Ariandra Lemus</h3>
                 <p class="text-fuchsia-600 font-medium">Fashion Designer • Hairdresser • DIY Creator</p>
                 <p class="text-gray-600 mt-2 text-sm">
