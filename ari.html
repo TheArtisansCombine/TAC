@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for social media icons -->
+    <!-- Font Awesome for social media icons and hamburger menu -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -53,6 +53,54 @@
             transition: none; /* Removed transition for object-fit and transform */
             transform: none; /* Ensure no residual transform */
         }
+
+        /* Mobile Navigation Overlay Styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-overlay nav a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 0.75rem 0;
+            display: block;
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .mobile-menu-overlay nav a:hover {
+            color: #d1d5db; /* gray-300 */
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Active link styling */
+        .nav-link.active {
+            font-weight: 700; /* bolder */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -63,23 +111,42 @@
             <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
-            <div class="hidden md:flex items-center ml-auto"> <!-- This div groups nav and GetFabb logo and pushes them right -->
-                <nav class="space-x-6">
-                    <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
-                    <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
-                    <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
-                    <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
-                    <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors">Opportunities</a>
-                    <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
-                    <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
-                </nav>
-                <!-- GetFabb Logo on top right for desktop, with spacing from nav -->
-                <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6">
-            </div>
-            <!-- Mobile Join Us button -->
-            <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity ml-auto">Join Us</a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 ml-auto"> <!-- Added ml-auto to push nav and logo right -->
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors nav-link">Our Mission</a>
+                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Artisan Profiles</a>
+                <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors nav-link">Artisan Gallery</a>
+                <a href="events.html" class="text-white hover:text-gray-200 transition-colors nav-link">Events</a>
+                <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors nav-link">Opportunities</a>
+                <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors nav-link">Partners</a>
+                <a href="contact.html" class="text-white hover:text-gray-200 transition-colors nav-link">Contact</a>
+            </nav>
+            <!-- GetFabb Logo on top right for desktop -->
+            <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6 hidden md:block"> <!-- Ensure it's hidden on mobile -->
+            <!-- Mobile Hamburger Icon -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none ml-auto"> <!-- ml-auto to push to right on mobile -->
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html#about" class="nav-link">Our Mission</a>
+            <a href="artisans.html" class="nav-link active">Artisan Profiles</a>
+            <a href="gallery.html" class="nav-link">Artisan Gallery</a>
+            <a href="events.html" class="nav-link">Events</a>
+            <a href="opportunities.html" class="nav-link">Opportunities</a>
+            <a href="forge-of-collaboration.html" class="nav-link">Partners</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+    </div>
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
@@ -285,6 +352,51 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link
+            const currentPath = window.location.pathname.split('/').pop(); // Gets 'ari.html' or similar
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                // Remove active class from all links first
+                link.classList.remove('active');
+
+                // Add active class to the link that matches the current page
+                // Handle both direct file match and index.html for root
+                if (link.getAttribute('href').includes(currentPath) && currentPath !== '') {
+                    link.classList.add('active');
+                } else if (currentPath === '' && link.getAttribute('href') === 'index.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
