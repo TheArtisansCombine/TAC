@@ -115,6 +115,71 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Carousel specific styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px; /* Adjust as needed */
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column; /* To stack image and description */
+            justify-content: center;
+            align-items: center;
+            padding: 1rem; /* Add some padding around the content */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem; /* Space between image and description */
+        }
+
+        .carousel-slide p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4b5563; /* gray-700 */
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -219,28 +284,49 @@
             </a>
         </section>
         
-        <!-- Upcoming Events Preview Section -->
-        <section id="events" class="py-16 bg-gray-100">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Upcoming Events</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Intro to Manga Art with Ryan McCarthy Preview -->
-                <a href="https://events.getlocalhop.com/intro-to-manga-art-with-artist-ryan-mccarthy/event/rrJhZm5eqx/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="images/manga.jpg" alt="Intro to Manga Art" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Intro to Manga Art</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">August 7, 2025 | 2:00 PM</p>
-                        <p class="text-gray-600 text-sm">Unleash your inner artist! Learn dynamic techniques and storytelling from published manga artist Ryan McCarthy in this engaging workshop.</p>
+        <!-- Upcoming Events Carousel Section -->
+        <section class="py-16 bg-gray-100 rounded-lg shadow-md mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Upcoming Event Highlights</h2>
+            <div class="carousel-container">
+                <div class="carousel-track" id="event-carousel-track">
+                    <!-- Event Flyer 1 -->
+                    <div class="carousel-slide">
+                        <a href="events.html" target="_blank">
+                            <img src="https://placehold.co/600x400/831843/ffffff?text=Event+Flyer+1" alt="Upcoming Event Flyer 1">
+                        </a>
+                        <p>A vibrant art exhibition showcasing local talents.</p>
                     </div>
-                </a>
-                <!-- Arcadia Folk Festival Preview -->
-                <a href="https://www.arcadiafolkfest.com/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-hover-effect">
-                    <img src="images/arcadia.png" alt="Arcadia Folk Festival" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Arcadia Folk Festival 2025</h3>
-                        <p class="text-fuchsia-600 font-medium mb-4">August 22-23, 2025</p>
-                        <p class="text-gray-600 text-sm">Immerse yourself in the sounds of local and regional folk artists, live music, and captivating performances in Easthampton, MA.</p>
+                    <!-- Event Flyer 2 -->
+                    <div class="carousel-slide">
+                        <a href="events.html" target="_blank">
+                            <img src="https://placehold.co/600x400/0d9488/ffffff?text=Event+Flyer+2" alt="Upcoming Event Flyer 2">
+                        </a>
+                        <p>Live music performance by emerging artists in the city.</p>
                     </div>
-                </a>
+                    <!-- Event Flyer 3 -->
+                    <div class="carousel-slide">
+                        <a href="events.html" target="_blank">
+                            <img src="https://placehold.co/600x400/a855f7/ffffff?text=Event+Flyer+3" alt="Upcoming Event Flyer 3">
+                        </a>
+                        <p>Hands-on workshop: Learn the basics of pottery making.</p>
+                    </div>
+                    <!-- Event Flyer 4 -->
+                    <div class="carousel-slide">
+                        <a href="events.html" target="_blank">
+                            <img src="https://placehold.co/600x400/ef4444/ffffff?text=Event+Flyer+4" alt="Upcoming Event Flyer 4">
+                        </a>
+                        <p>Annual craft fair featuring unique handmade goods.</p>
+                    </div>
+                    <!-- Event Flyer 5 -->
+                    <div class="carousel-slide">
+                        <a href="events.html" target="_blank">
+                            <img src="https://placehold.co/600x400/22c55e/ffffff?text=Event+Flyer+5" alt="Upcoming Event Flyer 5">
+                        </a>
+                        <p>Photography showcase: Capturing the essence of our community.</p>
+                    </div>
+                </div>
+                <button class="carousel-button prev" id="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-button next" id="carousel-next"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="mt-12 text-center">
                 <a href="events.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
@@ -538,6 +624,34 @@
                     dropdown.querySelector('.nav-link').classList.add('active');
                 }
             });
+
+            // Carousel functionality
+            const carouselTrack = document.getElementById('event-carousel-track');
+            const carouselPrev = document.getElementById('carousel-prev');
+            const carouselNext = document.getElementById('carousel-next');
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const offset = -currentIndex * 100;
+                carouselTrack.style.transform = `translateX(${offset}%)`;
+            }
+
+            carouselPrev.addEventListener('click', () => {
+                currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+                updateCarousel();
+            });
+
+            carouselNext.addEventListener('click', () => {
+                currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+                updateCarousel();
+            });
+
+            // Auto-advance carousel (optional)
+            setInterval(() => {
+                currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+                updateCarousel();
+            }, 5000); // Change slide every 5 seconds
         });
     </script>
 
