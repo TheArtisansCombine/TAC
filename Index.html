@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons and hamburger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -68,11 +70,50 @@
             cursor: pointer;
         }
 
-        /* Active link styling (example - apply dynamically with JS for real-world use) */
+        /* Active link styling */
         .nav-link.active {
             font-weight: 700; /* bolder */
             text-decoration: underline;
             text-underline-offset: 4px;
+        }
+
+        /* Dropdown specific styles for desktop */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            /* Artistic gradient background for dropdowns */
+            background-image: linear-gradient(to bottom right, #0d9488, #831843); /* Teal-700 to Fuchsia-900 */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            top: 100%; /* Position below the parent link */
+            left: 50%; /* Center dropdown relative to parent */
+            transform: translateX(-50%); /* Adjust for centering */
+            padding: 0.5rem 0; /* py-2 */
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
@@ -85,15 +126,37 @@
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
             <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-6">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
-                <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors nav-link">Our Mission</a>
-                <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors nav-link">Artisan Profiles</a>
-                <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors nav-link">Artisan Gallery</a>
-                <a href="events.html" class="text-white hover:text-gray-200 transition-colors nav-link">Events</a>
-                <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors nav-link">Opportunities</a>
-                <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors nav-link">Partners</a>
-                <a href="contact.html" class="text-white hover:text-gray-200 transition-colors nav-link">Contact</a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Our Mission</a>
+                
+                <!-- Who We Are Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="artisans.html">Artisan Profiles</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                    </div>
+                </div>
+
+                <!-- What's Going On! Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="events.html">Events</a>
+                        <a href="opportunities.html">Opportunities</a>
+                    </div>
+                </div>
+
+                <!-- About Us Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html#our-mission">Where We're From</a> <!-- Links to Our Mission section -->
+                        <a href="index.html#testimonials">Testimonials</a> <!-- New section on index.html -->
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
             </nav>
             <!-- Mobile Hamburger Icon -->
             <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
@@ -108,14 +171,36 @@
             <i class="fas fa-times"></i>
         </button>
         <nav class="flex flex-col space-y-4">
-            <a href="index.html" class="nav-link active">Home</a>
-            <a href="index.html#about" class="nav-link">Our Mission</a>
-            <a href="artisans.html" class="nav-link">Artisan Profiles</a>
-            <a href="gallery.html" class="nav-link">Artisan Gallery</a>
-            <a href="events.html" class="nav-link">Events</a>
-            <a href="opportunities.html" class="nav-link">Opportunities</a>
-            <a href="forge-of-collaboration.html" class="nav-link">Partners</a>
-            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index.html" class="nav-link">Our Mission</a>
+            
+            <!-- Mobile Who We Are Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">Who We Are</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="artisans.html" class="text-lg">Artisan Profiles</a>
+                    <a href="gallery.html" class="text-lg">Artisan Gallery</a>
+                    <a href="forge-of-collaboration.html" class="text-lg">Partner Businesses</a>
+                </div>
+            </div>
+
+            <!-- Mobile What's Going On! Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">What's Going On!</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="events.html" class="text-lg">Events</a>
+                    <a href="opportunities.html" class="text-lg">Opportunities</a>
+                </div>
+            </div>
+
+            <!-- Mobile About Us Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">About Us</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="index.html#our-mission" class="text-lg">Where We're From</a>
+                    <a href="index.html#testimonials" class="text-lg">Testimonials</a>
+                    <a href="contact.html" class="text-lg">Contact</a>
+                </div>
+            </div>
         </nav>
     </div>
 
@@ -272,8 +357,8 @@
             </div>
         </section>
 
-        <!-- Our Mission Section -->
-        <section id="about" class="py-16 bg-gray-100">
+        <!-- Our Mission Section (renamed to our-mission for consistency) -->
+        <section id="our-mission" class="py-16 bg-gray-100">
             <div class="container mx-auto px-4 max-w-2xl text-center">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
                 <p class="text-gray-700 leading-relaxed mb-4">
@@ -282,6 +367,25 @@
                 <p class="text-gray-700 leading-relaxed">
                     Our goal is to preserve and promote traditional skills while also embracing modern innovation in craftsmanship. Join us in celebrating the beauty of unique, handcrafted products.
                 </p>
+            </div>
+        </section>
+
+        <!-- Testimonials Section (New placeholder) -->
+        <section id="testimonials" class="py-16">
+            <div class="container mx-auto px-4 max-w-2xl text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">What Our Community Says</h2>
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <p class="text-gray-700 text-lg italic mb-4">
+                        "The Artisans Combine has been instrumental in growing my small business. The support and exposure are invaluable!"
+                    </p>
+                    <p class="font-semibold text-fuchsia-600">- A Happy Artisan</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-8 mt-6">
+                    <p class="text-gray-700 text-lg italic mb-4">
+                        "I love attending the events organized by The Artisans Combine. Always inspiring and a great way to discover unique art."
+                    </p>
+                    <p class="font-semibold text-fuchsia-600">- A Community Member</p>
+                </div>
             </div>
         </section>
 
@@ -392,17 +496,46 @@
                 });
             });
 
-            // Highlight active navigation link (basic example for index.html)
-            const currentPath = window.location.pathname.split('/').pop(); // Gets 'index.html' or similar
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
             const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
 
             navLinks.forEach(link => {
-                // Remove active class from all links first
-                link.classList.remove('active');
+                link.classList.remove('active'); // Clear active from all links first
+            });
 
-                // Add active class to the link that matches the current page
-                if (link.getAttribute('href').includes(currentPath) || (currentPath === '' && link.getAttribute('href') === 'index.html')) {
+            // Handle direct links and highlight them
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = linkHref.split('#')[0];
+                }
+
+                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
                     link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = linkHref.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
                 }
             });
         });
