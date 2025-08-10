@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ja'voni White | Fashion Model, Musician, Entrepreneur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-artsy-gradient {
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+        /* Ensure consistent height for cards within a row */
+        .grid > div {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Important for stretching */
+        }
+        .grid > div .p-4 {
+            flex-grow: 1; /* Allows content area to expand */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes "Learn More" to bottom */
+        }
+
+        /* Portfolio Image Hover Effect */
+        .portfolio-image-container {
+            width: 100%;
+            height: 192px; /* h-48 equivalent */
+            overflow: hidden; /* Ensures image doesn't spill out */
+            position: relative;
+        }
+        .portfolio-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Default: covers the area, may crop */
+            transition: transform 0.3s ease-in-out, object-fit 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover .portfolio-image-container img {
+            object-fit: contain; /* On hover: reveals full image, may letterbox */
+            transform: scale(1.05); /* Slightly scales up for visual emphasis */
+        }
+    </style>
+</head>
+<body class="bg-artsy-gradient text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center max-w-7xl">
+            <a href="index.html" class="h-10">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            </a>
+            <div class="hidden md:flex items-center ml-auto"> <!-- This div groups nav and GetFabb logo and pushes them right -->
+                <nav class="space-x-6">
+                    <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
+                    <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
+                    <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
+                    <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
+                    <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors">Opportunities</a>
+                    <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
+                    <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
+                </nav>
+                <!-- GetFabb Logo on top right for desktop, with spacing from nav -->
+                <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6">
+            </div>
+            <!-- Mobile Join Us button -->
+            <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity ml-auto">Join Us</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
+
+        <!-- Ja'voni White Personal Bio Section -->
+        <section id="personal-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12 mb-16">
+            <div class="mb-8 md:mb-0">
+                <img src="images/javoni_profile.jpg" alt="Ja'voni White Profile Picture" class="rounded-full w-56 h-56 mx-auto md:mx-0 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
+                <!-- Image as an underlining banner - Placeholder for aesthetic -->
+                <img src="images/ari_flower.png" alt="Decorative Element" class="block w-48 mx-auto mt-4 object-contain">
+            </div>
+            <div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
+                    Dante "Ja'voni" White
+                </h1>
+                <p class="text-2xl font-medium text-fuchsia-600 mb-4">Fashion Model • Musician • Entrepreneur</p>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
+                    Dante "Ja'voni" White is a fashion model, musician, and entrepreneur, blending his diverse talents into a unique artistic presence. His journey is marked by a dynamic approach to creativity, whether he's gracing the runway, composing melodies, or building his brand.
+                </p>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0 mt-4">
+                    As the visionary behind <strong>Ja'voni’s Apparel</strong>, Dante offers a men’s formalwear brand specializing in stylish suits, tuxedos, and accessories for weddings, proms, and other special occasions. With a keen eye for fashion and quality, Dante aims to help men look and feel their best for life’s important moments, ensuring exceptional customer service and meticulous attention to detail.
+                </p>
+                <div class="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div class="flex space-x-4">
+                        <!-- Personal Social Media Link for Ja'voni White -->
+                        <a href="https://www.facebook.com/dante.white.351" target="_blank" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
+                            <i class="fab fa-facebook-f text-3xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ja'voni's Apparel Brand Section -->
+        <section id="javonis-apparel" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
+            <div class="flex items-center justify-center md:justify-start mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 mr-4">Ja'voni's Apparel</h2>
+                <img src="images/jovanis_logo.png" alt="Ja'voni's Apparel Logo" class="h-20 w-auto object-contain"> <!-- Increased size -->
+            </div>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                Ja'voni's Apparel is Dante's signature formalwear brand, meticulously curated to provide men with sophisticated and stylish options for every significant event. Each piece reflects a commitment to quality, fit, and timeless elegance, ensuring clients make a memorable impression.
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                <div class="flex space-x-4">
+                    <!-- Business Social Media Links for Ja'voni's Apparel -->
+                    <a href="https://www.facebook.com/JavonisApparel" target="_blank" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
+                        <i class="fab fa-facebook-f text-3xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/javonisapparel" target="_blank" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
+                        <i class="fab fa-instagram text-3xl"></i>
+                    </a>
+                    <a href="mailto:info@javonisapparel.com" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fashion Modeling Section -->
+        <section id="fashion-modeling" class="mt-16 text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Fashion Modeling</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                Dante "Ja'voni" White brings a powerful presence and versatile aesthetic to the world of fashion modeling. His ability to embody diverse styles and narratives makes him a compelling figure on set and in campaigns.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Modeling Sample 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/javoni_modeling1.jpg" alt="Fashion Modeling Sample 1" class="rounded-lg shadow-sm">
+                    </div>
+                    <div class="p-4">
+                        <!-- No title for portfolio image as requested -->
+                    </div>
+                </div>
+                <!-- Modeling Sample 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/javoni_modeling2.jpg" alt="Fashion Modeling Sample 2" class="rounded-lg shadow-sm">
+                    </div>
+                    <div class="p-4">
+                        <!-- No title for portfolio image as requested -->
+                    </div>
+                </div>
+                <!-- Modeling Sample 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/javoni_modeling3.jpg" alt="Fashion Modeling Sample 3" class="rounded-lg shadow-sm">
+                    </div>
+                    <div class="p-4">
+                        <!-- No title for portfolio image as requested -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="mt-16 text-center">
+            <a href="artisans.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to Artisans</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Footer Column 1: Contact Info -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact</h3>
+                    <p class="text-sm">Western Massachusetts</p>
+                    <p class="text-sm">
+                        <a href="mailto:theartisanscombine@gmail.com" class="hover:text-white transition-colors">theartisanscombine@gmail.com</a>
+                    </p>
+                    <div class="flex justify-center md:justify-start mt-4 space-x-4">
+                        <!-- Social Media Links -->
+                        <a href="https://www.facebook.com/theartisanscombine" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C17.34 21.283 22 17.185 22 12z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.44.675.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21-.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Partner Logos -->
+                <div class="md:text-center">
+                    <h3 class="text-white font-bold mb-4">Our Partners</h3>
+                    <div class="flex justify-center space-x-6">
+                        <!-- Partner Logo for Alicea Media Arts -->
+                        <a href="jesus.html" class="h-10">
+                            <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
+                        </a>
+                        <!-- Partner Logo for Bobby Diesel -->
+                        <a href="bobby.html" class="h-10">
+                            <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer Column 3: Navigation -->
+                <div class="md:text-right">
+                    <h3 class="text-white font-bold mb-4">Navigation</h3>
+                    <ul class="text-sm">
+                        <li><a href="#about" class="hover:text-white transition-colors">Our Mission</a></li>
+                        <li><a href="artisans.html" class="hover:text-white transition-colors">Artisan Profiles</a></li>
+                        <li><a href="gallery.html" class="hover:text-white transition-colors">Artisan Gallery</a></li>
+                        <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
+                        <li><a href="opportunities.html" class="hover:text-white transition-colors">Opportunities</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>&copy; 2025 The Artisans Combine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // No longer need a separate overlay div, as the effect is within the card
+            // const previewOverlay = document.getElementById('image-preview-overlay');
+            // const previewImage = document.getElementById('preview-image');
+
+            const portfolioImages = document.querySelectorAll('#getfabb-hair .portfolio-image-container img, #modeling-fashion .portfolio-image-container img');
+
+            portfolioImages.forEach(img => {
+                // Remove mouseover/mouseout listeners for the overlay effect
+                // The new effect is purely CSS-driven on the parent .card-hover-effect
+            });
+
+            // No need for click listener on overlay as it's removed
+            // if (previewOverlay) {
+            //     previewOverlay.addEventListener('click', () => {
+            //         previewOverlay.classList.remove('visible');
+            //         document.body.style.overflow = '';
+            //     });
+            // }
+        });
+    </script>
+
+</body>
+</html>
