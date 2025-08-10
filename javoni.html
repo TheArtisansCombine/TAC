@@ -41,19 +41,105 @@
         /* Portfolio Image Hover Effect */
         .portfolio-image-container {
             width: 100%;
-            height: 192px; /* h-48 equivalent */
+            /* Removed fixed height to allow image aspect ratio to dictate height */
             overflow: hidden; /* Ensures image doesn't spill out */
             position: relative;
         }
         .portfolio-image-container img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Default: covers the area, may crop */
-            transition: transform 0.3s ease-in-out, object-fit 0.3s ease-in-out;
+            height: auto; /* Ensures image maintains its aspect ratio */
+            object-fit: contain; /* Ensures the entire image is visible, no cropping */
+            transition: transform 0.3s ease-in-out;
         }
         .card-hover-effect:hover .portfolio-image-container img {
-            object-fit: contain; /* On hover: reveals full image, may letterbox */
             transform: scale(1.05); /* Slightly scales up for visual emphasis */
+        }
+
+        /* Mobile Navigation Overlay Styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-overlay nav a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 0.75rem 0;
+            display: block;
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .mobile-menu-overlay nav a:hover {
+            color: #d1d5db; /* gray-300 */
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Active link styling */
+        .nav-link.active {
+            font-weight: 700; /* bolder */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Dropdown specific styles for desktop */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            /* Darker, transparent artistic gradient background for dropdowns - REVERSED DIRECTION */
+            background-image: linear-gradient(to bottom right, rgba(131, 24, 67, 0.9), rgba(13, 148, 136, 0.9)); /* Fuchsia-900 to Teal-700 with 90% opacity */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            top: 100%; /* Position below the parent link */
+            left: 50%; /* Center dropdown relative to parent */
+            transform: translateX(-50%); /* Adjust for centering */
+            padding: 0.5rem 0; /* py-2 */
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
@@ -61,27 +147,90 @@
 
     <!-- Header & Navigation -->
     <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex items-center max-w-7xl">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
             <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
-            <div class="hidden md:flex items-center ml-auto"> <!-- This div groups nav and GetFabb logo and pushes them right -->
-                <nav class="space-x-6">
-                    <a href="index.html" class="text-white hover:text-gray-200 transition-colors">Home</a>
-                    <a href="index.html#about" class="text-white hover:text-gray-200 transition-colors">Our Mission</a>
-                    <a href="artisans.html" class="text-white hover:text-gray-200 transition-colors">Artisan Profiles</a>
-                    <a href="gallery.html" class="text-white hover:text-gray-200 transition-colors">Artisan Gallery</a>
-                    <a href="opportunities.html" class="text-white hover:text-gray-200 transition-colors">Opportunities</a>
-                    <a href="forge-of-collaboration.html" class="text-white hover:text-gray-200 transition-colors">Partners</a>
-                    <a href="contact.html" class="text-white hover:text-gray-200 transition-colors">Contact</a>
-                </nav>
-                <!-- GetFabb Logo on top right for desktop, with spacing from nav -->
-                <img src="images/getfabb_logo.png" alt="GetFabb Logo" class="h-10 w-auto object-contain ml-6">
-            </div>
-            <!-- Mobile Join Us button -->
-            <a href="contact.html" class="md:hidden bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200 transition-opacity ml-auto">Join Us</a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                
+                <!-- Who We Are Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="artisans.html" class="active">Artisan Profiles</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                    </div>
+                </div>
+
+                <!-- What's Going On! Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="events.html">Events</a>
+                        <a href="opportunities.html">Opportunities</a>
+                    </div>
+                </div>
+
+                <!-- About Us Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="index.html#our-mission">Our Mission</a>
+                        <a href="where-we-are-from.html">Where We're From</a>
+                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Mobile Hamburger Icon -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="index.html" class="nav-link">Home</a>
+            
+            <!-- Mobile Who We Are Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">Who We Are</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="artisans.html">Artisan Profiles</a>
+                    <a href="gallery.html">Artisan Gallery</a>
+                    <a href="forge-of-collaboration.html">Partner Businesses</a>
+                </div>
+            </div>
+
+            <!-- Mobile What's Going On! Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">What's Going On!</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="events.html">Events</a>
+                    <a href="opportunities.html">Opportunities</a>
+                </div>
+            </div>
+
+            <!-- Mobile About Us Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">About Us</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="index.html#our-mission">Our Mission</a>
+                    <a href="where-we-are-from.html">Where We're From</a>
+                    <a href="index.html#testimonials">Testimonials</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
@@ -152,7 +301,7 @@
                         <img src="images/javoni_modeling1.jpg" alt="Fashion Modeling Sample 1" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
-                        <!-- No title for portfolio image as requested -->
+                        <p class="text-gray-600 mt-2 text-sm">Dynamic poses and expressive storytelling in high fashion.</p>
                     </div>
                 </div>
                 <!-- Modeling Sample 2 -->
@@ -161,7 +310,7 @@
                         <img src="images/javoni_modeling2.jpg" alt="Fashion Modeling Sample 2" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
-                        <!-- No title for portfolio image as requested -->
+                        <p class="text-gray-600 mt-2 text-sm">Versatile looks for editorial and commercial campaigns.</p>
                     </div>
                 </div>
                 <!-- Modeling Sample 3 -->
@@ -170,7 +319,7 @@
                         <img src="images/javoni_modeling3.jpg" alt="Fashion Modeling Sample 3" class="rounded-lg shadow-sm">
                     </div>
                     <div class="p-4">
-                        <!-- No title for portfolio image as requested -->
+                        <p class="text-gray-600 mt-2 text-sm">Captivating presence showcasing diverse apparel styles.</p>
                     </div>
                 </div>
             </div>
@@ -188,7 +337,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12">
+    <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <!-- Footer Column 1: Contact Info -->
@@ -200,20 +349,20 @@
                     </p>
                     <div class="flex justify-center md:justify-start mt-4 space-x-4">
                         <!-- Social Media Links -->
-                        <a href="https://www.facebook.com/theartisanscombine" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.facebook.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C17.34 21.283 22 17.185 22 12z" clip-rule="evenodd" />
                             </svg>
                         </a>
-                        <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.44.675.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21-.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.675.44.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21-.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
                             </svg>
                         </a>
                     </div>
                 </div>
 
-                <!-- Footer Column 2: Partner Logos -->
+                <!-- Footer Column 2: Our Partners -->
                 <div class="md:text-center">
                     <h3 class="text-white font-bold mb-4">Our Partners</h3>
                     <div class="flex justify-center space-x-6">
@@ -229,46 +378,104 @@
                 </div>
 
                 <!-- Footer Column 3: Navigation -->
-                <div class="md:text-right">
+                <div class="md:text-left">
                     <h3 class="text-white font-bold mb-4">Navigation</h3>
-                    <ul class="text-sm">
-                        <li><a href="#about" class="hover:text-white transition-colors">Our Mission</a></li>
-                        <li><a href="artisans.html" class="hover:text-white transition-colors">Artisan Profiles</a></li>
-                        <li><a href="gallery.html" class="hover:text-white transition-colors">Artisan Gallery</a></li>
-                        <li><a href="events.html" class="hover:text-white transition-colors">Events</a></li>
-                        <li><a href="opportunities.html" class="hover:text-white transition-colors">Opportunities</a></li>
-                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+                        <div>
+                            <p class="text-white font-semibold mt-2">Who We Are</p>
+                            <a href="artisans.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Profiles</a>
+                            <a href="gallery.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Gallery</a>
+                            <a href="forge-of-collaboration.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Partner Businesses</a>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold mt-2">What's Going On!</p>
+                            <a href="events.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Events</a>
+                            <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
+                            <p class="text-white font-semibold mt-2">About Us</p>
+                            <a href="index.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
+                            <a href="where-we-are-from.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Copyright Notice -->
             <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
-                <p>&copy; 2025 The Artisans Combine. All rights reserved.</p>
+                <p>&copy; 2025 The Artisans Combine. All rights-reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // No longer need a separate overlay div, as the effect is within the card
-            // const previewOverlay = document.getElementById('image-preview-overlay');
-            // const previewImage = document.getElementById('preview-image');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
 
-            const portfolioImages = document.querySelectorAll('#getfabb-hair .portfolio-image-container img, #modeling-fashion .portfolio-image-container img');
-
-            portfolioImages.forEach(img => {
-                // Remove mouseover/mouseout listeners for the overlay effect
-                // The new effect is purely CSS-driven on the parent .card-hover-effect
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             });
 
-            // No need for click listener on overlay as it's removed
-            // if (previewOverlay) {
-            //     previewOverlay.addEventListener('click', () => {
-            //         previewOverlay.classList.remove('visible');
-            //         document.body.style.overflow = '';
-            //     });
-            // }
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active'); // Clear active from all links first
+            });
+
+            // Handle direct links and highlight them
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = link.split('#')[0];
+                }
+
+                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = link.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
+                }
+            });
         });
     </script>
 
