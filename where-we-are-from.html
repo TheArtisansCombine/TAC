@@ -131,9 +131,11 @@
         }
 
         .map-container img {
-            width: 100%; /* Image fills the container width */
-            height: 100%; /* Image fills the container height */
-            object-fit: cover; /* This makes the image cover the area, cropping parts if aspect ratios differ, giving a "zoomed-in" feel */
+            width: 100%; /* Image fills the container width (before scale) */
+            height: 100%; /* Image fills the container height (before scale) */
+            object-fit: cover; /* This makes the image cover the area, cropping parts if aspect ratios differ */
+            transform: scale(2); /* Zoom in by 2x */
+            object-position: center; /* Try to center the "zoomed" image */
             display: block;
             border-radius: 0.5rem;
         }
@@ -236,9 +238,9 @@
             Western Massachusetts, often affectionately known by its area code "413," is a region rich in natural beauty, historical significance, and a thriving arts and culture scene. From the rolling Berkshire Mountains to the fertile Pioneer Valley, this area provides a unique backdrop for a diverse community of artisans.
         </p>
 
-        <!-- Map Section -->
+        <!-- Moved title outside the map-container -->
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Home in the Northeast</h2>
         <section class="map-container mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Home in the Northeast</h2>
             <div class="flex justify-center items-center h-full">
                 <!-- Map image for Western Massachusetts -->
                 <img src="images/WMTAC.png" alt="Map of Western Massachusetts" class="w-full h-full object-cover">
