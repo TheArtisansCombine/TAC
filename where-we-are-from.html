@@ -114,11 +114,28 @@
         }
 
         /* Map specific styles */
+        .map-container {
+            width: 100%; /* Default to full width on small screens */
+            max-width: 500px; /* Max width for larger screens */
+            height: 350px; /* Fixed height for consistent sizing */
+            margin: 0 auto;
+            background-color: #f3f4f6; /* gray-100 */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem;
+            overflow: hidden; /* Crucial for cropping effect */
+            display: flex; /* For centering content within */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .map-container img {
-            max-width: 100%;
-            height: auto;
-            display: block; /* Ensures no extra space below image */
-            border-radius: 0.5rem; /* Matches container border-radius */
+            width: 100%; /* Image fills the container width */
+            height: 100%; /* Image fills the container height */
+            object-fit: cover; /* This makes the image cover the area, cropping parts if aspect ratios differ, giving a "zoomed-in" feel */
+            display: block;
+            border-radius: 0.5rem;
         }
     </style>
 </head>
@@ -222,9 +239,9 @@
         <!-- Map Section -->
         <section class="map-container mb-12">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Home in the Northeast</h2>
-            <div class="flex justify-center items-center">
-                <!-- Replaced SVG map with WMTAC.png -->
-                <img src="images/WMTAC.png" alt="Map of Western Massachusetts" class="w-full h-auto object-contain">
+            <div class="flex justify-center items-center h-full">
+                <!-- Map image for Western Massachusetts -->
+                <img src="images/WMTAC.png" alt="Map of Western Massachusetts" class="w-full h-full object-cover">
             </div>
         </section>
 
