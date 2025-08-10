@@ -114,32 +114,11 @@
         }
 
         /* Map specific styles */
-        .map-container {
-            width: 100%;
-            max-width: 800px; /* Adjust as needed */
-            margin: 0 auto;
-            background-color: #f3f4f6; /* gray-100 */
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 1rem;
-        }
-        .map-svg {
-            width: 100%;
+        .map-container img {
+            max-width: 100%;
             height: auto;
-        }
-        .state-path {
-            fill: #cbd5e1; /* gray-300 */
-            stroke: #64748b; /* slate-600 */
-            stroke-width: 0.5;
-            transition: fill 0.3s ease-in-out;
-        }
-        .state-path:hover {
-            fill: #94a3b8; /* slate-400 */
-        }
-        .western-mass-highlight {
-            fill: #f0abfc; /* fuchsia-300 */
-            stroke: #c026d3; /* fuchsia-600 */
-            stroke-width: 1.5;
+            display: block; /* Ensures no extra space below image */
+            border-radius: 0.5rem; /* Matches container border-radius */
         }
     </style>
 </head>
@@ -244,21 +223,8 @@
         <section class="map-container mb-12">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Home in the Northeast</h2>
             <div class="flex justify-center items-center">
-                <svg class="map-svg" viewBox="0 0 1000 800">
-                    <!-- Base states, simplified paths -->
-                    <path class="state-path" d="M300,50 L350,70 L400,50 L450,80 L420,120 L380,100 L300,150 Z" id="state-ny"></path> <!-- New York (simplified) -->
-                    <path class="state-path" d="M450,80 L500,100 L550,80 L600,120 L580,180 L500,150 L450,120 Z" id="state-vt"></path> <!-- Vermont (simplified) -->
-                    <path class="state-path" d="M550,80 L600,60 L650,80 L700,100 L680,160 L600,140 Z" id="state-nh"></path> <!-- New Hampshire (simplified) -->
-                    <path class="state-path" d="M650,80 L700,60 L750,80 L800,100 L780,160 L700,140 Z" id="state-me"></path> <!-- Maine (simplified) -->
-                    <path class="state-path" d="M350,180 L400,200 L450,180 L500,220 L480,280 L400,250 L350,220 Z" id="state-ct"></path> <!-- Connecticut (simplified) -->
-                    <path class="state-path" d="M480,280 L530,300 L580,280 L630,320 L610,380 L530,350 L480,320 Z" id="state-ri"></path> <!-- Rhode Island (simplified) -->
-                    
-                    <!-- Massachusetts (divided into East and West for highlighting) -->
-                    <!-- Western Mass (highlighted) -->
-                    <path class="state-path western-mass-highlight" d="M400,150 L450,120 L480,150 L450,200 L400,220 L350,200 L380,180 Z" id="western-mass"></path>
-                    <!-- Eastern Mass (normal) -->
-                    <path class="state-path" d="M480,150 L550,100 L600,120 L580,180 L500,200 L450,200 Z" id="eastern-mass"></path>
-                </svg>
+                <!-- Replaced SVG map with WMTAC.png -->
+                <img src="images/WMTAC.png" alt="Map of Western Massachusetts" class="w-full h-auto object-contain">
             </div>
         </section>
 
