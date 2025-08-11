@@ -41,14 +41,14 @@
         /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
         .portfolio-image-container {
             width: 100%;
-            height: 192px; /* h-48 equivalent, ensures consistent height for images */
+            /* Removed fixed height to allow image aspect ratio to dictate height */
             overflow: hidden; /* Ensures image doesn't spill out */
             position: relative;
         }
         /* Portfolio Image: Always covers the container and maintains its size */
         .portfolio-image-container img {
             width: 100%;
-            height: 100%; /* Fill the container height */
+            height: auto; /* Ensures image maintains its aspect ratio */
             object-fit: cover; /* Image will cover the container, cropping if necessary */
             transition: none; /* No scaling on hover for these images */
             transform: none;
