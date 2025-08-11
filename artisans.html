@@ -286,7 +286,7 @@
             </a>
             <!-- New Profile Card for Ja'voni White -->
             <a href="javoni.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                <img src="https://placehold.co/600x400/fuchsia-600/ffffff?text=Ja'voni+White" alt="Ja'voni White's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                <img src="images/javoni_profile.jpg" alt="Ja'voni White's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
                 <h3 class="text-xl font-semibold text-gray-900">Ja'voni White</h3>
                 <p class="text-fuchsia-600 font-medium">Fashion Model • Musician • Entrepreneur</p>
                 <p class="text-gray-600 mt-2 text-sm">
@@ -421,12 +421,20 @@
                     linkHref = link.split('#')[0];
                 }
 
-                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                // Special handling for 'artisans.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link
+                if (currentPath === 'artisans.html' && linkHref.includes('artisans.html')) {
+                    link.classList.add('active');
+                    // Find the parent dropdown and activate it
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
                     link.classList.add('active');
                 }
             });
 
-            // Handle dropdown active states
+            // Handle dropdown active states for other pages (already handled by the above logic)
             dropdownParents.forEach(dropdown => {
                 const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
                 let isDropdownActive = false;
