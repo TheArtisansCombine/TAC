@@ -131,17 +131,19 @@
             transition: all 0.3s ease-in-out; /* Smooth transition for movements */
         }
         .partner-logo-container .ari-jays-logo {
-            width: 60%; /* Smaller, in back */
+            width: 50%; /* Adjusted for side-by-side */
             height: auto;
             z-index: 1; /* Behind getfabb-logo */
-            transform: translateX(-20px) translateY(10px); /* Shift left and down */
+            left: 0; /* Align to left */
+            transform: translateX(10%); /* Shift right for spacing */
             opacity: 0.7; /* Slightly transparent */
         }
         .partner-logo-container .getfabb-logo {
-            width: 80%; /* Larger, more prominent */
+            width: 50%; /* Adjusted for side-by-side */
             height: auto;
             z-index: 2; /* On top */
-            transform: translateX(20px) translateY(-10px); /* Shift right and up */
+            right: 0; /* Align to right */
+            transform: translateX(-10%); /* Shift left for spacing */
         }
     </style>
 </head>
@@ -260,6 +262,20 @@
                         <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">Explore Services <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
+                <!-- NEW Partner Card: The She Shack -->
+                <a href="sheshack.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="partner-logo-container">
+                        <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="w-24 h-24 mx-auto object-contain">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The She Shack</h3>
+                        <p class="text-fuchsia-600 font-medium text-sm mb-3">Handcrafted Home Décor Atelier</p>
+                        <p class="text-gray-600 text-sm">
+                            A cozy corner of creativity offering handmade, beautifully detailed, and customizable décor pieces.
+                        </p>
+                        <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">View Shop <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
                 <!-- NEW Partner Card: Cruzer Urameshi -->
                 <a href="cruzer.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
                     <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-24 h-24 mx-auto mb-4 object-cover">
@@ -290,7 +306,7 @@
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <!-- Footer Column 1: Contact Info and Partners -->
+                <!-- Footer Column 1: Contact Info -->
                 <div>
                     <h3 class="text-white font-bold mb-4">Contact</h3>
                     <p class="text-sm">Western Massachusetts</p>
@@ -305,6 +321,9 @@
                             </a>
                             <a href="bobby.html" class="h-10">
                                 <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="sheshack.html" class="h-10">
+                                <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="h-full w-auto object-contain">
                             </a>
                         </div>
                     </div>
@@ -376,7 +395,7 @@
                 let linkHref = link.getAttribute('href');
                 // Normalize href for comparison (remove #anchors for main page links)
                 if (linkHref.includes('#')) {
-                    linkHref = linkHref.split('#')[0];
+                    linkHref = link.split('#')[0];
                 }
 
                 // Special handling for 'forge-of-collaboration.html' to highlight 'Who We Are' dropdown and 'Partner Businesses' sub-link
