@@ -41,7 +41,7 @@
         /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
         .portfolio-image-container {
             width: 100%;
-            height: 192px; /* h-48 equivalent, ensures consistent height for images */
+            height: auto; /* Allows image aspect ratio to dictate height */
             overflow: hidden; /* Ensures image doesn't spill out */
             position: relative;
         }
@@ -235,11 +235,11 @@
 
         <!-- Cruzer Urameshi Bio Section -->
         <section id="cruzer-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12 mb-16">
-            <div class="mb-8 md:mb-0">
-                <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-56 h-56 mx-auto md:mx-0 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
-                <p class="text-fuchsia-600 font-bold mt-4 text-center mx-auto" style="width: 100%;">#CruzerCruzerCruzer</p>
+            <div class="mb-8 md:mb-0 flex flex-col items-center mx-auto"> <!-- Added mx-auto here -->
+                <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-56 h-56 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
+                <p class="text-fuchsia-600 font-bold mt-4">#CruzerCruzerCruzer</p>
             </div>
-            <div>
+            <div class="flex-1"> <!-- Added flex-1 to allow text content to take remaining space -->
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
                     Cruzer Urameshi
                 </h1>
@@ -269,7 +269,8 @@
                 </div>
 
                 <!-- Personal Portfolio Images (moved here) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mt-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mt-8 mx-auto max-w-4xl">
+                    <!-- Added mx-auto and max-w-4xl to center the grid itself -->
                     <!-- Portfolio Image 1 -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                         <div class="portfolio-image-container">
@@ -303,7 +304,7 @@
         
         <!-- Cruzer's Music Section -->
         <section id="cruzer-music" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
-            <div class="flex items-center justify-center md:justify-start mb-6">
+            <div class="flex flex-col items-center justify-center mb-6"> <!-- Changed to flex-col and centered -->
                 <h2 class="text-3xl font-bold text-gray-900 mr-4">
                     <img src="images/cruzer_logo.jpg" alt="Cruzer Urameshi Logo" class="h-16 w-auto object-contain inline-block mr-2">
                     Cruzer's Music
@@ -344,7 +345,8 @@
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 When he’s not crafting beats, Cruzer is plugged into the gaming world, finding inspiration in immersive digital landscapes. He’s also committed to mentoring emerging artists — helping them sharpen their sound, navigate the industry, and launch their own creative journeys. His passion for lifting others up is as strong as his drive to create.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mx-auto max-w-4xl">
+                <!-- Added mx-auto and max-w-4xl to center the grid itself -->
                 <!-- Portfolio Image 1 (Gaming) -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="portfolio-image-container">
