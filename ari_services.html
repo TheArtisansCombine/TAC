@@ -26,6 +26,24 @@
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
 
+        /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
+        .portfolio-image-container {
+            width: 100%;
+            height: auto; /* Allows image aspect ratio to dictate height */
+            overflow: hidden; /* Ensures image doesn't spill out */
+            position: relative;
+        }
+        /* Portfolio Image: Always covers the container and maintains its size */
+        .portfolio-image-container img {
+            width: 100%;
+            height: auto; /* Ensures image maintains its aspect ratio */
+            object-fit: contain; /* Ensures the entire image is visible, no cropping */
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover .portfolio-image-container img {
+            transform: scale(1.05); /* Slightly scales up for visual emphasis */
+        }
+
         /* Mobile Navigation Overlay Styles */
         .mobile-menu-overlay {
             position: fixed;
@@ -118,7 +136,7 @@
 
     <!-- Header & Navigation -->
     <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex items-center max-w-7xl">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
             <a href="index.html" class="h-10">
                 <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
             </a>
@@ -150,7 +168,7 @@
                     <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="index.html#our-mission">Our Mission</a>
-                        <a href="index.html#our-mission">Where We're From</a>
+                        <a href="where-we-are-from.html">Where We're From</a>
                         <a href="index.html#testimonials">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
@@ -195,7 +213,7 @@
                 <span class="text-2xl font-semibold">About Us</span>
                 <div class="mobile-dropdown-content flex flex-col mt-2">
                     <a href="index.html#our-mission">Our Mission</a>
-                    <a href="index.html#our-mission">Where We're From</a>
+                    <a href="where-we-are-from.html">Where We're From</a>
                     <a href="index.html#testimonials">Testimonials</a>
                     <a href="contact.html">Contact</a>
                 </div>
@@ -220,6 +238,28 @@
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 As a dedicated and skilled hairdresser, Ari offers a full spectrum of salon services aimed at bringing your hair dreams to life. From precision cuts and vibrant coloring to intricate styling for special occasions, Ari approaches each client with a personalized touch. She believes a great hairstyle isn't just about technique; it's about understanding your unique personality and lifestyle to create a look that empowers you. Step into her chair and experience a transformation that enhances your natural beauty and boosts your confidence.
             </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair1.jpg" alt="Hair Styling Sample 1" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair2.jpg" alt="Hair Styling Sample 2" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair3.jpg" alt="Hair Styling Sample 3" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_hair4.jpg" alt="Hair Styling Sample 4" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+            </div>
             <div class="mt-8">
                 <a href="#" target="_blank" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
                     Book a Hair Appointment
@@ -236,19 +276,48 @@
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
                 Ari Jays Designs is the creative hub where Ari's passion for fashion and DIY artistry truly flourishes. This is a space dedicated to innovative fashion concepts, from avant-garde pieces to custom-tailored creations that reflect individuality. Beyond clothing, Ari transforms everyday materials into extraordinary art pieces through her diverse DIY projects, showcasing sustainable practices and imaginative craftsmanship. Whether it's a unique garment or a handcrafted decor item, each design tells a story of creativity, skill, and a deep love for making. Explore her portfolio to see how she blends aesthetics with bespoke artistry, pushing the boundaries of traditional design.
             </p>
-            <div class="mt-8">
-                <a href="#" target="_blank" class="bg-gradient-to-r from-fuchsia-600 to-teal-400 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                    View Design Portfolio
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                <!-- Fashion Design Sample 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion1.jpg" alt="Fashion Design Sample 1" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Fashion Design Sample 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion2.jpg" alt="Fashion Design Sample 2" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Fashion Design Sample 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/ari_fashion3.jpg" alt="Fashion Design Sample 3" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mini Profile Section for Ari -->
+        <section class="py-12 text-center bg-gradient-to-r from-teal-200 to-fuchsia-200 text-gray-800 rounded-lg p-8 shadow-sm border border-gray-200 max-w-xl mx-auto">
+            <div class="flex flex-col items-center">
+                <img src="images/ari_profile.jpg" alt="Ariandra Lemus Profile Picture" class="rounded-full w-24 h-24 object-cover object-center border-2 border-fuchsia-400 shadow-md mb-4">
+                <h3 class="text-2xl font-bold mb-2">Meet Ariandra Lemus</h3>
+                <p class="text-md mb-6">
+                    Ariandra Lemus is the creative force behind both GetFabb with Ari and Ari Jays Designs, bringing her passion for hairdressing, fashion, and DIY artistry to life.
+                </p>
+                <a href="ari.html" class="inline-block bg-white text-gray-800 font-semibold py-2 px-6 rounded-full hover:bg-gray-200 transition-colors">
+                    View Ari's Full Profile
                 </a>
             </div>
         </section>
 
         <div class="mt-16 text-center">
-            <a href="ari.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+            <a href="forge-of-collaboration.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                 </svg>
-                <span>Back to Ari's Profile</span>
+                <span>Back to Partner Businesses</span>
             </a>
         </div>
 
@@ -258,47 +327,30 @@
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <!-- Footer Column 1: Contact Info -->
+                <!-- Footer Column 1: Contact Info and Partners -->
                 <div>
                     <h3 class="text-white font-bold mb-4">Contact</h3>
                     <p class="text-sm">Western Massachusetts</p>
                     <p class="text-sm">
                         <a href="mailto:theartisanscombine@gmail.com" class="hover:text-white transition-colors">theartisanscombine@gmail.com</a>
                     </p>
-                    <div class="flex justify-center md:justify-start mt-4 space-x-4">
-                        <!-- Social Media Links -->
-                        <a href="https://www.facebook.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C17.34 21.283 22 17.185 22 12z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.675.44.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                    <div class="mt-8">
+                        <h3 class="text-white font-bold mb-4">Our Partners</h3>
+                        <div class="flex justify-center md:justify-start space-x-6">
+                            <a href="jesus.html" class="h-10">
+                                <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="bobby.html" class="h-10">
+                                <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Footer Column 2: Our Partners -->
-                <div class="md:text-center">
-                    <h3 class="text-white font-bold mb-4">Our Partners</h3>
-                    <div class="flex justify-center space-x-6">
-                        <!-- Partner Logo for Alicea Media Arts -->
-                        <a href="jesus.html" class="h-10">
-                            <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
-                        </a>
-                        <!-- Partner Logo for Bobby Diesel -->
-                        <a href="bobby.html" class="h-10">
-                            <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Footer Column 3: Navigation -->
-                <div class="md:text-left">
+                <!-- Footer Column 2: Navigation -->
+                <div class="md:text-left md:col-span-2">
                     <h3 class="text-white font-bold mb-4">Navigation</h3>
-                    <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
                         <div>
                             <p class="text-white font-semibold mt-2">Who We Are</p>
                             <a href="artisans.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Profiles</a>
@@ -311,7 +363,7 @@
                             <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
                             <p class="text-white font-semibold mt-2">About Us</p>
                             <a href="index.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
-                            <a href="index.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="where-we-are-from.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
                             <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
                             <a href="contact.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
                         </div>
@@ -358,23 +410,26 @@
             const dropdownParents = document.querySelectorAll('.dropdown');
 
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Clear active from all links first
-            });
-
-            // Handle direct links and highlight them
-            navLinks.forEach(link => {
                 let linkHref = link.getAttribute('href');
                 // Normalize href for comparison (remove #anchors for main page links)
                 if (linkHref.includes('#')) {
-                    linkHref = link.split('#')[0];
+                    linkHref = linkHref.split('#')[0];
                 }
 
-                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                // Special handling for 'ari_services.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link
+                if (currentPath === 'ari_services.html' && linkHref.includes('artisans.html')) {
+                    link.classList.add('active');
+                    // Find the parent dropdown and activate it
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
                     link.classList.add('active');
                 }
             });
 
-            // Handle dropdown active states
+            // Handle dropdown active states for other pages (already handled by the above logic)
             dropdownParents.forEach(dropdown => {
                 const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
                 let isDropdownActive = false;
