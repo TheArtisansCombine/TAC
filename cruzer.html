@@ -41,7 +41,7 @@
         /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
         .portfolio-image-container {
             width: 100%;
-            height: auto; /* Allows image aspect ratio to dictate height */
+            height: 192px; /* h-48 equivalent, ensures consistent height for images */
             overflow: hidden; /* Ensures image doesn't spill out */
             position: relative;
         }
@@ -237,7 +237,7 @@
         <section id="cruzer-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12 mb-16">
             <div class="mb-8 md:mb-0">
                 <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-56 h-56 mx-auto md:mx-0 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
-                <p class="text-fuchsia-600 font-bold mt-4 text-center">#CruzerCruzerCruzer</p>
+                <p class="text-fuchsia-600 font-bold mt-4 text-center mx-auto" style="width: 100%;">#CruzerCruzerCruzer</p>
             </div>
             <div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
@@ -265,6 +265,37 @@
                         <a href="mailto:cruzclay19@gmail.com" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
                             <i class="fas fa-envelope text-3xl"></i>
                         </a>
+                    </div>
+                </div>
+
+                <!-- Personal Portfolio Images (moved here) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mt-8">
+                    <!-- Portfolio Image 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                        <div class="portfolio-image-container">
+                            <img src="images/cruzer1.jpg" alt="Cruzer Urameshi Personal Portfolio Image 1" class="rounded-lg shadow-sm">
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mt-2 text-sm">A glimpse into Cruzer's early creative journey.</p>
+                        </div>
+                    </div>
+                    <!-- Portfolio Image 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                        <div class="portfolio-image-container">
+                            <img src="images/cruzer2.jpg" alt="Cruzer Urameshi Personal Portfolio Image 2" class="rounded-lg shadow-sm">
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mt-2 text-sm">Capturing the essence of his artistic evolution.</p>
+                        </div>
+                    </div>
+                    <!-- Portfolio Image 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                        <div class="portfolio-image-container">
+                            <img src="images/cruzer3.jpg" alt="Cruzer Urameshi Personal Portfolio Image 3" class="rounded-lg shadow-sm">
+                        </div>
+                        <div class="p-4">
+                            <p class="text-gray-600 mt-2 text-sm">Behind-the-scenes moments of his independent career.</p>
+                        </div>
                     </div>
                 </div>
             </div>
