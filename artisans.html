@@ -266,6 +266,16 @@
                     </p>
                     <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
                 </a>
+                <!-- Profile Card for Kathleen O'Shea -->
+                <a href="kathleen.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
+                    <img src="images/kathleen_profile.jpg" alt="Kathleen O'Shea Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-900">Kathleen O'Shea</h3>
+                    <p class="text-fuchsia-600 font-medium">DIY Home Décor Creator</p>
+                    <p class="text-gray-600 mt-2 text-sm">
+                        A passionate DIY home décor creator who brings cozy charm and creative flair to every project she crafts.
+                    </p>
+                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
+                </a>
             </div>
         </section>
 
@@ -310,16 +320,6 @@
                     <p class="text-fuchsia-600 font-medium">Fashion Designer • Hairdresser • DIY Creator</p>
                     <p class="text-gray-600 mt-2 text-sm">
                         A multi-talented artist specializing in fashion design, hairdressing, and transforming materials into beautiful creations.
-                    </p>
-                    <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
-                </a>
-                <!-- Profile Card for Cruzer Urameshi (NEW) -->
-                <a href="cruzer.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
-                    <h3 class="text-xl font-semibold text-gray-900">Cruzer Urameshi</h3>
-                    <p class="text-fuchsia-600 font-medium">Independent Music Producer | Streamer | Visionary</p>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        Born in Columbus, Georgia, and raised just outside Atlanta, Cruzer Urameshi blends hip-hop, lofi, synth-wave, and ambient styles into immersive sonic worlds.
                     </p>
                     <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
                 </a>
@@ -440,23 +440,26 @@
             const dropdownParents = document.querySelectorAll('.dropdown');
 
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Clear active from all links first
-            });
-
-            // Handle direct links and highlight them
-            navLinks.forEach(link => {
                 let linkHref = link.getAttribute('href');
                 // Normalize href for comparison (remove #anchors for main page links)
                 if (linkHref.includes('#')) {
-                    linkHref = link.split('#')[0];
+                    linkHref = linkHref.split('#')[0];
                 }
 
-                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                // Special handling for 'kathleen.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link (assuming it's under About Us)
+                if (currentPath === 'kathleen.html' && linkHref.includes('artisans.html')) {
+                    link.classList.add('active');
+                    // Find the parent dropdown and activate it
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
                     link.classList.add('active');
                 }
             });
 
-            // Handle dropdown active states
+            // Handle dropdown active states for other pages (already handled by the above logic)
             dropdownParents.forEach(dropdown => {
                 const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
                 let isDropdownActive = false;
