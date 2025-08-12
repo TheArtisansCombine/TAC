@@ -128,18 +128,20 @@
         .partner-logo-container img {
             position: absolute;
             object-fit: contain;
+            transition: all 0.3s ease-in-out; /* Smooth transition for movements */
         }
         .partner-logo-container .ari-jays-logo {
+            width: 60%; /* Smaller, in back */
+            height: auto;
+            z-index: 1; /* Behind getfabb-logo */
+            transform: translateX(-20px) translateY(10px); /* Shift left and down */
+            opacity: 0.7; /* Slightly transparent */
+        }
+        .partner-logo-container .getfabb-logo {
             width: 80%; /* Larger, more prominent */
             height: auto;
             z-index: 2; /* On top */
-        }
-        .partner-logo-container .getfabb-logo {
-            width: 60%; /* Smaller, in back */
-            height: auto;
-            opacity: 0.7; /* Slightly transparent */
-            transform: translateX(20px) translateY(10px); /* Adjust position */
-            z-index: 1; /* Behind ari-jays-logo */
+            transform: translateX(20px) translateY(-10px); /* Shift right and up */
         }
     </style>
 </head>
@@ -246,8 +248,8 @@
                 <!-- NEW Partner Card: GetFabb with Ari / Ari Jays Designs -->
                 <a href="ari_services.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="partner-logo-container">
-                        <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="ari-jays-logo">
                         <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="getfabb-logo">
+                        <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="ari-jays-logo">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">GetFabb with Ari / Ari Jays Designs</h3>
@@ -391,15 +393,10 @@
             const dropdownParents = document.querySelectorAll('.dropdown');
 
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Clear active from all links first
-            });
-
-            // Handle direct links and highlight them
-            navLinks.forEach(link => {
                 let linkHref = link.getAttribute('href');
                 // Normalize href for comparison (remove #anchors for main page links)
                 if (linkHref.includes('#')) {
-                    linkHref = link.split('#')[0];
+                    linkHref = linkHref.split('#')[0];
                 }
 
                 // Special handling for 'forge-of-collaboration.html' to highlight 'Who We Are' dropdown and 'Partner Businesses' sub-link
