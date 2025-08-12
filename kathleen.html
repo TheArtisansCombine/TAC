@@ -113,22 +113,28 @@
             display: block;
         }
 
-        /* Portfolio Image Container: Holds the image and ensures consistent dimensions */
+        /* Portfolio/Catalog Image Container: Ensures consistent dimensions */
         .portfolio-image-container {
             width: 100%;
-            height: auto; /* Allows image aspect ratio to dictate height */
-            overflow: hidden; /* Ensures image doesn't spill out */
+            height: 200px; /* Fixed height for consistent image display */
+            overflow: hidden;
             position: relative;
         }
-        /* Portfolio Image: Always covers the container and maintains its size */
         .portfolio-image-container img {
             width: 100%;
-            height: auto; /* Ensures image maintains its aspect ratio */
-            object-fit: contain; /* Ensures the entire image is visible, no cropping */
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the container, cropping if necessary */
             transition: transform 0.3s ease-in-out;
         }
         .card-hover-effect:hover .portfolio-image-container img {
             transform: scale(1.05); /* Slightly scales up for visual emphasis */
+        }
+        /* Specific styling for the banner image to ensure it covers the area */
+        .banner-image {
+            width: 100%;
+            height: 300px; /* Adjust height as needed for your banner */
+            object-fit: cover;
+            object-position: center;
         }
     </style>
 </head>
@@ -223,45 +229,113 @@
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
 
-        <!-- Kathleen O'Shea Bio Section -->
-        <section id="kathleen-bio" class="text-center md:flex md:items-center md:text-left md:space-x-12 mb-16">
-            <div class="mb-8 md:mb-0 flex flex-col items-center mx-auto">
-                <img src="images/kathleen_profile.jpg" alt="Kathleen O'Shea Profile Picture" class="rounded-full w-56 h-56 object-cover object-center border-4 border-fuchsia-600 shadow-lg">
-            </div>
-            <div>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-2">
-                    Kathleen O'Shea
+        <!-- Banner Section for The She Shack -->
+        <section class="mb-16">
+            <img src="images/sheshack.jpg" alt="The She Shack Banner" class="banner-image rounded-lg shadow-xl">
+        </section>
+
+        <!-- The She Shack Bio Section -->
+        <section id="sheshack-bio" class="text-center bg-white rounded-lg shadow-md p-8 mb-16">
+            <div class="flex items-center justify-center mb-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mr-4">
+                    The She Shack
                 </h1>
-                <p class="text-2xl font-medium text-fuchsia-600 mb-4">DIY Home Décor Creator</p>
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0">
-                    Kathleen O’Shea is a passionate DIY home décor creator who brings cozy charm and creative flair to every project she crafts. From upcycling everyday items into stylish room accents to designing handmade home accessories, Kathleen’s approach marries functionality with imagination. Her hands-on tutorials and inspiring before-and-after project stories make stylish décor accessible to crafters of all skill levels.
-                </p>
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0 mt-4">
-                    The She Shack is Kathleen O’Shea’s handcrafted home décor atelier—where cozy creativity meets custom charm. Based in Hardwick, The She Shack offers handmade, beautifully detailed, and customizable décor pieces crafted with artistry and heart. Whether you're picking items up locally or having them delivered, each piece reflects Kathleen’s commitment to quality, individuality, and warm, inviting design.
-                </p>
-                <div class="mt-6 flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div class="flex space-x-4">
-                        <!-- Social Media Links for Kathleen (placeholders) -->
-                        <a href="#" target="_blank" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
-                            <i class="fab fa-facebook-f text-3xl"></i>
-                        </a>
-                        <a href="#" target="_blank" class="text-gray-600 hover:text-fuchsia-600 transition-colors">
-                            <i class="fab fa-instagram text-3xl"></i>
-                        </a>
+                <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="h-20 w-auto object-contain">
+            </div>
+            <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                The She Shack is Kathleen O’Shea’s handcrafted home décor atelier—where cozy creativity meets custom charm. Based in Hardwick, The She Shack offers handmade, beautifully detailed, and customizable décor pieces crafted with artistry and heart. Whether you're picking items up locally or having them delivered, each piece reflects Kathleen’s commitment to quality, individuality, and warm, inviting design.
+            </p>
+            <p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+                At The She Shack, it’s all about turning everyday spaces into something special. You’ll find unique, ready-to-love items alongside custom creations made just for you, all crafted with quality materials and a whole lot of heart. This isn’t mass-produced décor—it’s the kind of piece that makes friends say, “Where did you get that?” and makes your home feel a little more you. Whether you’re stopping by to pick out the perfect gift, refresh your living room, or just get inspired, The She Shack is here to help you make your home as warm and welcoming as a neighbor’s front porch.
+            </p>
+
+            <!-- Portfolio Images for The She Shack Bio -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack1.jpg" alt="The She Shack Item 1" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack2.jpg" alt="The She Shack Item 2" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack3.jpg" alt="The She Shack Item 3" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack4.jpg" alt="The She Shack Item 4" class="rounded-lg shadow-sm">
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- Kathleen's Works Section -->
-        <section id="kathleen-works" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Explore Kathleen's Creations</h2>
+
+        <!-- The She Shack Catalog Section -->
+        <section id="sheshack-catalog" class="mt-16 text-center bg-gray-100 rounded-lg shadow-md p-8 mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Our Handcrafted Catalog</h2>
             <p class="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-                Discover a selection of Kathleen's unique home décor pieces and inspiring DIY projects.
+                Browse through a selection of unique and customizable home décor pieces available from The She Shack.
             </p>
-            <div class="mt-8">
-                <a href="sheshack.html" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                    View Her Works
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                <!-- Catalog Image 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_1.jpg" alt="The She Shack Catalog Item 1" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_2.jpg" alt="The She Shack Catalog Item 2" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_3.jpg" alt="The She Shack Catalog Item 3" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_4.jpg" alt="The She Shack Catalog Item 4" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_5.jpg" alt="The She Shack Catalog Item 5" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_6.jpg" alt="The She Shack Catalog Item 6" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+                <!-- Catalog Image 7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="portfolio-image-container">
+                        <img src="images/sheshack_7.jpg" alt="The She Shack Catalog Item 7" class="rounded-lg shadow-sm">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mini Profile Section for Kathleen -->
+        <section class="py-12 text-center bg-gradient-to-r from-teal-200 to-fuchsia-200 text-gray-800 rounded-lg p-8 shadow-sm border border-gray-200 max-w-xl mx-auto">
+            <div class="flex flex-col items-center">
+                <img src="images/kathleen_profile.jpg" alt="Kathleen O'Shea Profile Picture" class="rounded-full w-24 h-24 object-cover object-center border-2 border-fuchsia-400 shadow-md mb-4">
+                <h3 class="text-2xl font-bold mb-2">Meet Kathleen O'Shea</h3>
+                <p class="text-md mb-6">
+                    Together, Kathleen O’Shea and The She Shack create a unique synergy: her personal DIY inspiration and approachable project tutorials complement the tangible, handcrafted decor pieces she develops under The She Shack brand. It’s one creative vision across two channels—one digital, one tangible—both rooted in making homes beautiful, personal, and inviting.
+                </p>
+                <a href="kathleen.html" class="inline-block bg-white text-gray-800 font-semibold py-2 px-6 rounded-full hover:bg-gray-200 transition-colors">
+                    View Kathleen's Profile
                 </a>
             </div>
         </section>
@@ -296,6 +370,9 @@
                             </a>
                             <a href="bobby.html" class="h-10">
                                 <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="sheshack_logo.png" class="h-10">
+                                <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="h-full w-auto object-contain">
                             </a>
                         </div>
                     </div>
@@ -370,8 +447,8 @@
                     linkHref = linkHref.split('#')[0];
                 }
 
-                // Special handling for 'ari_services.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link
-                if (currentPath === 'ari_services.html' && linkHref.includes('artisans.html')) {
+                // Special handling for 'sheshack.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link (or relevant parent)
+                if (currentPath === 'sheshack.html' && linkHref.includes('artisans.html')) {
                     link.classList.add('active');
                     // Find the parent dropdown and activate it
                     let parentDropdown = link.closest('.dropdown');
