@@ -180,6 +180,39 @@
         .carousel-button.next {
             right: 10px;
         }
+
+        /* Partner Card Specific Styles for Logo Overlay */
+        .partner-logo-container {
+            position: relative;
+            width: 100%;
+            height: 150px; /* Fixed height for consistent preview area */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f3f4f6; /* Light gray background for logos */
+            border-radius: 0.5rem 0.5rem 0 0; /* Match card border-radius */
+        }
+        .partner-logo-container img {
+            position: absolute;
+            object-fit: contain;
+            transition: all 0.3s ease-in-out; /* Smooth transition for movements */
+        }
+        .partner-logo-container .ari-jays-logo {
+            width: 50%; /* Adjusted for side-by-side */
+            height: auto;
+            z-index: 1; /* Behind getfabb-logo */
+            left: 0; /* Align to left */
+            transform: translateX(10%); /* Shift right for spacing */
+            opacity: 0.7; /* Slightly transparent */
+        }
+        .partner-logo-container .getfabb-logo {
+            width: 50%; /* Adjusted for side-by-side */
+            height: auto;
+            z-index: 2; /* On top */
+            right: 0; /* Align to right */
+            transform: translateX(-10%); /* Shift left for spacing */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -361,13 +394,13 @@
                     </p>
                     <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
                 </a>
-                <!-- Profile Card for Thai Zeo -->
-                <a href="thaizeo.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/thaizeo_profile.jpg" alt="Thai Zeo's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
-                    <h3 class="text-xl font-semibold text-gray-900">Thai Zeo</h3>
-                    <p class="text-fuchsia-600 font-medium">Musician, Model & Author</p>
+                <!-- Profile Card for Krusin B Krusin (Replaced Thai Zeo) -->
+                <a href="krusin.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
+                    <img src="images/krusin_profile.jpg" alt="Krusin B Krusin Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-900">Krusin B Krusin</h3>
+                    <p class="text-fuchsia-600 font-medium">Independent Music Producer & Artist</p>
                     <p class="text-gray-600 mt-2 text-sm">
-                        Explore the compelling narratives crafted by Thai Zeo through her music, modeling, and published literary works.
+                        A dynamic recording artist, songwriter, and producer blending multi-genre sounds with a theatrical background.
                     </p>
                     <span class="mt-4 inline-block text-fuchsia-600 hover:text-fuchsia-800 font-semibold text-sm transition-colors">View Work</span>
                 </a>
@@ -445,6 +478,52 @@
             </div>
         </section>
 
+        <!-- NEW Partner Businesses Section -->
+        <section class="py-16 bg-gray-100 rounded-lg shadow-md mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Partner Businesses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Partner Card: GetFabb with Ari / Ari Jays Designs -->
+                <a href="ari_services.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="partner-logo-container">
+                        <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="getfabb-logo">
+                        <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="ari-jays-logo">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">GetFabb with Ari / Ari Jays Designs</h3>
+                        <p class="text-fuchsia-600 font-medium text-sm mb-3">Hair Artistry & Fashion Design</p>
+                        <p class="text-gray-600 text-sm">
+                            Innovative hair styling, custom fashion designs, and unique DIY creations by Ariandra Lemus.
+                        </p>
+                        <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">Explore Services <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Partner Card: The She Shack -->
+                <a href="sheshack.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="partner-logo-container">
+                        <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="w-24 h-24 mx-auto object-contain">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">The She Shack</h3>
+                        <p class="text-fuchsia-600 font-medium text-sm mb-3">Handcrafted Home Décor Atelier</p>
+                        <p class="text-gray-600 text-sm">
+                            A cozy corner of creativity offering handmade, beautifully detailed, and customizable décor pieces.
+                        </p>
+                        <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">View Shop <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Partner Card: Cruzer Urameshi -->
+                <a href="cruzer.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-24 h-24 mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Cruzer Urameshi</h3>
+                    <p class="text-fuchsia-600 font-medium text-sm mb-3">Independent Music Producer | Streamer | Visionary</p>
+                    <p class="text-gray-600 text-sm">
+                        Born in Columbus, Georgia, Cruzer Urameshi blends hip-hop, lofi, synth-wave, and ambient styles into immersive sonic worlds.
+                    </p>
+                    <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">View Profile <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                </a>
+            </div>
+        </section>
+
         <!-- Our Mission Section (renamed to our-mission for consistency) -->
         <section id="our-mission" class="py-16 bg-gray-100">
             <div class="container mx-auto px-4 max-w-2xl text-center">
@@ -464,9 +543,9 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">What Our Community Says</h2>
                 <div class="bg-white rounded-lg shadow-md p-8">
                     <p class="text-gray-700 text-lg italic mb-4">
-                        "It’s fire to see a community of like-minded individuals all with a common goal of marketing & collaboration... I think this could be amazing for the community"
+                        "The Artisans Combine has been instrumental in growing my small business. The support and exposure are invaluable!"
                     </p>
-                    <p class="font-semibold text-fuchsia-600">- Go from the 413</p>
+                    <p class="font-semibold text-fuchsia-600">- A Happy Artisan</p>
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-8 mt-6">
                     <p class="text-gray-700 text-lg italic mb-4">
@@ -500,7 +579,7 @@
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <!-- Footer Column 1: Contact Info and Partners -->
+                <!-- Footer Column 1: Contact Info -->
                 <div>
                     <h3 class="text-white font-bold mb-4">Contact</h3>
                     <p class="text-sm">Western Massachusetts</p>
@@ -515,6 +594,9 @@
                             </a>
                             <a href="bobby.html" class="h-10">
                                 <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="sheshack.html" class="h-10">
+                                <img src="images/sheshack_logo.png" alt="The She Shack Logo" class="h-full w-auto object-contain">
                             </a>
                         </div>
                     </div>
@@ -583,23 +665,77 @@
             const dropdownParents = document.querySelectorAll('.dropdown');
 
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Clear active from all links first
-            });
-
-            // Handle direct links and highlight them
-            navLinks.forEach(link => {
                 let linkHref = link.getAttribute('href');
                 // Normalize href for comparison (remove #anchors for main page links)
                 if (linkHref.includes('#')) {
                     linkHref = link.split('#')[0];
                 }
 
-                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                // Special handling for 'index.html' to highlight 'Home'
+                if (currentPath === 'index.html' || currentPath === '') {
+                    if (linkHref === 'index.html') {
+                        link.classList.add('active');
+                    }
+                }
+                // Special handling for 'artisans.html' to highlight 'Who We Are' dropdown and 'Artisan Profiles' sub-link
+                else if (currentPath === 'artisans.html' && linkHref.includes('artisans.html')) {
                     link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'gallery.html' to highlight 'Who We Are' dropdown and 'Artisan Gallery' sub-link
+                else if (currentPath === 'gallery.html' && linkHref.includes('gallery.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'forge-of-collaboration.html' to highlight 'Who We Are' dropdown and 'Partner Businesses' sub-link
+                else if (currentPath === 'forge-of-collaboration.html' && linkHref.includes('forge-of-collaboration.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'events.html' to highlight 'What\'s Going On!' dropdown and 'Events' sub-link
+                else if (currentPath === 'events.html' && linkHref.includes('events.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'opportunities.html' to highlight 'What\'s Going On!' dropdown and 'Opportunities' sub-link
+                else if (currentPath === 'opportunities.html' && linkHref.includes('opportunities.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'where-we-are-from.html' to highlight 'About Us' dropdown and 'Where We're From' sub-link
+                else if (currentPath === 'where-we-are-from.html' && linkHref.includes('where-we-are-from.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'contact.html' to highlight 'About Us' dropdown and 'Contact' sub-link
+                else if (currentPath === 'contact.html' && linkHref.includes('contact.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
                 }
             });
 
-            // Handle dropdown active states
+            // Handle dropdown active states for other pages (already handled by the above logic)
             dropdownParents.forEach(dropdown => {
                 const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
                 let isDropdownActive = false;
