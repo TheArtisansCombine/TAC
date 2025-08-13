@@ -286,6 +286,20 @@
                     </p>
                     <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">View Profile <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                 </a>
+                <!-- NEW Partner Card: Stash Spot Ent -->
+                <a href="stashspot.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
+                    <div class="partner-logo-container">
+                        <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="w-24 h-24 mx-auto object-contain">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Stash Spot Ent</h3>
+                        <p class="text-fuchsia-600 font-medium text-sm mb-3">Music Promotion Platform</p>
+                        <p class="text-gray-600 text-sm">
+                            A grassroots music promotion platform based in Western Massachusetts, dedicated to putting Hip Hop and R&B artists center stage.
+                        </p>
+                        <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
             </div>
             <p class="text-center text-lg text-gray-700 mt-12">
                 Interested in becoming a partner? <a href="contact.html?subject=Partnership%20Inquiry" class="text-fuchsia-600 hover:underline font-medium">Contact us</a> to explore collaboration opportunities.
@@ -324,6 +338,9 @@
                             </a>
                             <a href="sheshack.html" class="h-10">
                                 <img src="images/sheshack_logo.jpg" alt="The She Shack Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="stashspot.html" class="h-10">
+                                <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="h-full w-auto object-contain">
                             </a>
                         </div>
                     </div>
@@ -398,10 +415,9 @@
                     linkHref = link.split('#')[0];
                 }
 
-                // Special handling for 'kathleen.html' to highlight 'About Us' dropdown and 'Artisan Profiles' sub-link (or relevant parent)
-                if (currentPath === 'kathleen.html' && linkHref.includes('artisans.html')) {
+                // Special handling for 'forge-of-collaboration.html' to highlight 'Who We Are' dropdown and 'Partner Businesses' sub-link
+                if (currentPath === 'forge-of-collaboration.html' && linkHref.includes('forge-of-collaboration.html')) {
                     link.classList.add('active');
-                    // Find the parent dropdown and activate it
                     let parentDropdown = link.closest('.dropdown');
                     if (parentDropdown) {
                         parentDropdown.querySelector('.nav-link').classList.add('active');
