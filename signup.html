@@ -4,10 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>TAC Sign-Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN for easy styling -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome for social media icons and hamburger menu -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
     body {
-        font-family: 'Segoe UI', Tahoma, sans-serif;
-        background: linear-gradient(135deg, #fafafa, #e9f5f1);
+        font-family: 'Inter', sans-serif;
+        background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
         margin: 0;
         padding: 0;
         color: #333;
@@ -17,156 +24,593 @@
         max-width: 650px;
         margin: 3rem auto;
         background: white;
-        padding: 2rem;
+        padding: 2.5rem; /* Increased padding */
         border-radius: 1rem;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Stronger shadow */
     }
 
     h1 {
         text-align: center;
-        color: #207561; /* TAC accent color */
+        color: #111827; /* gray-900 */
         margin-bottom: 1rem;
+        font-size: 2.5rem; /* Larger heading */
+        font-weight: 700; /* bolder */
     }
 
     p {
         text-align: center;
-        color: #555;
-        margin-bottom: 2rem;
+        color: #4b5563; /* gray-700 */
+        margin-bottom: 2.5rem; /* More space */
+        font-size: 1.125rem; /* Larger paragraph text */
     }
 
     label {
-        font-weight: bold;
+        font-weight: 600; /* semi-bold */
         display: block;
-        margin-top: 1rem;
-        margin-bottom: 0.4rem;
+        margin-top: 1.5rem; /* More space above labels */
+        margin-bottom: 0.6rem; /* More space below labels */
+        color: #1f2937; /* gray-800 */
     }
 
-    input, select, textarea {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
         width: 100%;
-        padding: 0.7rem;
-        border: 1px solid #ccc;
+        padding: 0.8rem;
+        border: 1px solid #d1d5db; /* gray-300 */
         border-radius: 0.5rem;
         font-size: 1rem;
         box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #34d399; /* teal-400 */
+        box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2); /* light teal ring */
     }
 
     textarea {
         resize: vertical;
-        min-height: 80px;
+        min-height: 100px; /* Slightly taller textarea */
     }
 
     .checkbox-group, .radio-group {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.8rem;
-        margin-bottom: 0.5rem;
+        gap: 1rem; /* More space between options */
+        margin-bottom: 1rem;
     }
 
     .checkbox-group label, .radio-group label {
         font-weight: normal;
+        color: #374151; /* gray-700 */
+        display: flex;
+        align-items: center;
+        margin-top: 0; /* Reset margin from general label style */
+        margin-bottom: 0;
+    }
+    .checkbox-group input[type="checkbox"],
+    .radio-group input[type="radio"] {
+        width: auto; /* Allow checkbox/radio to be small */
+        margin-right: 0.5rem;
+        cursor: pointer;
     }
 
-    button {
-        margin-top: 2rem;
+    button[type="submit"] {
+        margin-top: 2.5rem;
         width: 100%;
-        padding: 0.8rem;
-        font-size: 1.1rem;
+        padding: 1rem; /* Larger button */
+        font-size: 1.25rem; /* Larger font */
         font-weight: bold;
         color: white;
-        background-color: #207561;
+        background-image: linear-gradient(to right, #207561, #831843); /* Teal to Fuchsia gradient */
         border: none;
-        border-radius: 0.5rem;
+        border-radius: 0.75rem; /* More rounded */
         cursor: pointer;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Add shadow to button */
     }
 
-    button:hover {
-        background-color: #17594f;
+    button[type="submit"]:hover {
+        opacity: 0.9;
+        transform: translateY(-2px); /* Slight lift effect */
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Header & Footer styles from the main site for consistency */
+    .header-gradient {
+        background-image: linear-gradient(to right, #2dd4bf, #c026d3); /* teal-400 to fuchsia-600 */
+    }
+    .footer-gradient {
+        background-image: linear-gradient(to bottom right, #0f766e, #831843); /* teal-700 to fuchsia-900 */
+    }
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    .mobile-menu-overlay nav a {
+        color: white;
+        font-size: 1.5rem;
+        padding: 0.75rem 0;
+        display: block;
+        text-align: center;
+        transition: color 0.2s;
+    }
+    .mobile-menu-overlay nav a:hover {
+        color: #d1d5db; /* gray-300 */
+    }
+    .mobile-menu-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    /* Active link styling */
+    .nav-link.active {
+        font-weight: 700; /* bolder */
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    /* Dropdown specific styles for desktop */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-image: linear-gradient(to bottom right, rgba(131, 24, 67, 0.9), rgba(13, 148, 136, 0.9));
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem 0;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
     }
 </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
-<div class="form-container">
-    <h1>Join TAC</h1>
-    <p>Be part of something creative, collaborative, and inspiring.</p>
+    <!-- Header & Navigation (Copied from main site for consistency) -->
+    <header class="header-gradient shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="index.html" class="h-10">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            </a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                
+                <!-- Who We Are Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="artisans.html">Artisan Profiles</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                    </div>
+                </div>
 
-    <form name="tac-signup" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="tac-signup" />
+                <!-- What's Going On! Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="events.html">Events</a>
+                        <a href="opportunities.html">Opportunities</a>
+                    </div>
+                </div>
 
-        <!-- Basic Info -->
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="fullName" required>
-
-        <label for="preferredName">Preferred Name/Nickname</label>
-        <input type="text" id="preferredName" name="preferredName">
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="phone">Phone Number (optional)</label>
-        <input type="tel" id="phone" name="phone">
-
-        <label for="pronouns">Pronouns (optional)</label>
-        <input type="text" id="pronouns" name="pronouns">
-
-        <!-- About You -->
-        <label for="location">Where are you based? (City, Country)</label>
-        <input type="text" id="location" name="location">
-
-        <label for="hearAbout">How did you hear about TAC?</label>
-        <textarea id="hearAbout" name="hearAbout"></textarea>
-
-        <label for="motivation">What inspired you to join TAC?</label>
-        <textarea id="motivation" name="motivation"></textarea>
-
-        <!-- Interests & Skills -->
-        <label>Which areas of TAC are you most interested in?</label>
-        <div class="checkbox-group">
-            <label><input type="checkbox" name="interests" value="Creative Projects"> Creative Projects</label>
-            <label><input type="checkbox" name="interests" value="Event Planning"> Event Planning</label>
-            <label><input type="checkbox" name="interests" value="Community Outreach"> Community Outreach</label>
-            <label><input type="checkbox" name="interests" value="Content Creation"> Content Creation</label>
-            <label><input type="checkbox" name="interests" value="Other"> Other</label>
+                <!-- About Us Dropdown -->
+                <div class="dropdown">
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Mobile Hamburger Icon -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </header>
 
-        <label for="skills">What skills or talents would you like to share with TAC?</label>
-        <textarea id="skills" name="skills"></textarea>
+    <!-- Mobile Menu Overlay (Copied from main site for consistency) -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="index.html" class="nav-link">Home</a>
+            
+            <!-- Mobile Who We Are Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">Who We Are</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="artisans.html">Artisan Profiles</a>
+                    <a href="gallery.html">Artisan Gallery</a>
+                    <a href="forge-of-collaboration.html">Partner Businesses</a>
+                </div>
+            </div>
 
-        <!-- Commitment -->
-        <label for="timeCommitment">How much time can you dedicate each month?</label>
-        <input type="text" id="timeCommitment" name="timeCommitment">
+            <!-- Mobile What's Going On! Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">What's Going On!</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="events.html">Events</a>
+                    <a href="opportunities.html">Opportunities</a>
+                </div>
+            </div>
 
-        <label>Are you open to collaborating online and/or in person?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="collaboration" value="Online"> Online</label>
-            <label><input type="radio" name="collaboration" value="In Person"> In Person</label>
-            <label><input type="radio" name="collaboration" value="Both"> Both</label>
+            <!-- Mobile About Us Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">About Us</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="aboutus.html#our-mission">Our Mission</a>
+                    <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                    <a href="aboutus.html#testimonials">Testimonials</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="flex-grow container mx-auto px-4 py-12 md:py-20">
+        <div class="form-container">
+            <div class="text-center mb-8">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="mx-auto h-24 w-auto object-contain mb-4">
+                <h1 class="text-gray-900">Join The Artisans' Combine</h1>
+                <p class="text-gray-700">Be part of something creative, collaborative, and inspiring.</p>
+            </div>
+
+            <form name="tac-signup" method="POST" data-netlify="true" id="signupForm">
+                <input type="hidden" name="form-name" value="tac-signup" />
+
+                <!-- Basic Info -->
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <label for="preferredName">Preferred Name (Optional)</label>
+                <p class="text-sm text-gray-500 mb-2">Nickname; Artist Name; Stage Name etc.</p>
+                <input type="text" id="preferredName" name="preferredName">
+                
+                <label for="pronouns">Pronouns (optional)</label>
+                <input type="text" id="pronouns" name="pronouns">
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number (optional)</label>
+                <input type="tel" id="phone" name="phone">
+
+                <!-- About You -->
+                <label>Where are you based?</label>
+                <div class="checkbox-group" id="locationCheckboxes">
+                    <label><input type="checkbox" name="locationRegion" value="Berkshire"> Berkshire</label>
+                    <label><input type="checkbox" name="locationRegion" value="Franklin"> Franklin</label>
+                    <label><input type="checkbox" name="locationRegion" value="Hampden"> Hampden</label>
+                    <label><input type="checkbox" name="locationRegion" value="Hampshire"> Hampshire</label>
+                    <label><input type="checkbox" name="locationRegion" value="Outside Western Mass" id="outsideWesternMass"> Outside Western Mass</label>
+                </div>
+                <label for="locationCity">City</label>
+                <input type="text" id="locationCity" name="locationCity">
+
+                <label for="hearAbout">How did you hear about TAC?</label>
+                <textarea id="hearAbout" name="hearAbout"></textarea>
+
+                <label for="motivation">What inspired you to join TAC?</label>
+                <textarea id="motivation" name="motivation"></textarea>
+
+                <!-- Interests & Skills -->
+                <label>Which areas of TAC are you most interested in?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="interests" value="Creative Projects"> Creative Projects</label>
+                    <label><input type="checkbox" name="interests" value="Event Planning"> Event Planning</label>
+                    <label><input type="checkbox" name="interests" value="Community Outreach"> Community Outreach</label>
+                    <label><input type="checkbox" name="checkbox-interests" value="Content Creation"> Content Creation</label>
+                    <label><input type="checkbox" name="checkbox-interests" value="Other"> Other</label>
+                </div>
+
+                <label for="skills">What skills or talents would you like to share with TAC?</label>
+                <textarea id="skills" name="skills"></textarea>
+
+                <!-- Commitment -->
+                <label for="timeCommitment">How much time can you dedicate each month?</label>
+                <p class="text-sm text-gray-500 mb-2">It's ok if you're pinching for seconds out of every minute, we can work with that.</p>
+                <input type="text" id="timeCommitment" name="timeCommitment">
+
+                <label>Are you open to collaborating online and/or in person?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="collaboration" value="Online"> Online</label>
+                    <label><input type="radio" name="collaboration" value="In Person"> In Person</label>
+                    <label><input type="radio" name="collaboration" value="Both"> Both</label>
+                </div>
+
+                <!-- Fun Questions -->
+                <label for="animal">If TAC were an animal, what would it be and why?</label>
+                <textarea id="animal" name="animal"></textarea>
+
+                <label for="randomFact">Share one random fact about yourself</label>
+                <textarea id="randomFact" name="randomFact"></textarea>
+
+                <!-- Consent -->
+                <label>Do you agree to follow TAC’s community guidelines?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="guidelines" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="guidelines" value="No"> No</label>
+                </div>
+
+                <label>Can we send you occasional updates by email?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="updates" value="Yes"> Yes</label>
+                    <label><input type="radio" name="updates" value="No"> No</label>
+                </div>
+
+                <button type="submit">Submit Form</button>
+            </form>
         </div>
+    </main>
 
-        <!-- Fun Questions -->
-        <label for="animal">If TAC were an animal, what would it be and why?</label>
-        <textarea id="animal" name="animal"></textarea>
+    <!-- Footer (Copied from main site for consistency) -->
+    <footer class="footer-gradient text-gray-300 py-12 mt-auto">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Footer Column 1: Contact Info -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact</h3>
+                    <p class="text-sm">Western Massachusetts</p>
+                    <p class="text-sm">
+                        <a href="mailto:theartisanscombine@gmail.com" class="hover:text-white transition-colors">theartisanscombine@gmail.com</a>
+                    </p>
+                    <div class="flex justify-center md:justify-start mt-4 space-x-4">
+                        <!-- Social Media Links -->
+                        <a href="https://www.facebook.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C17.34 21.283 22 17.185 22 12z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/theartisanscombine" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.724.01 3.697.045.974.034 1.48.113 1.966.308a3.073 3.073 0 011.724 1.724c.195.486.274.992.308 1.966.036.973.046 1.267.046 3.697v1.734c0 2.43-.01 2.724-.045 3.697-.034.974-.113 1.48-.308 1.966a3.073 3.073 0 01-1.724 1.724c-.486.195-.992.274-1.966.308-.973.036-1.267.046-3.697.046s-2.724-.01-3.697-.045c-.974-.034-1.48-.113-1.966-.308a3.073 3.073 0 01-1.724-1.724c-.195-.486-.274-.992-.308-1.966-.036-.973-.046-1.267-.046-3.697v-1.734c0-2.43.01-2.724.045-3.697.034-.974.113-1.48.308-1.966a3.073 3.073 0 011.724-1.724c.486-.195.992-.274 1.966-.308.973-.036 1.267-.046 3.697-.046zM12 4c-2.61 0-3.328.01-4.227.04-.903.03-1.2.07-1.458.175-.245.105-.465.23-.675.44-.21.21-.335.43-.44.675-.105.258-.145.555-.175 1.458-.03 1.1-.04 1.23-.04 4.227s.01 3.127.04 4.227c.03.903.07 1.2.175 1.458.105.245.23.465.44.675.21.21.43.335.675.44.258.105.555.145 1.458.175 1.1.03 1.23.04 4.227.04s3.127-.01 4.227-.04c.903-.03 1.2-.07 1.458-.175.245-.105.465-.23.675-.44.21-.21.335-.43.44-.675.105-.258.145-.555.175-1.458.03-1.1.04-1.23.04-4.227s-.01-3.127-.04-4.227c-.03-.903-.07-1.2-.175-1.458a3.073 3.073 0 01-.44-.675c-.21-.21-.43-.335-.675-.44-.258-.105-.555-.145-1.458-.175-1.1-.03-1.23-.04-4.227-.04zM12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM12 14.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
 
-        <label for="randomFact">Share one random fact about yourself</label>
-        <textarea id="randomFact" name="randomFact"></textarea>
+                <!-- Footer Column 2: Our Partners -->
+                <div class="md:text-center">
+                    <h3 class="text-white font-bold mb-4">Our Partners</h3>
+                    <div class="flex justify-center space-x-6">
+                        <!-- Partner Logo for Alicea Media Arts -->
+                        <a href="jesus.html" class="h-10">
+                            <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
+                        </a>
+                        <!-- Partner Logo for Bobby Diesel -->
+                        <a href="bobby.html" class="h-10">
+                            <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                        </a>
+                    </div>
+                </div>
 
-        <!-- Consent -->
-        <label>Do you agree to follow TAC’s community guidelines?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="guidelines" value="Yes" required> Yes</label>
-            <label><input type="radio" name="guidelines" value="No"> No</label>
+                <!-- Footer Column 3: Navigation -->
+                <div class="md:text-left">
+                    <h3 class="text-white font-bold mb-4">Navigation</h3>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
+                        <div>
+                            <p class="text-white font-semibold mt-2">Who We Are</p>
+                            <a href="artisans.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Profiles</a>
+                            <a href="gallery.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Gallery</a>
+                            <a href="forge-of-collaboration.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Partner Businesses</a>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold mt-2">What's Going On!</p>
+                            <a href="events.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Events</a>
+                            <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
+                            <p class="text-white font-semibold mt-2">About Us</p>
+                            <a href="aboutus.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
+                            <a href="where-we-are-from.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>&copy; 2025 The Artisans Combine. All rights-reserved.</p>
+            </div>
         </div>
+    </footer>
 
-        <label>Can we send you occasional updates by email?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="updates" value="Yes"> Yes</label>
-            <label><input type="radio" name="updates" value="No"> No</label>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
+            const signupForm = document.getElementById('signupForm');
+            const formContainer = document.querySelector('.form-container');
 
-        <button type="submit">Join TAC</button>
-    </form>
-</div>
+            // Location specific elements
+            const outsideWesternMassCheckbox = document.getElementById('outsideWesternMass');
+            const locationCityInput = document.getElementById('locationCity');
+            const locationRegionCheckboxes = document.querySelectorAll('input[name="locationRegion"]');
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active'); // Clear active from all links first
+            });
+
+            // Handle direct links and highlight them
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = link.split('#')[0];
+                }
+
+                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = link.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
+                }
+            });
+
+            // Location checkbox logic
+            outsideWesternMassCheckbox.addEventListener('change', () => {
+                if (outsideWesternMassCheckbox.checked) {
+                    locationCityInput.value = ''; // Clear any existing text
+                    locationCityInput.placeholder = 'Outside The 413? We may still team up!';
+                    locationCityInput.disabled = true;
+                    locationCityInput.classList.add('bg-gray-200', 'text-gray-500');
+                    // Uncheck other regional checkboxes if "Outside Western Mass" is checked
+                    locationRegionCheckboxes.forEach(checkbox => {
+                        if (checkbox !== outsideWesternMassCheckbox) {
+                            checkbox.checked = false;
+                        }
+                    });
+                } else {
+                    locationCityInput.placeholder = '';
+                    locationCityInput.disabled = false;
+                    locationCityInput.classList.remove('bg-gray-200', 'text-gray-500');
+                }
+            });
+
+            // Uncheck "Outside Western Mass" if any other region is checked
+            locationRegionCheckboxes.forEach(checkbox => {
+                if (checkbox !== outsideWesternMassCheckbox) {
+                    checkbox.addEventListener('change', () => {
+                        if (checkbox.checked) {
+                            outsideWesternMassCheckbox.checked = false;
+                            locationCityInput.placeholder = '';
+                            locationCityInput.disabled = false;
+                            locationCityInput.classList.remove('bg-gray-200', 'text-gray-500');
+                        }
+                    });
+                }
+            });
+
+
+            // Handle form submission
+            signupForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                // You would typically send the form data to a server here.
+                // For this example, we'll simulate a successful submission.
+
+                // Simulate form submission success
+                formContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="mx-auto h-24 w-auto object-contain mb-4">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Thank You for Joining!</h2>
+                        <p class="text-lg text-gray-700 mb-8">Your form has been successfully submitted. We're excited to have you!</p>
+                        <a href="index.html" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                            Back to Home
+                        </a>
+                    </div>
+                `;
+
+                // Optional: Redirect after a few seconds
+                // setTimeout(() => {
+                //     window.location.href = 'index.html';
+                // }, 3000); // Redirect after 3 seconds
+            });
+        });
+    </script>
 
 </body>
 </html>
