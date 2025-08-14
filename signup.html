@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TAC Sign-Up</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: linear-gradient(135deg, #fafafa, #e9f5f1);
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    .form-container {
+        max-width: 650px;
+        margin: 3rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        text-align: center;
+        color: #207561; /* TAC accent color */
+        margin-bottom: 1rem;
+    }
+
+    p {
+        text-align: center;
+        color: #555;
+        margin-bottom: 2rem;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .checkbox-group, .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .checkbox-group label, .radio-group label {
+        font-weight: normal;
+    }
+
+    button {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: white;
+        background-color: #207561;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #17594f;
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Join TAC</h1>
+    <p>Be part of something creative, collaborative, and inspiring.</p>
+
+    <form name="tac-signup" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="tac-signup" />
+
+        <!-- Basic Info -->
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="preferredName">Preferred Name/Nickname</label>
+        <input type="text" id="preferredName" name="preferredName">
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number (optional)</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="pronouns">Pronouns (optional)</label>
+        <input type="text" id="pronouns" name="pronouns">
+
+        <!-- About You -->
+        <label for="location">Where are you based? (City, Country)</label>
+        <input type="text" id="location" name="location">
+
+        <label for="hearAbout">How did you hear about TAC?</label>
+        <textarea id="hearAbout" name="hearAbout"></textarea>
+
+        <label for="motivation">What inspired you to join TAC?</label>
+        <textarea id="motivation" name="motivation"></textarea>
+
+        <!-- Interests & Skills -->
+        <label>Which areas of TAC are you most interested in?</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="interests" value="Creative Projects"> Creative Projects</label>
+            <label><input type="checkbox" name="interests" value="Event Planning"> Event Planning</label>
+            <label><input type="checkbox" name="interests" value="Community Outreach"> Community Outreach</label>
+            <label><input type="checkbox" name="interests" value="Content Creation"> Content Creation</label>
+            <label><input type="checkbox" name="interests" value="Other"> Other</label>
+        </div>
+
+        <label for="skills">What skills or talents would you like to share with TAC?</label>
+        <textarea id="skills" name="skills"></textarea>
+
+        <!-- Commitment -->
+        <label for="timeCommitment">How much time can you dedicate each month?</label>
+        <input type="text" id="timeCommitment" name="timeCommitment">
+
+        <label>Are you open to collaborating online and/or in person?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="collaboration" value="Online"> Online</label>
+            <label><input type="radio" name="collaboration" value="In Person"> In Person</label>
+            <label><input type="radio" name="collaboration" value="Both"> Both</label>
+        </div>
+
+        <!-- Fun Questions -->
+        <label for="animal">If TAC were an animal, what would it be and why?</label>
+        <textarea id="animal" name="animal"></textarea>
+
+        <label for="randomFact">Share one random fact about yourself</label>
+        <textarea id="randomFact" name="randomFact"></textarea>
+
+        <!-- Consent -->
+        <label>Do you agree to follow TAC’s community guidelines?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="guidelines" value="Yes" required> Yes</label>
+            <label><input type="radio" name="guidelines" value="No"> No</label>
+        </div>
+
+        <label>Can we send you occasional updates by email?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="updates" value="Yes"> Yes</label>
+            <label><input type="radio" name="updates" value="No"> No</label>
+        </div>
+
+        <button type="submit">Join TAC</button>
+    </form>
+</div>
+
+</body>
+</html>
