@@ -112,6 +112,21 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Specific style for zoomed-in image within a fixed container */
+        .zoomed-in-image-container {
+            width: 100%;
+            height: 250px; /* Or desired height */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -128,7 +143,7 @@
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="artisans.html">Artisan Profiles</a>
                         <a href="gallery.html">Artisan Gallery</a>
@@ -204,36 +219,69 @@
     </div>
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 text-center mb-8">
-            Our Mission
-        </h1>
-        <p class="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            At The Artisans Combine, our purpose is clear: to foster a thriving ecosystem where creativity flourishes and community thrives.
-        </p>
+        <!-- Enhanced Hero Section for Mission Page -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-teal-500 to-fuchsia-700 text-white rounded-lg shadow-xl relative overflow-hidden">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 relative z-10">
+                Our Mission
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 relative z-10">
+                At The Artisans Combine, our purpose is clear: to foster a thriving ecosystem where creativity flourishes and community thrives.
+            </p>
+            <!-- Optional: Subtle SVG background pattern for visual interest -->
+            <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="1" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)" class="text-white" />
+            </svg>
+        </section>
 
         <!-- Mission Statement Section -->
         <section class="bg-white rounded-lg shadow-md p-8 mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Core Belief</h2>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">
+                <i class="fas fa-handshake mr-3 text-teal-500"></i> Our Core Belief
+            </h2>
             <p class="text-gray-700 leading-relaxed mb-4">
-                We believe in the power of handmade goods to tell a story and connect people. The Artisans Combine was founded to create a vibrant platform where talented artisans can share their craft with a wider audience. We host events, workshops, and markets to foster a supportive and collaborative environment.
+                We believe in the power of creative expression to tell a story and connect people. The Artisans Combine was founded to create a vibrant platform where talented artists, makers, and performers can share their craft with a wider audience. We host events, workshops, and markets to foster a supportive and collaborative environment.
             </p>
             <p class="text-gray-700 leading-relaxed">
-                Our goal is to preserve and promote traditional skills while also embracing modern innovation in craftsmanship. Join us in celebrating the beauty of unique, handcrafted products.
+                Our goal is to preserve and promote diverse artistic skills while also embracing modern innovation in all forms of artistry. Join us in celebrating the beauty of unique, passionately created works.
             </p>
         </section>
 
         <!-- Tagline Section -->
         <section class="bg-gradient-to-r from-teal-500 to-fuchsia-700 text-white rounded-lg p-8 md:p-12 text-center shadow-xl mb-12">
-            <h2 class="text-4xl font-extrabold">Where Craft Meets Community.</h2>
+            <h2 class="text-5xl font-extrabold leading-tight">Where Craft Meets Community.</h2>
         </section>
 
         <!-- Vision Section -->
-        <section class="bg-gray-100 rounded-lg shadow-md p-8 mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Vision for the Future</h2>
+        <section class="bg-gradient-to-r from-teal-50 to-fuchsia-50 text-gray-800 rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">
+                <i class="fas fa-lightbulb mr-3 text-fuchsia-500"></i> Our Vision for the Future
+            </h2>
             <p class="text-gray-700 leading-relaxed">
-                We aspire to a future where handmade artistry stands at the heart of everyday life—where artisans are champions of culture, innovation flows through tradition, and each crafted piece tells a story that connects us all.
+                We aspire to a future where diverse artistry stands at the heart of everyday life—where creators are champions of culture, innovation flows through tradition, and each passionately expressed piece tells a story that connects us all.
             </p>
         </section>
+
+        <!-- Where We're From Section -->
+        <section class="bg-gradient-to-r from-fuchsia-100 to-teal-100 text-gray-800 rounded-lg shadow-md p-8 mb-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                <i class="fas fa-map-marker-alt mr-3 text-fuchsia-600"></i> Our Roots: Where We're From
+            </h2>
+            <div class="zoomed-in-image-container mx-auto mb-8">
+                <img src="images/WMTAC.png" alt="Map of Western Massachusetts" class="w-full h-full object-cover object-center">
+            </div>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+                Our roots are deeply embedded in Western Massachusetts, affectionately known as "The 413." This region, rich in natural beauty and historical significance, is a vibrant wellspring of artistic talent. We are passionate about connecting and unifying the diverse array of artists, artisans, and fans of the arts across "The 413." Our goal is to foster a collaborative environment where every form of artistic expression is celebrated, from traditional crafts to modern performances, ensuring that the unique spirit of our home shines through in every creative endeavor. We're from here, and we truly care about nurturing the creative pulse of our community.
+            </p>
+            <a href="where-we-are-from.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                Explore Our Communities
+            </a>
+        </section>
+
 
         <div class="mt-16 text-center">
             <a href="index.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
