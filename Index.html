@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - The Artisans' Combine</title>
+    <title>The Artisans Combine</title>
+    <!-- Use the Inter font from Google Fonts for a modern, clean look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,9 +16,11 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Custom background gradient for an artsy feel */
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
         }
+        /* General card hover effect */
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
@@ -113,19 +116,102 @@
             display: block;
         }
 
-        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
-        .zoomed-in-image-container {
-            width: 100%;
-            height: 250px; /* Or desired height */
+        /* Carousel specific styles */
+        .carousel-container {
+            position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 800px; /* Adjust as needed */
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column; /* To stack image and description */
+            justify-content: center;
+            align-items: center;
+            padding: 1rem; /* Add some padding around the content */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 0.5rem; /* Space between image and description */
         }
-        .zoomed-in-image-container img {
+
+        .carousel-slide p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #4b5563; /* gray-700 */
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        /* Partner Card Specific Styles for Logo Overlay */
+        .partner-logo-container {
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
-            object-position: center; /* Centers the image within the crop */
+            height: 150px; /* Fixed height for consistent preview area */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #f3f4f6; /* Light gray background for logos */
+            border-radius: 0.5rem 0.5rem 0 0; /* Match card border-radius */
+        }
+        .partner-logo-container img {
+            position: absolute;
+            object-fit: contain;
+            transition: all 0.3s ease-in-out; /* Smooth transition for movements */
+        }
+        .partner-logo-container .ari-jays-logo {
+            width: 50%; /* Adjusted for side-by-side */
+            height: auto;
+            z-index: 1; /* Behind getfabb-logo */
+            left: 0; /* Align to left */
+            transform: translateX(10%); /* Shift right for spacing */
+            opacity: 0.7; /* Slightly transparent */
+        }
+        .partner-logo-container .getfabb-logo {
+            width: 50%; /* Adjusted for side-by-side */
+            height: auto;
+            z-index: 2; /* On top */
+            right: 0; /* Align to right */
+            transform: translateX(-10%); /* Shift left for spacing */
         }
     </style>
 </head>
@@ -162,14 +248,13 @@
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
-                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
-                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
+                        <a href="mission.html">Our Mission</a>
+                        <a href="where-we-are-from.html">Where We're From</a>
+                        <a href="index.html#testimonials">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
-
                 </div>
             </nav>
             <!-- Mobile Hamburger Icon -->
@@ -210,7 +295,7 @@
             <div class="mobile-dropdown-parent text-white">
                 <span class="text-2xl font-semibold">About Us</span>
                 <div class="mobile-dropdown-content flex flex-col mt-2">
-                    <a href="index.html#our-mission">Our Mission</a>
+                    <a href="mission.html">Our Mission</a>
                     <a href="where-we-are-from.html">Where We're From</a>
                     <a href="index.html#testimonials">Testimonials</a>
                     <a href="contact.html">Contact</a>
@@ -509,7 +594,7 @@
 
     </main>
 
-     <!-- Footer -->
+ <!-- Footer -->
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
@@ -654,6 +739,22 @@
                         parentDropdown.querySelector('.nav-link').classList.add('active');
                     }
                 }
+                // Special handling for 'aboutus.html' to highlight 'About Us' dropdown and its sub-links
+                else if (currentPath === 'aboutus.html' && linkHref.includes('aboutus.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                // Special handling for 'mission.html' to highlight 'About Us' dropdown and 'Our Mission' sub-link
+                else if (currentPath === 'mission.html' && linkHref.includes('mission.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
                 // Special handling for 'where-we-are-from.html' to highlight 'About Us' dropdown and 'Where We're From' sub-link
                 else if (currentPath === 'where-we-are-from.html' && linkHref.includes('where-we-are-from.html')) {
                     link.classList.add('active');
@@ -697,7 +798,3 @@
 
 </body>
 </html>
-
-
-
-
