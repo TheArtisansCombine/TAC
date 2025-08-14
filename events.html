@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Opportunities</title>
+    <title>About Us - The Artisans' Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
+
         /* Mobile Navigation Overlay Styles */
         .mobile-menu-overlay {
             position: fixed;
@@ -111,6 +112,21 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
+        .zoomed-in-image-container {
+            width: 100%;
+            height: 250px; /* Or desired height */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -123,7 +139,7 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
@@ -137,23 +153,22 @@
 
                 <!-- What's Going On! Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="events.html">Events</a>
-                        <a href="opportunities.html" class="active">Opportunities</a>
+                        <a href="opportunities.html">Opportunities</a>
                     </div>
                 </div>
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="aboutus.html#our-mission">Our Mission</a>
-                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
-                        <a href="aboutus.html#testimonials">Testimonials</a>
+                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
+                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
-                </div>
             </nav>
             <!-- Mobile Hamburger Icon -->
             <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
@@ -204,96 +219,358 @@
 
     <main class="container mx-auto px-4 max-w-7xl py-12 md:py-20">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 text-center mb-8">
-            Artisan Opportunities
+            Upcoming Events
         </h1>
         <p class="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            Discover various opportunities to collaborate, showcase your work, and grow as an artist within our vibrant community.
+            Join us at our upcoming events, workshops, and gatherings to celebrate local artistry and connect with the community.
         </p>
 
-        <!-- Current Opportunities Section -->
-        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Current Opportunities</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Southwick Library 2025 Call to Artists Card -->
-                <a href="https://www.southwickma.org/southwick-public-library/pages/laporte-gallery" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect">
-                    <img src="images/southwick.webp" alt="Southwick Library LaPorte Gallery" class="w-full h-48 object-cover">
-                    <div class="p-4 flex flex-col justify-between flex-grow">
+        <!-- Find Local Events Section - Moved to top -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">Find Local Events 🔍</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+                Use our search tool to find upcoming art events, music performances, workshops, and festivals near you.
+            </p>
+            <div class="max-w-xl mx-auto space-y-4">
+                <input type="text" id="eventLocationInput" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400" placeholder="e.g., 'Northampton, MA', 'Springfield, MA', 'Pittsfield, MA'">
+                <div class="flex justify-center space-x-4">
+                    <button id="searchEventsBtn" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                        Search Events
+                    </button>
+                    <button id="clearEventsSearchBtn" class="bg-gray-300 text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-400 transition-transform transform hover:scale-105">
+                        Clear Search
+                    </button>
+                </div>
+                <div id="loadingEventsIndicator" class="hidden mt-4 text-fuchsia-600 font-semibold flex items-center justify-center">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Searching...
+                </div>
+                <div id="eventSearchResults" class="mt-6 space-y-4 text-left">
+                    <!-- Search results will be displayed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Scheduled Engagements -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Scheduled Engagements</h2>
+            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-10">
+                Don't miss these special events with specific dates and times, featuring a variety of artistic expressions.
+            </p>
+            <div id="timedEventsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Lil Wayne: Tha Carter VI Tour -->
+                <a href="https://concerts50.com/upcoming-concerts-in-new-york/syracuse" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Lil Wayne: Tha Carter VI Tour" data-start-date="2025-08-08" data-end-date="2025-08-08">
+                    <img src="https://placehold.co/300x200/4a0e7f/ffffff?text=Music+Concert" alt="Lil Wayne Concert" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Southwick Library: 2025 Call to Artists</h3>
-                            <p class="text-fuchsia-600 font-medium text-sm mb-2">LaPorte Gallery Exhibition</p>
-                            <p class="text-gray-600 text-xs">
-                                Submit your work for consideration to exhibit in the beautiful LaPorte Gallery at the Southwick Public Library throughout 2025. A fantastic chance to showcase your art to the local community.
-                            </p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Lil Wayne: Tha Carter VI Tour</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 8, 2025 | 7:00 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Experience a night of iconic hip-hop with the legendary Lil Wayne, celebrating over two decades of "Carter Classics."</p>
                         </div>
-                        <span class="text-teal-600 hover:underline text-sm mt-2 inline-block">View Call Details <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Jonas Brothers: JONAS20 -->
+                <a href="https://concerts50.com/upcoming-concerts-in-new-york/syracuse" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Jonas Brothers: JONAS20" data-start-date="2025-08-19" data-end-date="2025-08-19">
+                    <img src="https://placehold.co/300x200/f06292/ffffff?text=Music+Concert" alt="Jonas Brothers Concert" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Jonas Brothers: JONAS20</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 19, 2025 | 7:30 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Join the Jonas Brothers for an unforgettable evening on their "Greetings From Your Hometown" tour, filled with pop anthems and fan favorites.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Thomas Rhett: Better In Boots Tour -->
+                <a href="https://concerts50.com/upcoming-concerts-in-new-york/syracuse" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Thomas Rhett: Better In Boots Tour" data-start-date="2025-08-21" data-end-date="2025-08-21">
+                    <img src="https://placehold.co/300x200/81c784/ffffff?text=Music+Concert" alt="Thomas Rhett Concert" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Thomas Rhett: Better In Boots Tour</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 21, 2025 | 7:30 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Catch the chart-topping pop-country sensation Thomas Rhett as he brings his "Better In Boots" tour to the stage for a night of high-energy hits.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Sublime w/ The Interrupters -->
+                <a href="https://concerts50.com/upcoming-concerts-in-connecticut/new-haven" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="New Haven, CT" data-title="Sublime w/ The Interrupters" data-start-date="2025-08-23" data-end-date="2025-08-23">
+                    <img src="https://placehold.co/300x200/42a5f5/ffffff?text=Music+Concert" alt="Sublime Concert" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Sublime w/ The Interrupters</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>New Haven, CT</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 23, 2025 | 7:00 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Dive into a vibrant evening of reggae rock and high-energy ska punk with the legendary Sublime, featuring The Interrupters.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Arcadia Folk Festival -->
+                <a href="https://www.arcadiafolkfest.com/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Easthampton, MA" data-title="Arcadia Folk Festival" data-start-date="2025-08-22" data-end-date="2025-08-23">
+                    <img src="images/arcadia.png" alt="Arcadia Folk Festival" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Arcadia Folk Festival 2025</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Easthampton, MA</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 22-23, 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Immerse yourself in two days of soulful melodies and vibrant performances at this cherished folk music celebration.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Rachel Ruysch: Artist, Naturalist, and Pioneer -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Boston, MA" data-title="Rachel Ruysch Exhibition" data-start-date="2025-08-23" data-end-date="2025-12-07">
+                    <img src="https://placehold.co/300x200/ffb74d/ffffff?text=Art+Exhibition" alt="Rachel Ruysch Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Rachel Ruysch: Artist, Naturalist, Pioneer</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Boston, MA</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>August 23 – December 7, 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Discover the breathtaking floral masterpieces of Rachel Ruysch in this pioneering solo exhibition dedicated to the Dutch still life painter.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Martin Puryear: Nexus -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Boston, MA" data-title="Martin Puryear Exhibition" data-start-date="2025-09-27" data-end-date="2026-02-08">
+                    <img src="https://placehold.co/300x200/c51162/ffffff?text=Art+Exhibition" alt="Martin Puryear Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Martin Puryear: Nexus</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Boston, MA</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>September 27, 2025 – February 8, 2026</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Witness the intricate and powerful sculptures of Martin Puryear, a master of form and material, in this compelling exhibition.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Faces in the Crowd: Street Photography -->
+                <a href="https://www.mfa.org/news/advance-exhibition-schedule" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Boston, MA" data-title="Street Photography Exhibition" data-start-date="2025-10-11" data-end-date="2026-07-13">
+                    <img src="https://placehold.co/300x200/64dd17/ffffff?text=Photography+Show" alt="Street Photography Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Faces in the Crowd: Street Photography</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Boston, MA</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>October 11, 2025 – July 13, 2026</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Explore the dynamic and candid world of street photography, capturing the essence of urban life and its diverse characters.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Old Deerfield Holiday Craft Fair -->
+                <a href="https://deerfield-craft.org/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="West Springfield, MA" data-title="Old Deerfield Holiday Craft Fair" data-start-date="2025-11-15" data-end-date="2025-11-16">
+                    <img src="images/craftfair.webp" alt="Craft Fair" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Old Deerfield Holiday Craft Fair</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>West Springfield, MA</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>November 15-16, 2025</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Discover unique, handcrafted treasures from over 200 juried crafters and artists at this festive holiday market.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                 <!-- Syracuse Orchestra: Elgar's Enigma Variations -->
+                <a href="https://syracuseorchestra.org/2025-26-season/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Syracuse Orchestra" data-start-date="2025-11-15" data-end-date="2025-11-15">
+                    <img src="https://placehold.co/300x200/9e9d24/ffffff?text=Orchestra+Concert" alt="Syracuse Orchestra" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Syracuse Orchestra: Elgar's Enigma Variations</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>November 15, 2025 | 7:30 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">An enchanting evening of classical music featuring Elgar's timeless "Enigma Variations" performed by the Syracuse Orchestra.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Woolsey Hall: Holiday Extravaganza -->
+                <a href="https://newhavensymphony.org/venue/woolsey-hall/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="New Haven, CT" data-title="Holiday Extravaganza" data-start-date="2025-12-21" data-end-date="2025-12-21">
+                    <img src="https://placehold.co/300x200/ef5350/ffffff?text=Holiday+Event" alt="Holiday Extravaganza" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Woolsey Hall: Holiday Extravaganza</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>New Haven, CT</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>December 21, 2025 | 3:00 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">A joyous festive program filled with holiday favorites, sing-along carols, and delightful seasonal surprises for the whole family.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse Orchestra: Brahms & Debussy -->
+                <a href="https://syracuseorchestra.org/2025-26-season/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Syracuse Orchestra" data-start-date="2026-01-24" data-end-date="2026-01-24">
+                    <img src="https://placehold.co/300x200/6d4c41/ffffff?text=Classical+Concert" alt="Syracuse Orchestra" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Syracuse Orchestra: Brahms & Debussy</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>January 24, 2026 | 7:30 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">An evening of classical dance themes featuring Brahms' powerful Symphony No. 2 and Debussy's evocative compositions.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Jennie Jieun Lee: Luteal Elements and Grooves -->
+                <a href="https://thealdrich.org/exhibitions/jennie-jieun-lee" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Ridgefield, CT" data-title="Jennie Jieun Lee Exhibition" data-start-date="2026-01-25" data-end-date="2026-05-26">
+                    <img src="https://placehold.co/300x200/c0ca33/ffffff?text=Art+Exhibition" alt="Jennie Jieun Lee Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Jennie Jieun Lee: Luteal Elements and Grooves</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Ridgefield, CT</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>January 25, 2026 – May 26, 2026</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">Explore a captivating new exhibition by artist Jennie Jieun Lee, showcasing her unique blend of luteal elements and rhythmic grooves.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                 <!-- VISIONS OF HOPE: Moving Images by Teens -->
+                <a href="https://artragegallery.org/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Visions of Hope Exhibition" data-start-date="2026-02-07" data-end-date="2026-03-21">
+                    <img src="https://placehold.co/300x200/7cb342/ffffff?text=Film+Exhibition" alt="Visions of Hope Exhibition" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">VISIONS OF HOPE: Moving Images by Teens</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>February 7 – March 21, 2026</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">An inspiring exhibition showcasing powerful moving images and films created by talented teenagers, offering unique perspectives on hope.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse Orchestra: Love Stories -->
+                <a href="https://syracuseorchestra.org/2025-26-season/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="Syracuse, NY" data-title="Syracuse Orchestra: Love Stories" data-start-date="2026-02-14" data-end-date="2026-02-14">
+                    <img src="https://placehold.co/300x200/9c27b0/ffffff?text=Orchestra+Concert" alt="Syracuse Orchestra Love Stories" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Syracuse Orchestra: Love Stories</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>Syracuse, NY</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>February 14, 2026 | 7:30 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">An enchanting orchestral performance dedicated to romantic themes and iconic love stories brought to life through music.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Woolsey Hall: Beethoven & Mendelssohn -->
+                <a href="https://newhavensymphony.org/venue/woolsey-hall/" target="_blank" class="block bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl flex flex-col" data-location="New Haven, CT" data-title="Beethoven & Mendelssohn" data-start-date="2026-02-22" data-end-date="2026-02-22">
+                    <img src="https://placehold.co/300x200/26a69a/ffffff?text=Classical+Concert" alt="Beethoven & Mendelssohn Concert" class="w-full h-48 object-cover">
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Woolsey Hall: Beethoven & Mendelssohn</h3>
+                            <h4 class="text-gray-600 font-medium text-sm mb-1"><i class="fas fa-map-marker-alt mr-1"></i>New Haven, CT</h4>
+                            <p class="text-fuchsia-700 font-semibold text-base mb-3"><i class="far fa-calendar-alt mr-2"></i>February 22, 2026 | 3:00 PM</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">A lyrical program showcasing the genius of Beethoven's Pastoral Symphony and Mendelssohn's exquisite Violin Concerto.</p>
+                        </div>
+                        <span class="text-teal-600 hover:text-teal-800 font-semibold text-sm mt-4 inline-block self-start">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- TAC Opportunities Section -->
-        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">TAC Opportunities</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="flex flex-col items-center text-center">
-                    <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="w-32 h-32 object-contain mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Become a Member Artisan</h3>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Are you a passionate artisan looking for a supportive community and new avenues to showcase your talent? Join The Artisans Combine and gain access to exclusive events, collaborative projects, and a network of fellow creatives.
-                    </p>
-                    <a href="contact.html?subject=Artisan%20Membership%20Inquiry" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                        Inquire About Membership
-                    </a>
-                </div>
-                <div class="flex flex-col items-center text-center">
-                    <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="w-32 h-32 object-contain mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Canvas Book Artist Partnership</h3>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Explore a unique opportunity to feature your work in the innovative Canvas Book series by Alicea Media Arts. Expand your reach and present your art in a distinctive, curated publication.
-                    </p>
-                    <a href="https://www.aliceamediaarts.com/canvas-books/artist-partnership" target="_blank" class="bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                        Learn More about Canvas Books
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action Section (at the bottom) -->
-        <section class="bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Explore More Ways to Get Involved</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Host a Workshop or Class -->
-                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
-                    <img src="https://placehold.co/300x200/a78bfa/ffffff?text=Workshop" alt="Workshop Hosting" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Host a Workshop or Class</h3>
-                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Share Your Skills</p>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Do you have a unique artistic skill or craft you'd like to teach? Connect with the community and inspire new creators.
-                    </p>
-                    <a href="contact.html?subject=Workshop%20Proposal" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Propose a Workshop <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                </div>
-
-                <!-- Showcase Your Art: Exhibition Space -->
-                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
-                    <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Exhibition" alt="Exhibition Space" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Showcase Your Art: Exhibition Space</h3>
-                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Display Your Creations</p>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Looking for a venue to exhibit your latest works? We help connect artisans with local galleries and spaces for exhibitions.
-                    </p>
-                    <a href="contact.html?subject=Exhibition%20Inquiry" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Inquire About Exhibitions <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                </div>
-
-                <!-- Become a Market Vendor -->
-                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
-                    <img src="https://placehold.co/300x200/fbbf24/ffffff?text=Market" alt="Market Vendor" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Become a Market Vendor</h3>
-                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Sell Your Products</p>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Participate in our curated artisan markets and connect directly with customers. A fantastic way to sell your handmade goods.
-                    </p>
-                    <a href="contact.html?subject=Market%20Vendor%20Application" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Apply to be a Vendor <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                </div>
+        <!-- Ongoing or Recurring Events -->
+        <section class="py-12 bg-gray-100 rounded-lg">
+            <h2 class="text-3xl font-bold text-gray-900 text-center md:text-left mb-4">Ongoing & Recurring Events</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+                Explore continuous series and regular gatherings that foster creativity and community engagement.
+            </p>
+            <div id="ongoingEventsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- First Friday ArtsWalk -->
+                <a href="https://www.firstfridaysartswalk.com/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Pittsfield, MA" data-title="First Friday ArtsWalk">
+                    <img src="images/artswalk.jpg" alt="ArtsWalk" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">First Friday ArtsWalk</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Every First Friday | 5:00 PM - 8:00 PM</p>
+                            <p class="text-gray-600 text-xs">Experience art openings, live music, and performances throughout downtown Pittsfield. Location: Downtown Pittsfield, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- The Mount Poetry & Performance -->
+                <a href="https://edithwharton.org/calendar/poetry-performance/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Lenox, MA" data-title="Poetry & Performance Series">
+                    <img src="images/mount.png" alt="Poetry Reading" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Poetry & Performance Series</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing Dates | Various times</p>
+                            <p class="text-gray-600 text-xs">A series of site-responsive programs incorporating poetry, spoken word, theater, and dance. Location: The Mount, Lenox, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Artist Sessions at Wistariahurst Museum -->
+                <a href="https://wistariahurst.org/event/artist-sessions-june-2025-3/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Holyoke, MA" data-title="Artist Sessions">
+                    <img src="https://placehold.co/300x200/ff9800/ffffff?text=Art+Sessions" alt="Artist Sessions" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Artist Sessions at Wistariahurst Museum</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Monthly | Various times</p>
+                            <p class="text-gray-600 text-xs">Workshops and sessions for artists to connect, focus on goals, and enhance practices. Culminates in an art show in January 2026. Location: Holyoke, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Brookline Poetry Series -->
+                <a href="https://www.brooklinelibrary.org/ongoing/brookline-poetry-series/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Brookline, MA" data-title="Brookline Poetry Series">
+                    <img src="https://placehold.co/300x200/673ab7/ffffff?text=Poetry+Series" alt="Brookline Poetry Series" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">Brookline Poetry Series</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Monthly | 2:00 PM (Live/Zoom)</p>
+                            <p class="text-gray-600 text-xs">Ongoing poetry readings featuring various poets, held in-person and via Zoom. Location: Brookline Public Library, Brookline, MA.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Yale University Art Gallery Exhibitions -->
+                <a href="https://artgallery.yale.edu/visit/exhibitions" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="New Haven, CT" data-title="Yale Art Gallery Exhibitions">
+                    <img src="https://placehold.co/300x200/00bcd4/ffffff?text=Art+Gallery" alt="Yale Art Gallery Exhibitions" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Yale University Art Gallery Exhibitions</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various times</p>
+                            <p class="text-gray-600 text-xs">Explore diverse art installations and collections throughout the year. Location: Yale University Art Gallery, New Haven, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Long Wharf Theatre Season -->
+                <a href="https://www.longwharf.org/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="New Haven, CT" data-title="Long Wharf Theatre">
+                    <img src="https://placehold.co/300x200/d81b60/ffffff?text=Theatre" alt="Long Wharf Theatre" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Long Wharf Theatre Season</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing Season | Various locations</p>
+                            <p class="text-gray-600 text-xs">Experience bold storytelling and vibrant theatre productions across Greater New Haven. Location: Various venues, New Haven, CT.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- ArtRage Gallery Exhibitions (Syracuse) -->
+                <a href="https://artragegallery.org/exhibitions/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="ArtRage Gallery Exhibitions">
+                    <img src="https://placehold.co/300x200/ff5722/ffffff?text=Gallery" alt="ArtRage Gallery" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">ArtRage Gallery Exhibitions</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various dates</p>
+                            <p class="text-gray-600 text-xs">Committed to breaking boundaries and showcasing art for an open, just world. Location: ArtRage Gallery, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+                <!-- Syracuse University - La Casita Art Gallery -->
+                <a href="https://lacasita.syr.edu/la-casita-art-gallery/" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect" data-location="Syracuse, NY" data-title="La Casita Art Gallery">
+                    <img src="https://placehold.co/300x200/795548/ffffff?text=Latin+Art" alt="La Casita Art Gallery" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">La Casita Art Gallery</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">Ongoing | Various dates</p>
+                            <p class="text-gray-600 text-xs">Showcases U.S. Latino and Latin American artists and civic-centered exhibitions. Location: Syracuse University, Syracuse, NY.</p>
+                        </div>
+                        <span class="text-fuchsia-600 hover:underline text-sm mt-2 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -441,3 +718,5 @@
 
 </body>
 </html>
+
+
