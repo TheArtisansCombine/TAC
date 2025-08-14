@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - The Artisans' Combine</title>
+    <title>The Artisans Combine | Opportunities</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,6 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
-
         /* Mobile Navigation Overlay Styles */
         .mobile-menu-overlay {
             position: fixed;
@@ -112,21 +111,6 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
-        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
-        .zoomed-in-image-container {
-            width: 100%;
-            height: 250px; /* Or desired height */
-            overflow: hidden;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .zoomed-in-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
-            object-position: center; /* Centers the image within the crop */
-        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -139,7 +123,7 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
@@ -153,20 +137,20 @@
 
                 <!-- What's Going On! Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="events.html">Events</a>
-                        <a href="opportunities.html">Opportunities</a>
+                        <a href="opportunities.html" class="active">Opportunities</a>
                     </div>
                 </div>
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
-                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
-                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -209,9 +193,9 @@
             <div class="mobile-dropdown-parent text-white">
                 <span class="text-2xl font-semibold">About Us</span>
                 <div class="mobile-dropdown-content flex flex-col mt-2">
-                    <a href="index.html#our-mission">Our Mission</a>
-                    <a href="index.html#our-mission">Where We're From</a>
-                    <a href="index.html#testimonials">Testimonials</a>
+                    <a href="aboutus.html#our-mission">Our Mission</a>
+                    <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                    <a href="aboutus.html#testimonials">Testimonials</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
@@ -226,8 +210,30 @@
             Discover various opportunities to collaborate, showcase your work, and grow as an artist within our vibrant community.
         </p>
 
+        <!-- Current Opportunities Section -->
         <section class="bg-white rounded-lg shadow-md p-8 mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Join Our Collective</h2>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Current Opportunities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Southwick Library 2025 Call to Artists Card -->
+                <a href="https://www.southwickma.org/southwick-public-library/pages/laporte-gallery" target="_blank" class="block bg-white rounded-lg shadow-md overflow-hidden flex flex-col card-hover-effect">
+                    <img src="images/southwick.webp" alt="Southwick Library LaPorte Gallery" class="w-full h-48 object-cover">
+                    <div class="p-4 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Southwick Library: 2025 Call to Artists</h3>
+                            <p class="text-fuchsia-600 font-medium text-sm mb-2">LaPorte Gallery Exhibition</p>
+                            <p class="text-gray-600 text-xs">
+                                Submit your work for consideration to exhibit in the beautiful LaPorte Gallery at the Southwick Public Library throughout 2025. A fantastic chance to showcase your art to the local community.
+                            </p>
+                        </div>
+                        <span class="text-teal-600 hover:underline text-sm mt-2 inline-block">View Call Details <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- TAC Opportunities Section -->
+        <section class="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">TAC Opportunities</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="flex flex-col items-center text-center">
                     <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="w-32 h-32 object-contain mb-4">
@@ -252,52 +258,41 @@
             </div>
         </section>
 
+        <!-- Call to Action Section (at the bottom) -->
         <section class="bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Other Opportunities</h2>
-            <div class="space-y-8">
-                <!-- Opportunity 1: Workshop Hosting -->
-                <div class="flex flex-col md:flex-row items-center md:space-x-6">
-                    <div class="md:w-1/3 mb-4 md:mb-0">
-                        <img src="https://placehold.co/300x200/a78bfa/ffffff?text=Workshop" alt="Workshop Hosting" class="rounded-lg shadow-sm w-full h-auto object-cover">
-                    </div>
-                    <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Host a Workshop or Class</h3>
-                        <p class="text-fuchsia-600 font-medium text-sm mb-2">Share Your Skills</p>
-                        <p class="text-gray-600 text-sm">
-                            Do you have a unique artistic skill or craft you'd like to teach? We offer opportunities for artisans to host workshops and classes, connecting with the community and inspiring new creators.
-                        </p>
-                        <a href="contact.html?subject=Workshop%20Proposal" class="text-teal-600 hover:underline text-sm mt-2 inline-block">Propose a Workshop <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                    </div>
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Explore More Ways to Get Involved</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Host a Workshop or Class -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
+                    <img src="https://placehold.co/300x200/a78bfa/ffffff?text=Workshop" alt="Workshop Hosting" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Host a Workshop or Class</h3>
+                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Share Your Skills</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Do you have a unique artistic skill or craft you'd like to teach? Connect with the community and inspire new creators.
+                    </p>
+                    <a href="contact.html?subject=Workshop%20Proposal" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Propose a Workshop <i class="fas fa-arrow-right text-xs ml-1"></i></a>
                 </div>
 
-                <!-- Opportunity 2: Exhibition Space -->
-                <div class="flex flex-col md:flex-row-reverse items-center md:space-x-reverse md:space-x-6">
-                    <div class="md:w-1/3 mb-4 md:mb-0">
-                        <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Exhibition" alt="Exhibition Space" class="rounded-lg shadow-sm w-full h-auto object-cover">
-                    </div>
-                    <div class="md:w-2/3 text-center md:text-right">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Showcase Your Art: Exhibition Space</h3>
-                        <p class="text-fuchsia-600 font-medium text-sm mb-2">Display Your Creations</p>
-                        <p class="text-gray-600 text-sm">
-                            Looking for a venue to exhibit your latest works? We partner with local galleries and spaces to provide our artisans with opportunities for solo and group exhibitions.
-                        </p>
-                        <a href="contact.html?subject=Exhibition%20Inquiry" class="text-teal-600 hover:underline text-sm mt-2 inline-block">Inquire About Exhibitions <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                    </div>
+                <!-- Showcase Your Art: Exhibition Space -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
+                    <img src="https://placehold.co/300x200/60a5fa/ffffff?text=Exhibition" alt="Exhibition Space" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Showcase Your Art: Exhibition Space</h3>
+                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Display Your Creations</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Looking for a venue to exhibit your latest works? We help connect artisans with local galleries and spaces for exhibitions.
+                    </p>
+                    <a href="contact.html?subject=Exhibition%20Inquiry" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Inquire About Exhibitions <i class="fas fa-arrow-right text-xs ml-1"></i></a>
                 </div>
 
-                <!-- Opportunity 3: Market Vendor -->
-                <div class="flex flex-col md:flex-row items-center md:space-x-6">
-                    <div class="md:w-1/3 mb-4 md:mb-0">
-                        <img src="https://placehold.co/300x200/fbbf24/ffffff?text=Market" alt="Market Vendor" class="rounded-lg shadow-sm w-full h-auto object-cover">
-                    </div>
-                    <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Become a Market Vendor</h3>
-                        <p class="text-fuchsia-600 font-medium text-sm mb-2">Sell Your Products</p>
-                        <p class="text-gray-600 text-sm">
-                            Participate in our curated artisan markets and connect directly with customers. This is a fantastic way to sell your handmade goods and build your brand.
-                        </p>
-                        <a href="contact.html?subject=Market%20Vendor%20Application" class="text-teal-600 hover:underline text-sm mt-2 inline-block">Apply to be a Vendor <i class="fas fa-arrow-right text-xs ml-1"></i></a>
-                    </div>
+                <!-- Become a Market Vendor -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm card-hover-effect">
+                    <img src="https://placehold.co/300x200/fbbf24/ffffff?text=Market" alt="Market Vendor" class="rounded-lg shadow-sm w-full h-auto object-cover mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Become a Market Vendor</h3>
+                    <p class="text-fuchsia-600 font-medium text-sm mb-2">Sell Your Products</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Participate in our curated artisan markets and connect directly with customers. A fantastic way to sell your handmade goods.
+                    </p>
+                    <a href="contact.html?subject=Market%20Vendor%20Application" class="text-teal-600 hover:underline text-sm mt-auto inline-block">Apply to be a Vendor <i class="fas fa-arrow-right text-xs ml-1"></i></a>
                 </div>
             </div>
         </section>
@@ -446,6 +441,3 @@
 
 </body>
 </html>
-
-
-
