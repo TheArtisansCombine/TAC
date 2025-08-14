@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Artisans</title>
+    <title>About Us - The Artisans' Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
         .bg-artsy-gradient {
             background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
         }
-        /* General card hover effect */
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
@@ -113,6 +112,21 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
+        .zoomed-in-image-container {
+            width: 100%;
+            height: 250px; /* Or desired height */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -125,13 +139,13 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="artisans.html" class="active">Artisan Profiles</a>
+                        <a href="artisans.html">Artisan Profiles</a>
                         <a href="gallery.html">Artisan Gallery</a>
                         <a href="forge-of-collaboration.html">Partner Businesses</a>
                     </div>
@@ -148,11 +162,11 @@
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="index.html#our-mission">Our Mission</a>
-                        <a href="where-we-are-from.html">Where We're From</a>
-                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
+                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -483,5 +497,6 @@
 
 </body>
 </html>
+
 
 
