@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | The Forge of Collaboration</title>
+    <title>About Us - The Artisans' Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -113,37 +113,19 @@
             display: block;
         }
 
-        /* Partner Card Specific Styles for Logo Overlay */
-        .partner-logo-container {
-            position: relative;
+        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
+        .zoomed-in-image-container {
             width: 100%;
-            height: 150px; /* Fixed height for consistent preview area */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 250px; /* Or desired height */
             overflow: hidden;
-            background-color: #f3f4f6; /* Light gray background for logos */
-            border-radius: 0.5rem 0.5rem 0 0; /* Match card border-radius */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .partner-logo-container img {
-            position: absolute;
-            object-fit: contain;
-            transition: all 0.3s ease-in-out; /* Smooth transition for movements */
-        }
-        .partner-logo-container .ari-jays-logo {
-            width: 50%; /* Adjusted for side-by-side */
-            height: auto;
-            z-index: 1; /* Behind getfabb-logo */
-            left: 0; /* Align to left */
-            transform: translateX(10%); /* Shift right for spacing */
-            opacity: 0.7; /* Slightly transparent */
-        }
-        .partner-logo-container .getfabb-logo {
-            width: 50%; /* Adjusted for side-by-side */
-            height: auto;
-            z-index: 2; /* On top */
-            right: 0; /* Align to right */
-            transform: translateX(-10%); /* Shift left for spacing */
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
         }
     </style>
 </head>
@@ -157,15 +139,15 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="artisans.html">Artisan Profiles</a>
                         <a href="gallery.html">Artisan Gallery</a>
-                        <a href="forge-of-collaboration.html" class="active">Partner Businesses</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
                     </div>
                 </div>
 
@@ -180,11 +162,11 @@
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="index.html#our-mission">Our Mission</a>
-                        <a href="where-we-are-from.html">Where We're From</a>
-                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
+                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -452,3 +434,4 @@
 
 </body>
 </html>
+
