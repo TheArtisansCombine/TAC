@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Contact Us</title>
+    <title>About Us - The Artisans' Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for social media icons and loading spinner -->
+    <!-- Font Awesome for social media icons and hamburger menu -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -112,6 +112,21 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
+        .zoomed-in-image-container {
+            width: 100%;
+            height: 250px; /* Or desired height */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800">
@@ -124,7 +139,7 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link active">Home</a>
                 
                 <!-- Who We Are Dropdown -->
                 <div class="dropdown">
@@ -147,12 +162,12 @@
 
                 <!-- About Us Dropdown -->
                 <div class="dropdown">
-                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link active">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="index.html#our-mission">Our Mission</a>
-                        <a href="index.html#our-mission">Where We're From</a>
-                        <a href="index.html#testimonials">Testimonials</a>
-                        <a href="contact.html" class="active">Contact</a>
+                        <a href="aboutus.html#our-mission" class="nav-link">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from" class="nav-link">Where We're From</a>
+                        <a href="aboutus.html#testimonials" class="nav-link">Testimonials</a>
+                        <a href="contact.html">Contact</a>
                     </div>
                 </div>
             </nav>
@@ -406,4 +421,5 @@
 
 </body>
 </html>
+
 
