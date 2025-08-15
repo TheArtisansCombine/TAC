@@ -404,7 +404,6 @@
                 <!-- Poets, Musicians, & Vocalists Section (Image Left, Text Right) -->
                 <div class="bg-white rounded-lg shadow-md p-6 card-hover-effect group flex flex-col md:flex-row items-center justify-center text-center max-w-4xl mx-auto">
                     <div class="slideshow-container md:w-2/5 mb-6 md:mb-0 md:mr-6" data-slideshow-id="vocalists">
-                        <!-- Corrected typo for krusin_rap2.jpg and re-added all images for clarity -->
                         <img src="images/thaizeo_music.jpg" alt="Thai Zeo Music" class="slideshow-image vocalists-slideshow-image active" data-index="0" loading="lazy" data-title="Thai Zeo - Performance" data-description="Soul-stirring performance by Thai Zeo, whose lyrical depth and melodic voice create an immersive auditory experience that captivates the soul.">
                         <img src="images/krusin_rap1.jpg" alt="Krusin B Krusin Rap 1" class="slideshow-image vocalists-slideshow-image" data-index="1" loading="lazy" data-title="Krusin B Krusin - Live" data-description="High-energy rap performance by Krusin B Krusin, delivering powerful verses with an undeniable stage presence that electrifies the crowd.">
                         <img src="images/krusin_rap2.jpg" alt="Krusin B Krusin Rap 2" class="slideshow-image vocalists-slideshow-image" data-index="2" loading="lazy" data-title="Krusin B Krusin - Studio" data-description="Krusin B Krusin in the recording studio, meticulously crafting his unique sound, blending diverse genres to create innovative and compelling tracks.">
@@ -741,7 +740,12 @@
                     const clickedImage = e.target.closest('.slideshow-image');
                     if (clickedImage) {
                         const index = parseInt(clickedImage.dataset.index);
-                        openLightbox(images[index], titles[index], descriptions[index]);
+                        // The lightbox should get its content directly from the clicked image's data attributes
+                        openLightbox(
+                            clickedImage.src,
+                            clickedImage.dataset.title || clickedImage.alt,
+                            clickedImage.dataset.description || ''
+                        );
                     }
                 });
             }
