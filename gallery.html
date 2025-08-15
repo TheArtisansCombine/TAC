@@ -168,84 +168,7 @@
             object-position: top; /* Display top half of the image */
         }
 
-        /* Lightbox styles */
-        .lightbox-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        .lightbox-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .lightbox-content {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            max-width: 90%;
-            max-height: 90%;
-            overflow: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .lightbox-image {
-            max-width: 100%;
-            max-height: 70vh; /* Adjust as needed */
-            object-fit: contain;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        .lightbox-info {
-            text-align: center;
-            color: #333;
-        }
-        .lightbox-info h3 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        .lightbox-info p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 1rem;
-        }
-        .lightbox-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .lightbox-actions button {
-            background-image: linear-gradient(to right, #207561, #831843);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        .lightbox-actions button:hover {
-            opacity: 0.9;
-        }
+        /* Lightbox styles - REMOVED */
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
@@ -573,21 +496,7 @@
         </div>
     </main>
 
-    <!-- Lightbox Overlay -->
-    <div id="lightbox-overlay" class="lightbox-overlay">
-        <i class="fas fa-times lightbox-close" id="lightbox-close-btn"></i>
-        <div class="lightbox-content">
-            <img src="" alt="Lightbox Image" class="lightbox-image" id="lightbox-image">
-            <div class="lightbox-info">
-                <h3 id="lightbox-title"></h3>
-                <p id="lightbox-description"></p>
-            </div>
-            <div class="lightbox-actions">
-                <button id="lightbox-share-btn"><i class="fas fa-share-alt mr-2"></i> Share</button>
-                <button id="lightbox-contact-btn"><i class="fas fa-envelope mr-2"></i> Contact Artist</button>
-            </div>
-        </div>
-    </div>
+    <!-- Lightbox Overlay - REMOVED -->
 
     <!-- Footer -->
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12 mt-10">
@@ -668,46 +577,22 @@
             const mobileMenuClose = document.getElementById('mobile-menu-close');
             const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
 
-            // Lightbox elements
-            const lightboxOverlay = document.getElementById('lightbox-overlay');
-            const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxTitle = document.getElementById('lightbox-title');
-            const lightboxDescription = document.getElementById('lightbox-description');
-            const lightboxShareBtn = document.getElementById('lightbox-share-btn');
-            const lightboxContactBtn = document.getElementById('lightbox-contact-btn');
+            // Lightbox elements - REMOVED
 
-            // Function to open lightbox
-            function openLightbox(src, title, description) {
-                lightboxImage.src = src;
-                lightboxTitle.textContent = title;
-                lightboxDescription.textContent = description;
-                lightboxOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            }
+            // Function to open lightbox - REMOVED
+            // function openLightbox(src, title, description) { ... }
 
-            // Function to close lightbox
-            function closeLightbox() {
-                lightboxOverlay.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scrolling
-                // Clear content when closing
-                lightboxImage.src = '';
-                lightboxTitle.textContent = '';
-                lightboxDescription.textContent = '';
-            }
+            // Function to close lightbox - REMOVED
+            // function closeLightbox() { ... }
 
-            // Close lightbox when close button is clicked
-            lightboxCloseBtn.addEventListener('click', closeLightbox);
+            // Close lightbox when close button is clicked - REMOVED
+            // lightboxCloseBtn.addEventListener('click', closeLightbox);
 
-            // Close lightbox when clicking outside the content
-            lightboxOverlay.addEventListener('click', (e) => {
-                if (e.target === lightboxOverlay) {
-                    closeLightbox();
-                }
-            });
+            // Close lightbox when clicking outside the content - REMOVED
+            // lightboxOverlay.addEventListener('click', (e) => { ... });
 
             // Generic slideshow function
-            function setupSlideshow(slideshowId, images, titles, descriptions) {
+            function setupSlideshow(slideshowId) { // Removed images, titles, descriptions parameters
                 const slideshowContainer = document.querySelector(`[data-slideshow-id="${slideshowId}"]`);
                 if (!slideshowContainer) return;
 
@@ -735,12 +620,11 @@
                 // Initial display
                 showSlide(currentSlide);
 
-                // Add click listener to open lightbox
+                // Removed click listener to open lightbox
+                /*
                 slideshowContainer.addEventListener('click', (e) => {
                     const clickedImage = e.target.closest('.slideshow-image');
                     if (clickedImage) {
-                        const index = parseInt(clickedImage.dataset.index);
-                        // The lightbox should get its content directly from the clicked image's data attributes
                         openLightbox(
                             clickedImage.src,
                             clickedImage.dataset.title || clickedImage.alt,
@@ -748,90 +632,26 @@
                         );
                     }
                 });
+                */
             }
 
+            // Data for Slideshows - These arrays are no longer strictly necessary for lightbox, but kept for slideshow logic if needed elsewhere
+            // The lightbox now pulls data directly from the clicked image's data attributes.
+
             // Data for Modeling Slideshow
-            const modelingImages = [
-                'images/javoni_profile.jpg', 'images/javoni_modeling1.jpg', 'images/javoni_modeling2.jpg',
-                'images/ari_model1.jpg', 'images/ari_fashion1.jpg', 'images/ari_fashion2.jpg',
-                'images/thaizeo_profile.jpg', 'images/thaizeo_model.jpg'
-            ];
-            const modelingTitles = [
-                "Ja'voni White - Profile", "Ja'voni White - Modeling 1", "Ja'voni White - Modeling 2",
-                "Ariandra Lemus - Modeling", "Ariandra Lemus - Fashion 1", "Ariandra Lemus - Fashion 2",
-                "Thai Zeo - Profile", "Thai Zeo - Modeling"
-            ];
-            const modelingDescriptions = [
-                "Dynamic fashion model and musician. Ja'voni brings a fresh perspective to every shoot, blending his musical rhythm with visual artistry to create compelling narratives.",
-                "Ja'voni showcasing his unique style, a fusion of contemporary trends and personal expression. His poses are fluid, reflecting his background in movement and music.",
-                "Captivating presence in front of the camera, Ja'voni's versatility allows him to embody diverse concepts, making each shot a storytelling masterpiece.",
-                "Ariandra's striking pose, demonstrating her natural flair and deep understanding of fashion. Her ability to convey emotion through posture is truly remarkable.",
-                "Innovative fashion design by Ariandra, where she not only models but also brings her own creations to life, showcasing the intricate details and unique vision behind each piece.",
-                "Ariandra's creative fashion work, a testament to her multi-faceted talent. She seamlessly transitions from designer to muse, embodying the essence of her artistic endeavors.",
-                "Thai Zeo's artistic presence, captivating audiences with her unique blend of music and visual performance. Her modeling work often reflects the lyrical depth of her poetry.",
-                "Thai Zeo's captivating modeling, where every frame tells a story. Her expressive eyes and graceful movements create powerful visual narratives that complement her musical artistry."
-            ];
-            setupSlideshow('modeling', modelingImages, modelingTitles, modelingDescriptions);
+            setupSlideshow('modeling'); // No longer passing arrays
 
             // Data for Wall Art Slideshow
-            const wallArtImages = [
-                'images/bobbydiesel_exterior.jpg', 'images/bobbydiesel_interior.jpg', 'images/go1.jpg',
-                'images/go2.jpg', 'images/go_profile.jpg'
-            ];
-            const wallArtTitles = [
-                "Bobby Diesel - Exterior Mural", "Bobby Diesel - Interior Mural", "GO - Street Art 1",
-                "GO - Street Art 2", "GO - Profile"
-            ];
-            const wallArtDescriptions = [
-                "Vibrant outdoor mural by Bobby Diesel, transforming urban spaces with bold colors and dynamic compositions that reflect the city's pulse.",
-                "Intricate indoor mural by Bobby Diesel, bringing a unique blend of street art aesthetics and refined artistic techniques into private and commercial interiors.",
-                "Dynamic street art by GO, where every piece is a spontaneous expression of urban culture, often incorporating hidden messages and symbolic elements.",
-                "Expressive urban art by GO, showcasing his mastery of form and color in large-scale public installations that challenge perceptions and spark dialogue.",
-                "GO's artistic vision, captured in his profile piece, revealing the thoughtful process behind his powerful street art and urban explorations."
-            ];
-            setupSlideshow('wall-art', wallArtImages, wallArtTitles, wallArtDescriptions);
+            setupSlideshow('wall-art'); // No longer passing arrays
 
             // Data for Vocalists & Poets Slideshow
-            const vocalistsImages = [
-                'images/thaizeo_music.jpg', 'images/krusin_rap1.jpg', 'images/krusin_rap2.jpg',
-                'images/krusin_rap3.jpg', 'images/javoni_modeling2.jpg'
-            ];
-            const vocalistsTitles = [
-                "Thai Zeo - Performance", "Krusin B Krusin - Live", "Krusin B Krusin - Studio",
-                "Krusin B Krusin - Performance", "Ja'voni White - Performance"
-            ];
-            const vocalistsDescriptions = [
-                "Soul-stirring performance by Thai Zeo, whose lyrical depth and melodic voice create an immersive auditory experience that captivates the soul.",
-                "High-energy rap performance by Krusin B Krusin, delivering powerful verses with an undeniable stage presence that electrifies the crowd.",
-                "Krusin B Krusin in the recording studio, meticulously crafting his unique sound, blending diverse genres to create innovative and compelling tracks.",
-                "Dynamic stage presence by Krusin B Krusin, showcasing his theatrical background and ability to connect with the audience through every lyric and movement.",
-                "Ja'voni White's captivating performance, where his vocal talent and poetic delivery combine to create a truly mesmerizing and thought-provoking artistic display."
-            ];
-            setupSlideshow('vocalists', vocalistsImages, vocalistsTitles, vocalistsDescriptions);
+            setupSlideshow('vocalists'); // No longer passing arrays
             
-            // Data for Photography Slideshow (if you add more images)
-            const photographyImages = ['images/ama_photo.jpg'];
-            const photographyTitles = ['Stunning Photography'];
-            const photographyDescriptions = ['Explore the world through the discerning lens of our talented photographers. They masterfully capture fleeting moments, intricate details, and unique perspectives, transforming everyday scenes into stunning visual narratives that invite contemplation and reveal hidden beauty.'];
-            setupSlideshow('photography', photographyImages, photographyTitles, photographyDescriptions);
+            // Data for Photography Slideshow
+            setupSlideshow('photography'); // No longer passing arrays
 
             // Data for Paper, Canvas, & Other Mediums Slideshow
-            const traditionalMediumsImages = [
-                'https://placehold.co/300x350/a78bfa/ffffff?text=Canvas+Art',
-                'https://placehold.co/300x350/60a5fa/ffffff?text=Paper+Art',
-                'https://placehold.co/300x350/fbbf24/ffffff?text=Mixed+Media'
-            ];
-            const traditionalMediumsTitles = [
-                "Canvas Art",
-                "Paper Art",
-                "Mixed Media Art"
-            ];
-            const traditionalMediumsDescriptions = [
-                "Vibrant paintings on canvas, showcasing diverse styles and subjects.",
-                "Intricate and expressive artworks created on various types of paper.",
-                "Innovative pieces combining different materials and techniques for unique textures and visual effects."
-            ];
-            setupSlideshow('traditional-mediums', traditionalMediumsImages, traditionalMediumsTitles, traditionalMediumsDescriptions);
+            setupSlideshow('traditional-mediums'); // No longer passing arrays
 
 
             // Toggle mobile menu visibility
@@ -896,7 +716,8 @@
                         isDropdownActive = true;
                         link.classList.add('active'); // Highlight the specific dropdown item
                     }
-                    // Add click listener to open lightbox for all images within the card
+                    // Removed click listener to open lightbox for all images within the card
+                    /*
                     if (link.closest('.card-hover-effect')) {
                         const cardImages = link.closest('.card-hover-effect').querySelectorAll('img:not(.slideshow-image)');
                         cardImages.forEach(img => {
@@ -905,6 +726,7 @@
                             });
                         });
                     }
+                    */
                 });
                 if (isDropdownActive) {
                     // Add active class to the dropdown title itself
