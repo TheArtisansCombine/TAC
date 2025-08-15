@@ -146,7 +146,7 @@
         .slideshow-container {
             position: relative;
             width: 67.5%; /* Made thinner by 1/4 (90% * 0.75) */
-            height: 700px; /* Increased height for taller cards */
+            height: 800px; /* Increased height for taller cards */
             overflow: hidden;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -394,7 +394,6 @@
                         <img src="images/go1.jpg" alt="GO street art 1" class="slideshow-image wall-art-slideshow-image" data-index="2" loading="lazy" data-title="GO - Street Art 1" data-description="Dynamic street art by GO, where every piece is a spontaneous expression of urban culture, often incorporating hidden messages and symbolic elements.">
                         <img src="images/go2.jpg" alt="GO street art 2" class="slideshow-image wall-art-slideshow-image" data-index="3" loading="lazy" data-title="GO - Street Art 2" data-description="Expressive urban art by GO, showcasing his mastery of form and color in large-scale public installations that challenge perceptions and spark dialogue.">
                         <img src="images/go_profile.jpg" alt="GO profile" class="slideshow-image wall-art-slideshow-image" data-index="4" loading="lazy" data-title="GO - Profile" data-description="GO's artistic vision, captured in his profile piece, revealing the thoughtful process behind his powerful street art and urban explorations.">
-                        <img src="images/shie1.jpg" alt="Shie street art" class="slideshow-image wall-art-slideshow-image" data-index="5" loading="lazy" data-title="Shie - Street Art" data-description="Captivating street art by Shie, known for her distinctive style that blends intricate details with powerful imagery, often highlighting social commentary within public spaces.">
                     </div>
                 </div>
 
@@ -776,19 +775,18 @@
             // Data for Wall Art Slideshow
             const wallArtImages = [
                 'images/bobbydiesel_exterior.jpg', 'images/bobbydiesel_interior.jpg', 'images/go1.jpg',
-                'images/go2.jpg', 'images/go_profile.jpg', 'images/shie1.jpg'
+                'images/go2.jpg', 'images/go_profile.jpg'
             ];
             const wallArtTitles = [
                 "Bobby Diesel - Exterior Mural", "Bobby Diesel - Interior Mural", "GO - Street Art 1",
-                "GO - Street Art 2", "GO - Profile", "Shie - Street Art"
+                "GO - Street Art 2", "GO - Profile"
             ];
             const wallArtDescriptions = [
                 "Vibrant outdoor mural by Bobby Diesel, transforming urban spaces with bold colors and dynamic compositions that reflect the city's pulse.",
                 "Intricate indoor mural by Bobby Diesel, bringing a unique blend of street art aesthetics and refined artistic techniques into private and commercial interiors.",
                 "Dynamic street art by GO, where every piece is a spontaneous expression of urban culture, often incorporating hidden messages and symbolic elements.",
                 "Expressive urban art by GO, showcasing his mastery of form and color in large-scale public installations that challenge perceptions and spark dialogue.",
-                "GO's artistic vision, captured in his profile piece, revealing the thoughtful process behind his powerful street art and urban explorations.",
-                "Captivating street art by Shie, known for her distinctive style that blends intricate details with powerful imagery, often highlighting social commentary within public spaces."
+                "GO's artistic vision, captured in his profile piece, revealing the thoughtful process behind his powerful street art and urban explorations."
             ];
             setupSlideshow('wall-art', wallArtImages, wallArtTitles, wallArtDescriptions);
 
