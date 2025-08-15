@@ -360,7 +360,8 @@
         <!-- Gallery Categories Section (Smaller, Stacked, Alternating) -->
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Featured Art Categories</h2>
-            <div class="grid grid-cols-1 gap-8">
+            <!-- Changed grid-cols-1 to grid-cols-1 md:grid-cols-2 to make cards display in two columns on medium screens and up -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
                 <!-- Modeling and Fashion Section (Image Left, Text Right) -->
                 <div class="bg-white rounded-lg shadow-md p-6 card-hover-effect group flex flex-col md:flex-row items-center justify-center text-center max-w-4xl mx-auto">
                     <div class="slideshow-container md:w-2/5 mb-6 md:mb-0 md:mr-6" data-slideshow-id="modeling">
@@ -780,7 +781,7 @@
                 "Vibrant outdoor mural by Bobby Diesel, transforming urban spaces with bold colors and dynamic compositions that reflect the city's pulse.",
                 "Intricate indoor mural by Bobby Diesel, bringing a unique blend of street art aesthetics and refined artistic techniques into private and commercial interiors.",
                 "Dynamic street art by GO, where every piece is a spontaneous expression of urban culture, often incorporating hidden messages and symbolic elements.",
-                "Expressive urban art by GO, showcasing his mastery of form and color in large-scale public installations that challenge perceptions and spark dialogue.",
+                "Expressive urban art by GO, showcasing his mastery of form and color in large-scale public installations that consolidate perceptions and spark dialogue.",
                 "GO's artistic vision, captured in his profile piece, revealing the thoughtful process behind his powerful street art and urban explorations."
             ];
             setupSlideshow('wall-art', wallArtImages, wallArtTitles, wallArtDescriptions);
@@ -808,6 +809,24 @@
             const photographyTitles = ['Stunning Photography'];
             const photographyDescriptions = ['Explore the world through the discerning lens of our talented photographers. They masterfully capture fleeting moments, intricate details, and unique perspectives, transforming everyday scenes into stunning visual narratives that invite contemplation and reveal hidden beauty.'];
             setupSlideshow('photography', photographyImages, photographyTitles, photographyDescriptions);
+
+            // Data for Paper, Canvas, & Other Mediums Slideshow
+            const traditionalMediumsImages = [
+                'https://placehold.co/300x350/a78bfa/ffffff?text=Canvas+Art',
+                'https://placehold.co/300x350/60a5fa/ffffff?text=Paper+Art',
+                'https://placehold.co/300x350/fbbf24/ffffff?text=Mixed+Media'
+            ];
+            const traditionalMediumsTitles = [
+                "Canvas Art",
+                "Paper Art",
+                "Mixed Media Art"
+            ];
+            const traditionalMediumsDescriptions = [
+                "Vibrant paintings on canvas, showcasing diverse styles and subjects.",
+                "Intricate and expressive artworks created on various types of paper.",
+                "Innovative pieces combining different materials and techniques for unique textures and visual effects."
+            ];
+            setupSlideshow('traditional-mediums', traditionalMediumsImages, traditionalMediumsTitles, traditionalMediumsDescriptions);
 
 
             // Toggle mobile menu visibility
