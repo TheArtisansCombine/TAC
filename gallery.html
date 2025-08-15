@@ -164,6 +164,85 @@
         .slideshow-image.active {
             opacity: 1;
         }
+
+        /* Lightbox styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 70vh; /* Adjust as needed */
+            object-fit: contain;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .lightbox-info {
+            text-align: center;
+            color: #333;
+        }
+        .lightbox-info h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .lightbox-info p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .lightbox-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .lightbox-actions button {
+            background-image: linear-gradient(to right, #207561, #831843);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .lightbox-actions button:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
@@ -256,28 +335,40 @@
     </div>
 
     <main class="flex-grow container mx-auto px-4 max-w-7xl py-12 md:py-20">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 text-center mb-8">
-            The Artisan Gallery
-        </h1>
-        <p class="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            A vibrant showcase of the diverse art forms and creative disciplines our community specializes in. Discover unique pieces and the talented hands behind them.
-        </p>
+        <!-- Hero Section for Gallery -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-teal-500 to-fuchsia-700 text-white rounded-lg shadow-xl relative overflow-hidden mb-12">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 relative z-10">
+                The Artisan Gallery
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 relative z-10">
+                A vibrant showcase of the diverse art forms and creative disciplines our community specializes in. Discover unique pieces and the talented hands behind them.
+            </p>
+            <!-- Optional: Subtle SVG background pattern for visual interest -->
+            <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="1" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)" class="text-white" />
+            </svg>
+        </section>
 
-        <!-- Gallery Categories Section (Larger, Stacked) -->
+        <!-- Gallery Categories Section (Larger, Stacked, Alternating) -->
         <section class="mb-16">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Featured Art Categories</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Modeling Section (Slideshow) -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Modeling Section (Image Left, Text Right) -->
                 <div class="bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col md:flex-row items-center justify-center text-center md:text-left">
-                    <div class="slideshow-container md:w-1/2 mb-6 md:mb-0 md:mr-6">
-                        <img src="images/javoni_profile.jpg" alt="Ja'voni White Modeling" class="slideshow-image active" data-index="0">
-                        <img src="images/javoni_modeling1.jpg" alt="Ja'voni White Modeling 1" class="slideshow-image" data-index="1">
-                        <img src="images/javoni_modeling2.jpg" alt="Ja'voni White Modeling 2" class="slideshow-image" data-index="2">
-                        <img src="images/ari_model1.jpg" alt="Ariandra Lemus Modeling" class="slideshow-image" data-index="3">
-                        <img src="images/ari_fashion1.jpg" alt="Ariandra Lemus Fashion 1" class="slideshow-image" data-index="4">
-                        <img src="images/ari_fashion2.jpg" alt="Ariandra Lemus Fashion 2" class="slideshow-image" data-index="5">
-                        <img src="images/thaizeo_profile.jpg" alt="Thai Zeo Modeling" class="slideshow-image" data-index="6">
-                        <img src="images/thaizeo_model.jpg" alt="Thai Zeo Modeling 1" class="slideshow-image" data-index="7">
+                    <div class="slideshow-container md:w-1/2 mb-6 md:mb-0 md:mr-6" data-slideshow-id="modeling">
+                        <img src="images/javoni_profile.jpg" alt="Ja'voni White Modeling" class="slideshow-image modeling-slideshow-image active" data-index="0" loading="lazy">
+                        <img src="images/javoni_modeling1.jpg" alt="Ja'voni White Modeling 1" class="slideshow-image modeling-slideshow-image" data-index="1" loading="lazy">
+                        <img src="images/javoni_modeling2.jpg" alt="Ja'voni White Modeling 2" class="slideshow-image modeling-slideshow-image" data-index="2" loading="lazy">
+                        <img src="images/ari_model1.jpg" alt="Ariandra Lemus Modeling" class="slideshow-image modeling-slideshow-image" data-index="3" loading="lazy">
+                        <img src="images/ari_fashion1.jpg" alt="Ariandra Lemus Fashion 1" class="slideshow-image modeling-slideshow-image" data-index="4" loading="lazy">
+                        <img src="images/ari_fashion2.jpg" alt="Ariandra Lemus Fashion 2" class="slideshow-image modeling-slideshow-image" data-index="5" loading="lazy">
+                        <img src="images/thaizeo_profile.jpg" alt="Thai Zeo Modeling" class="slideshow-image modeling-slideshow-image" data-index="6" loading="lazy">
+                        <img src="images/thaizeo_model.jpg" alt="Thai Zeo Modeling 1" class="slideshow-image modeling-slideshow-image" data-index="7" loading="lazy">
                     </div>
                     <div class="md:w-1/2 flex flex-col items-center md:items-start">
                         <h3 class="text-3xl font-bold text-gray-900 mb-4">Modeling</h3>
@@ -288,25 +379,57 @@
                     </div>
                 </div>
 
-                <!-- Art and Wall Art Section -->
-                <a href="javascript:void(0);" class="block bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col items-center text-center">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Art & Wall Art</h3>
-                    <p class="text-gray-600 mb-6 max-w-md">
-                        Discover painters, illustrators, and sculptors who create stunning visual pieces that transform spaces and tell stories.
-                    </p>
-                    <img src="images/bobbydiesel_exterior.jpg" alt="Art and Wall Art" class="w-full h-80 object-cover rounded-lg shadow-md group-hover:opacity-90 transition-opacity">
-                    <span class="text-teal-600 hover:underline text-base mt-6 inline-block">Explore Art & Wall Art <i class="fas fa-arrow-right text-sm ml-1"></i></span>
-                </a>
+                <!-- Wall Art Section (Text Left, Image Right) -->
+                <div class="bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col md:flex-row-reverse items-center justify-center text-center md:text-left">
+                    <div class="md:w-1/2 flex flex-col items-center md:items-start md:order-2">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Wall Art</h3>
+                        <p class="text-gray-600 mb-6 max-w-md">
+                            Discover the expansive world of wall art, from vibrant **graffiti** and impactful **street art** to intricate **frescos** and monumental **murals**. Our artists transform public and private spaces into captivating visual narratives.
+                        </p>
+                        <a href="javascript:void(0);" class="text-teal-600 hover:underline text-base mt-auto inline-block">Explore Wall Art <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                    <div class="slideshow-container md:w-1/2 mb-6 md:mb-0 md:ml-6 md:order-1" data-slideshow-id="wall-art">
+                        <img src="images/bobbydiesel_exterior.jpg" alt="Bobby Diesel exterior mural" class="slideshow-image wall-art-slideshow-image active" data-index="0" loading="lazy">
+                        <img src="images/bobbydiesel_interior.jpg" alt="Bobby Diesel interior mural" class="slideshow-image wall-art-slideshow-image" data-index="1" loading="lazy">
+                        <img src="images/go1.jpg" alt="GO street art 1" class="slideshow-image wall-art-slideshow-image" data-index="2" loading="lazy">
+                        <img src="images/go2.jpg" alt="GO street art 2" class="slideshow-image wall-art-slideshow-image" data-index="3" loading="lazy">
+                        <img src="images/go_profile.jpg" alt="GO profile" class="slideshow-image wall-art-slideshow-image" data-index="4" loading="lazy">
+                        <img src="images/shie1.jpg" alt="Shie street art" class="slideshow-image wall-art-slideshow-image" data-index="5" loading="lazy">
+                    </div>
+                </div>
 
-                <!-- Photography Section -->
-                <a href="javascript:void(0);" class="block bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col items-center text-center lg:col-span-2 mx-auto max-w-2xl">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Photography</h3>
-                    <p class="text-gray-600 mb-6 max-w-md">
-                        Explore the world through the lens of our talented photographers, capturing moments and perspectives in stunning detail.
-                    </p>
-                    <img src="images/ama_photo.jpg" alt="Photography" class="w-full h-80 object-cover rounded-lg shadow-md group-hover:opacity-90 transition-opacity">
-                    <span class="text-teal-600 hover:underline text-base mt-6 inline-block">Explore Photography <i class="fas fa-arrow-right text-sm ml-1"></i></span>
-                </a>
+                <!-- Vocalists & Poets Section (Image Left, Text Right) -->
+                <div class="bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col md:flex-row items-center justify-center text-center md:text-left">
+                    <div class="slideshow-container md:w-1/2 mb-6 md:mb-0 md:mr-6" data-slideshow-id="vocalists">
+                        <img src="images/thaizeo_music.jpg" alt="Thai Zeo Music" class="slideshow-image vocalists-slideshow-image active" data-index="0" loading="lazy">
+                        <img src="images/krusin_rap1.jpg" alt="Krusin B Krusin Rap 1" class="slideshow-image vocalists-slideshow-image" data-index="1" loading="lazy">
+                        <img src="images/krusin_rap2.jpg" alt="Krusin B Krusin Rap 2" class="slideshow-image vocalists-slideshow-image" data-index="2" loading="lazy">
+                        <img src="images/krusin_rap3.jpg" alt="Krusin B Krusin Rap 3" class="slideshow-image vocalists-slideshow-image" data-index="3" loading="lazy">
+                        <img src="images/javoni_modeling2.jpg" alt="Ja'voni White Modeling" class="slideshow-image vocalists-slideshow-image" data-index="4" loading="lazy">
+                    </div>
+                    <div class="md:w-1/2 flex flex-col items-center md:items-start">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Vocalists & Poets</h3>
+                        <p class="text-gray-600 mb-6 max-w-md">
+                            Experience the power of spoken word and captivating melodies from our talented vocalists and poets. Their performances weave intricate narratives and evoke deep emotions, transforming moments into unforgettable artistic expressions.
+                        </p>
+                        <a href="artisans.html" class="text-teal-600 hover:underline text-base mt-auto inline-block">Explore Vocalists & Poets <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Photography Section (Text Left, Image Right) -->
+                <div class="bg-white rounded-lg shadow-md p-8 card-hover-effect group flex flex-col md:flex-row-reverse items-center text-center md:text-left">
+                    <div class="md:w-1/2 flex flex-col items-center md:items-start md:order-2">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Photography</h3>
+                        <p class="text-gray-600 mb-6 max-w-md">
+                            Explore the world through the lens of our talented photographers, capturing moments and perspectives in stunning detail.
+                        </p>
+                        <a href="javascript:void(0);" class="text-teal-600 hover:underline text-base mt-auto inline-block">Explore Photography <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                    <div class="slideshow-container md:w-1/2 mb-6 md:mb-0 md:ml-6 md:order-1" data-slideshow-id="photography">
+                        <img src="images/ama_photo.jpg" alt="Photography" class="slideshow-image photography-slideshow-image active" data-index="0" loading="lazy">
+                        <!-- Add more photography images here if available -->
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -316,7 +439,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 <!-- Profile Card for Jesus Alicea -->
                 <a href="jesus.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <img src="images/jesusalicea_profile.jpg" alt="Jesus Alicea's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="text-xl font-semibold text-gray-900">Jesus Alicea</h3>
                     <p class="text-fuchsia-600 font-medium">Alicea Media Arts</p>
                     <p class="text-gray-600 mt-2 text-sm">
@@ -326,7 +449,7 @@
                 </a>
                 <!-- Profile Card for Bobby Diesel -->
                 <a href="bobby.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <img src="images/bobbydiesel_profile.jpg" alt="Bobby Diesel's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="text-xl font-semibold text-gray-900">Bobby Diesel</h3>
                     <p class="text-fuchsia-600 font-medium">Muralist | Artist | Letterer</p>
                     <p class="text-gray-600 mt-2 text-sm">
@@ -336,7 +459,7 @@
                 </a>
                 <!-- New Profile Card for Ja'voni White -->
                 <a href="javoni.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/javoni_profile.jpg" alt="Ja'voni White's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <img src="images/javoni_profile.jpg" alt="Ja'voni White's Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="text-xl font-semibold text-gray-900">Ja'voni White</h3>
                     <p class="text-fuchsia-600 font-medium">Fashion Model • Musician • Entrepreneur</p>
                     <p class="text-gray-600 mt-2 text-sm">
@@ -359,8 +482,8 @@
                 <!-- Partner Card: GetFabb with Ari / Ari Jays Designs -->
                 <a href="ari_services.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="partner-logo-container">
-                        <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="getfabb-logo">
-                        <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="ari-jays-logo">
+                        <img src="images/getfabb_logo.png" alt="GetFabb with Ari Logo" class="getfabb-logo" loading="lazy">
+                        <img src="images/arijays_logo.png" alt="Ari Jays Designs Logo" class="ari-jays-logo" loading="lazy">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">GetFabb with Ari / Ari Jays Designs</h3>
@@ -374,7 +497,7 @@
                 <!-- Partner Card: The She Shack -->
                 <a href="sheshack.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="partner-logo-container">
-                        <img src="images/sheshack_logo.jpg" alt="The She Shack Logo" class="w-24 h-24 mx-auto object-contain">
+                        <img src="images/sheshack_logo.jpg" alt="The She Shack Logo" class="w-24 h-24 mx-auto object-contain" loading="lazy">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">The She Shack</h3>
@@ -387,7 +510,7 @@
                 </a>
                 <!-- Partner Card: Cruzer Urameshi (from forge-of-collaboration) -->
                 <a href="cruzer.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect w-full max-w-sm">
-                    <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover">
+                    <img src="images/cruzer_profile.jpg" alt="Cruzer Urameshi Profile Picture" class="rounded-full w-48 h-48 mx-auto mb-4 object-cover" loading="lazy">
                     <h3 class="text-xl font-semibold text-gray-900">Cruzer Urameshi</h3>
                     <p class="text-fuchsia-600 font-medium">Independent Music Producer | Streamer | Visionary</p>
                     <p class="text-gray-600 mt-2 text-sm">
@@ -398,7 +521,7 @@
                 <!-- Partner Card: Stash Spot Ent -->
                 <a href="stashspot.html" class="block bg-white rounded-lg shadow-md overflow-hidden text-center p-6 card-hover-effect">
                     <div class="partner-logo-container">
-                        <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="w-24 h-24 mx-auto object-contain">
+                        <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="w-24 h-24 mx-auto object-contain" loading="lazy">
                     </div>
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">Stash Spot Ent</h3>
@@ -454,6 +577,22 @@
             </a>
         </div>
     </main>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay" class="lightbox-overlay">
+        <i class="fas fa-times lightbox-close" id="lightbox-close-btn"></i>
+        <div class="lightbox-content">
+            <img src="" alt="Lightbox Image" class="lightbox-image" id="lightbox-image">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+            </div>
+            <div class="lightbox-actions">
+                <button id="lightbox-share-btn"><i class="fas fa-share-alt mr-2"></i> Share</button>
+                <button id="lightbox-contact-btn"><i class="fas fa-envelope mr-2"></i> Contact Artist</button>
+            </div>
+        </div>
+    </div>
 
  <!-- Footer -->
     <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12">
@@ -523,30 +662,137 @@
             const mobileMenuClose = document.getElementById('mobile-menu-close');
             const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
 
-            // Slideshow functionality for the Modeling card
-            const slideshowImages = document.querySelectorAll('.slideshow-image');
-            let currentSlide = 0;
-            const totalSlides = slideshowImages.length;
+            // Lightbox elements
+            const lightboxOverlay = document.getElementById('lightbox-overlay');
+            const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const lightboxShareBtn = document.getElementById('lightbox-share-btn');
+            const lightboxContactBtn = document.getElementById('lightbox-contact-btn');
 
-            function showSlide(index) {
-                slideshowImages.forEach((img, i) => {
-                    img.classList.remove('active');
-                    if (i === index) {
-                        img.classList.add('active');
+            // Function to open lightbox
+            function openLightbox(src, title, description) {
+                lightboxImage.src = src;
+                lightboxTitle.textContent = title;
+                lightboxDescription.textContent = description;
+                lightboxOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            // Function to close lightbox
+            function closeLightbox() {
+                lightboxOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+                // Clear content when closing
+                lightboxImage.src = '';
+                lightboxTitle.textContent = '';
+                lightboxDescription.textContent = '';
+            }
+
+            // Close lightbox when close button is clicked
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+
+            // Close lightbox when clicking outside the content
+            lightboxOverlay.addEventListener('click', (e) => {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+
+            // Generic slideshow function
+            function setupSlideshow(slideshowId, images, titles, descriptions) {
+                const slideshowContainer = document.querySelector(`[data-slideshow-id="${slideshowId}"]`);
+                if (!slideshowContainer) return;
+
+                const slideshowImages = slideshowContainer.querySelectorAll('.slideshow-image');
+                let currentSlide = 0;
+                const totalSlides = slideshowImages.length;
+
+                function showSlide(index) {
+                    slideshowImages.forEach((img, i) => {
+                        img.classList.remove('active');
+                        if (i === index) {
+                            img.classList.add('active');
+                        }
+                    });
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    showSlide(currentSlide);
+                }
+
+                // Start the slideshow
+                setInterval(nextSlide, 3000); // Change image every 3 seconds
+
+                // Initial display
+                showSlide(currentSlide);
+
+                // Add click listener to open lightbox
+                slideshowContainer.addEventListener('click', (e) => {
+                    const clickedImage = e.target.closest('.slideshow-image');
+                    if (clickedImage) {
+                        const index = parseInt(clickedImage.dataset.index);
+                        openLightbox(images[index], titles[index], descriptions[index]);
                     }
                 });
             }
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-            }
+            // Data for Modeling Slideshow
+            const modelingImages = [
+                'images/javoni_profile.jpg', 'images/javoni_modeling1.jpg', 'images/javoni_modeling2.jpg',
+                'images/ari_model1.jpg', 'images/ari_fashion1.jpg', 'images/ari_fashion2.jpg',
+                'images/thaizeo_profile.jpg', 'images/thaizeo_model.jpg'
+            ];
+            const modelingTitles = [
+                "Ja'voni White - Profile", "Ja'voni White - Modeling 1", "Ja'voni White - Modeling 2",
+                "Ariandra Lemus - Modeling", "Ariandra Lemus - Fashion 1", "Ariandra Lemus - Fashion 2",
+                "Thai Zeo - Profile", "Thai Zeo - Modeling"
+            ];
+            const modelingDescriptions = [
+                "Dynamic fashion model and musician.", "Ja'voni showcasing his unique style.", "Captivating presence in front of the camera.",
+                "Ariandra's striking pose.", "Innovative fashion design by Ariandra.", "Ariandra's creative fashion work.",
+                "Thai Zeo's artistic presence.", "Thai Zeo's captivating modeling."
+            ];
+            setupSlideshow('modeling', modelingImages, modelingTitles, modelingDescriptions);
 
-            // Start the slideshow
-            setInterval(nextSlide, 3000); // Change image every 3 seconds
+            // Data for Wall Art Slideshow
+            const wallArtImages = [
+                'images/bobbydiesel_exterior.jpg', 'images/bobbydiesel_interior.jpg', 'images/go1.jpg',
+                'images/go2.jpg', 'images/go_profile.jpg', 'images/shie1.jpg'
+            ];
+            const wallArtTitles = [
+                "Bobby Diesel - Exterior Mural", "Bobby Diesel - Interior Mural", "GO - Street Art 1",
+                "GO - Street Art 2", "GO - Profile", "Shie - Street Art"
+            ];
+            const wallArtDescriptions = [
+                "Vibrant outdoor mural by Bobby Diesel.", "Intricate indoor mural by Bobby Diesel.", "Dynamic street art by GO.",
+                "Expressive urban art by GO.", "GO's artistic vision.", "Captivating street art by Shie."
+            ];
+            setupSlideshow('wall-art', wallArtImages, wallArtTitles, wallArtDescriptions);
 
-            // Initial display
-            showSlide(currentSlide);
+            // Data for Vocalists & Poets Slideshow
+            const vocalistsImages = [
+                'images/thaizeo_music.jpg', 'images/krusin_rap1.jpg', 'images/krusin_rap2.jpg',
+                'images/krusin_rap3.jpg', 'images/javoni_modeling2.jpg'
+            ];
+            const vocalistsTitles = [
+                "Thai Zeo - Performance", "Krusin B Krusin - Live", "Krusin B Krusin - Studio",
+                "Krusin B Krusin - Performance", "Ja'voni White - Performance"
+            ];
+            const vocalistsDescriptions = [
+                "Soul-stirring performance by Thai Zeo.", "High-energy rap performance by Krusin B Krusin.", "Krusin B Krusin in the recording studio.",
+                "Dynamic stage presence by Krusin B Krusin.", "Ja'voni White's captivating performance."
+            ];
+            setupSlideshow('vocalists', vocalistsImages, vocalistsTitles, vocalistsDescriptions);
+            
+            // Data for Photography Slideshow (if you add more images)
+            const photographyImages = ['images/ama_photo.jpg'];
+            const photographyTitles = ['Stunning Photography'];
+            const photographyDescriptions = ['Capturing moments and perspectives in stunning detail.'];
+            setupSlideshow('photography', photographyImages, photographyTitles, photographyDescriptions);
+
 
             // Toggle mobile menu visibility
             mobileMenuButton.addEventListener('click', () => {
