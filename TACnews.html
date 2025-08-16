@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Artisans Combine | TAC News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons and hamburger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Mobile Navigation Overlay Styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-overlay nav a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 0.75rem 0;
+            display: block;
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .mobile-menu-overlay nav a:hover {
+            color: #d1d5db; /* gray-300 */
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Active link styling */
+        .nav-link.active {
+            font-weight: 700; /* bolder */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Dropdown specific styles for desktop */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            /* Darker, transparent artistic gradient background for dropdowns - REVERSED DIRECTION */
+            background-image: linear-gradient(to bottom right, rgba(131, 24, 67, 0.9), rgba(13, 148, 136, 0.9)); /* Fuchsia-900 to Teal-700 with 90% opacity */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            top: 100%; /* Position below the parent link */
+            left: 50%; /* Center dropdown relative to parent */
+            transform: translateX(-50%); /* Adjust for centering */
+            padding: 0.5rem 0; /* py-2 */
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="index.html" class="h-10">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            </a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                
+                <!-- Who We Are Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="artisans.html">Artisan Profiles</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                    </div>
+                </div>
+
+                <!-- What's Going On! Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="events.html">Events</a>
+                        <a href="opportunities.html">Opportunities</a>
+                        <a href="TACnews.html" class="active">TAC News</a> <!-- New link -->
+                    </div>
+                </div>
+
+                <!-- About Us Dropdown -->
+                <div class="dropdown">
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Mobile Hamburger Icon -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="index.html" class="nav-link">Home</a>
+            
+            <!-- Mobile Who We Are Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">Who We Are</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="artisans.html">Artisan Profiles</a>
+                    <a href="gallery.html">Artisan Gallery</a>
+                    <a href="forge-of-collaboration.html">Partner Businesses</a>
+                </div>
+            </div>
+
+            <!-- Mobile What's Going On! Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">What's Going On!</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="events.html">Events</a>
+                    <a href="opportunities.html">Opportunities</a>
+                    <a href="TACnews.html">TAC News</a> <!-- New link -->
+                </div>
+            </div>
+
+            <!-- Mobile About Us Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">About Us</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="aboutus.html#our-mission">Our Mission</a>
+                    <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                    <a href="aboutus.html#testimonials">Testimonials</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="flex-grow container mx-auto px-4 max-w-7xl py-12 md:py-20">
+        <!-- Hero Section for TAC News -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-fuchsia-500 to-teal-700 text-white rounded-lg shadow-xl relative overflow-hidden mb-12">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 relative z-10">
+                TAC News: Your Creative Pulse
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 relative z-10">
+                Stay updated with the latest articles, artist spotlights, and community news from The Artisans Combine.
+            </p>
+            <!-- Optional: Subtle SVG background pattern for visual interest -->
+            <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="1" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)" class="text-white" />
+            </svg>
+        </section>
+
+        <!-- Articles Grid Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Latest Articles & Updates</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/831843/ffffff?text=Article+Image+1" alt="Article about new art techniques" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Unveiling New Horizons: Modern Art Techniques</h3>
+                        <p class="text-gray-500 text-sm mb-3">By Jane Doe | August 15, 2025</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            Explore the cutting-edge techniques that are reshaping the art world, from digital painting to interactive installations.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/0d9488/ffffff?text=Article+Image+2" alt="Interview with a local musician" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Spotlight: The Rhythms of Local Talent</h3>
+                        <p class="text-gray-500 text-sm mb-3">By John Smith | August 10, 2025</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            An exclusive interview with a rising star in the local music scene, discussing their inspirations and creative process.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/a855f7/ffffff?text=Article+Image+3" alt="Community art project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Community Canvas: A Collaborative Masterpiece</h3>
+                        <p class="text-gray-500 text-sm mb-3">By Emily White | August 5, 2025</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            Discover how a recent community art project brought together diverse talents to create a stunning public mural.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/ef4444/ffffff?text=Article+Image+4" alt="Tips for aspiring artisans" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">From Hobby to Hustle: Tips for Emerging Artisans</h3>
+                        <p class="text-gray-500 text-sm mb-3">By Alex Green | July 28, 2025</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            Practical advice and inspiring stories for artists looking to turn their passion into a sustainable career.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Article Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/22c55e/ffffff?text=Article+Image+5" alt="Review of a recent art event" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Event Recap: The Spring Artisan Fair Success</h3>
+                        <p class="text-gray-500 text-sm mb-3">By Sarah Brown | July 20, 2025</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            A look back at the highlights and successes of our recent Spring Artisan Fair, featuring attendee testimonials.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    View All Articles
+                </a>
+            </div>
+        </section>
+
+        <div class="mt-16 text-center">
+            <a href="index.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12 mt-10">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Footer Column 1: Contact Info -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact</h3>
+                    <p class="text-sm">Western Massachusetts</p>
+                    <p class="text-sm">
+                        <a href="mailto:theartisanscombine@gmail.com" class="hover:text-white transition-colors">theartisanscombine@gmail.com</a>
+                    </p>
+                    <div class="mt-8">
+                        <h3 class="text-white font-bold mb-4">Our Partners</h3>
+                        <div class="flex justify-center md:justify-start space-x-6">
+                            <a href="jesus.html" class="h-10">
+                                <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="bobby.html" class="h-10">
+                                <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="sheshack.html" class="h-10">
+                                <img src="images/sheshack_logo.jpg" alt="The She Shack Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="stashspot.html" class="h-10">
+                                <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="h-full w-auto object-contain">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Navigation -->
+                <div class="md:text-left md:col-span-2">
+                    <h3 class="text-white font-bold mb-4">Navigation</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+                        <div>
+                            <p class="text-white font-semibold mt-2">Who We Are</p>
+                            <a href="artisans.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Profiles</a>
+                            <a href="gallery.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Gallery</a>
+                            <a href="forge-of-collaboration.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Partner Businesses</a>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold mt-2">What's Going On!</p>
+                            <a href="events.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Events</a>
+                            <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
+                            <a href="TACnews.html" class="text-gray-300 hover:text-white transition-colors block ml-4">TAC News</a> <!-- New link -->
+                            <p class="text-white font-semibold mt-2">About Us</p>
+                            <a href="aboutus.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
+                            <a href="aboutus.html#where-we-are-from" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="aboutus.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>&copy; 2025 The Artisans Combine. All rights-reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = link.split('#')[0];
+                }
+
+                // Highlight the new TAC News link
+                if (currentPath === 'TACnews.html' && linkHref.includes('TACnews.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states for other pages (already handled by the above logic)
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = link.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
