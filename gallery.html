@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Gallery</title>
+    <title>Gallery | The Artisans' Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,7 +14,9 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
+        }
+        .bg-artsy-gradient {
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
         }
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -110,6 +112,22 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+        /* Specific style for zoomed-in image within a fixed container for mission/where-we-are-from */
+        .zoomed-in-image-container {
+            width: 100%;
+            height: 250px; /* Or desired height */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .zoomed-in-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the image cover the container, effectively "zooming in" if the aspect ratio doesn't match */
+            object-position: center; /* Centers the image within the crop */
+        }
+
         /* Partner Card Specific Styles for Logo Overlay */
         .partner-logo-container {
             position: relative;
@@ -122,56 +140,25 @@
             background-color: #f3f4f6; /* Light gray background for logos */
             border-radius: 0.5rem 0.5rem 0 0; /* Match card border-radius */
         }
-        .partner-logo-container img {
-            position: absolute;
+        /* Updated styles for side-by-side logos */
+        .partner-logo-container .getfabb-logo-side {
+            width: 45%; /* Adjusted for side-by-side */
+            height: auto;
             object-fit: contain;
-            transition: all 0.3s ease-in-out; /* Smooth transition for movements */
+            position: relative; /* Use relative positioning for side-by-side */
+            margin-right: 5%; /* Space between logos */
+            z-index: 2; /* Ensure it's on top */
         }
-        .partner-logo-container .ari-jays-logo {
-            width: 50%; /* Adjusted for side-by-side */
+        .partner-logo-container .ari-jays-logo-side {
+            width: 45%; /* Adjusted for side-by-side */
             height: auto;
+            object-fit: contain;
+            position: relative; /* Use relative positioning for side-by-side */
             z-index: 1; /* Behind getfabb-logo */
-            left: 0; /* Align to left */
-            transform: translateX(10%); /* Shift right for spacing */
-            opacity: 0.7; /* Slightly transparent */
         }
-        .partner-logo-container .getfabb-logo {
-            width: 50%; /* Adjusted for side-by-side */
-            height: auto;
-            z-index: 2; /* On top */
-            right: 0; /* Align to right */
-            transform: translateX(-10%); /* Shift left for spacing */
-        }
-        /* Slideshow specific styles */
-        .slideshow-container {
-            position: relative;
-            width: 40%; /* Image takes 40% of card width */
-            height: 350px; /* Consistent height for all featured cards */
-            overflow: hidden;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .slideshow-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .slideshow-image.active {
-            opacity: 1;
-        }
-        .modeling-slideshow-image {
-            object-position: top; /* Display top half of the image */
-        }
-
-        /* Lightbox styles - REMOVED */
     </style>
 </head>
-<body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
+<body class="bg-artsy-gradient text-gray-800">
 
     <!-- Header & Navigation -->
     <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
@@ -188,8 +175,8 @@
                     <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="artisans.html">Artisan Profiles</a>
-                        <a href="gallery.html" class="active">Artisan Gallery</a>
-                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html" class="active">Partner Businesses</a>
                     </div>
                 </div>
 
@@ -199,6 +186,7 @@
                     <div class="dropdown-content">
                         <a href="events.html">Events</a>
                         <a href="opportunities.html">Opportunities</a>
+                        <a href="TACnews.html" class="active">TAC News</a> <!-- New link -->
                     </div>
                 </div>
 
@@ -206,9 +194,9 @@
                 <div class="dropdown">
                     <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="mission.html">Our Mission</a>
-                        <a href="where-we-are-from.html">Where We're From</a>
-                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -688,6 +676,7 @@
 
 </body>
 </html>
+
 
 
 
