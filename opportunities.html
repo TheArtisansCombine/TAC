@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Artisans Combine | Opportunities</title>
+    <title>Opportunities | The Artisans Combine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,9 +14,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-        }
-        .bg-artsy-gradient {
-            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%);
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
         }
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -25,6 +23,7 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
         }
+
         /* Mobile Navigation Overlay Styles */
         .mobile-menu-overlay {
             position: fixed;
@@ -113,7 +112,7 @@
         }
     </style>
 </head>
-<body class="bg-artsy-gradient text-gray-800">
+<body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
 
     <!-- Header & Navigation -->
     <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
@@ -140,7 +139,8 @@
                     <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
                         <a href="events.html">Events</a>
-                        <a href="opportunities.html" class="active">Opportunities</a>
+                        <a href="opportunities.html">Opportunities</a>
+                        <a href="TACnews.html" class="active">TAC News</a> <!-- New link -->
                     </div>
                 </div>
 
@@ -148,9 +148,9 @@
                 <div class="dropdown">
                     <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
                     <div class="dropdown-content">
-                        <a href="mission.html">Our Mission</a>
-                        <a href="where-we-are-from.html">Where We're From</a>
-                        <a href="index.html#testimonials">Testimonials</a>
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
                         <a href="contact.html">Contact</a>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
             </button>
         </div>
     </header>
-
+    
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay">
         <button id="mobile-menu-close" class="mobile-menu-close">
@@ -455,6 +455,7 @@
 
 </body>
 </html>
+
 
 
 
