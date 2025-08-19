@@ -434,28 +434,58 @@
             // Define your playlist with relative paths to the 'music' folder
             const playlist = [
                 {
-                    src: 'music/song1.mp3', // Example: Replace with your actual MP3 filenames
-                    title: 'Creative Flow',
-                    artist: 'Artisan Beats',
-                    cover: 'https://placehold.co/256x256/831843/ffffff?text=Creative+Flow' // Placeholder cover
+                    src: 'music/Hardware.mp3',
+                    title: 'Hardware',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/831843/ffffff?text=Hardware'
                 },
                 {
-                    src: 'music/song2.mp3', // Example: Replace with your actual MP3 filenames
-                    title: 'Inspiration Echoes',
-                    artist: 'Studio Sounds',
-                    cover: 'https://placehold.co/256x256/0d9488/ffffff?text=Inspiration+Echoes' // Placeholder cover
+                    src: 'music/In Due Time (Aries Spears Intro).mp3',
+                    title: 'In Due Time (Aries Spears Intro)',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/0d9488/ffffff?text=In+Due+Time'
                 },
                 {
-                    src: 'music/song3.mp3', // Example: Replace with your actual MP3 filenames
-                    title: 'Masterpiece Mood',
-                    artist: 'The Combine Collective',
-                    cover: 'https://placehold.co/256x256/a855f7/ffffff?text=Masterpiece+Mood' // Placeholder cover
+                    src: 'music/Julirico.mp3',
+                    title: 'Julirico',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/a855f7/ffffff?text=Julirico'
+                },
+                {
+                    src: 'music/Not Easy.mp3',
+                    title: 'Not Easy',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/ef4444/ffffff?text=Not+Easy'
+                },
+                {
+                    src: 'music/On My Way.mp3',
+                    title: 'On My Way',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/22c55e/ffffff?text=On+My+Way'
+                },
+                {
+                    src: 'music/Scandals.mp3',
+                    title: 'Scandals',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/3b82f6/ffffff?text=Scandals'
+                },
+                {
+                    src: 'music/What.mp3',
+                    title: 'What',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/f97316/ffffff?text=What'
+                },
+                {
+                    src: 'music/Who Else but I.mp3',
+                    title: 'Who Else but I',
+                    artist: 'Unknown Artist',
+                    cover: 'https://placehold.co/256x256/6b7280/ffffff?text=Who+Else'
                 }
                 // Add more tracks as needed: { src: 'music/your-song.mp3', title: 'Your Song Title', artist: 'Your Artist Name', cover: 'path/to/your/cover.jpg' }
             ];
 
             let currentTrackIndex = 0;
-            let isPlaying = false;
+            let isPlaying = true; // Set to true to auto-play
 
             function loadTrack(index) {
                 if (playlist.length === 0) {
@@ -475,8 +505,15 @@
                 trackArtist.textContent = track.artist;
                 coverArt.src = track.cover;
 
+                // Only attempt to play if isPlaying is true
                 if (isPlaying) {
-                    audioPlayer.play();
+                    audioPlayer.play().catch(error => {
+                        // Catch and log any autoplay errors (e.g., due to browser policies)
+                        console.log('Autoplay prevented:', error);
+                        // Optionally, show a message to the user to manually play
+                        playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                        isPlaying = false; // Reset isPlaying if autoplay fails
+                    });
                 } else {
                     audioPlayer.load(); // Load the track without playing
                 }
@@ -525,8 +562,16 @@
             // Set initial volume
             audioPlayer.volume = volumeSlider.value;
 
-            // Load the first track on page load
+            // Load the first track on page load and attempt to play
             loadTrack(currentTrackIndex);
+            // Explicitly try to play after loading, as some browsers require user interaction
+            // This will be caught by the .catch() if autoplay is prevented.
+            audioPlayer.play().catch(error => {
+                console.log('Initial autoplay prevented:', error);
+                isPlaying = false; // Ensure button shows play state if autoplay fails
+                updatePlayPauseButton();
+            });
+
 
             // Mobile menu logic (copied from existing pages)
             mobileMenuButton.addEventListener('click', () => {
