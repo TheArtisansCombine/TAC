@@ -165,16 +165,16 @@
             background: #831843; /* Fuchsia-900 */
         }
 
-        .playlist-buttons button {
+        .channel-buttons button { /* Renamed from playlist-buttons */
             background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
             color: white;
-            padding: 0.4rem 0.8rem; /* Smaller playlist buttons */
+            padding: 0.4rem 0.8rem; /* Smaller buttons */
             border-radius: 0.5rem;
             font-weight: 500;
             transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .playlist-buttons button:hover {
+        .channel-buttons button:hover {
             background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
@@ -207,7 +207,7 @@
             margin-bottom: 0.5rem; /* Reduce bottom margin for player controls */
         }
         .video-player-card-integrated .mt-3 {
-            margin-top: 0.75rem; /* Reduce top margin for playlist buttons */
+            margin-top: 0.75rem; /* Reduce top margin for channel buttons */
         }
     </style>
 </head>
@@ -346,6 +346,13 @@
                             <input type="range" id="volume-slider-video" min="0" max="1" step="0.01" value="0.75" class="w-full h-1.5 bg-gray-300 rounded-lg appearance-none cursor-pointer">
                             <i class="fas fa-volume-up text-gray-200 text-sm"></i>
                         </div>
+
+                        <!-- New Channel Buttons -->
+                        <div class="channel-buttons flex flex-wrap justify-center md:justify-start gap-2 mt-3">
+                            <button id="channel-button-1">Channel 1</button>
+                            <button id="channel-button-2">Channel 2</button>
+                            <button id="channel-button-3">Channel 3</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -462,8 +469,8 @@
             const videoTitle = document.getElementById('video-title');
             const videoArtist = document.getElementById('video-artist');
 
-            // Define your video playlist (replace with your actual video files and info)
-            const playlist = [
+            // Define your video playlists
+            const channel1Playlist = [
                 {
                     src: 'video/video1.mp4', // Example: Replace with your actual video filenames
                     title: 'Artist Spotlight: The Painter',
@@ -475,22 +482,40 @@
                     title: 'Live Performance: Indie Band',
                     artist: 'The Local Sounds',
                     poster: 'https://placehold.co/600x400/4FD1C5/ffffff?text=Video+2'
-                },
+                }
+            ];
+
+            const channel2Playlist = [
                 {
                     src: 'video/video3.mp4', // Example: Replace with your actual video filenames
                     title: 'Community Mural Project Time-lapse',
                     artist: 'Urban Canvas',
                     poster: 'https://placehold.co/600x400/F97316/ffffff?text=Video+3'
+                },
+                {
+                    src: 'https://www.w3schools.com/html/mov_bbb.mp4', // Example: Public domain video
+                    title: 'Big Buck Bunny (Sample)',
+                    artist: 'Blender Foundation',
+                    poster: 'https://placehold.co/600x400/FF5733/ffffff?text=Big+Buck+Bunny'
                 }
-                // Add more video tracks as needed
             ];
 
+            const channel3Playlist = [
+                {
+                    src: 'https://www.w3schools.com/html/movie.mp4', // Example: Public domain video
+                    title: 'The Bear (Sample)',
+                    artist: 'W3Schools',
+                    poster: 'https://placehold.co/600x400/33FF57/ffffff?text=The+Bear'
+                }
+            ];
+
+            let currentActivePlaylist = channel1Playlist; // Default to Channel 1
             let currentVideoIndex = 0;
             let isPlaying = true; // Attempt to autoplay
 
             function loadVideo(index) {
-                if (playlist.length === 0) {
-                    videoTitle.textContent = 'No videos available';
+                if (currentActivePlaylist.length === 0) {
+                    videoTitle.textContent = 'No videos available for this channel';
                     videoArtist.textContent = '';
                     videoPlayer.src = '';
                     videoPlayer.poster = 'https://placehold.co/600x400/cccccc/000000?text=No+Video';
@@ -500,7 +525,7 @@
                 }
 
                 currentVideoIndex = index;
-                const video = playlist[currentVideoIndex];
+                const video = currentActivePlaylist[currentVideoIndex];
                 videoPlayer.src = video.src;
                 videoPlayer.poster = video.poster; // Set the poster image
                 videoTitle.textContent = video.title;
@@ -533,7 +558,7 @@
             }
 
             function playNextVideo() {
-                currentVideoIndex = (currentVideoIndex + 1) % playlist.length;
+                currentVideoIndex = (currentVideoIndex + 1) % currentActivePlaylist.length;
                 loadVideo(currentVideoIndex);
                 videoPlayer.play();
                 isPlaying = true;
@@ -541,9 +566,31 @@
             }
 
             function playPrevVideo() {
-                currentVideoIndex = (currentVideoIndex - 1 + playlist.length) % playlist.length;
+                currentVideoIndex = (currentVideoIndex - 1 + currentActivePlaylist.length) % currentActivePlaylist.length;
                 loadVideo(currentVideoIndex);
                 videoPlayer.play();
+                isPlaying = true;
+                updatePlayPauseButton();
+            }
+
+            // Function to switch channels (playlists)
+            function switchChannel(channelName) {
+                switch (channelName) {
+                    case 'channel1':
+                        currentActivePlaylist = channel1Playlist;
+                        break;
+                    case 'channel2':
+                        currentActivePlaylist = channel2Playlist;
+                        break;
+                    case 'channel3':
+                        currentActivePlaylist = channel3Playlist;
+                        break;
+                    default:
+                        currentActivePlaylist = channel1Playlist;
+                }
+                currentVideoIndex = 0; // Reset to first video of new channel
+                loadVideo(currentVideoIndex);
+                videoPlayer.play(); // Start playing new channel
                 isPlaying = true;
                 updatePlayPauseButton();
             }
@@ -556,6 +603,12 @@
             volumeSlider.addEventListener('input', (e) => {
                 videoPlayer.volume = e.target.value;
             });
+
+            // Event Listeners for Channel Buttons
+            document.getElementById('channel-button-1').addEventListener('click', () => switchChannel('channel1'));
+            document.getElementById('channel-button-2').addEventListener('click', () => switchChannel('channel2'));
+            document.getElementById('channel-button-3').addEventListener('click', () => switchChannel('channel3'));
+
 
             // Set initial volume and load first video on page load
             videoPlayer.volume = volumeSlider.value;
