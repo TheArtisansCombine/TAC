@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Artisans Combine | TAC Radio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons and hamburger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Mobile Navigation Overlay Styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-overlay nav a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 0.75rem 0;
+            display: block;
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .mobile-menu-overlay nav a:hover {
+            color: #d1d5db; /* gray-300 */
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Active link styling */
+        .nav-link.active {
+            font-weight: 700; /* bolder */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Dropdown specific styles for desktop */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            /* Darker, transparent artistic gradient background for dropdowns - REVERSED DIRECTION */
+            background-image: linear-gradient(to bottom right, rgba(131, 24, 67, 0.9), rgba(13, 148, 136, 0.9)); /* Fuchsia-900 to Teal-700 with 90% opacity */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow: hidden;
+            top: 100%; /* Position below the parent link */
+            left: 50%; /* Center dropdown relative to parent */
+            transform: translateX(-50%); /* Adjust for centering */
+            padding: 0.5rem 0; /* py-2 */
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 0.75rem 1rem; /* px-4 py-3 */
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Radio Player Specific Styles */
+        .radio-player-card {
+            background-image: linear-gradient(to bottom right, #f0f9ff, #e0f2fe); /* Light blue gradient */
+            border: 1px solid #bfdbfe; /* Light blue border */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .radio-player-card:hover {
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        .player-controls button {
+            background-color: #831843; /* Fuchsia-900 */
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px; /* full rounded */
+            font-weight: 600;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .player-controls button:hover {
+            background-color: #a8275a; /* Darker fuchsia */
+            transform: scale(1.05);
+        }
+        .player-controls button:active {
+            transform: scale(0.95);
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            background: #831843; /* Fuchsia-900 */
+        }
+        input[type="range"]::-moz-range-thumb {
+            background: #831843; /* Fuchsia-900 */
+        }
+    </style>
+</head>
+<body class="bg-artsy-gradient text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gradient-to-r from-teal-400 to-fuchsia-600 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center max-w-7xl">
+            <a href="index.html" class="h-10">
+                <img src="images/TAC-1_2_2.png" alt="The Artisans Combine Logo" class="h-full w-auto object-contain">
+            </a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors nav-link">Home</a>
+                
+                <!-- Who We Are Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link">Who We Are <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="artisans.html">Artisan Profiles</a>
+                        <a href="gallery.html">Artisan Gallery</a>
+                        <a href="forge-of-collaboration.html">Partner Businesses</a>
+                    </div>
+                </div>
+
+                <!-- What's Going On! Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-white hover:text-gray-200 transition-colors nav-link active">What's Going On! <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="events.html">Events</a>
+                        <a href="opportunities.html">Opportunities</a>
+                        <a href="TACnews.html" class="active">TAC News</a> <!-- Active link for this page -->
+                    </div>
+                </div>
+
+                <!-- About Us Dropdown -->
+                <div class="dropdown">
+                    <a href="aboutus.html" class="text-white hover:text-gray-200 transition-colors nav-link">About Us <i class="fas fa-caret-down ml-1"></i></a>
+                    <div class="dropdown-content">
+                        <a href="aboutus.html#our-mission">Our Mission</a>
+                        <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                        <a href="aboutus.html#testimonials">Testimonials</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Mobile Hamburger Icon -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="index.html" class="nav-link">Home</a>
+            
+            <!-- Mobile Who We Are Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">Who We Are</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="artisans.html">Artisan Profiles</a>
+                    <a href="gallery.html">Artisan Gallery</a>
+                    <a href="forge-of-collaboration.html">Partner Businesses</a>
+                </div>
+            </div>
+
+            <!-- Mobile What's Going On! Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">What's Going On!</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="events.html">Events</a>
+                    <a href="opportunities.html">Opportunities</a>
+                    <a href="TACnews.html">TAC News</a> <!-- Active link for this page -->
+                    <a href="radio.html">TAC Radio</a> <!-- New radio link -->
+                </div>
+            </div>
+
+            <!-- Mobile About Us Section -->
+            <div class="mobile-dropdown-parent text-white">
+                <span class="text-2xl font-semibold">About Us</span>
+                <div class="mobile-dropdown-content flex flex-col mt-2">
+                    <a href="aboutus.html#our-mission">Our Mission</a>
+                    <a href="aboutus.html#where-we-are-from">Where We're From</a>
+                    <a href="aboutus.html#testimonials">Testimonials</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="flex-grow container mx-auto px-4 max-w-7xl py-12 md:py-20">
+        <!-- Hero Section for TAC Radio -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-fuchsia-500 to-teal-700 text-white rounded-lg shadow-xl relative overflow-hidden mb-12">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 relative z-10">
+                TAC Radio: Your Creative Soundscape
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 relative z-10">
+                Tune in to the sounds of local artistry, exclusive interviews, and curated playlists from The Artisans Combine.
+            </p>
+            <!-- Optional: Subtle SVG background pattern for visual interest -->
+            <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="1" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)" class="text-white" />
+            </svg>
+        </section>
+
+        <!-- Radio Player Section -->
+        <section class="mb-16">
+            <div class="max-w-3xl mx-auto radio-player-card rounded-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Now Broadcasting</h2>
+                <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <!-- Album Art / Player Visual -->
+                    <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
+                        <img id="cover-art" src="https://placehold.co/256x256/831843/ffffff?text=TAC+Radio" alt="Album Cover" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Track Info and Controls -->
+                    <div class="flex-grow text-center md:text-left">
+                        <p class="text-sm text-gray-500 mb-1">Now Playing:</p>
+                        <h3 id="track-title" class="text-2xl font-bold text-gray-900 mb-1">Loading Track...</h3>
+                        <p id="track-artist" class="text-lg text-fuchsia-700 mb-4">The Artisans Combine</p>
+                        
+                        <audio id="audio-player" class="w-full hidden" controls></audio>
+                        
+                        <div class="player-controls flex items-center justify-center md:justify-start space-x-4 mb-4">
+                            <button id="prev-button" class="p-3 text-lg"><i class="fas fa-backward"></i></button>
+                            <button id="play-pause-button" class="p-4 text-2xl rounded-full"><i class="fas fa-play"></i></button>
+                            <button id="next-button" class="p-3 text-lg"><i class="fas fa-forward"></i></button>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-volume-down text-gray-600"></i>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.75" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer">
+                            <i class="fas fa-volume-up text-gray-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Episodes / Radio Highlights Section (Placeholder) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Latest Episodes & Radio Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Episode Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Episode+1" alt="Episode 1 Cover" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Interview with Local Muralist: [Artist Name]</h3>
+                        <p class="text-gray-500 text-sm mb-3">August 20, 2025 | Episode 001</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            Tune in to hear about the inspiration behind their latest public art installation.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Episode Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Episode+2" alt="Episode 2 Cover" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Curated Playlist: Summer Vibes & Creativity</h3>
+                        <p class="text-gray-500 text-sm mb-3">August 18, 2025 | Episode 002</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            A hand-picked selection of tracks to fuel your creative projects and summer adventures.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Episode Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Episode+3" alt="Episode 3 Cover" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Artisan Stories: The Journey of a Potter</h3>
+                        <p class="text-gray-500 text-sm mb-3">August 12, 2025 | Episode 003</p>
+                        <p class="text-gray-700 text-base leading-relaxed">
+                            Hear from a master potter about their craft, challenges, and the joy of working with clay.
+                        </p>
+                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                    View All Episodes
+                </a>
+            </div>
+        </section>
+
+        <div class="mt-16 text-center">
+            <a href="index.html" class="text-gray-600 hover:text-fuchsia-600 transition-colors inline-flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-teal-700 to-fuchsia-900 text-gray-300 py-12 mt-10">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Footer Column 1: Contact Info -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact</h3>
+                    <p class="text-sm">Western Massachusetts</p>
+                    <p class="text-sm">
+                        <a href="mailto:theartisanscombine@gmail.com" class="hover:text-white transition-colors">theartisanscombine@gmail.com</a>
+                    </p>
+                    <div class="mt-8">
+                        <h3 class="text-white font-bold mb-4">Our Partners</h3>
+                        <div class="flex justify-center md:justify-start space-x-6">
+                            <a href="jesus.html" class="h-10">
+                                <img src="images/AMA_logo.png" alt="Alicea Media Arts Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="bobby.html" class="h-10">
+                                <img src="images/BobbyDieselLogo1_1.png" alt="Bobby Diesel's Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="sheshack.html" class="h-10">
+                                <img src="images/sheshack_logo.jpg" alt="The She Shack Logo" class="h-full w-auto object-contain">
+                            </a>
+                            <a href="stashspot.html" class="h-10">
+                                <img src="images/stashspot_logo.jpg" alt="Stash Spot Ent Logo" class="h-full w-auto object-contain">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Column 2: Navigation -->
+                <div class="md:text-left md:col-span-2">
+                    <h3 class="text-white font-bold mb-4">Navigation</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+                        <div>
+                            <p class="text-white font-semibold mt-2">Who We Are</p>
+                            <a href="artisans.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Profiles</a>
+                            <a href="gallery.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Artisan Gallery</a>
+                            <a href="forge-of-collaboration.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Partner Businesses</a>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold mt-2">What's Going On!</p>
+                            <a href="events.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Events</a>
+                            <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
+                            <a href="TACnews.html" class="text-gray-300 hover:text-white transition-colors block ml-4">TAC News</a>
+                            <a href="radio.html" class="text-gray-300 hover:text-white transition-colors block ml-4">TAC Radio</a> <!-- New radio link -->
+                            <p class="text-white font-semibold mt-2">About Us</p>
+                            <a href="aboutus.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
+                            <a href="aboutus.html#where-we-are-from" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="aboutus.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>&copy; 2025 The Artisans Combine. All rights-reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
+
+            // Audio Player Logic
+            const audioPlayer = document.getElementById('audio-player');
+            const playPauseButton = document.getElementById('play-pause-button');
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
+            const volumeSlider = document.getElementById('volume-slider');
+            const trackTitle = document.getElementById('track-title');
+            const trackArtist = document.getElementById('track-artist');
+            const coverArt = document.getElementById('cover-art');
+
+            // Define your playlist (replace with your actual audio files and info)
+            const playlist = [
+                {
+                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Placeholder MP3
+                    title: 'Creative Flow',
+                    artist: 'Artisan Beats',
+                    cover: 'https://placehold.co/256x256/831843/ffffff?text=Creative+Flow'
+                },
+                {
+                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Placeholder MP3
+                    title: 'Inspiration Echoes',
+                    artist: 'Studio Sounds',
+                    cover: 'https://placehold.co/256x256/0d9488/ffffff?text=Inspiration+Echoes'
+                },
+                {
+                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', // Placeholder MP3
+                    title: 'Masterpiece Mood',
+                    artist: 'The Combine Collective',
+                    cover: 'https://placehold.co/256x256/a855f7/ffffff?text=Masterpiece+Mood'
+                }
+            ];
+
+            let currentTrackIndex = 0;
+            let isPlaying = false;
+
+            function loadTrack(index) {
+                if (playlist.length === 0) {
+                    trackTitle.textContent = 'No tracks available';
+                    trackArtist.textContent = '';
+                    coverArt.src = 'https://placehold.co/256x256/cccccc/000000?text=No+Track';
+                    playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                    audioPlayer.src = '';
+                    isPlaying = false;
+                    return;
+                }
+
+                currentTrackIndex = index;
+                const track = playlist[currentTrackIndex];
+                audioPlayer.src = track.src;
+                trackTitle.textContent = track.title;
+                trackArtist.textContent = track.artist;
+                coverArt.src = track.cover;
+
+                if (isPlaying) {
+                    audioPlayer.play();
+                } else {
+                    audioPlayer.load(); // Load the track without playing
+                }
+                updatePlayPauseButton();
+            }
+
+            function togglePlayPause() {
+                if (isPlaying) {
+                    audioPlayer.pause();
+                } else {
+                    audioPlayer.play();
+                }
+                isPlaying = !isPlaying;
+                updatePlayPauseButton();
+            }
+
+            function updatePlayPauseButton() {
+                playPauseButton.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+            }
+
+            function playNextTrack() {
+                currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+                loadTrack(currentTrackIndex);
+                audioPlayer.play(); // Automatically play next track
+                isPlaying = true;
+                updatePlayPauseButton();
+            }
+
+            function playPrevTrack() {
+                currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+                loadTrack(currentTrackIndex);
+                audioPlayer.play(); // Automatically play previous track
+                isPlaying = true;
+                updatePlayPauseButton();
+            }
+
+            // Event Listeners for Player Controls
+            playPauseButton.addEventListener('click', togglePlayPause);
+            nextButton.addEventListener('click', playNextTrack);
+            prevButton.addEventListener('click', playPrevTrack);
+            audioPlayer.addEventListener('ended', playNextTrack); // Loop playlist
+            volumeSlider.addEventListener('input', (e) => {
+                audioPlayer.volume = e.target.value;
+            });
+
+            // Set initial volume
+            audioPlayer.volume = volumeSlider.value;
+
+            // Load the first track on page load
+            loadTrack(currentTrackIndex);
+
+            // Mobile menu logic (copied from existing pages)
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = link.split('#')[0];
+                }
+
+                // Highlight the new TAC News link
+                if (currentPath === 'TACnews.html' && linkHref.includes('TACnews.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } 
+                // Highlight the new TAC Radio link
+                else if (currentPath === 'radio.html' && linkHref.includes('radio.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                }
+                else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states for other pages (already handled by the above logic)
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = link.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
