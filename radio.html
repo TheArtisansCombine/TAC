@@ -80,7 +80,6 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            /* Darker, transparent artistic gradient background for dropdowns - REVERSED DIRECTION */
             background-image: linear-gradient(to bottom right, rgba(131, 24, 67, 0.9), rgba(13, 148, 136, 0.9)); /* Fuchsia-900 to Teal-700 with 90% opacity */
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -112,15 +111,48 @@
         }
 
         /* Radio Player Specific Styles */
-        .radio-player-card {
-            background-image: linear-gradient(to bottom right, #f0f9ff, #e0f2fe); /* Light blue gradient */
-            border: 1px solid #bfdbfe; /* Light blue border */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            transition: all 0.3s ease-in-out;
+        /* Combined hero and player styling */
+        .hero-radio-section {
+            background-image: linear-gradient(to right, #207561, #831843); /* Teal-400 to Fuchsia-600 */
+            padding: 1.5rem 1rem; /* py-6 md:py-8 - Made even shorter */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* softer shadow */
+            position: relative;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .radio-player-card:hover {
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        .hero-radio-section h1 {
+            color: white;
+            max-width: 100%; /* Make title wider */
+            margin-left: auto;
+            margin-right: auto;
         }
+        .hero-radio-section p {
+            color: white;
+        }
+
+        .radio-player-card-integrated {
+            background-color: rgba(255, 255, 255, 0.2); /* More opaque, but still slightly transparent */
+            backdrop-filter: blur(10px); /* Stronger frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.4); /* More visible border */
+            border-radius: 0.75rem; /* rounded-lg */
+            padding: 1rem; /* p-4 - reduced padding */
+            margin-top: 1rem; /* space from hero text - reduced */
+            width: 100%;
+            max-width: 600px; /* Constrain width for better look */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25); /* Softer shadow for the player card */
+        }
+
+        /* Ensure text within the integrated player is white for contrast */
+        .radio-player-card-integrated #track-title,
+        .radio-player-card-integrated #track-artist {
+            color: white;
+        }
+
         .player-controls button {
             background-color: #831843; /* Fuchsia-900 */
             color: white;
@@ -141,6 +173,20 @@
         }
         input[type="range"]::-moz-range-thumb {
             background: #831843; /* Fuchsia-900 */
+        }
+
+        .playlist-buttons button {
+            background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .playlist-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -238,13 +284,13 @@
     </div>
 
     <main class="flex-grow container mx-auto px-4 max-w-7xl py-12 md:py-20">
-        <!-- Hero Section for TAC Radio -->
-        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-fuchsia-500 to-teal-700 text-white rounded-lg shadow-xl relative overflow-hidden mb-12">
+        <!-- Hero Section with Integrated Radio Player -->
+        <section class="hero-radio-section text-center mb-12">
             <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 relative z-10">
-                TAC Radio: Your Creative Soundscape
+                TAC Radio
             </h1>
             <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 relative z-10">
-                Tune in to the sounds of local artistry, exclusive interviews, and curated playlists from The Artisans Combine.
+                Your Creative Soundscape
             </p>
             <!-- Optional: Subtle SVG background pattern for visual interest -->
             <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -255,12 +301,9 @@
                 </defs>
                 <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)" class="text-white" />
             </svg>
-        </section>
 
-        <!-- Radio Player Section -->
-        <section class="mb-16">
-            <div class="max-w-3xl mx-auto radio-player-card rounded-lg p-8">
-                <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Now Broadcasting</h2>
+            <!-- Radio Player Integrated into Hero -->
+            <div class="radio-player-card-integrated">
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
                     <!-- Album Art / Player Visual -->
                     <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 rounded-lg overflow-hidden shadow-lg">
@@ -269,9 +312,8 @@
                     
                     <!-- Track Info and Controls -->
                     <div class="flex-grow text-center md:text-left">
-                        <p class="text-sm text-gray-500 mb-1">Now Playing:</p>
-                        <h3 id="track-title" class="text-2xl font-bold text-gray-900 mb-1">Loading Track...</h3>
-                        <p id="track-artist" class="text-lg text-fuchsia-700 mb-4">The Artisans Combine</p>
+                        <h3 id="track-title" class="text-2xl font-bold mb-1">Loading Track...</h3>
+                        <p id="track-artist" class="text-lg text-fuchsia-200 mb-4">The Artisans Combine</p>
                         
                         <audio id="audio-player" class="w-full hidden" controls></audio>
                         
@@ -282,62 +324,40 @@
                         </div>
 
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-volume-down text-gray-600"></i>
+                            <i class="fas fa-volume-down text-gray-200"></i>
                             <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.75" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer">
-                            <i class="fas fa-volume-up text-gray-600"></i>
+                            <i class="fas fa-volume-up text-gray-200"></i>
+                        </div>
+
+                        <!-- New Playlist Buttons -->
+                        <div class="playlist-buttons flex flex-wrap justify-center md:justify-start gap-3 mt-6">
+                            <button id="playlist-button-1">Playlist 1</button>
+                            <button id="playlist-button-2">Playlist 2</button>
+                            <button id="playlist-button-3">Playlist 3</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Latest Episodes / Radio Highlights Section (Placeholder) -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Latest Episodes & Radio Highlights</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Episode Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Episode+1" alt="Episode 1 Cover" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Interview with Local Muralist: [Artist Name]</h3>
-                        <p class="text-gray-500 text-sm mb-3">August 20, 2025 | Episode 001</p>
-                        <p class="text-gray-700 text-base leading-relaxed">
-                            Tune in to hear about the inspiration behind their latest public art installation.
-                        </p>
-                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
-                    </div>
+        <!-- Western Mass Music Scene Section -->
+        <section class="py-16 bg-white rounded-lg shadow-md mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">The Vibrant Sound of Western Massachusetts 🎶</h2>
+            <div class="max-w-4xl mx-auto text-center px-4">
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Western Massachusetts is a melting pot of musical talent, a region where diverse genres converge and artistic innovation thrives. From the folk traditions echoing through the rolling hills to the vibrant indie rock scenes in Northampton and Amherst, and the soulful jazz and hip-hop beats emerging from Springfield, our communities pulsate with rhythm and melody.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    You'll discover a rich tapestry of singer-songwriters, experimental artists, classical ensembles, and energetic bands performing in intimate coffee shops, historic theaters, and lively outdoor festivals. This fertile ground nurtures both established and emerging artists, creating a supportive environment where creativity is not just heard, but deeply felt.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    TAC Radio is proud to showcase this incredible local talent, bringing the unique soundscape of Western Mass directly to your ears. Explore the artists who call this region home and contribute to its rich musical heritage.
+                </p>
+                <div class="mt-8 text-center">
+                    <a href="artisans.html" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
+                        Discover Local Artists
+                    </a>
                 </div>
-
-                <!-- Episode Card 2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Episode+2" alt="Episode 2 Cover" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Curated Playlist: Summer Vibes & Creativity</h3>
-                        <p class="text-gray-500 text-sm mb-3">August 18, 2025 | Episode 002</p>
-                        <p class="text-gray-700 text-base leading-relaxed">
-                            A hand-picked selection of tracks to fuel your creative projects and summer adventures.
-                        </p>
-                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
-                    </div>
-                </div>
-
-                <!-- Episode Card 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
-                    <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Episode+3" alt="Episode 3 Cover" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Artisan Stories: The Journey of a Potter</h3>
-                        <p class="text-gray-500 text-sm mb-3">August 12, 2025 | Episode 003</p>
-                        <p class="text-gray-700 text-base leading-relaxed">
-                            Hear from a master potter about their craft, challenges, and the joy of working with clay.
-                        </p>
-                        <a href="#" class="text-teal-600 hover:underline text-base mt-4 inline-block">Listen Now <i class="fas fa-arrow-right text-sm ml-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 text-center">
-                <a href="#" class="inline-block bg-gradient-to-r from-teal-400 to-fuchsia-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:opacity-90 transition-transform transform hover:scale-105">
-                    View All Episodes
-                </a>
             </div>
         </section>
 
@@ -431,7 +451,7 @@
             const trackArtist = document.getElementById('track-artist');
             const coverArt = document.getElementById('cover-art');
 
-            // Define your playlist with relative paths to the 'music' folder
+            // Define your playlist (replace with your actual audio files and info)
             const playlist = [
                 {
                     src: 'music/Hardware.mp3',
@@ -484,11 +504,17 @@
                 // Add more tracks as needed: { src: 'music/your-song.mp3', title: 'Your Song Title', artist: 'Your Artist Name', cover: 'path/to/your/cover.jpg' }
             ];
 
+            // Define different playlists
+            const allTracksPlaylist = playlist; // All tracks
+            const shortPlaylist1 = [playlist[0], playlist[1]]; // Example: First two tracks
+            const shortPlaylist2 = [playlist[2], playlist[3]]; // Example: Next two tracks
+
+            let currentActivePlaylist = allTracksPlaylist; // Default to all tracks
             let currentTrackIndex = 0;
             let isPlaying = true; // Set to true to auto-play
 
             function loadTrack(index) {
-                if (playlist.length === 0) {
+                if (currentActivePlaylist.length === 0) {
                     trackTitle.textContent = 'No tracks available';
                     trackArtist.textContent = '';
                     coverArt.src = 'https://placehold.co/256x256/cccccc/000000?text=No+Track';
@@ -499,7 +525,7 @@
                 }
 
                 currentTrackIndex = index;
-                const track = playlist[currentTrackIndex];
+                const track = currentActivePlaylist[currentTrackIndex];
                 audioPlayer.src = track.src;
                 trackTitle.textContent = track.title;
                 trackArtist.textContent = track.artist;
@@ -535,7 +561,7 @@
             }
 
             function playNextTrack() {
-                currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+                currentTrackIndex = (currentTrackIndex + 1) % currentActivePlaylist.length;
                 loadTrack(currentTrackIndex);
                 audioPlayer.play(); // Automatically play next track
                 isPlaying = true;
@@ -543,9 +569,31 @@
             }
 
             function playPrevTrack() {
-                currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+                currentTrackIndex = (currentTrackIndex - 1 + currentActivePlaylist.length) % currentActivePlaylist.length;
                 loadTrack(currentTrackIndex);
                 audioPlayer.play(); // Automatically play previous track
+                isPlaying = true;
+                updatePlayPauseButton();
+            }
+
+            // Function to switch playlists
+            function switchPlaylist(playlistName) {
+                switch (playlistName) {
+                    case 'all':
+                        currentActivePlaylist = allTracksPlaylist;
+                        break;
+                    case 'playlist1':
+                        currentActivePlaylist = shortPlaylist1;
+                        break;
+                    case 'playlist2':
+                        currentActivePlaylist = shortPlaylist2;
+                        break;
+                    default:
+                        currentActivePlaylist = allTracksPlaylist;
+                }
+                currentTrackIndex = 0; // Reset to first track of new playlist
+                loadTrack(currentTrackIndex);
+                audioPlayer.play(); // Start playing new playlist
                 isPlaying = true;
                 updatePlayPauseButton();
             }
@@ -558,6 +606,12 @@
             volumeSlider.addEventListener('input', (e) => {
                 audioPlayer.volume = e.target.value;
             });
+
+            // Event Listeners for Playlist Buttons
+            document.getElementById('playlist-button-1').addEventListener('click', () => switchPlaylist('playlist1'));
+            document.getElementById('playlist-button-2').addEventListener('click', () => switchPlaylist('playlist2'));
+            document.getElementById('playlist-button-3').addEventListener('click', () => switchPlaylist('all')); // Assuming Playlist 3 plays all tracks
+
 
             // Set initial volume
             audioPlayer.volume = volumeSlider.value;
