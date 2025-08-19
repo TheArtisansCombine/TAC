@@ -172,7 +172,8 @@
                     <div class="dropdown-content">
                         <a href="events.html">Events</a>
                         <a href="opportunities.html">Opportunities</a>
-                        <a href="TACnews.html" class="active">TAC News</a> <!-- Active link for this page -->
+                        <a href="TACnews.html">TAC News</a>
+                        <a href="radio.html" class="active">TAC Radio</a> <!-- Active link for this page -->
                     </div>
                 </div>
 
@@ -218,7 +219,7 @@
                 <div class="mobile-dropdown-content flex flex-col mt-2">
                     <a href="events.html">Events</a>
                     <a href="opportunities.html">Opportunities</a>
-                    <a href="TACnews.html">TAC News</a> <!-- Active link for this page -->
+                    <a href="TACnews.html">TAC News</a>
                     <a href="radio.html">TAC Radio</a> <!-- New radio link -->
                 </div>
             </div>
@@ -430,26 +431,27 @@
             const trackArtist = document.getElementById('track-artist');
             const coverArt = document.getElementById('cover-art');
 
-            // Define your playlist (replace with your actual audio files and info)
+            // Define your playlist with relative paths to the 'music' folder
             const playlist = [
                 {
-                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', // Placeholder MP3
+                    src: 'music/song1.mp3', // Example: Replace with your actual MP3 filenames
                     title: 'Creative Flow',
                     artist: 'Artisan Beats',
-                    cover: 'https://placehold.co/256x256/831843/ffffff?text=Creative+Flow'
+                    cover: 'https://placehold.co/256x256/831843/ffffff?text=Creative+Flow' // Placeholder cover
                 },
                 {
-                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', // Placeholder MP3
+                    src: 'music/song2.mp3', // Example: Replace with your actual MP3 filenames
                     title: 'Inspiration Echoes',
                     artist: 'Studio Sounds',
-                    cover: 'https://placehold.co/256x256/0d9488/ffffff?text=Inspiration+Echoes'
+                    cover: 'https://placehold.co/256x256/0d9488/ffffff?text=Inspiration+Echoes' // Placeholder cover
                 },
                 {
-                    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', // Placeholder MP3
+                    src: 'music/song3.mp3', // Example: Replace with your actual MP3 filenames
                     title: 'Masterpiece Mood',
                     artist: 'The Combine Collective',
-                    cover: 'https://placehold.co/256x256/a855f7/ffffff?text=Masterpiece+Mood'
+                    cover: 'https://placehold.co/256x256/a855f7/ffffff?text=Masterpiece+Mood' // Placeholder cover
                 }
+                // Add more tracks as needed: { src: 'music/your-song.mp3', title: 'Your Song Title', artist: 'Your Artist Name', cover: 'path/to/your/cover.jpg' }
             ];
 
             let currentTrackIndex = 0;
