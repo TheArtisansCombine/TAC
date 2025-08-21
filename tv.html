@@ -14,7 +14,9 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: radial-gradient(at 0% 0%, #fafafa 0%, #e5e7eb 100%); /* bg-artsy-gradient */
+            /* Slightly lighter teal to fuchsia gradient */
+            background-image: linear-gradient(to bottom right, #1A6E6A 0%, #6A269C 100%); /* Slightly lighter Teal-700 to Fuchsia-900 */
+            color: #e2e8f0; /* Light gray for general body text for contrast */
         }
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -133,7 +135,7 @@
             padding: 0.5rem; /* p-2 - significantly reduced padding */
             margin-top: 0.75rem; /* space from hero text - reduced */
             width: 100%;
-            max-width: 85%; /* Adjusted to be slightly less wide */
+            max-width: 80%; /* Adjusted to be slightly less wide */
             box-shadow: 0 6px 15px rgba(0,0,0,0.25); /* Softer shadow for the player card */
         }
 
@@ -208,6 +210,19 @@
         }
         .video-player-card-integrated .mt-3 {
             margin-top: 0.75rem; /* Reduce top margin for channel buttons */
+        }
+        /* Styling for the main content section on the matching background */
+        .main-content-section-light-bg { /* Renamed class for clarity */
+            background-color: rgba(255, 255, 255, 0.9); /* Almost opaque white for strong contrast */
+            border: 1px solid rgba(200, 200, 200, 0.5); /* Lighter border */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Standard shadow */
+            color: #1a252f; /* Dark text for readability */
+        }
+        .main-content-section-light-bg h2 {
+            color: #1a252f; /* Ensure headings are dark for contrast */
+        }
+        .main-content-section-light-bg p {
+            color: #4b5563; /* Darker gray for paragraph text */
         }
     </style>
 </head>
@@ -359,16 +374,16 @@
         </section>
 
         <!-- Video Content Description Section -->
-        <section class="py-16 bg-white rounded-lg shadow-md mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Dive into Western Mass Visuals 🎬</h2>
+        <section class="py-16 rounded-lg shadow-md mb-16 main-content-section-light-bg">
+            <h2 class="text-3xl font-bold text-center mb-8">Dive into Western Mass Visuals 🎬</h2>
             <div class="max-w-4xl mx-auto text-center px-4">
-                <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                    Welcome to TAC TV, your window into the dynamic visual arts scene of Western Massachusetts. Here, we showcase a curated selection of **short films, artist documentaries, performance recordings, and creative narratives** that capture the essence of our vibrant community.
+                <p class="text-lg leading-relaxed mb-6">
+                    Welcome to TAC TV, your window into the dynamic visual arts scene of Western Massachusetts. Here, we showcase a curated selection of short films, artist documentaries, performance recordings, and creative narratives that capture the essence of our vibrant community.
                 </p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                <p class="text-lg leading-relaxed mb-6">
                     Explore the stories behind the art, witness captivating live performances, and gain insights into the creative processes of local filmmakers, dancers, musicians, and visual artists. From experimental shorts to compelling interviews, TAC TV is dedicated to bringing the rich visual tapestry of our region directly to you.
                 </p>
-                <p class="text-lg text-gray-700 leading-relaxed">
+                <p class="text-lg leading-relaxed">
                     Immerse yourself in the talent that thrives in our valleys and hills. New content is added regularly, so keep an eye out for fresh perspectives and inspiring visual journeys.
                 </p>
                 <div class="mt-8 text-center">
