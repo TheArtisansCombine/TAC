@@ -119,7 +119,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* CSS for the spinner container (now holds canvas and pointer) */
+        /* CSS for the spinner container (now holds canvas and central pointer) */
         .spinner-container {
             position: relative;
             width: 250px; /* Larger size for the wheel */
@@ -136,19 +136,22 @@
             position: absolute;
             top: 0;
             left: 0;
-            transition: transform 3s ease-out; /* Smooth spin transition */
+            /* The canvas itself no longer transitions for spinning */
         }
 
-        .spinner-pointer {
+        /* New central spinning pointer */
+        .central-spinner-pointer {
             position: absolute;
             width: 0;
             height: 0;
-            border-left: 15px solid transparent; /* Larger pointer */
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid #dc2626; /* Red pointer, now pointing down */
-            top: -15px; /* Position above the canvas */
-            left: 50%;
-            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #dc2626; /* Red pointer, pointing down */
+            top: 50%; /* Position in the middle vertically */
+            left: 50%; /* Position in the middle horizontally */
+            transform: translate(-50%, -100%); /* Adjust to point from center-top */
+            transform-origin: 50% 100%; /* Rotate around its base */
+            transition: transform 3s ease-out; /* Smooth spin transition */
             z-index: 10; /* Ensure pointer is on top */
         }
 
@@ -274,10 +277,10 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
-        #prevCoinModalBtn, #prevDieModalBtn {
+        #prevCoinModalBtn, #prevDieModalBtn, #prevSpinnerModalBtn {
             left: 1rem;
         }
-        #nextCoinModalBtn, #nextDieModalBtn {
+        #nextCoinModalBtn, #nextDieModalBtn, #nextSpinnerModalBtn {
             right: 1rem;
         }
 
@@ -305,6 +308,13 @@
         }
         .saved-die-slot-btn:hover {
             background-color: #60a5fa; /* Blue-400 */
+        }
+        .saved-spinner-slot-btn {
+            background-color: #f0abfc; /* Fuchsia-300 */
+            color: #831843; /* Dark fuchsia text */
+        }
+        .saved-spinner-slot-btn:hover {
+            background-color: #e879f9; /* Fuchsia-400 */
         }
     </style>
 </head>
@@ -379,14 +389,14 @@
                                     w-full sm:w-auto text-lg">
                             Flip
                         </button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                         <button id="customizeCoinBtn"
                                 class="bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Customize
                         </button>
-                    </div>
-                    <div id="coinPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
                         <button id="changeCoinCountBtn"
                                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
@@ -421,14 +431,14 @@
                                     w-full sm:w-auto text-lg">
                             Roll
                         </button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                         <button id="customizeDieBtn"
                                 class="bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Customize
                         </button>
-                    </div>
-                    <div id="diePostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
                         <button id="changeDieCountBtn"
                                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
@@ -464,7 +474,13 @@
                             Spin
                         </button>
                     </div>
-                    <div id="spinnerPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+                        <button id="customizeSpinnerBtn"
+                                class="bg-fuchsia-300 hover:bg-fuchsia-400 text-fuchsia-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Customize
+                        </button>
                         <button id="changeSpinnerCountBtn"
                                 class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-00 ease-in-out transform hover:-translate-y-1 active:scale-95
@@ -517,7 +533,7 @@
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
-            <div class="flex justify-between gap-4 mt-6 relative">
+            <div class="flex justify-between items-center gap-4 mt-6 relative">
                 <button id="prevCoinModalBtn"
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
@@ -591,7 +607,7 @@
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
-            <div class="flex justify-between gap-4 mt-6 relative">
+            <div class="flex justify-center gap-4 mt-6 relative">
                 <button id="prevDieModalBtn"
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
@@ -609,6 +625,50 @@
                     </button>
                 </div>
                 <button id="nextDieModalBtn"
+                        class="modal-arrow-button" style="right: 1rem;">
+                    &rarr;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spinner Edit Modal -->
+    <div id="spinnerEditModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="spinnerEditModalTitle" class="text-2xl font-bold text-gray-800 mb-4">Edit Spinner Options</h3>
+            <div id="modalSpinnerOptionInputs" class="space-y-4 mb-6">
+                <!-- Dynamically generated input fields for spinner parts -->
+            </div>
+            <!-- Saved Spinner Options within Modal -->
+            <div class="bg-fuchsia-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-fuchsia-800 mb-4 text-center">Saved Spinner Options</h4>
+                <button id="saveCurrentSpinnerOptionsBtn"
+                        class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4">
+                    Save Current Spinner
+                </button>
+                <div id="spinnerSaveSlotsContainerInModal" class="space-y-3">
+                    <!-- Saved slots will be dynamically generated here -->
+                </div>
+            </div>
+            <div class="flex justify-center gap-4 mt-6 relative">
+                <button id="prevSpinnerModalBtn"
+                        class="modal-arrow-button" style="left: 1rem;">
+                    &larr;
+                </button>
+                <div class="flex gap-4">
+                    <button id="saveSpinnerOptionsBtn"
+                            class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Save
+                    </button>
+                    <button id="cancelSpinnerOptionsBtn"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Cancel
+                    </button>
+                </div>
+                <button id="nextSpinnerModalBtn"
                         class="modal-arrow-button" style="right: 1rem;">
                     &rarr;
                 </button>
@@ -741,7 +801,12 @@
                 updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
                 loadSavedDieSlots(); // Load saved slots on die card display
             } else if (cardToShow === spinnerCard) {
+                // Initialize spinnerOptions for the new count if needed
+                if (spinnerOptions.length !== currentCount) {
+                    spinnerOptions = Array.from({length: currentCount}, (_, i) => `Option ${i + 1}`);
+                }
                 updateSpinnerDisplay(); // Ensure display and title are updated when spinnerCard is shown
+                loadSavedSpinnerSlots(); // Load saved slots on spinner card display
             }
         }
 
@@ -778,7 +843,7 @@
         const flipCoinBtn = document.getElementById('flipCoinBtn');
         const customizeCoinBtn = document.getElementById('customizeCoinBtn');
         const coinResultDisplay = document.getElementById('coinResultDisplay');
-        const coinPostDecisionActions = document.getElementById('coinPostDecisionActions');
+        // Removed coinPostDecisionActions (now empty)
 
         let coinOptions = [{heads: "Heads", tails: "Tails"}]; // Default options, now an array of objects
 
@@ -804,10 +869,11 @@
         // Event listener for Flip Coin button
         flipCoinBtn.addEventListener('click', () => {
             const coinElements = coinResultDisplay.querySelectorAll('.coin');
-            coinPostDecisionActions.classList.add('hidden'); // Hide post-decision actions during flip
+            // coinPostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             flipCoinBtn.disabled = true; // Disable button during animation
             customizeCoinBtn.disabled = true; // Disable customize button during flip
-            // Removed disabling of nav buttons
+            changeCoinCountBtn.disabled = true; // Disable change count button
+            returnToMenuFromCoin.disabled = true; // Disable return to menu button
 
             const results = []; // Store results for splash screen
             coinElements.forEach((coinEl, index) => {
@@ -824,10 +890,11 @@
                     if (index === coinElements.length - 1) { // Only re-enable after last coin finishes
                         flipCoinBtn.disabled = false;
                         customizeCoinBtn.disabled = false; // Re-enable customize button
-                        // Removed re-enabling of nav buttons
+                        changeCoinCountBtn.disabled = false; // Re-enable change count button
+                        returnToMenuFromCoin.disabled = false; // Re-enable return to menu button
                         // Show splash screen with combined results
                         showResultSplashScreen(results.join(', '), () => {
-                            coinPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                            // coinPostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                         });
                     }
                 }, 1000 + (index * 100)); // Stagger animations slightly
@@ -1014,7 +1081,6 @@
         const rollDieBtn = document.getElementById('rollDieBtn');
         const customizeDieBtn = document.getElementById('customizeDieBtn'); // New
         const dieResultDisplay = document.getElementById('dieResultDisplay');
-        const diePostDecisionActions = document.getElementById('diePostDecisionActions');
         
         let dieOptions = [{faces: ["1", "2", "3", "4", "5", "6"]}]; // Default options, now an array of objects
 
@@ -1036,9 +1102,11 @@
         // Event listener for Roll Die button
         rollDieBtn.addEventListener('click', () => {
             const dieElements = dieResultDisplay.querySelectorAll('.die');
-            diePostDecisionActions.classList.add('hidden'); // Hide post-decision actions during roll
+            // diePostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             rollDieBtn.disabled = true; // Disable button during animation
             customizeDieBtn.disabled = true; // Disable customize button during roll
+            changeDieCountBtn.disabled = true; // Disable change count button
+            returnToMenuFromDie.disabled = true; // Disable return to menu button
 
             const results = []; // Store results for splash screen
             dieElements.forEach((dieEl, index) => {
@@ -1055,9 +1123,11 @@
                     if (index === dieElements.length - 1) { // Only re-enable after last die finishes
                         rollDieBtn.disabled = false;
                         customizeDieBtn.disabled = false; // Re-enable customize button
+                        changeDieCountBtn.disabled = false; // Re-enable change count button
+                        returnToMenuFromDie.disabled = false; // Re-enable return to menu button
                         // Show splash screen with combined results
                         showResultSplashScreen(results.join(', '), () => {
-                            diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                            // diePostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                         });
                     }
                 }, 500 + (index * 100)); // Stagger animations slightly
@@ -1235,11 +1305,11 @@
 
         // --- Spinner Logic (Roulette Wheel) ---
         const spinSpinnerBtn = document.getElementById('spinSpinnerBtn');
+        const customizeSpinnerBtn = document.getElementById('customizeSpinnerBtn'); // New
         const spinnerResultDisplay = document.getElementById('spinnerResultDisplay');
-        const spinnerPostDecisionActions = document.getElementById('spinnerPostDecisionActions');
+        // Removed spinnerPostDecisionActions (now empty)
 
-        // Spinner options are now implicitly numbers 1 to currentCount
-        let spinnerOptions = []; // Will be populated dynamically
+        let spinnerOptions = []; // Will be populated dynamically based on currentCount
 
         // Helper function to wrap text on canvas
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -1280,8 +1350,15 @@
             canvas.width = 250; // Fixed size for drawing
             canvas.height = 250;
             canvas.classList.add('spinner-canvas');
-            canvas.style.transform = 'rotate(0deg)'; // Initial state
+            // canvas.style.transform = 'rotate(0deg)'; // Canvas itself no longer spins
             spinnerContainer.appendChild(canvas);
+
+            // New central spinning pointer element
+            const centralSpinnerPointer = document.createElement('div');
+            centralSpinnerPointer.classList.add('central-spinner-pointer');
+            centralSpinnerPointer.style.transform = `translate(-50%, -100%) rotate(0deg)`; // Initial state
+            spinnerContainer.appendChild(centralSpinnerPointer);
+
 
             const ctx = canvas.getContext('2d');
             const centerX = canvas.width / 2;
@@ -1311,27 +1388,23 @@
                 ctx.lineWidth = 1;
                 ctx.stroke();
 
-                // Draw text: number for each slice
-                const optionText = (j + 1).toString(); // Display number
+                // Draw text: custom option for each slice
+                const optionText = spinnerOptions[j] || (j + 1).toString(); // Use custom option or default number
                 const textAngle = startAngle + sliceAngle / 2; // Text angle is relative to the slice's position
 
                 ctx.save();
                 ctx.translate(centerX + Math.cos(textAngle) * (radius / 2.2), centerY + Math.sin(textAngle) * (radius / 2.2));
                 ctx.rotate(textAngle + Math.PI / 2); // Keep text upright relative to the slice
                 ctx.fillStyle = '#fff';
-                ctx.font = 'bold 18px Inter'; /* Larger font for numbers */
+                ctx.font = 'bold 14px Inter'; /* Adjusted font for custom text */
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText(optionText, 0, 0); // No wrapping needed for numbers
+                const maxTextWidth = radius * 0.7;
+                wrapText(ctx, optionText, 0, 0, maxTextWidth, 16); // Wrap custom text
                 ctx.restore();
 
                 startAngle = endAngle;
             }
-
-            // Draw the pointer
-            const pointer = document.createElement('div');
-            pointer.classList.add('spinner-pointer');
-            spinnerContainer.appendChild(pointer);
 
             // Display result text if already spun, otherwise show placeholder
             const resultTextDiv = document.createElement('div');
@@ -1352,10 +1425,13 @@
             spinnerCardTitle.textContent = `Spin a Spinner (${currentCount} Parts)`;
         }
 
-        // Function to update spinner options (now implicitly numbers 1 to currentCount)
+        // Function to update spinner options from input fields (now based on currentCount)
         function updateSpinnerOptions() {
-            spinnerOptions = Array.from({length: currentCount}, (_, i) => (i + 1).toString());
-            if (spinnerCard.classList.contains('card-visible')) {
+            // If spinnerOptions is empty or doesn't match currentCount, initialize with defaults
+            if (spinnerOptions.length !== currentCount) {
+                spinnerOptions = Array.from({length: currentCount}, (_, i) => `Option ${i + 1}`);
+            }
+            if (spinnerCard.classList.contains('card-visible') || spinnerEditModal.classList.contains('show')) {
                 updateSpinnerDisplay();
             }
             return true;
@@ -1363,28 +1439,30 @@
 
         // Event listener for Spin Spinner button
         spinSpinnerBtn.addEventListener('click', () => {
-            updateSpinnerOptions(); // Ensure spinnerOptions array is up-to-date with numbers
+            updateSpinnerOptions(); // Ensure spinnerOptions array is up-to-date with custom text
 
             const spinnerContainer = spinnerResultDisplay.querySelector('.spinner-container');
-            const canvasEl = spinnerContainer.querySelector('.spinner-canvas');
+            const centralSpinnerPointer = spinnerContainer.querySelector('.central-spinner-pointer');
             const existingResultTextEl = spinnerContainer.querySelector('.spinner-result-text');
             if (existingResultTextEl) existingResultTextEl.remove(); // Remove any previous result text
 
-            spinnerPostDecisionActions.classList.add('hidden'); // Hide post-decision actions during spin
+            // spinnerPostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             spinSpinnerBtn.disabled = true; // Disable button during animation
+            customizeSpinnerBtn.disabled = true; // Disable customize button
+            changeSpinnerCountBtn.disabled = true; // Disable change parts button
+            returnToMenuFromSpinner.disabled = true; // Disable return to menu button
 
-            const chosenNumber = Math.floor(Math.random() * currentCount) + 1; // Random number from 1 to currentCount
-            const chosenOption = chosenNumber.toString(); // Convert to string for consistency with results
+            const chosenIndex = Math.floor(Math.random() * currentCount); // Random index
+            const chosenOption = spinnerOptions[chosenIndex]; // Get custom option
 
             // Calculate the target rotation for the chosen option
             const totalRevolutions = 5; // How many full spins
             const sliceAngle = (2 * Math.PI) / currentCount; // Use currentCount for number of parts
-            const resultIndex = chosenNumber - 1; // Index is 0-based
-
+            
             // The pointer is at the top (visually 270 degrees or 3*PI/2 radians on a standard canvas)
             const targetAngleForPointer = 3 * Math.PI / 2;
             // The center of the result slice (relative to 0 radians at the right, WITH initial 180 deg offset)
-            const centerOfResultSliceAngle = (Math.PI + resultIndex * sliceAngle) + (sliceAngle / 2); // Adjusted for initial draw offset
+            const centerOfResultSliceAngle = (Math.PI + chosenIndex * sliceAngle) + (sliceAngle / 2); // Adjusted for initial draw offset
             
             // Calculate the rotation needed to bring the center of the result slice to the pointer's position
             let rotationOffset = targetAngleForPointer - centerOfResultSliceAngle;
@@ -1396,16 +1474,16 @@
             const finalRotation = rotationOffset + (totalRevolutions * 2 * Math.PI);
 
             // Apply initial reset (no transition)
-            canvasEl.style.transition = 'none';
-            canvasEl.style.transform = `rotate(0deg)`;
-            void canvasEl.offsetWidth; // Trigger reflow
+            centralSpinnerPointer.style.transition = 'none';
+            centralSpinnerPointer.style.transform = `translate(-50%, -100%) rotate(0deg)`;
+            void centralSpinnerPointer.offsetWidth; // Trigger reflow
 
-            // Apply the spinning animation
-            canvasEl.style.transition = `transform 3s ease-out`;
-            canvasEl.style.transform = `rotate(${finalRotation}rad)`;
+            // Apply the spinning animation to the central pointer
+            centralSpinnerPointer.style.transition = `transform 3s ease-out`;
+            centralSpinnerPointer.style.transform = `translate(-50%, -100%) rotate(${finalRotation}rad)`;
 
             setTimeout(() => {
-                canvasEl.style.transition = 'none'; // Remove transition after it's done
+                centralSpinnerPointer.style.transition = 'none'; // Remove transition after it's done
 
                 // Display the result text overlay
                 const finalResultTextDiv = document.createElement('div');
@@ -1414,16 +1492,206 @@
                 spinnerContainer.appendChild(finalResultTextDiv);
 
                 spinSpinnerBtn.disabled = false;
+                customizeSpinnerBtn.disabled = false; // Re-enable customize button
+                changeSpinnerCountBtn.disabled = false; // Re-enable change parts button
+                returnToMenuFromSpinner.disabled = false; // Re-enable return to menu button
                 showResultSplashScreen(chosenOption, () => {
-                    spinnerPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                    // spinnerPostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                 });
             }, 3000); // Match animation duration
         });
 
+
+        // --- Spinner Edit Modal Logic ---
+        const spinnerEditModal = document.getElementById('spinnerEditModal');
+        const spinnerEditModalTitle = document.getElementById('spinnerEditModalTitle');
+        const modalSpinnerOptionInputsContainer = document.getElementById('modalSpinnerOptionInputs'); // Container for inputs
+        const saveSpinnerOptionsBtn = document.getElementById('saveSpinnerOptionsBtn');
+        const cancelSpinnerOptionsBtn = document.getElementById('cancelSpinnerOptionsBtn');
+        const prevSpinnerModalBtn = document.getElementById('prevSpinnerModalBtn');
+        const nextSpinnerModalBtn = document.getElementById('nextSpinnerModalBtn');
+        const saveCurrentSpinnerOptionsBtn = document.getElementById('saveCurrentSpinnerOptionsBtn'); // New
+        const spinnerSaveSlotsContainerInModal = document.getElementById('spinnerSaveSlotsContainerInModal'); // New
+
+        let editingSpinnerPartIndex = -1; // To keep track of which part is being edited
+
+        function openSpinnerEditModal(index) {
+            editingSpinnerPartIndex = index;
+            // Dynamically create inputs based on currentCount
+            modalSpinnerOptionInputsContainer.innerHTML = '';
+            spinnerOptions.forEach((option, i) => {
+                const inputDiv = document.createElement('div');
+                inputDiv.innerHTML = `
+                    <label for="modalSpinnerOption${i + 1}" class="block text-gray-700 text-sm font-semibold mb-1">Part ${i + 1}:</label>
+                    <input type="text" id="modalSpinnerOption${i + 1}" value="${option}"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500">
+                `;
+                modalSpinnerOptionInputsContainer.appendChild(inputDiv);
+            });
+            
+            spinnerEditModalTitle.textContent = `Edit Options for Spinner (Part ${index + 1})`; // Update modal title
+            
+            // Manage navigation button visibility within the modal
+            prevSpinnerModalBtn.style.display = (editingSpinnerPartIndex === 0) ? 'none' : 'block';
+            nextSpinnerModalBtn.style.display = (editingSpinnerPartIndex === currentCount - 1) ? 'none' : 'block';
+
+            // Highlight the current input field
+            document.getElementById(`modalSpinnerOption${editingSpinnerPartIndex + 1}`).focus();
+
+            renderSpinnerSaveSlotsInModal(); // Render saved slots inside the modal
+            spinnerEditModal.classList.add('show');
+        }
+
+        function closeSpinnerEditModal() {
+            spinnerEditModal.classList.remove('show');
+            editingSpinnerPartIndex = -1;
+        }
+
+        saveSpinnerOptionsBtn.addEventListener('click', () => {
+            if (editingSpinnerPartIndex !== -1) {
+                const newOptions = Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).map(input => input.value.trim());
+                if (newOptions.every(option => option !== '') && newOptions.length === currentCount) {
+                    spinnerOptions = newOptions;
+                    showMessage(`Spinner options saved!`, "info");
+                } else {
+                    showMessage(`Please provide a value for all ${currentCount} parts of the spinner.`, "error");
+                    return; // Don't close modal if validation fails
+                }
+            }
+            closeSpinnerEditModal();
+            updateSpinnerDisplay(); // Redraw spinner with potentially updated text
+        });
+
+        cancelSpinnerOptionsBtn.addEventListener('click', closeSpinnerEditModal);
+
+        // Event listener for the main "Customize" button
+        customizeSpinnerBtn.addEventListener('click', () => {
+            if (currentCount > 0) {
+                openSpinnerEditModal(0); // Open modal for the first part
+            } else {
+                showMessage("Please select the number of spinner parts first.", "info");
+            }
+        });
+
+        // Navigation for spinner parts *within the modal*
+        prevSpinnerModalBtn.addEventListener('click', () => {
+            if (editingSpinnerPartIndex > 0) {
+                // Save current edits before navigating
+                const newOptions = Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).map(input => input.value.trim());
+                if (newOptions.every(option => option !== '') && newOptions.length === currentCount) {
+                    spinnerOptions = newOptions;
+                } else {
+                    showMessage("Please save or cancel current spinner edits before navigating.", "error");
+                    return;
+                }
+                openSpinnerEditModal(editingSpinnerPartIndex - 1);
+            }
+        });
+
+        nextSpinnerModalBtn.addEventListener('click', () => {
+            if (editingSpinnerPartIndex < currentCount - 1) {
+                // Save current edits before navigating
+                const newOptions = Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).map(input => input.value.trim());
+                if (newOptions.every(option => option !== '') && newOptions.length === currentCount) {
+                    spinnerOptions = newOptions;
+                } else {
+                    showMessage("Please save or cancel current spinner edits before navigating.", "error");
+                    return;
+                }
+                openSpinnerEditModal(editingSpinnerPartIndex + 1);
+            }
+        });
+
+
+        // --- Saved Spinner Slots Logic ---
+        let savedSpinnerSlots = []; // Array to store saved spinner options
+
+        function loadSavedSpinnerSlots() {
+            const savedData = localStorage.getItem('decidoSpinnerSlots');
+            if (savedData) {
+                savedSpinnerSlots = JSON.parse(savedData);
+            } else {
+                savedSpinnerSlots = [];
+            }
+        }
+
+        function saveSpinnerSlotsToLocalStorage() {
+            localStorage.setItem('decidoSpinnerSlots', JSON.stringify(savedSpinnerSlots));
+        }
+
+        function renderSpinnerSaveSlotsInModal() {
+            spinnerSaveSlotsContainerInModal.innerHTML = '';
+            if (savedSpinnerSlots.length === 0) {
+                spinnerSaveSlotsContainerInModal.innerHTML = '<p class="text-sm text-gray-600">No saved options yet.</p>';
+            }
+
+            savedSpinnerSlots.forEach((slot, index) => {
+                const savedSpinnerButton = document.createElement('button');
+                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-fuchsia-200', 'w-full', 'mb-2');
+                savedSpinnerButton.textContent = `${slot.name}: ${slot.options.join(', ')}`;
+                savedSpinnerButton.dataset.slotIndex = index;
+
+                savedSpinnerButton.addEventListener('click', (event) => {
+                    const slotIndex = parseInt(event.target.dataset.slotIndex, 10);
+                    if (editingSpinnerPartIndex !== -1 && savedSpinnerSlots[slotIndex].options.every(option => option !== '') && savedSpinnerSlots[slotIndex].options.length === currentCount) {
+                        spinnerOptions = [ ...savedSpinnerSlots[slotIndex].options ]; // Load a copy of options
+                        // Update modal inputs with recalled options
+                        Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).forEach((input, i) => {
+                            input.value = spinnerOptions[i];
+                        });
+                        showMessage(`Options from "${savedSpinnerSlots[slotIndex].name}" recalled for Spinner!`, "info");
+                    } else if (savedSpinnerSlots[slotIndex].options.length !== currentCount) {
+                        showMessage(`Cannot recall. Saved slot has ${savedSpinnerSlots[slotIndex].options.length} options, but current spinner has ${currentCount} parts.`, "error");
+                    }
+                    else {
+                        showMessage("No valid options saved in this slot to recall.", "error");
+                    }
+                });
+                spinnerSaveSlotsContainerInModal.appendChild(savedSpinnerButton);
+            });
+        }
+
+        // Event listener for the "Save Current Spinner" button inside the modal
+        saveCurrentSpinnerOptionsBtn.addEventListener('click', () => {
+            if (editingSpinnerPartIndex !== -1) {
+                const currentOptions = Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).map(input => input.value.trim());
+                if (currentOptions.every(option => option !== '') && currentOptions.length === currentCount) {
+                    const saveName = prompt("Name this saved spinner option (e.g., 'Food Choices', 'Activity Ideas'):");
+                    if (saveName) {
+                        const newSavedOption = {
+                            name: saveName.trim(),
+                            options: currentOptions
+                        };
+                        const existingIndex = savedSpinnerSlots.findIndex(slot => slot.name === newSavedOption.name);
+                        if (existingIndex !== -1) {
+                            savedSpinnerSlots[existingIndex] = newSavedOption;
+                            showMessage(`Updated saved options for "${newSavedOption.name}"!`, "info");
+                        } else {
+                            savedSpinnerSlots.push(newSavedOption);
+                            showMessage(`Saved options "${newSavedOption.name}"!`, "info");
+                        }
+                        saveSpinnerSlotsToLocalStorage();
+                        renderSpinnerSaveSlotsInModal(); // Update display of saved slots
+                    } else {
+                        showMessage("Save operation cancelled. Please provide a name.", "info");
+                    }
+                } else {
+                    showMessage(`Please provide a value for all ${currentCount} parts of the spinner before saving.`, "error");
+                }
+            } else {
+                showMessage("No spinner is currently being edited.", "error");
+            }
+        });
+
+
         // Initial calls for cleaner start if cards are initially visible
         if (spinnerCard.classList.contains('card-visible')) {
-            updateSpinnerOptions(); // Ensure spinnerOptions are set for initial display
+            // Initialize spinnerOptions for the new count if needed
+            if (spinnerOptions.length !== currentCount) {
+                spinnerOptions = Array.from({length: currentCount}, (_, i) => `Option ${i + 1}`);
+            }
             updateSpinnerDisplay();
+            loadSavedSpinnerSlots(); // Load saved slots on spinner card display
         }
         if (coinCard.classList.contains('card-visible')) {
             // Initialize coinOptions for the new count if needed
