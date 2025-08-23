@@ -572,7 +572,7 @@
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
                 </button>
-                <div class="flex gap-4">
+                <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveCoinOptionsBtn"
                             class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
@@ -646,7 +646,7 @@
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
                 </button>
-                <div class="flex gap-4">
+                <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveDieOptionsBtn"
                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
@@ -690,7 +690,7 @@
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
                 </button>
-                <div class="flex gap-4">
+                <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveSpinnerOptionsBtn"
                             class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
@@ -988,9 +988,13 @@
 
         savedOptionsModal.addEventListener('click', (event) => {
             if (event.target === savedOptionsModal) {
-                savedOptionsModal.classList.remove('show');
+                closeSavedOptionsModal();
             }
         });
+
+        function closeSavedOptionsModal() {
+            savedOptionsModal.classList.remove('show');
+        }
 
 
         // --- Coin Flip Logic ---
