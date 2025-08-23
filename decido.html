@@ -9,6 +9,7 @@
     <!-- Google Fonts - Inter -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <style>
+        /* Base styles, overridden by theme classes */
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -17,17 +18,229 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f4f8; /* Light blue-gray background */
             margin: 0;
+            transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
         }
-        /* Custom message box styling (instead of alert()) */
+
+        /* --- Theme: Natural & Calm (Default) --- */
+        body.theme-natural {
+            background-color: #f8fbf8; /* Light sage/off-white background */
+            color: #343a40; /* Darker text for contrast */
+        }
+        .theme-natural .decision-selection-card {
+            background: linear-gradient(to bottom right, #ecfccb, #a7f3d0); /* from-lime-50 to-emerald-100 */
+            color: #1e402e; /* Dark green text */
+        }
+        .theme-natural .coin-btn-main { background-color: #fcd34d; color: #78350f; } /* amber-300 */
+        .theme-natural .coin-btn-main:hover { background-color: #fbbf24; } /* amber-400 */
+        .theme-natural .die-btn-main { background-color: #6ee7b7; color: #065f46; } /* emerald-300 */
+        .theme-natural .die-btn-main:hover { background-color: #34d399; } /* emerald-400 */
+        .theme-natural .spinner-btn-main { background-color: #93c5fd; color: #1e3a8a; } /* blue-300 */
+        .theme-natural .spinner-btn-main:hover { background-color: #60a5fa; } /* blue-400 */
+        .theme-natural .options-btn-main { background-color: #d1d5db; color: #374151; } /* gray-300 */
+        .theme-natural .options-btn-main:hover { background-color: #9ca3af; } /* gray-400 */
+
+        .theme-natural .coin-card { background-color: #fffbeb; border-color: #fcd34d; color: #78350f; } /* yellow-50, amber-300 */
+        .theme-natural .die-card { background-color: #ecfdf5; border-color: #6ee7b7; color: #065f46; } /* emerald-50, emerald-300 */
+        .theme-natural .spinner-card { background-color: #eff6ff; border-color: #93c5fd; color: #1e3a8a; } /* blue-50, blue-300 */
+
+        .theme-natural .primary-action-btn { background-color: #84cc16; color: white; } /* lime-500 */
+        .theme-natural .primary-action-btn:hover { background-color: #65a30d; } /* lime-600 */
+        .theme-natural .secondary-action-btn { background-color: #a7f3d0; color: #065f46; } /* emerald-300 */
+        .theme-natural .secondary-action-btn:hover { background-color: #6ee7b7; } /* emerald-400 */
+        .theme-natural .neutral-action-btn { background-color: #d1d5db; color: #374151; } /* gray-300 */
+        .theme-natural .neutral-action-btn:hover { background-color: #9ca3af; } /* gray-400 */
+        .theme-natural .danger-action-btn { background-color: #ef4444; color: white; } /* red-500 */
+        .theme-natural .danger-action-btn:hover { background-color: #dc2626; } /* red-600 */
+
+        /* Modals and inputs */
+        .theme-natural .modal-content { background-color: #ffffff; color: #343a40; }
+        .theme-natural .modal-content label { color: #495057; }
+        .theme-natural .modal-content input[type="text"] { background-color: #f0fdf4; border-color: #d1fae5; color: #1e402e; }
+        .theme-natural .modal-content input[type="text"]:focus { border-color: #84cc16; box-shadow: 0 0 0 2px rgba(132, 204, 22, 0.5); }
+        .theme-natural .modal-arrow-button { background-color: #dcfce7; color: #1e402e; }
+        .theme-natural .modal-arrow-button:hover:not(:disabled) { background-color: #a7f3d0; }
+
+        /* Saved slots in modals */
+        .theme-natural .bg-amber-100 { background-color: #fffbeb; }
+        .theme-natural .text-amber-800 { color: #78350f; }
+        .theme-natural .saved-coin-slot-btn { background-color: #fcd34d; color: #78350f; border-color: #fcd34d; }
+        .theme-natural .saved-coin-slot-btn:hover { background-color: #fbbf24; }
+
+        .theme-natural .bg-emerald-100 { background-color: #ecfdf5; }
+        .theme-natural .text-emerald-800 { color: #065f46; }
+        .theme-natural .saved-die-slot-btn { background-color: #6ee7b7; color: #065f46; border-color: #6ee7b7; }
+        .theme-natural .saved-die-slot-btn:hover { background-color: #34d399; }
+
+        .theme-natural .bg-blue-100 { background-color: #eff6ff; }
+        .theme-natural .text-blue-800 { color: #1e3a8a; }
+        .theme-natural .saved-spinner-slot-btn { background-color: #93c5fd; color: #1e3a8a; border-color: #93c5fd; }
+        .theme-natural .saved-spinner-slot-btn:hover { background-color: #60a5fa; }
+
+        .theme-natural .delete-saved-option-btn { background-color: #ef4444; }
+        .theme-natural .delete-saved-option-btn:hover { background-color: #dc2626; }
+        .theme-natural .saved-slot-btn.delete-mode { border-color: #ef4444; box-shadow: 0 0 0 2px #ef4444; }
+
+        /* Spinner slice colors for Natural & Calm */
+        .theme-natural .spinner-slice-color-0 { fill: #81c784; } /* Light Green */
+        .theme-natural .spinner-slice-color-1 { fill: #a5d6a7; } /* Muted Green */
+        .theme-natural .spinner-slice-color-2 { fill: #fcd34d; } /* Amber */
+        .theme-natural .spinner-slice-color-3 { fill: #ffe082; } /* Light Amber */
+        .theme-natural .spinner-slice-color-4 { fill: #a2d2ff; } /* Light Blue */
+        .theme-natural .spinner-slice-color-5 { fill: #bde0fe; } /* Muted Blue */
+        .theme-natural .spinner-slice-color-6 { fill: #c1e1c1; } /* Pale Green */
+        .theme-natural .spinner-slice-color-7 { fill: #f0f4c3; } /* Very Light Yellow-Green */
+        .theme-natural .spinner-result-text { color: #495057; }
+
+
+        /* --- Theme: Bold & Energetic --- */
+        body.theme-bold {
+            background-color: #1a202c; /* Deep blue-gray background */
+            color: #e2e8f0; /* Light text for contrast */
+        }
+        .theme-bold .decision-selection-card {
+            background: linear-gradient(to bottom right, #6b21a8, #4338ca); /* from-purple-700 to-indigo-800 */
+            color: white;
+        }
+        .theme-bold .coin-btn-main { background-color: #fbbf24; color: #5b21b6; } /* yellow-400, purple-900 */
+        .theme-bold .coin-btn-main:hover { background-color: #facc15; } /* yellow-300 */
+        .theme-bold .die-btn-main { background-color: #60a5fa; color: #3730a3; } /* blue-400, indigo-900 */
+        .theme-bold .die-btn-main:hover { background-color: #3b82f6; } /* blue-300 */
+        .theme-bold .spinner-btn-main { background-color: #e879f9; color: #86198f; } /* fuchsia-400, fuchsia-900 */
+        .theme-bold .spinner-btn-main:hover { background-color: #d946eef; } /* fuchsia-300 */
+        .theme-bold .options-btn-main { background-color: #4a5568; color: #e2e8f0; } /* gray-700 */
+        .theme-bold .options-btn-main:hover { background-color: #2d3748; } /* gray-800 */
+
+        .theme-bold .coin-card { background-color: #451a03; border-color: #d69e2e; color: #fcd34d; } /* yellow-950, yellow-700, yellow-200 */
+        .theme-bold .die-card { background-color: #0c152e; border-color: #3b82f6; color: #93c5fd; } /* blue-950, blue-700, blue-200 */
+        .theme-bold .spinner-card { background-color: #4a0429; border-color: #ec4899; color: #f0abfc; } /* fuchsia-950, fuchsia-700, fuchsia-200 */
+
+        .theme-bold .primary-action-btn { background-color: #6366f1; color: white; } /* indigo-500 */
+        .theme-bold .primary-action-btn:hover { background-color: #4f46e5; } /* indigo-600 */
+        .theme-bold .secondary-action-btn { background-color: #a78bfa; color: white; } /* violet-400 */
+        .theme-bold .secondary-action-btn:hover { background-color: #8b5cf6; } /* violet-500 */
+        .theme-bold .neutral-action-btn { background-color: #4a5568; color: #e2e8f0; } /* gray-700 */
+        .theme-bold .neutral-action-btn:hover { background-color: #2d3748; } /* gray-800 */
+        .theme-bold .danger-action-btn { background-color: #ef4444; color: white; } /* red-500 */
+        .theme-bold .danger-action-btn:hover { background-color: #dc2626; } /* red-600 */
+
+        /* Modals and inputs */
+        .theme-bold .modal-content { background-color: #2d3748; color: #e2e8f0; }
+        .theme-bold .modal-content label { color: #cbd5e0; }
+        .theme-bold .modal-content input[type="text"] { background-color: #4a5568; border-color: #4a5568; color: #e2e8f0; }
+        .theme-bold .modal-content input[type="text"]:focus { border-color: #667eea; box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5); }
+        .theme-bold .modal-arrow-button { background-color: #4a5568; color: #e2e8f0; }
+        .theme-bold .modal-arrow-button:hover:not(:disabled) { background-color: #6a7f8e; }
+
+        /* Saved slots in modals */
+        .theme-bold .bg-amber-100 { background-color: #451a03; }
+        .theme-bold .text-amber-800 { color: #fcd34d; }
+        .theme-bold .saved-coin-slot-btn { background-color: #d69e2e; color: white; border-color: #d69e2e; }
+        .theme-bold .saved-coin-slot-btn:hover { background-color: #e6a73c; }
+
+        .theme-bold .bg-emerald-100 { background-color: #065f46; }
+        .theme-bold .text-emerald-800 { color: #6ee7b7; }
+        .theme-bold .saved-die-slot-btn { background-color: #3b82f6; color: white; border-color: #3b82f6; }
+        .theme-bold .saved-die-slot-btn:hover { background-color: #60a5fa; }
+
+        .theme-bold .bg-blue-100 { background-color: #1e3a8a; }
+        .theme-bold .text-blue-800 { color: #93c5fd; }
+        .theme-bold .saved-spinner-slot-btn { background-color: #ec4899; color: white; border-color: #ec4899; }
+        .theme-bold .saved-spinner-slot-btn:hover { background-color: #f472b6; }
+
+        .theme-bold .delete-saved-option-btn { background-color: #ef4444; }
+        .theme-bold .delete-saved-option-btn:hover { background-color: #dc2626; }
+        .theme-bold .saved-slot-btn.delete-mode { border-color: #ef4444; box-shadow: 0 0 0 2px #ef4444; }
+
+        /* Spinner slice colors for Bold & Energetic */
+        .theme-bold .spinner-slice-color-0 { fill: #FF3366; }
+        .theme-bold .spinner-slice-color-1 { fill: #33CCFF; }
+        .theme-bold .spinner-slice-color-2 { fill: #CCFF33; }
+        .theme-bold .spinner-slice-color-3 { fill: #FFCC33; }
+        .theme-bold .spinner-slice-color-4 { fill: #6633FF; }
+        .theme-bold .spinner-slice-color-5 { fill: #33FFCC; }
+        .theme-bold .spinner-slice-color-6 { fill: #FF6633; }
+        .theme-bold .spinner-slice-color-7 { fill: #CC33FF; }
+        .theme-bold .spinner-result-text { color: white; }
+
+
+        /* --- Theme: Modern & Calm --- */
+        body.theme-modern {
+            background-color: #f0f4f8; /* Light blue-gray background */
+            color: #2d3748; /* Darker text */
+        }
+        .theme-modern .decision-selection-card {
+            background: linear-gradient(to bottom right, #4299e1, #667eea); /* from-blue-500 to-indigo-600 */
+            color: white;
+        }
+        .theme-modern .coin-btn-main { background-color: white; color: #2b6cb0; } /* white, blue-700 */
+        .theme-modern .coin-btn-main:hover { background-color: #ebf8ff; } /* blue-100 */
+        .theme-modern .die-btn-main { background-color: white; color: #4c51bf; } /* white, indigo-700 */
+        .theme-modern .die-btn-main:hover { background-color: #e0e7ff; } /* indigo-100 */
+        .theme-modern .spinner-btn-main { background-color: white; color: #805ad5; } /* white, fuchsia-700 */
+        .theme-modern .spinner-btn-main:hover { background-color: #f0e4ff; } /* fuchsia-100 */
+        .theme-modern .options-btn-main { background-color: #e2e8f0; color: #2d3748; } /* gray-200 */
+        .theme-modern .options-btn-main:hover { background-color: #cbd5e0; } /* gray-300 */
+
+        .theme-modern .coin-card { background-color: #ebf8ff; border-color: #90cdf4; color: #2b6cb0; } /* blue-50, blue-200, blue-800 */
+        .theme-modern .die-card { background-color: #e0e7ff; border-color: #a3bffa; color: #4c51bf; } /* indigo-50, indigo-200, indigo-800 */
+        .theme-modern .spinner-card { background-color: #f0e4ff; border-color: #d6bcfa; color: #805ad5; } /* fuchsia-50, fuchsia-200, fuchsia-800 */
+
+        .theme-modern .primary-action-btn { background-color: #4299e1; color: white; } /* blue-500 */
+        .theme-modern .primary-action-btn:hover { background-color: #3182ce; } /* blue-600 */
+        .theme-modern .secondary-action-btn { background-color: #90cdf4; color: #2b6cb0; } /* blue-300 */
+        .theme-modern .secondary-action-btn:hover { background-color: #63b3ed; } /* blue-400 */
+        .theme-modern .neutral-action-btn { background-color: #cbd5e0; color: #2d3748; } /* gray-300 */
+        .theme-modern .neutral-action-btn:hover { background-color: #a0aec0; } /* gray-400 */
+        .theme-modern .danger-action-btn { background-color: #ef4444; color: white; } /* red-500 */
+        .theme-modern .danger-action-btn:hover { background-color: #dc2626; } /* red-600 */
+
+        /* Modals and inputs */
+        .theme-modern .modal-content { background-color: #ffffff; color: #2d3748; }
+        .theme-modern .modal-content label { color: #4a5568; }
+        .theme-modern .modal-content input[type="text"] { background-color: #e2e8f0; border-color: #cbd5e0; color: #2d3748; }
+        .theme-modern .modal-content input[type="text"]:focus { border-color: #4299e1; box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5); }
+        .theme-modern .modal-arrow-button { background-color: #e2e8f0; color: #2d3748; }
+        .theme-modern .modal-arrow-button:hover:not(:disabled) { background-color: #cbd5e0; }
+
+        /* Saved slots in modals */
+        .theme-modern .bg-amber-100 { background-color: #ebf8ff; }
+        .theme-modern .text-amber-800 { color: #2b6cb0; }
+        .theme-modern .saved-coin-slot-btn { background-color: #90cdf4; color: #2b6cb0; border-color: #90cdf4; }
+        .theme-modern .saved-coin-slot-btn:hover { background-color: #63b3ed; }
+
+        .theme-modern .bg-emerald-100 { background-color: #e0e7ff; }
+        .theme-modern .text-emerald-800 { color: #4c51bf; }
+        .theme-modern .saved-die-slot-btn { background-color: #a3bffa; color: #4c51bf; border-color: #a3bffa; }
+        .theme-modern .saved-die-slot-btn:hover { background-color: #7f9cf7; }
+
+        .theme-modern .bg-blue-100 { background-color: #f0e4ff; }
+        .theme-modern .text-blue-800 { color: #805ad5; }
+        .theme-modern .saved-spinner-slot-btn { background-color: #d6bcfa; color: #805ad5; border-color: #d6bcfa; }
+        .theme-modern .saved-spinner-slot-btn:hover { background-color: #b794f4; }
+
+        .theme-modern .delete-saved-option-btn { background-color: #ef4444; }
+        .theme-modern .delete-saved-option-btn:hover { background-color: #dc2626; }
+        .theme-modern .saved-slot-btn.delete-mode { border-color: #ef4444; box-shadow: 0 0 0 2px #ef4444; }
+
+        /* Spinner slice colors for Modern & Calm */
+        .theme-modern .spinner-slice-color-0 { fill: #A2D2FF; }
+        .theme-modern .spinner-slice-color-1 { fill: #BDE0FE; }
+        .theme-modern .spinner-slice-color-2 { fill: #FFC8DD; }
+        .theme-modern .spinner-slice-color-3 { fill: #FFADAD; }
+        .theme-modern .spinner-slice-color-4 { fill: #CDB4DB; }
+        .theme-modern .spinner-slice-color-5 { fill: #A0C4FF; }
+        .theme-modern .spinner-slice-color-6 { fill: #98F5E1; }
+        .theme-modern .spinner-slice-color-7 { fill: #FFD166; }
+        .theme-modern .spinner-result-text { color: white; }
+
+
+        /* Custom message box styling (instead of alert()) - theme agnostic */
         .message-box {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #4CAF50; /* Green */
-            color: white;
             padding: 15px 25px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -39,6 +252,9 @@
         .message-box.show {
             opacity: 1;
         }
+        .message-box[data-type="success"] { background-color: #10b981; color: white; }
+        .message-box[data-type="error"] { background-color: #ef4444; color: white; }
+        .message-box[data-type="info"] { background-color: #3b82f6; color: white; }
 
         /* Basic animation for coin flip and die roll - placeholder for now */
         .decision-display {
@@ -50,22 +266,19 @@
             flex-wrap: wrap; /* Allow items to wrap on smaller screens */
             font-size: 2.5rem;
             font-weight: 700;
-            color: #2d3748; /* Darker text */
         }
 
-        /* CSS for the coin flip animation */
+        /* Coin specific styles */
         .coin {
             width: 80px;
             height: 80px;
-            background-color: #fcd34d; /* Gold-like color */
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #3b444b;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             position: relative;
             transform-style: preserve-3d;
             animation: none; /* Controlled by JS */
@@ -73,53 +286,36 @@
             border: 2px solid transparent; /* Subtle border for hover */
             transition: border-color 0.2s ease-in-out;
         }
-        .coin:hover {
-            border-color: #d97706; /* Amber-600 on hover */
-        }
-        /* Removed .coin.selected style */
-
-        .coin.flipping {
-            animation: flip 1s ease-out forwards;
-        }
-
+        .coin.flipping { animation: flip 1s ease-out forwards; }
         @keyframes flip {
             0% { transform: rotateX(0deg); }
             50% { transform: rotateX(1800deg); } /* Multiple spins */
             100% { transform: rotateX(3600deg); }
         }
 
-        /* CSS for the die roll animation (simple version) */
+        /* Die specific styles */
         .die {
             width: 80px;
             height: 80px;
-            background-color: #e2e8f0; /* Light gray */
             border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2rem;
             font-weight: 700;
-            color: #2d3748;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             animation: none; /* Controlled by JS */
             cursor: pointer; /* Indicate it's clickable */
             border: 2px solid transparent; /* Subtle border for hover */
             transition: border-color 0.2s ease-in-out;
         }
-        .die:hover {
-            border-color: #3b82f6; /* Blue-500 on hover */
-        }
-
-        .die.rolling {
-            animation: roll 0.5s infinite linear;
-        }
-
+        .die.rolling { animation: roll 0.5s infinite linear; }
         @keyframes roll {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* CSS for the spinner container (now holds canvas and central pointer) */
+        /* Spinner specific styles */
         .spinner-container {
             position: relative;
             width: 250px; /* Larger size for the wheel */
@@ -128,25 +324,21 @@
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             background-color: transparent; /* Background for visibility */
         }
-
         .spinner-canvas {
             position: absolute;
             top: 0;
             left: 0;
-            /* The canvas itself no longer transitions for spinning */
         }
-
-        /* New central spinning pointer */
         .central-spinner-pointer {
             position: absolute;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
-            border-bottom: 20px solid #dc2626; /* Red pointer, pointing down */
+            border-bottom: 20px solid #ef4444; /* Tailwind red-500 pointer, pointing down */
             top: 50%; /* Position in the middle vertically */
             left: 50%; /* Position in the middle horizontally */
             transform: translate(-50%, -100%); /* Adjust to point from center-top */
@@ -154,8 +346,6 @@
             transition: transform 3s ease-out; /* Smooth spin transition */
             z-index: 10; /* Ensure pointer is on top */
         }
-
-        /* Optional: Styles for the result text overlay */
         .spinner-result-text {
             position: absolute;
             top: 50%;
@@ -200,7 +390,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly lighter overlay */
             color: white;
             display: flex;
             justify-content: center;
@@ -216,11 +406,7 @@
             box-sizing: border-box;
             word-break: break-word;
         }
-
-        .splash-screen.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .splash-screen.show { opacity: 1; visibility: visible; }
 
         /* Modal Styles */
         .modal-overlay {
@@ -229,7 +415,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.4); /* Lighter overlay */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -238,15 +424,11 @@
             visibility: hidden;
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: white;
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             width: 90%;
             text-align: center;
@@ -258,8 +440,6 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: #e2e8f0; /* Gray-200 */
-            color: #2d3748; /* Gray-800 */
             font-weight: bold;
             padding: 0.5rem 0.8rem;
             border-radius: 9999px; /* Full rounded */
@@ -269,25 +449,13 @@
             font-size: 1.25rem; /* Larger arrow text */
             line-height: 1; /* Align arrow vertically */
         }
-        .modal-arrow-button:hover:not(:disabled) {
-            background-color: #cbd5e0; /* Gray-300 */
-            transform: translateY(-50%) scale(1.05);
-        }
-        .modal-arrow-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        #prevCoinModalBtn, #prevDieModalBtn, #prevSpinnerModalBtn {
-            left: 1rem;
-        }
-        #nextCoinModalBtn, #nextDieModalBtn, #nextSpinnerModalBtn {
-            right: 1rem;
-        }
+        .modal-arrow-button:hover:not(:disabled) { transform: translateY(-50%) scale(1.05); }
+        .modal-arrow-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        #prevCoinModalBtn, #prevDieModalBtn, #prevSpinnerModalBtn { left: 1rem; }
+        #nextCoinModalBtn, #nextDieModalBtn, #nextSpinnerModalBtn { right: 1rem; }
 
         /* Saved Slot Button Style */
         .saved-slot-btn {
-            background-color: #fcd34d; /* Yellow-300 for coin, adjusted for die */
-            color: #3b444b; /* Dark text */
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 8px;
@@ -299,30 +467,13 @@
             border: none;
             position: relative; /* For delete button positioning */
         }
-        .saved-slot-btn:hover {
-            background-color: #fbbf24; /* Yellow-400 for coin, adjusted for die */
-            transform: translateY(-1px);
-        }
-        .saved-die-slot-btn {
-            background-color: #93c5fd; /* Blue-300 */
-            color: #1e3a8a; /* Dark blue text */
-        }
-        .saved-die-slot-btn:hover {
-            background-color: #60a5fa; /* Blue-400 */
-        }
-        .saved-spinner-slot-btn {
-            background-color: #f0abfc; /* Fuchsia-300 */
-            color: #831843; /* Dark fuchsia text */
-        }
-        .saved-spinner-slot-btn:hover {
-            background-color: #e879f9; /* Fuchsia-400 */
-        }
+        .saved-slot-btn:hover { transform: translateY(-1px); }
 
         .delete-saved-option-btn {
             position: absolute;
             top: 5px;
             right: 5px;
-            background-color: #ef4444; /* Red-500 */
+            background-color: #ef4444; /* Tailwind red-500 */
             color: white;
             border: none;
             border-radius: 50%;
@@ -339,19 +490,43 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             transition: background-color 0.2s;
         }
-        .delete-saved-option-btn:hover {
-            background-color: #dc2626; /* Red-600 */
-        }
+        .delete-saved-option-btn:hover { background-color: #dc2626; }
 
         /* Style for saved options when in delete mode */
-        .saved-slot-btn.delete-mode {
-            border-color: #ef4444; /* Red border */
-            box-shadow: 0 0 0 2px #ef4444; /* Red glow */
-            cursor: pointer;
+        .saved-slot-btn.delete-mode { border-color: #ef4444; box-shadow: 0 0 0 2px #ef4444; cursor: pointer; }
+
+        /* --- Global element styling that changes with theme --- */
+        body.theme-natural .coin { background-color: #fcd34d; color: #78350f; border-color: transparent; }
+        body.theme-natural .coin:hover { border-color: #fbbf24; }
+        body.theme-natural .die { background-color: #6ee7b7; color: #065f46; border-color: transparent; }
+        body.theme-natural .die:hover { border-color: #34d399; }
+        body.theme-natural .decision-display { color: #495057; }
+        body.theme-natural .spinner-result-text { color: #495057; }
+
+        body.theme-bold .coin { background-color: #fcd34d; color: #4c2d0f; border-color: transparent; }
+        body.theme-bold .coin:hover { border-color: #fbbf24; }
+        body.theme-bold .die { background-color: #3b82f6; color: #1e3a8a; border-color: transparent; }
+        body.theme-bold .die:hover { border-color: #60a5fa; }
+        body.theme-bold .decision-display { color: #cbd5e0; }
+        body.theme-bold .spinner-result-text { color: white; }
+
+        body.theme-modern .coin { background-color: #fcd34d; color: #3b444b; border-color: transparent; }
+        body.theme-modern .coin:hover { border-color: #d97706; }
+        body.theme-modern .die { background-color: #e2e8f0; color: #2d3748; border-color: transparent; }
+        body.theme-modern .die:hover { border-color: #3b82f6; }
+        body.theme-modern .decision-display { color: #2d3748; }
+        body.theme-modern .spinner-result-text { color: white; }
+
+        /* General button styles for cards */
+        .card-button {
+            font-bold py-3 px-6 rounded-lg shadow-lg
+            transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+            w-full sm:w-auto text-lg;
         }
+
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
+<body class="theme-natural min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
     <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 lg:p-12 space-y-8">
         <!-- App Header -->
         <header class="text-center mb-8">
@@ -362,34 +537,34 @@
         <!-- Main Card Container -->
         <div id="mainCardContainer">
             <!-- Initial Decision Selection Card -->
-            <section id="decisionSelectionCard" class="card-transition card-visible bg-gradient-to-br from-purple-500 to-indigo-600 p-6 sm:p-8 rounded-xl shadow-lg text-white text-center space-y-6">
+            <section id="decisionSelectionCard" class="card-transition card-visible decision-selection-card p-6 sm:p-8 rounded-xl shadow-lg text-center space-y-6">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">What's your dilemma?</h2>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <button id="showCoinCountBtn"
-                            class="bg-white text-purple-700 hover:bg-purple-100 font-bold py-4 px-8 rounded-lg shadow-md
+                            class="coin-btn-main font-bold py-4 px-8 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    text-xl w-full sm:w-auto">
                         Flip a Coin
                     </button>
                     <button id="showDieCountBtn"
-                            class="bg-white text-indigo-700 hover:bg-indigo-100 font-bold py-4 px-8 rounded-lg shadow-md
+                            class="die-btn-main font-bold py-4 px-8 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    text-xl w-full sm:w-auto">
                         Roll a Die
                     </button>
                     <button id="showSpinnerCountBtn"
-                            class="bg-white text-fuchsia-700 hover:bg-fuchsia-100 font-bold py-4 px-8 rounded-lg shadow-md
+                            class="spinner-btn-main font-bold py-4 px-8 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    text-xl w-full sm:w-auto">
                         Spin a Spinner
                     </button>
                 </div>
                 <div class="flex justify-center mt-6">
-                    <button id="viewSavedOptionsBtn"
-                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                    <button id="optionsBtn"
+                            class="options-btn-main font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
-                        View Saved Options
+                        Options
                     </button>
                 </div>
             </section>
@@ -403,7 +578,7 @@
                     </div>
                     <div class="flex justify-center">
                         <button id="backToMainBtn"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="neutral-action-btn font-bold py-3 px-6 rounded-lg shadow-lg
                                        transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                        w-full sm:w-auto text-lg">
                             Back
@@ -414,18 +589,18 @@
 
             <!-- Coin Flip Section -->
             <section id="coinCard" class="card-transition card-hidden" style="display: none;">
-                <div class="bg-yellow-50 p-6 sm:p-8 rounded-xl shadow-md border border-yellow-200">
-                    <h2 id="coinCardTitle" class="text-3xl font-bold text-yellow-800 mb-6 text-center">Flip a Coin</h2>
+                <div class="coin-card p-6 sm:p-8 rounded-xl shadow-md border">
+                    <h2 id="coinCardTitle" class="text-3xl font-bold mb-6 text-center">Flip a Coin</h2>
 
                     <!-- Coin Display and Result -->
-                    <div id="coinResultDisplay" class="decision-display mb-8 text-yellow-700">
+                    <div id="coinResultDisplay" class="decision-display mb-8">
                         <!-- Coins will be dynamically added here -->
                     </div>
 
                     <!-- Coin Actions -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                         <button id="flipCoinBtn"
-                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Flip
@@ -433,19 +608,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                         <button id="customizeCoinBtn"
-                                class="bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="secondary-action-btn bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Customize
                         </button>
                         <button id="changeCoinCountBtn"
-                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Change Count
                         </button>
                         <button id="returnToMenuFromCoin"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="neutral-action-btn font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Return to Menu
@@ -456,18 +631,18 @@
 
             <!-- Die Roll Section -->
             <section id="dieCard" class="card-transition card-hidden" style="display: none;">
-                <div class="bg-blue-50 p-6 sm:p-8 rounded-xl shadow-md border border-blue-200">
-                    <h2 id="dieCardTitle" class="text-3xl font-bold text-blue-800 mb-6 text-center">Roll a Die</h2>
+                <div class="die-card p-6 sm:p-8 rounded-xl shadow-md border">
+                    <h2 id="dieCardTitle" class="text-3xl font-bold mb-6 text-center">Roll a Die</h2>
 
                     <!-- Die Display and Result -->
-                    <div id="dieResultDisplay" class="decision-display mb-8 text-blue-700">
+                    <div id="dieResultDisplay" class="decision-display mb-8">
                         <!-- Dice will be dynamically added here -->
                     </div>
 
                     <!-- Die Actions -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                         <button id="rollDieBtn"
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Roll
@@ -475,19 +650,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                         <button id="customizeDieBtn"
-                                class="bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="secondary-action-btn bg-emerald-300 hover:bg-emerald-400 text-emerald-800 font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Customize
                         </button>
                         <button id="changeDieCountBtn"
-                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Change Count
                         </button>
                         <button id="returnToMenuFromDie"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="neutral-action-btn font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Return to Menu
@@ -498,18 +673,18 @@
 
             <!-- Spinner Section -->
             <section id="spinnerCard" class="card-transition card-hidden" style="display: none;">
-                <div class="bg-fuchsia-50 p-6 sm:p-8 rounded-xl shadow-md border border-fuchsia-200">
-                    <h2 id="spinnerCardTitle" class="text-3xl font-bold text-fuchsia-800 mb-6 text-center">Spin a Spinner</h2>
+                <div class="spinner-card p-6 sm:p-8 rounded-xl shadow-md border">
+                    <h2 id="spinnerCardTitle" class="text-3xl font-bold mb-6 text-center">Spin a Spinner</h2>
 
                     <!-- Spinner Display and Result -->
-                    <div id="spinnerResultDisplay" class="decision-display mb-8 text-fuchsia-700">
+                    <div id="spinnerResultDisplay" class="decision-display mb-8">
                         <!-- Single spinner will be dynamically added here -->
                     </div>
 
                     <!-- Spinner Actions -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
                         <button id="spinSpinnerBtn"
-                                class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Spin
@@ -517,22 +692,91 @@
                     </div>
                     <div class="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                         <button id="customizeSpinnerBtn"
-                                class="bg-fuchsia-300 hover:bg-fuchsia-400 text-fuchsia-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="secondary-action-btn bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Customize
                         </button>
                         <button id="changeSpinnerCountBtn"
-                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="primary-action-btn bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-00 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
                             Change Parts
                         </button>
                         <button id="returnToMenuFromSpinner"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                class="neutral-action-btn font-bold py-3 px-6 rounded-lg shadow-lg
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    w-full sm:w-auto text-lg">
                             Return to Menu
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Options Card -->
+            <section id="optionsCard" class="card-transition card-hidden" style="display: none;">
+                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md border border-gray-200">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Options</h2>
+
+                    <!-- Theme Selection -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Choose Theme</h3>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button id="themeNaturalBtn"
+                                    class="bg-lime-200 text-lime-800 hover:bg-lime-300 font-bold py-3 px-6 rounded-lg shadow-md
+                                           transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                           w-full sm:w-auto text-lg">
+                                Natural & Calm
+                            </button>
+                            <button id="themeBoldBtn"
+                                    class="bg-purple-200 text-purple-800 hover:bg-purple-300 font-bold py-3 px-6 rounded-lg shadow-md
+                                           transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                           w-full sm:w-auto text-lg">
+                                Bold & Energetic
+                            </button>
+                            <button id="themeModernBtn"
+                                    class="bg-blue-200 text-blue-800 hover:bg-blue-300 font-bold py-3 px-6 rounded-lg shadow-md
+                                           transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                           w-full sm:w-auto text-lg">
+                                Modern & Calm
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Saved Options Section -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Your Saved Options</h3>
+                        <!-- Saved Coins Section -->
+                        <div class="bg-amber-100 p-4 rounded-lg shadow-inner">
+                            <h4 class="text-xl font-bold text-amber-800 mb-3">Saved Coins</h4>
+                            <div id="savedCoinsListOptions" class="space-y-2">
+                                <p class="text-sm text-gray-600">No saved coins yet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Saved Dice Section -->
+                        <div class="bg-emerald-100 p-4 rounded-lg shadow-inner">
+                            <h4 class="text-xl font-bold text-emerald-800 mb-3">Saved Dice</h4>
+                            <div id="savedDiceListOptions" class="space-y-2">
+                                <p class="text-sm text-gray-600">No saved dice yet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Saved Spinners Section -->
+                        <div class="bg-blue-100 p-4 rounded-lg shadow-inner">
+                            <h4 class="text-xl font-bold text-blue-800 mb-3">Saved Spinners</h4>
+                            <div id="savedSpinnersListOptions" class="space-y-2">
+                                <p class="text-sm text-gray-600">No saved spinners yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mt-6">
+                        <button id="backToMainFromOptionsBtn"
+                                class="neutral-action-btn font-bold py-3 px-6 rounded-lg shadow-lg
+                                       transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                       w-full sm:w-auto text-lg">
+                            Back to Menu
                         </button>
                     </div>
                 </div>
@@ -554,28 +798,28 @@
                 <div>
                     <label for="modalCoinOption1" class="block text-gray-700 text-sm font-semibold mb-2">Option 1 (Heads):</label>
                     <input type="text" id="modalCoinOption1"
-                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalCoinOption2" class="block text-gray-700 text-sm font-semibold mb-2">Option 2 (Tails):</label>
                     <input type="text" id="modalCoinOption2"
-                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-gray-100 text-gray-800">
                 </div>
             </div>
             <!-- Saved Coin Options within Modal -->
-            <div class="bg-yellow-100 p-4 rounded-lg mt-6 shadow-inner">
-                <h4 class="text-xl font-bold text-yellow-800 mb-4 text-center">Saved Coin Options</h4>
+            <div class="bg-amber-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-amber-800 mb-4 text-center">Saved Coin Options</h4>
                 <button id="saveCurrentCoinOptionsBtn"
-                        class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
-                               transition duration-200 mb-4">
+                        class="bg-amber-400 hover:bg-amber-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4 mr-2">
                     Save Current Coin
                 </button>
                 <button id="deleteSavedCoinOptionsBtn"
-                        class="bg-red-400 hover:bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                        class="danger-action-btn text-sm font-bold py-2 px-4 rounded-lg shadow-md
                                transition duration-200 mb-4">
                     Delete Saved
                 </button>
-                <div id="coinSaveSlotsContainerInModal" class="space-y-3">
+                <div id="coinSaveSlotsContainerInModal" class="space-y-3 mt-3">
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
@@ -586,12 +830,12 @@
                 </button>
                 <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveCoinOptionsBtn"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                            class="primary-action-btn bg-amber-500 hover:bg-amber-400 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Save
                     </button>
                     <button id="cancelCoinOptionsBtn"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                            class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Cancel
                     </button>
@@ -613,48 +857,48 @@
                 <div>
                     <label for="modalDieOption1" class="block text-gray-700 text-sm font-semibold mb-1">Face 1:</label>
                     <input type="text" id="modalDieOption1"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalDieOption2" class="block text-gray-700 text-sm font-semibold mb-1">Face 2:</label>
                     <input type="text" id="modalDieOption2"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalDieOption3" class="block text-gray-700 text-sm font-semibold mb-1">Face 3:</label>
                     <input type="text" id="modalDieOption3"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalDieOption4" class="block text-gray-700 text-sm font-semibold mb-1">Face 4:</label>
                     <input type="text" id="modalDieOption4"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalDieOption5" class="block text-gray-700 text-sm font-semibold mb-1">Face 5:</label>
                     <input type="text" id="modalDieOption5"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
                 <div>
                     <label for="modalDieOption6" class="block text-gray-700 text-sm font-semibold mb-1">Face 6:</label>
                     <input type="text" id="modalDieOption6"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-gray-100 text-gray-800">
                 </div>
             </div>
             <!-- Saved Die Options within Modal -->
-            <div class="bg-blue-100 p-4 rounded-lg mt-6 shadow-inner">
-                <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">Saved Die Options</h4>
+            <div class="bg-emerald-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-emerald-800 mb-4 text-center">Saved Die Options</h4>
                 <button id="saveCurrentDieOptionsBtn"
-                        class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
-                               transition duration-200 mb-4">
+                        class="bg-emerald-400 hover:bg-emerald-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4 mr-2">
                     Save Current Die
                 </button>
                 <button id="deleteSavedDieOptionsBtn"
-                        class="bg-red-400 hover:bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                        class="danger-action-btn text-sm font-bold py-2 px-4 rounded-lg shadow-md
                                transition duration-200 mb-4">
                     Delete Saved
                 </button>
-                <div id="dieSaveSlotsContainerInModal" class="space-y-3">
+                <div id="dieSaveSlotsContainerInModal" class="space-y-3 mt-3">
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
@@ -665,12 +909,12 @@
                 </button>
                 <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveDieOptionsBtn"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                            class="primary-action-btn bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Save
                     </button>
                     <button id="cancelDieOptionsBtn"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                            class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Cancel
                     </button>
@@ -691,19 +935,19 @@
                 <!-- Dynamically generated input fields for spinner parts -->
             </div>
             <!-- Saved Spinner Options within Modal -->
-            <div class="bg-fuchsia-100 p-4 rounded-lg mt-6 shadow-inner">
-                <h4 class="text-xl font-bold text-fuchsia-800 mb-4 text-center">Saved Spinner Options</h4>
+            <div class="bg-blue-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">Saved Spinner Options</h4>
                 <button id="saveCurrentSpinnerOptionsBtn"
-                        class="bg-fuchsia-400 hover:bg-fuchsia-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
-                               transition duration-200 mb-4">
+                        class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4 mr-2">
                     Save Current Spinner
                 </button>
                 <button id="deleteSavedSpinnerOptionsBtn"
-                        class="bg-red-400 hover:bg-red-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                        class="danger-action-btn text-sm font-bold py-2 px-4 rounded-lg shadow-md
                                transition duration-200 mb-4">
                     Delete Saved
                 </button>
-                <div id="spinnerSaveSlotsContainerInModal" class="space-y-3">
+                <div id="spinnerSaveSlotsContainerInModal" class="space-y-3 mt-3">
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
@@ -714,12 +958,12 @@
                 </button>
                 <div class="flex justify-center gap-4 flex-grow"> <!-- Added flex-grow to center buttons -->
                     <button id="saveSpinnerOptionsBtn"
-                            class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                            class="primary-action-btn bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Save
                     </button>
                     <button id="cancelSpinnerOptionsBtn"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                            class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
                         Cancel
                     </button>
@@ -732,67 +976,26 @@
         </div>
     </div>
 
-    <!-- Saved Options Central Modal -->
-    <div id="savedOptionsModal" class="modal-overlay">
-        <div class="modal-content max-w-lg">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">Your Saved Options</h3>
-
-            <div class="space-y-6">
-                <!-- Saved Coins Section -->
-                <div class="bg-yellow-100 p-4 rounded-lg shadow-inner">
-                    <h4 class="text-xl font-bold text-yellow-800 mb-3">Saved Coins</h4>
-                    <div id="savedCoinsList" class="space-y-2">
-                        <p class="text-sm text-gray-600">No saved coins yet.</p>
-                    </div>
-                </div>
-
-                <!-- Saved Dice Section -->
-                <div class="bg-blue-100 p-4 rounded-lg shadow-inner">
-                    <h4 class="text-xl font-bold text-blue-800 mb-3">Saved Dice</h4>
-                    <div id="savedDiceList" class="space-y-2">
-                        <p class="text-sm text-gray-600">No saved dice yet.</p>
-                    </div>
-                </div>
-
-                <!-- Saved Spinners Section -->
-                <div class="bg-fuchsia-100 p-4 rounded-lg shadow-inner">
-                    <h4 class="text-xl font-bold text-fuchsia-800 mb-3">Saved Spinners</h4>
-                    <div id="savedSpinnersList" class="space-y-2">
-                        <p class="text-sm text-gray-600">No saved spinners yet.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-center mt-6">
-                <button id="closeSavedOptionsModalBtn"
-                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
-                               transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Coin Action Choice Modal -->
     <div id="coinActionChoiceModal" class="modal-overlay">
         <div class="modal-content">
             <h3 id="coinActionChoiceTitle" class="text-2xl font-bold text-gray-800 mb-4">What do you want to do with this coin?</h3>
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 <button id="flipSavedCoinBtn"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                        class="primary-action-btn bg-amber-500 hover:bg-amber-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                w-full sm:w-auto text-lg">
                     Flip Coin
                 </button>
                 <button id="spinSavedCoinAsSpinnerBtn"
-                        class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                        class="primary-action-btn bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                w-full sm:w-auto text-lg">
                     Spin as 2-Part Spinner
                 </button>
             </div>
             <button id="cancelCoinActionBtn"
-                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                    class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
                            transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 mt-4">
                 Cancel
             </button>
@@ -805,23 +1008,43 @@
             <h3 id="dieActionChoiceTitle" class="text-2xl font-bold text-gray-800 mb-4">What do you want to do with this die?</h3>
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
                 <button id="rollSavedDieBtn"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                        class="primary-action-btn bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                w-full sm:w-auto text-lg">
                     Roll Die
                 </button>
                 <button id="spinSavedDieAsSpinnerBtn"
-                        class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                        class="primary-action-btn bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                w-full sm:w-auto text-lg">
                     Spin as 6-Part Spinner
                 </button>
             </div>
             <button id="cancelDieActionBtn"
-                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                    class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
                            transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 mt-4">
                 Cancel
             </button>
+        </div>
+    </div>
+
+    <!-- Generic Confirmation Modal -->
+    <div id="confirmationModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="confirmationModalTitle" class="text-2xl font-bold text-gray-800 mb-4">Confirm Action</h3>
+            <p id="confirmationModalMessage" class="text-gray-600 mb-6">Are you sure you want to proceed with this action?</p>
+            <div class="flex justify-center gap-4">
+                <button id="confirmActionBtn"
+                        class="danger-action-btn font-bold py-2 px-5 rounded-lg shadow-md
+                               transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                    Confirm
+                </button>
+                <button id="cancelActionBtn"
+                        class="neutral-action-btn font-bold py-2 px-5 rounded-lg shadow-md
+                               transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
 
@@ -830,14 +1053,8 @@
         function showMessage(message, type = 'success', duration = 3000) {
             const msgBox = document.getElementById('messageBox');
             msgBox.textContent = message;
-            msgBox.className = 'message-box show'; // Reset classes and show
-            if (type === 'error') {
-                msgBox.style.backgroundColor = '#f44336'; // Red for error
-            } else if (type === 'info') {
-                msgBox.style.backgroundColor = '#2196F3'; // Blue for info
-            } else {
-                msgBox.style.backgroundColor = '#4CAF50'; // Green for success
-            }
+            msgBox.setAttribute('data-type', type); // Set data-type for styling
+            msgBox.classList.add('show');
 
             setTimeout(() => {
                 msgBox.classList.remove('show');
@@ -859,6 +1076,44 @@
             }, 1500); // Display result for 1.5 seconds
         }
 
+        // --- Generic Confirmation Modal Logic ---
+        const confirmationModal = document.getElementById('confirmationModal');
+        const confirmationModalTitle = document.getElementById('confirmationModalTitle');
+        const confirmationModalMessage = document.getElementById('confirmationModalMessage');
+        const confirmActionBtn = document.getElementById('confirmActionBtn');
+        const cancelActionBtn = document.getElementById('cancelActionBtn');
+
+        let onConfirmCallbackGlobal = null; // Stores the callback function for confirmation
+
+        function showConfirmationModal(title, message, onConfirm) {
+            confirmationModalTitle.textContent = title;
+            confirmationModalMessage.textContent = message;
+            onConfirmCallbackGlobal = onConfirm;
+            confirmationModal.classList.add('show');
+        }
+
+        function hideConfirmationModal() {
+            confirmationModal.classList.remove('show');
+            onConfirmCallbackGlobal = null;
+        }
+
+        confirmActionBtn.addEventListener('click', () => {
+            if (onConfirmCallbackGlobal) {
+                onConfirmCallbackGlobal();
+            }
+            hideConfirmationModal();
+        });
+
+        cancelActionBtn.addEventListener('click', () => {
+            hideConfirmationModal();
+        });
+
+        confirmationModal.addEventListener('click', (event) => {
+            if (event.target === confirmationModal) {
+                hideConfirmationModal();
+            }
+        });
+
 
         // --- Card Visibility Management ---
         const decisionSelectionCard = document.getElementById('decisionSelectionCard');
@@ -866,20 +1121,20 @@
         const coinCard = document.getElementById('coinCard');
         const dieCard = document.getElementById('dieCard');
         const spinnerCard = document.getElementById('spinnerCard');
+        const optionsCard = document.getElementById('optionsCard'); // New Options Card
 
         const showCoinCountBtn = document.getElementById('showCoinCountBtn');
         const showDieCountBtn = document.getElementById('showDieCountBtn');
         const showSpinnerCountBtn = document.getElementById('showSpinnerCountBtn');
+        const optionsBtn = document.getElementById('optionsBtn'); // New Options button
         const backToMainBtn = document.getElementById('backToMainBtn');
+        const backToMainFromOptionsBtn = document.getElementById('backToMainFromOptionsBtn'); // New Back button for Options
         const countSelectionTitle = document.getElementById('countSelectionTitle');
         const countButtonsContainer = countSelectionCard.querySelector('.flex.justify-center.gap-4.mb-6');
 
-        const viewSavedOptionsBtn = document.getElementById('viewSavedOptionsBtn');
-        const savedOptionsModal = document.getElementById('savedOptionsModal');
-        const closeSavedOptionsModalBtn = document.getElementById('closeSavedOptionsModalBtn');
-        const savedCoinsList = document.getElementById('savedCoinsList');
-        const savedDiceList = document.getElementById('savedDiceList'); // Corrected ID to the one in the central modal
-        const savedSpinnersList = document.getElementById('savedSpinnersList');
+        const savedCoinsListOptions = document.getElementById('savedCoinsListOptions'); // For Options Card
+        const savedDiceListOptions = document.getElementById('savedDiceListOptions');   // For Options Card
+        const savedSpinnersListOptions = document.getElementById('savedSpinnersListOptions'); // For Options Card
 
 
         const returnToMenuFromCoin = document.getElementById('returnToMenuFromCoin');
@@ -901,7 +1156,7 @@
 
         function showCard(cardToShow, type = '') {
             // First, process all cards to be hidden
-            [decisionSelectionCard, countSelectionCard, coinCard, dieCard, spinnerCard].forEach(card => {
+            [decisionSelectionCard, countSelectionCard, coinCard, dieCard, spinnerCard, optionsCard].forEach(card => {
                 if (card !== cardToShow) {
                     card.classList.remove('card-visible');
                     card.classList.add('card-hidden');
@@ -925,15 +1180,20 @@
             if (cardToShow === countSelectionCard) {
                 currentDecisionType = type;
                 let countOptionsHtml = '';
-                if (type === 'coin' || type === 'die') {
-                    countSelectionTitle.textContent = `How many ${type === 'coin' ? 'coins' : 'dice'}?`;
-                    [1, 2, 3].forEach(c => {
-                        countOptionsHtml += `<button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
+                if (type === 'coin') {
+                    countSelectionTitle.textContent = `How many coins?`;
+                    [1, 2, 3, 4, 5].forEach(c => {
+                        countOptionsHtml += `<button class="count-btn primary-action-btn font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
+                    });
+                } else if (type === 'die') {
+                    countSelectionTitle.textContent = `How many dice?`;
+                    [1, 2, 3, 4, 5, 6, 7].forEach(c => {
+                        countOptionsHtml += `<button class="count-btn primary-action-btn font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
                     });
                 } else if (type === 'spinner') {
                     countSelectionTitle.textContent = `How many parts of the pie chart?`;
                     [2, 3, 4, 5, 6, 8].forEach(c => {
-                        countOptionsHtml += `<button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
+                        countOptionsHtml += `<button class="count-btn primary-action-btn font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
                     });
                 }
                 countButtonsContainer.innerHTML = countOptionsHtml;
@@ -942,19 +1202,23 @@
                     button.addEventListener('click', handleCountButtonClick);
                 });
             } else if (cardToShow === coinCard) {
-                // Initialize coinOptions for the new count if needed
-                if (coinOptions.length !== currentCount) {
-                    coinOptions = Array.from({length: currentCount}, () => ({heads: "Heads", tails: "Tails"}));
-                }
-                updateCoinDisplay(); // Ensure display and title are updated when coinCard is shown
-                loadSavedCoinSlots(); // Load saved slots on coin card display
+                // Create a new coinOptions array of the correct size
+                const newCoinOptions = Array.from({ length: currentCount }, (_, i) => {
+                    // If an option existed at this index previously, use it. Otherwise, use default.
+                    return coinOptions[i] ? { ...coinOptions[i] } : { heads: "Heads", tails: "Tails" };
+                });
+                coinOptions = newCoinOptions; // Update the global coinOptions
+                updateCoinDisplay();
+                loadSavedCoinSlots();
             } else if (cardToShow === dieCard) {
-                // Initialize dieOptions for the new count if needed
-                if (dieOptions.length !== currentCount) {
-                    dieOptions = Array.from({length: currentCount}, () => ({faces: ["1", "2", "3", "4", "5", "6"]}));
-                }
-                updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
-                loadSavedDieSlots(); // Load saved slots on die card display
+                // Create a new dieOptions array of the correct size
+                const newDieOptions = Array.from({ length: currentCount }, (_, i) => {
+                    // If an option existed at this index previously, use it. Otherwise, use default.
+                    return dieOptions[i] ? { ...dieOptions[i] } : { faces: ["1", "2", "3", "4", "5", "6"] };
+                });
+                dieOptions = newDieOptions; // Update the global dieOptions
+                updateDieDisplay();
+                loadSavedDieSlots();
             } else if (cardToShow === spinnerCard) {
                 // Initialize spinnerOptions for the new count if needed
                 if (spinnerOptions.length !== currentCount) {
@@ -962,6 +1226,17 @@
                 }
                 updateSpinnerDisplay(); // Ensure display and title are updated when spinnerCard is shown
                 loadSavedSpinnerSlots(); // Load saved slots on spinner card display
+            } else if (cardToShow === optionsCard) {
+                renderSavedCoinsListOptions();
+                renderSavedDiceListOptions();
+                renderSavedSpinnersListOptions();
+                // Highlight current theme
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.remove('border-2', 'border-current');
+                    if (btn.id === `theme${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)}Btn`) {
+                        btn.classList.add('border-2', 'border-current');
+                    }
+                });
             }
         }
 
@@ -982,7 +1257,9 @@
         showCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
         showDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
         showSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
+        optionsBtn.addEventListener('click', () => showCard(optionsCard)); // Event listener for new Options button
         backToMainBtn.addEventListener('click', () => showCard(decisionSelectionCard));
+        backToMainFromOptionsBtn.addEventListener('click', () => showCard(decisionSelectionCard)); // Back from Options
 
         // Event listeners for post-decision actions
         returnToMenuFromCoin.addEventListener('click', () => showCard(decisionSelectionCard));
@@ -993,30 +1270,45 @@
         changeDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
         changeSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
 
-        // --- Saved Options Central Modal Logic ---
-        viewSavedOptionsBtn.addEventListener('click', () => {
-            loadSavedCoinSlots();
-            loadSavedDieSlots();
-            loadSavedSpinnerSlots();
-            renderSavedCoinsList();
-            renderSavedDiceList();
-            renderSavedSpinnersList();
-            savedOptionsModal.classList.add('show');
-        });
 
-        closeSavedOptionsModalBtn.addEventListener('click', () => {
-            savedOptionsModal.classList.remove('show');
-        });
+        // --- Theme Management ---
+        const themeNaturalBtn = document.getElementById('themeNaturalBtn');
+        const themeBoldBtn = document.getElementById('themeBoldBtn');
+        const themeModernBtn = document.getElementById('themeModernBtn');
+        let currentTheme = localStorage.getItem('decidoTheme') || 'natural'; // Default theme
 
-        savedOptionsModal.addEventListener('click', (event) => {
-            if (event.target === savedOptionsModal) {
-                closeSavedOptionsModal();
+        function applyTheme(themeName) {
+            document.body.classList.remove('theme-natural', 'theme-bold', 'theme-modern');
+            document.body.classList.add(`theme-${themeName}`);
+            currentTheme = themeName;
+            localStorage.setItem('decidoTheme', themeName);
+            // Re-render spinner to apply new colors
+            if (spinnerCard.classList.contains('card-visible')) {
+                updateSpinnerDisplay();
             }
-        });
-
-        function closeSavedOptionsModal() {
-            savedOptionsModal.classList.remove('show');
+            // Update button highlights in options card if visible
+            if (optionsCard.classList.contains('card-visible')) {
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.remove('border-2', 'border-current');
+                    if (btn.id === `theme${themeName.charAt(0).toUpperCase() + themeName.slice(1)}Btn`) {
+                        btn.classList.add('border-2', 'border-current');
+                    }
+                });
+            }
+            // Re-render saved lists to apply new button styles
+            renderSavedCoinsListOptions();
+            renderSavedDiceListOptions();
+            renderSavedSpinnersListOptions();
         }
+
+        themeNaturalBtn.addEventListener('click', () => applyTheme('natural'));
+        themeBoldBtn.addEventListener('click', () => applyTheme('bold'));
+        themeModernBtn.addEventListener('click', () => applyTheme('modern'));
+
+        // Apply theme on initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(currentTheme);
+        });
 
 
         // --- Coin Flip Logic ---
@@ -1035,20 +1327,15 @@
                 coinDiv.textContent = results[i] || '?'; // Show result or '?'
                 coinDiv.dataset.index = i; // Store index for animation
                 coinDiv.addEventListener('click', () => openCoinEditModal(i)); // Add click listener
-                // Removed selected class logic
                 coinResultDisplay.appendChild(coinDiv);
             }
             // Update the title based on currentCount
             coinCardTitle.textContent = currentCount > 1 ? 'Flip Coins' : 'Flip a Coin';
-            // Removed updateCoinNavButtons()
         }
-
-        // Removed updateCoinNavButtons function
 
         // Event listener for Flip Coin button
         flipCoinBtn.addEventListener('click', () => {
             const coinElements = coinResultDisplay.querySelectorAll('.coin');
-            // coinPostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             flipCoinBtn.disabled = true; // Disable button during animation
             customizeCoinBtn.disabled = true; // Disable customize button during flip
             changeCoinCountBtn.disabled = true; // Disable change count button
@@ -1073,7 +1360,6 @@
                         returnToMenuFromCoin.disabled = false; // Re-enable return to menu button
                         // Show splash screen with combined results
                         showResultSplashScreen(results.join(', '), () => {
-                            // coinPostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                         });
                     }
                 }, 1000 + (index * 100)); // Stagger animations slightly
@@ -1212,7 +1498,7 @@
 
             savedCoinSlots.forEach((slot, index) => {
                 const savedCoinButton = document.createElement('button');
-                savedCoinButton.classList.add('saved-slot-btn', 'text-sm', 'font-medium', 'text-yellow-700', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-yellow-200', 'w-full', 'mb-2');
+                savedCoinButton.classList.add('saved-slot-btn', 'saved-coin-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'w-full', 'mb-2');
                 savedCoinButton.textContent = `${slot.name}: ${slot.options.heads} / ${slot.options.tails}`;
                 savedCoinButton.dataset.slotIndex = index;
 
@@ -1220,12 +1506,16 @@
                     savedCoinButton.classList.add('delete-mode');
                     savedCoinButton.addEventListener('click', (event) => {
                         const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                        if (confirm(`Are you sure you want to delete "${savedCoinSlots[idxToDelete].name}"?`)) {
-                            savedCoinSlots.splice(idxToDelete, 1);
-                            saveCoinSlotsToLocalStorage();
-                            renderCoinSaveSlotsInModal(); // Re-render the list
-                            showMessage("Saved coin option deleted!", "info");
-                        }
+                        showConfirmationModal(
+                            "Delete Saved Coin",
+                            `Are you sure you want to delete "${savedCoinSlots[idxToDelete].name}"?`,
+                            () => {
+                                savedCoinSlots.splice(idxToDelete, 1);
+                                saveCoinSlotsToLocalStorage();
+                                renderCoinSaveSlotsInModal(); // Re-render the list
+                                showMessage("Saved coin option deleted!", "info");
+                            }
+                        );
                     });
                 } else {
                     savedCoinButton.addEventListener('click', (event) => {
@@ -1248,26 +1538,32 @@
             document.getElementById('deleteSavedCoinOptionsBtn').textContent = isDeletingSavedCoin ? 'Cancel Delete' : 'Delete Saved';
         }
 
-        // Function to render the saved coins list in the central saved options modal
-        function renderSavedCoinsList() {
-            savedCoinsList.innerHTML = '';
+        // Function to render the saved coins list in the Options Card
+        function renderSavedCoinsListOptions() {
+            savedCoinsListOptions.innerHTML = '';
             if (savedCoinSlots.length === 0) {
-                savedCoinsList.innerHTML = '<p class="text-sm text-gray-600">No saved coins yet.</p>';
+                savedCoinsListOptions.innerHTML = '<p class="text-sm text-gray-600">No saved coins yet.</p>';
             }
             savedCoinSlots.forEach((slot, index) => {
                 const slotWrapper = document.createElement('div');
                 slotWrapper.classList.add('flex', 'items-center', 'justify-between', 'gap-2', 'w-full', 'mb-2');
 
                 const savedCoinButton = document.createElement('button');
-                savedCoinButton.classList.add('saved-slot-btn', 'text-sm', 'font-medium', 'text-yellow-700', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-yellow-200', 'flex-grow');
+                savedCoinButton.classList.add('saved-slot-btn', 'saved-coin-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'flex-grow');
                 savedCoinButton.textContent = `${slot.name}: ${slot.options.heads} / ${slot.options.tails}`;
                 savedCoinButton.dataset.slotIndex = index;
                 savedCoinButton.addEventListener('click', () => {
                     // Store saved options temporarily for action choice modal
                     tempSavedCoinOptions = { ...slot.options };
-                    closeSavedOptionsModal();
-                    coinActionChoiceTitle.textContent = `What to do with "${slot.name}"?`;
-                    coinActionChoiceModal.classList.add('show');
+                    showCard(decisionSelectionCard); // Return to main menu
+                    setTimeout(() => {
+                        showCard(coinCard); // Go to coin card
+                        currentCount = 1; // Set count to 1 for saved coin
+                        coinOptions = [{ ...tempSavedCoinOptions }]; // Load saved options into the first coin
+                        updateCoinDisplay();
+                        // Trigger flip after a short delay to ensure card is rendered
+                        setTimeout(() => flipCoinBtn.click(), 100);
+                    }, 500); // Small delay to allow card transition
                 });
                 slotWrapper.appendChild(savedCoinButton);
 
@@ -1277,104 +1573,20 @@
                 deleteButton.dataset.slotIndex = index;
                 deleteButton.addEventListener('click', (event) => {
                     const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                    if (confirm(`Are you sure you want to delete "${savedCoinSlots[idxToDelete].name}"?`)) {
-                        savedCoinSlots.splice(idxToDelete, 1);
-                        saveCoinSlotsToLocalStorage();
-                        renderSavedCoinsList(); // Re-render the list
-                        showMessage("Saved coin option deleted!", "info");
-                    }
-                });
-                savedCoinsList.appendChild(slotWrapper);
-            });
-        }
-
-
-        // Event listener for the "Save Current Coin" button inside the modal
-        saveCurrentCoinOptionsBtn.addEventListener('click', () => {
-            if (editingCoinIndex !== -1) {
-                const opt1 = modalCoinOption1Input.value.trim();
-                const opt2 = modalCoinOption2Input.value.trim();
-                if (opt1 && opt2) {
-                    const saveName = prompt("Name this saved coin option (e.g., 'Yes/No', 'Coffee/Tea'):");
-                    if (saveName) {
-                        const newSavedOption = {
-                            name: saveName.trim(),
-                            options: { heads: opt1, tails: opt2 }
-                        };
-                        // Check if name already exists and replace, or add new
-                        const existingIndex = savedCoinSlots.findIndex(slot => slot.name === newSavedOption.name);
-                        if (existingIndex !== -1) {
-                            savedCoinSlots[existingIndex] = newSavedOption;
-                            showMessage(`Updated saved options for "${newSavedOption.name}"!`, "info");
-                        } else {
-                            savedCoinSlots.push(newSavedOption);
-                            showMessage(`Saved options "${newSavedOption.name}"!`, "info");
+                    showConfirmationModal(
+                        "Delete Saved Coin",
+                        `Are you sure you want to delete "${savedCoinSlots[idxToDelete].name}"?`,
+                        () => {
+                            savedCoinSlots.splice(idxToDelete, 1);
+                            saveCoinSlotsToLocalStorage();
+                            renderSavedCoinsListOptions(); // Re-render the list in Options card
+                            showMessage("Saved coin option deleted!", "info");
                         }
-                        saveCoinSlotsToLocalStorage();
-                        renderCoinSaveSlotsInModal(); // Update display of saved slots
-                    } else {
-                        showMessage("Save operation cancelled. Please provide a name.", "info");
-                    }
-                } else {
-                    showMessage("Please provide both options for the coin before saving.", "error");
-                }
-            } else {
-                showMessage("No coin is currently being edited.", "error");
-            }
-        });
-
-        // Event listener for the new "Delete Saved" button in the coin modal
-        document.getElementById('deleteSavedCoinOptionsBtn').addEventListener('click', () => {
-            isDeletingSavedCoin = !isDeletingSavedCoin; // Toggle delete mode
-            renderCoinSaveSlotsInModal(); // Re-render to show/hide highlights
-        });
-
-
-        // --- Coin Action Choice Modal Logic ---
-        const coinActionChoiceModal = document.getElementById('coinActionChoiceModal');
-        const coinActionChoiceTitle = document.getElementById('coinActionChoiceTitle');
-        const flipSavedCoinBtn = document.getElementById('flipSavedCoinBtn');
-        const spinSavedCoinAsSpinnerBtn = document.getElementById('spinSavedCoinAsSpinnerBtn');
-        const cancelCoinActionBtn = document.getElementById('cancelCoinActionBtn');
-        let tempSavedCoinOptions = null; // Temporarily store options from clicked saved slot
-
-        flipSavedCoinBtn.addEventListener('click', () => {
-            if (tempSavedCoinOptions) {
-                currentCount = 1; // Always flip one coin for this action
-                coinOptions = [{ ...tempSavedCoinOptions }]; // Load saved options into the first coin
-                closeCoinActionChoiceModal();
-                showCard(coinCard);
-                // Trigger flip after a short delay to ensure card is rendered
-                setTimeout(() => flipCoinBtn.click(), 100);
-            }
-        });
-
-        spinSavedCoinAsSpinnerBtn.addEventListener('click', () => {
-            if (tempSavedCoinOptions) {
-                currentCount = 2; // Fixed to 2 parts for coin as spinner
-                spinnerOptions = [tempSavedCoinOptions.heads, tempSavedCoinOptions.tails]; // Load saved options as spinner parts
-                closeCoinActionChoiceModal();
-                showCard(spinnerCard);
-                // Trigger spin after a short delay
-                setTimeout(() => spinSpinnerBtn.click(), 100);
-            }
-        });
-
-        cancelCoinActionBtn.addEventListener('click', () => {
-            closeCoinActionChoiceModal();
-            savedOptionsModal.classList.add('show'); // Return to saved options modal
-        });
-
-        coinActionChoiceModal.addEventListener('click', (event) => {
-            if (event.target === coinActionChoiceModal) {
-                closeCoinActionChoiceModal();
-                savedOptionsModal.classList.add('show'); // Return to saved options modal
-            }
-        });
-
-        function closeCoinActionChoiceModal() {
-            coinActionChoiceModal.classList.remove('show');
-            tempSavedCoinOptions = null;
+                    );
+                });
+                slotWrapper.appendChild(deleteButton);
+                savedCoinsListOptions.appendChild(slotWrapper);
+            });
         }
 
 
@@ -1403,7 +1615,6 @@
         // Event listener for Roll Die button
         rollDieBtn.addEventListener('click', () => {
             const dieElements = dieResultDisplay.querySelectorAll('.die');
-            // diePostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             rollDieBtn.disabled = true; // Disable button during animation
             customizeDieBtn.disabled = true; // Disable customize button during roll
             changeDieCountBtn.disabled = true; // Disable change count button
@@ -1428,7 +1639,6 @@
                         returnToMenuFromDie.disabled = false; // Re-enable return to menu button
                         // Show splash screen with combined results
                         showResultSplashScreen(results.join(', '), () => {
-                            // diePostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                         });
                     }
                 }, 500 + (index * 100)); // Stagger animations slightly
@@ -1565,7 +1775,7 @@
 
             savedDieSlots.forEach((slot, index) => {
                 const savedDieButton = document.createElement('button');
-                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-blue-200', 'w-full', 'mb-2');
+                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'w-full', 'mb-2');
                 savedDieButton.textContent = `${slot.name}: ${slot.options.faces.join(', ')}`;
                 savedDieButton.dataset.slotIndex = index;
 
@@ -1573,12 +1783,16 @@
                     savedDieButton.classList.add('delete-mode');
                     savedDieButton.addEventListener('click', (event) => {
                         const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                        if (confirm(`Are you sure you want to delete "${savedDieSlots[idxToDelete].name}"?`)) {
-                            savedDieSlots.splice(idxToDelete, 1);
-                            saveDieSlotsToLocalStorage();
-                            renderDieSaveSlotsInModal(); // Re-render the list
-                            showMessage("Saved die option deleted!", "info");
-                        }
+                        showConfirmationModal(
+                            "Delete Saved Die",
+                            `Are you sure you want to delete "${savedDieSlots[idxToDelete].name}"?`,
+                            () => {
+                                savedDieSlots.splice(idxToDelete, 1);
+                                saveDieSlotsToLocalStorage();
+                                renderDieSaveSlotsInModal(); // Re-render the list
+                                showMessage("Saved die option deleted!", "info");
+                            }
+                        );
                     });
                 } else {
                     savedDieButton.addEventListener('click', (event) => {
@@ -1600,26 +1814,32 @@
             document.getElementById('deleteSavedDieOptionsBtn').textContent = isDeletingSavedDie ? 'Cancel Delete' : 'Delete Saved';
         }
 
-        // Function to render the saved dice list in the central saved options modal
-        function renderSavedDiceList() {
-            savedDiceList.innerHTML = '';
+        // Function to render the saved dice list in the Options Card
+        function renderSavedDiceListOptions() {
+            savedDiceListOptions.innerHTML = '';
             if (savedDieSlots.length === 0) {
-                savedDiceList.innerHTML = '<p class="text-sm text-gray-600">No saved dice yet.</p>';
+                savedDiceListOptions.innerHTML = '<p class="text-sm text-gray-600">No saved dice yet.</p>';
             }
             savedDieSlots.forEach((slot, index) => {
                 const slotWrapper = document.createElement('div');
                 slotWrapper.classList.add('flex', 'items-center', 'justify-between', 'gap-2', 'w-full', 'mb-2');
 
                 const savedDieButton = document.createElement('button');
-                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-blue-200', 'flex-grow');
+                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'flex-grow');
                 savedDieButton.textContent = `${slot.name}: ${slot.options.faces.join(', ')}`;
                 savedDieButton.dataset.slotIndex = index;
                 savedDieButton.addEventListener('click', () => {
                     // Store saved options temporarily for action choice modal
                     tempSavedDieOptions = { ...slot.options };
-                    closeSavedOptionsModal();
-                    dieActionChoiceTitle.textContent = `What to do with "${slot.name}"?`;
-                    dieActionChoiceModal.classList.add('show');
+                    showCard(decisionSelectionCard); // Return to main menu
+                    setTimeout(() => {
+                        showCard(dieCard); // Go to die card
+                        currentCount = 1; // Set count to 1 for saved die
+                        dieOptions = [{ ...tempSavedDieOptions }]; // Load saved options into the first die
+                        updateDieDisplay();
+                        // Trigger roll after a short delay to ensure card is rendered
+                        setTimeout(() => rollDieBtn.click(), 100);
+                    }, 500); // Small delay to allow card transition
                 });
                 slotWrapper.appendChild(savedDieButton);
 
@@ -1629,101 +1849,20 @@
                 deleteButton.dataset.slotIndex = index;
                 deleteButton.addEventListener('click', (event) => {
                     const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                    if (confirm(`Are you sure you want to delete "${savedDieSlots[idxToDelete].name}"?`)) {
-                        savedDieSlots.splice(idxToDelete, 1);
-                        saveDieSlotsToLocalStorage();
-                        renderSavedDiceList(); // Re-render the list
-                        showMessage("Saved die option deleted!", "info");
-                    }
-                });
-                savedDiceList.appendChild(slotWrapper);
-            });
-        }
-
-        // Event listener for the "Save Current Die" button inside the modal
-        saveCurrentDieOptionsBtn.addEventListener('click', () => {
-            if (editingDieIndex !== -1) {
-                const currentFaces = modalDieOptionInputs.map(input => input.value.trim());
-                if (currentFaces.every(face => face !== '')) {
-                    const saveName = prompt("Name this saved die option (e.g., 'D&D', 'Yes/No/Maybe'):");
-                    if (saveName) {
-                        const newSavedOption = {
-                            name: saveName.trim(),
-                            options: { faces: currentFaces }
-                        };
-                        const existingIndex = savedDieSlots.findIndex(slot => slot.name === newSavedOption.name);
-                        if (existingIndex !== -1) {
-                            savedDieSlots[existingIndex] = newSavedOption;
-                            showMessage(`Updated saved options for "${newSavedOption.name}"!`, "info");
-                        } else {
-                            savedDieSlots.push(newSavedOption);
-                            showMessage(`Saved options "${newSavedOption.name}"!`, "info");
+                    showConfirmationModal(
+                        "Delete Saved Die",
+                        `Are you sure you want to delete "${savedDieSlots[idxToDelete].name}"?`,
+                        () => {
+                            savedDieSlots.splice(idxToDelete, 1);
+                            saveDieSlotsToLocalStorage();
+                            renderSavedDiceListOptions(); // Re-render the list in Options card
+                            showMessage("Saved die option deleted!", "info");
                         }
-                        saveDieSlotsToLocalStorage();
-                        renderDieSaveSlotsInModal();
-                    } else {
-                        showMessage("Save operation cancelled. Please provide a name.", "info");
-                    }
-                } else {
-                    showMessage("Please provide a value for all 6 faces of the die before saving.", "error");
-                }
-            } else {
-                showMessage("No die is currently being edited.", "error");
-            }
-        });
-
-        // Event listener for the new "Delete Saved" button in the die modal
-        document.getElementById('deleteSavedDieOptionsBtn').addEventListener('click', () => {
-            isDeletingSavedDie = !isDeletingSavedDie; // Toggle delete mode
-            renderDieSaveSlotsInModal(); // Re-render to show/hide highlights
-        });
-
-
-        // --- Die Action Choice Modal Logic ---
-        const dieActionChoiceModal = document.getElementById('dieActionChoiceModal');
-        const dieActionChoiceTitle = document.getElementById('dieActionChoiceTitle');
-        const rollSavedDieBtn = document.getElementById('rollSavedDieBtn');
-        const spinSavedDieAsSpinnerBtn = document.getElementById('spinSavedDieAsSpinnerBtn');
-        const cancelDieActionBtn = document.getElementById('cancelDieActionBtn');
-        let tempSavedDieOptions = null; // Temporarily store options from clicked saved slot
-
-        rollSavedDieBtn.addEventListener('click', () => {
-            if (tempSavedDieOptions) {
-                currentCount = 1; // Always roll one die for this action
-                dieOptions = [{ ...tempSavedDieOptions }]; // Load saved options into the first die
-                closeDieActionChoiceModal();
-                showCard(dieCard);
-                // Trigger roll after a short delay to ensure card is rendered
-                setTimeout(() => rollDieBtn.click(), 100);
-            }
-        });
-
-        spinSavedDieAsSpinnerBtn.addEventListener('click', () => {
-            if (tempSavedDieOptions) {
-                currentCount = 6; // Fixed to 6 parts for die as spinner
-                spinnerOptions = [...tempSavedDieOptions.faces]; // Load saved options as spinner parts
-                closeDieActionChoiceModal();
-                showCard(spinnerCard);
-                // Trigger spin after a short delay
-                setTimeout(() => spinSpinnerBtn.click(), 100);
-            }
-        });
-
-        cancelDieActionBtn.addEventListener('click', () => {
-            closeDieActionChoiceModal();
-            savedOptionsModal.classList.add('show'); // Return to saved options modal
-        });
-
-        dieActionChoiceModal.addEventListener('click', (event) => {
-            if (event.target === dieActionChoiceModal) {
-                closeDieActionChoiceModal();
-                savedOptionsModal.classList.add('show'); // Return to saved options modal
-            }
-        });
-
-        function closeDieActionChoiceModal() {
-            dieActionChoiceModal.classList.remove('show');
-            tempSavedDieOptions = null;
+                    );
+                });
+                slotWrapper.appendChild(deleteButton);
+                savedDiceListOptions.appendChild(slotWrapper);
+            });
         }
 
 
@@ -1773,7 +1912,6 @@
             canvas.width = 250; // Fixed size for drawing
             canvas.height = 250;
             canvas.classList.add('spinner-canvas');
-            // canvas.style.transform = 'rotate(0deg)'; // Canvas itself no longer spins
             spinnerContainer.appendChild(canvas);
 
             // New central spinning pointer element
@@ -1792,10 +1930,11 @@
             let startAngle = Math.PI; 
             const sliceAngle = (2 * Math.PI) / currentCount; // Use currentCount for number of parts
 
+            // Updated calm and traditional colors for the spinner slices
             const colors = [
-                '#FF6347', '#4682B4', '#3CB371', '#FFD700', '#DA70D6',
-                '#FFA07A', '#20B2AA', '#87CEEB'
-            ]; // 8 distinct colors
+                '#81c784', '#a5d6a7', '#fcd34d', '#ffe082', '#a2d2ff',
+                '#bde0fe', '#c1e1c1', '#f0f4c3'
+            ]; // 8 distinct, pastel colors
 
             // Draw slices based on currentCount (number of parts)
             for (let j = 0; j < currentCount; j++) {
@@ -1818,7 +1957,7 @@
                 ctx.save();
                 ctx.translate(centerX + Math.cos(textAngle) * (radius / 2.2), centerY + Math.sin(textAngle) * (radius / 2.2));
                 ctx.rotate(textAngle + Math.PI / 2); // Keep text upright relative to the slice
-                ctx.fillStyle = '#fff';
+                ctx.fillStyle = '#495057'; /* Darker text for readability */
                 ctx.font = 'bold 14px Inter'; /* Adjusted font for custom text */
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -1838,7 +1977,7 @@
                 resultTextDiv.textContent = '?';
                 resultTextDiv.classList.add('spinner-result-text');
                 resultTextDiv.style.backgroundColor = 'transparent';
-                resultTextDiv.style.color = '#2d3748';
+                resultTextDiv.style.color = '#495057'; /* Lighter text for decision display */
             }
             spinnerContainer.appendChild(resultTextDiv);
             
@@ -1869,7 +2008,6 @@
             const existingResultTextEl = spinnerContainer.querySelector('.spinner-result-text');
             if (existingResultTextEl) existingResultTextEl.remove(); // Remove any previous result text
 
-            // spinnerPostDecisionActions.classList.add('hidden'); // Removed: no longer hiding this div
             spinSpinnerBtn.disabled = true; // Disable button during animation
             customizeSpinnerBtn.disabled = true; // Disable customize button
             changeSpinnerCountBtn.disabled = true; // Disable change parts button
@@ -1919,7 +2057,6 @@
                 changeSpinnerCountBtn.disabled = false; // Re-enable change parts button
                 returnToMenuFromSpinner.disabled = false; // Re-enable return to menu button
                 showResultSplashScreen(chosenOption, () => {
-                    // spinnerPostDecisionActions.classList.remove('hidden'); // Removed: no longer hiding this div
                 });
             }, 3000); // Match animation duration
         });
@@ -1949,7 +2086,7 @@
                 inputDiv.innerHTML = `
                     <label for="modalSpinnerOption${i + 1}" class="block text-gray-700 text-sm font-semibold mb-1">Part ${i + 1}:</label>
                     <input type="text" id="modalSpinnerOption${i + 1}" value="${option}"
-                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500">
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100 text-gray-800">
                 `;
                 modalSpinnerOptionInputsContainer.appendChild(inputDiv);
             });
@@ -2063,7 +2200,7 @@
 
             savedSpinnerSlots.forEach((slot, index) => {
                 const savedSpinnerButton = document.createElement('button');
-                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-fuchsia-200', 'w-full', 'mb-2');
+                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'w-full', 'mb-2');
                 savedSpinnerButton.textContent = `${slot.name}: ${slot.options.join(', ')}`;
                 savedSpinnerButton.dataset.slotIndex = index;
 
@@ -2071,12 +2208,16 @@
                     savedSpinnerButton.classList.add('delete-mode');
                     savedSpinnerButton.addEventListener('click', (event) => {
                         const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                        if (confirm(`Are you sure you want to delete "${savedSpinnerSlots[idxToDelete].name}"?`)) {
-                            savedSpinnerSlots.splice(idxToDelete, 1);
-                            saveSpinnerSlotsToLocalStorage();
-                            renderSpinnerSaveSlotsInModal(); // Re-render the list
-                            showMessage("Saved spinner option deleted!", "info");
-                        }
+                        showConfirmationModal(
+                            "Delete Saved Spinner",
+                            `Are you sure you want to delete "${savedSpinnerSlots[idxToDelete].name}"?`,
+                            () => {
+                                savedSpinnerSlots.splice(idxToDelete, 1);
+                                saveSpinnerSlotsToLocalStorage();
+                                renderSpinnerSaveSlotsInModal(); // Re-render the list
+                                showMessage("Saved spinner option deleted!", "info");
+                            }
+                        );
                     });
                 } else {
                     savedSpinnerButton.addEventListener('click', (event) => {
@@ -2103,28 +2244,30 @@
             document.getElementById('deleteSavedSpinnerOptionsBtn').textContent = isDeletingSavedSpinner ? 'Cancel Delete' : 'Delete Saved';
         }
 
-        // Function to render the saved spinners list in the central saved options modal
-        function renderSavedSpinnersList() {
-            savedSpinnersList.innerHTML = '';
+        // Function to render the saved spinners list in the Options Card
+        function renderSavedSpinnersListOptions() {
+            savedSpinnersListOptions.innerHTML = '';
             if (savedSpinnerSlots.length === 0) {
-                savedSpinnersList.innerHTML = '<p class="text-sm text-gray-600">No saved spinners yet.</p>';
+                savedSpinnersListOptions.innerHTML = '<p class="text-sm text-gray-600">No saved spinners yet.</p>';
             }
             savedSpinnerSlots.forEach((slot, index) => {
                 const slotWrapper = document.createElement('div');
                 slotWrapper.classList.add('flex', 'items-center', 'justify-between', 'gap-2', 'w-full', 'mb-2');
 
                 const savedSpinnerButton = document.createElement('button');
-                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-fuchsia-200', 'flex-grow');
+                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'flex-grow');
                 savedSpinnerButton.textContent = `${slot.name}: ${slot.options.join(', ')}`;
                 savedSpinnerButton.dataset.slotIndex = index;
                 savedSpinnerButton.addEventListener('click', () => {
                     // When clicked, load these options into Spinner and open its edit modal
                     currentCount = slot.options.length; // Set currentCount to match saved spinner
                     spinnerOptions = [ ...slot.options ];
-                    closeSavedOptionsModal();
-                    showCard(spinnerCard); // Go to spinner card
-                    openSpinnerEditModal(0); // Open edit modal for spinner
-                    showMessage(`Options from "${slot.name}" loaded into Spinner!`, "info");
+                    showCard(decisionSelectionCard); // Return to main menu
+                    setTimeout(() => {
+                        showCard(spinnerCard); // Go to spinner card
+                        openSpinnerEditModal(0); // Open edit modal for spinner
+                        showMessage(`Options from "${slot.name}" loaded into Spinner!`, "info");
+                    }, 500); // Small delay to allow card transition
                 });
                 slotWrapper.appendChild(savedSpinnerButton);
 
@@ -2134,14 +2277,19 @@
                 deleteButton.dataset.slotIndex = index;
                 deleteButton.addEventListener('click', (event) => {
                     const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                    if (confirm(`Are you sure you want to delete "${savedSpinnerSlots[idxToDelete].name}"?`)) {
-                        savedSpinnerSlots.splice(idxToDelete, 1);
-                        saveSpinnerSlotsToLocalStorage();
-                        renderSavedSpinnersList(); // Re-render the list
-                        showMessage("Saved spinner option deleted!", "info");
-                    }
+                    showConfirmationModal(
+                        "Delete Saved Spinner",
+                        `Are you sure you want to delete "${savedSpinnerSlots[idxToDelete].name}"?`,
+                        () => {
+                            savedSpinnerSlots.splice(idxToDelete, 1);
+                            saveSpinnerSlotsToLocalStorage();
+                            renderSavedSpinnersListOptions(); // Re-render the list in Options card
+                            showMessage("Saved spinner option deleted!", "info");
+                        }
+                    );
                 });
-                savedSpinnersList.appendChild(slotWrapper);
+                slotWrapper.appendChild(deleteButton);
+                savedSpinnersListOptions.appendChild(slotWrapper);
             });
         }
 
@@ -2175,6 +2323,12 @@
             } else {
                 showMessage("No spinner is currently being edited.", "error");
             }
+        });
+
+        // Event listener for the new "Delete Saved" button in the spinner modal
+        document.getElementById('deleteSavedSpinnerOptionsBtn').addEventListener('click', () => {
+            isDeletingSavedSpinner = !isDeletingSavedSpinner; // Toggle delete mode
+            renderSpinnerSaveSlotsInModal(); // Re-render to show/hide highlights
         });
 
 
