@@ -351,6 +351,14 @@
                         Spin a Spinner
                     </button>
                 </div>
+                <div class="flex justify-center mt-6">
+                    <button id="viewSavedOptionsBtn"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                        View Saved Options
+                    </button>
+                </div>
             </section>
 
             <!-- Count Selection Card -->
@@ -607,7 +615,7 @@
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
-            <div class="flex justify-center gap-4 mt-6 relative">
+            <div class="flex justify-between items-center gap-4 mt-6 relative">
                 <button id="prevDieModalBtn"
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
@@ -651,7 +659,7 @@
                     <!-- Saved slots will be dynamically generated here -->
                 </div>
             </div>
-            <div class="flex justify-center gap-4 mt-6 relative">
+            <div class="flex justify-between items-center gap-4 mt-6 relative">
                 <button id="prevSpinnerModalBtn"
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
@@ -671,6 +679,47 @@
                 <button id="nextSpinnerModalBtn"
                         class="modal-arrow-button" style="right: 1rem;">
                     &rarr;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Options Central Modal -->
+    <div id="savedOptionsModal" class="modal-overlay">
+        <div class="modal-content max-w-lg">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Your Saved Options</h3>
+
+            <div class="space-y-6">
+                <!-- Saved Coins Section -->
+                <div class="bg-yellow-100 p-4 rounded-lg shadow-inner">
+                    <h4 class="text-xl font-bold text-yellow-800 mb-3">Saved Coins</h4>
+                    <div id="savedCoinsList" class="space-y-2">
+                        <p class="text-sm text-gray-600">No saved coins yet.</p>
+                    </div>
+                </div>
+
+                <!-- Saved Dice Section -->
+                <div class="bg-blue-100 p-4 rounded-lg shadow-inner">
+                    <h4 class="text-xl font-bold text-blue-800 mb-3">Saved Dice</h4>
+                    <div id="savedDiceList" class="space-y-2">
+                        <p class="text-sm text-gray-600">No saved dice yet.</p>
+                    </div>
+                </div>
+
+                <!-- Saved Spinners Section -->
+                <div class="bg-fuchsia-100 p-4 rounded-lg shadow-inner">
+                    <h4 class="text-xl font-bold text-fuchsia-800 mb-3">Saved Spinners</h4>
+                    <div id="savedSpinnersList" class="space-y-2">
+                        <p class="text-sm text-gray-600">No saved spinners yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-6">
+                <button id="closeSavedOptionsModalBtn"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                               transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                    Close
                 </button>
             </div>
         </div>
@@ -725,11 +774,17 @@
         const countSelectionTitle = document.getElementById('countSelectionTitle');
         const countButtonsContainer = countSelectionCard.querySelector('.flex.justify-center.gap-4.mb-6');
 
+        const viewSavedOptionsBtn = document.getElementById('viewSavedOptionsBtn'); // New
+        const savedOptionsModal = document.getElementById('savedOptionsModal');     // New
+        const closeSavedOptionsModalBtn = document.getElementById('closeSavedOptionsModalBtn'); // New
+        const savedCoinsList = document.getElementById('savedCoinsList');           // New
+        const savedDiceList = document.getElementById('savedDiceList');             // New
+        const savedSpinnersList = document.getElementById('savedSpinnersList');     // New
 
-        // Removed specific "Change to..." buttons
-        const returnToMenuFromCoin = document.getElementById('returnToMenuFromCoin'); // New
-        const returnToMenuFromDie = document.getElementById('returnToMenuFromDie');   // New
-        const returnToMenuFromSpinner = document.getElementById('returnToMenuFromSpinner'); // New
+
+        const returnToMenuFromCoin = document.getElementById('returnToMenuFromCoin');
+        const returnToMenuFromDie = document.getElementById('returnToMenuFromDie');
+        const returnToMenuFromSpinner = document.getElementById('returnToMenuFromSpinner');
 
         const changeCoinCountBtn = document.getElementById('changeCoinCountBtn');
         const changeDieCountBtn = document.getElementById('changeDieCountBtn');
@@ -838,13 +893,33 @@
         changeDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
         changeSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
 
+        // --- Saved Options Central Modal Logic ---
+        viewSavedOptionsBtn.addEventListener('click', () => {
+            loadSavedCoinSlots();
+            loadSavedDieSlots();
+            loadSavedSpinnerSlots();
+            renderSavedCoinsList();
+            renderSavedDiceList();
+            renderSavedSpinnersList();
+            savedOptionsModal.classList.add('show');
+        });
+
+        closeSavedOptionsModalBtn.addEventListener('click', () => {
+            savedOptionsModal.classList.remove('show');
+        });
+
+        savedOptionsModal.addEventListener('click', (event) => {
+            if (event.target === savedOptionsModal) {
+                savedOptionsModal.classList.remove('show');
+            }
+        });
+
 
         // --- Coin Flip Logic ---
         const flipCoinBtn = document.getElementById('flipCoinBtn');
         const customizeCoinBtn = document.getElementById('customizeCoinBtn');
         const coinResultDisplay = document.getElementById('coinResultDisplay');
-        // Removed coinPostDecisionActions (now empty)
-
+        
         let coinOptions = [{heads: "Heads", tails: "Tails"}]; // Default options, now an array of objects
 
         // Function to update the visual display of coins
@@ -992,6 +1067,13 @@
             }
         });
 
+        // Close modal on outside click
+        coinEditModal.addEventListener('click', (event) => {
+            if (event.target === coinEditModal) {
+                closeCoinEditModal();
+            }
+        });
+
 
         // --- Saved Coin Slots Logic ---
         let savedCoinSlots = []; // Array to store saved options
@@ -1041,6 +1123,34 @@
                 coinSaveSlotsContainerInModal.appendChild(savedCoinButton);
             });
         }
+
+        // Function to render the saved coins list in the central saved options modal
+        function renderSavedCoinsList() {
+            savedCoinsList.innerHTML = '';
+            if (savedCoinSlots.length === 0) {
+                savedCoinsList.innerHTML = '<p class="text-sm text-gray-600">No saved coins yet.</p>';
+            }
+            savedCoinSlots.forEach((slot, index) => {
+                const savedCoinButton = document.createElement('button');
+                savedCoinButton.classList.add('saved-slot-btn', 'text-sm', 'font-medium', 'text-yellow-700', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-yellow-200', 'w-full', 'mb-2');
+                savedCoinButton.textContent = `${slot.name}: ${slot.options.heads} / ${slot.options.tails}`;
+                savedCoinButton.dataset.slotIndex = index;
+                savedCoinButton.addEventListener('click', () => {
+                    // When clicked, load these options into Coin 1 and open its edit modal
+                    if (coinOptions.length === 0) { // Ensure coinOptions array is initialized
+                        coinOptions = [{heads: "Heads", tails: "Tails"}];
+                        currentCount = 1;
+                    }
+                    coinOptions[0] = { ...slot.options };
+                    closeSavedOptionsModal();
+                    showCard(coinCard); // Go to coin card
+                    openCoinEditModal(0); // Open edit modal for coin 1
+                    showMessage(`Options from "${slot.name}" loaded into Coin 1!`, "info");
+                });
+                savedCoinsList.appendChild(savedCoinButton);
+            });
+        }
+
 
         // Event listener for the "Save Current Coin" button inside the modal
         saveCurrentCoinOptionsBtn.addEventListener('click', () => {
@@ -1226,6 +1336,14 @@
             }
         });
 
+        // Close modal on outside click
+        dieEditModal.addEventListener('click', (event) => {
+            if (event.target === dieEditModal) {
+                closeDieEditModal();
+            }
+        });
+
+
         // --- Saved Die Slots Logic ---
         let savedDieSlots = []; // Array to store saved die options
 
@@ -1270,6 +1388,33 @@
             });
         }
 
+        // Function to render the saved dice list in the central saved options modal
+        function renderSavedDiceList() {
+            savedDiceList.innerHTML = '';
+            if (savedDieSlots.length === 0) {
+                savedDiceList.innerHTML = '<p class="text-sm text-gray-600">No saved dice yet.</p>';
+            }
+            savedDieSlots.forEach((slot, index) => {
+                const savedDieButton = document.createElement('button');
+                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-blue-200', 'w-full', 'mb-2');
+                savedDieButton.textContent = `${slot.name}: ${slot.options.faces.join(', ')}`;
+                savedDieButton.dataset.slotIndex = index;
+                savedDieButton.addEventListener('click', () => {
+                    // When clicked, load these options into Die 1 and open its edit modal
+                    if (dieOptions.length === 0) { // Ensure dieOptions array is initialized
+                        dieOptions = [{faces: ["1", "2", "3", "4", "5", "6"]}];
+                        currentCount = 1;
+                    }
+                    dieOptions[0] = { ...slot.options };
+                    closeSavedOptionsModal();
+                    showCard(dieCard); // Go to die card
+                    openDieEditModal(0); // Open edit modal for die 1
+                    showMessage(`Options from "${slot.name}" loaded into Die 1!`, "info");
+                });
+                savedDiceList.appendChild(savedDieButton);
+            });
+        }
+
         // Event listener for the "Save Current Die" button inside the modal
         saveCurrentDieOptionsBtn.addEventListener('click', () => {
             if (editingDieIndex !== -1) {
@@ -1307,8 +1452,7 @@
         const spinSpinnerBtn = document.getElementById('spinSpinnerBtn');
         const customizeSpinnerBtn = document.getElementById('customizeSpinnerBtn'); // New
         const spinnerResultDisplay = document.getElementById('spinnerResultDisplay');
-        // Removed spinnerPostDecisionActions (now empty)
-
+        
         let spinnerOptions = []; // Will be populated dynamically based on currentCount
 
         // Helper function to wrap text on canvas
@@ -1602,6 +1746,13 @@
             }
         });
 
+        // Close modal on outside click
+        spinnerEditModal.addEventListener('click', (event) => {
+            if (event.target === spinnerEditModal) {
+                closeSpinnerEditModal();
+            }
+        });
+
 
         // --- Saved Spinner Slots Logic ---
         let savedSpinnerSlots = []; // Array to store saved spinner options
@@ -1633,7 +1784,8 @@
 
                 savedSpinnerButton.addEventListener('click', (event) => {
                     const slotIndex = parseInt(event.target.dataset.slotIndex, 10);
-                    if (editingSpinnerPartIndex !== -1 && savedSpinnerSlots[slotIndex].options.every(option => option !== '') && savedSpinnerSlots[slotIndex].options.length === currentCount) {
+                    // Check if the number of saved options matches the current spinner's part count
+                    if (editingSpinnerPartIndex !== -1 && savedSpinnerSlots[slotIndex].options.length === currentCount) {
                         spinnerOptions = [ ...savedSpinnerSlots[slotIndex].options ]; // Load a copy of options
                         // Update modal inputs with recalled options
                         Array.from(modalSpinnerOptionInputsContainer.querySelectorAll('input')).forEach((input, i) => {
@@ -1648,6 +1800,33 @@
                     }
                 });
                 spinnerSaveSlotsContainerInModal.appendChild(savedSpinnerButton);
+            });
+        }
+
+        // Function to render the saved spinners list in the central saved options modal
+        function renderSavedSpinnersList() {
+            savedSpinnersList.innerHTML = '';
+            if (savedSpinnerSlots.length === 0) {
+                savedSpinnersList.innerHTML = '<p class="text-sm text-gray-600">No saved spinners yet.</p>';
+            }
+            savedSpinnerSlots.forEach((slot, index) => {
+                const savedSpinnerButton = document.createElement('button');
+                savedSpinnerButton.classList.add('saved-slot-btn', 'saved-spinner-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-fuchsia-200', 'w-full', 'mb-2');
+                savedSpinnerButton.textContent = `${slot.name}: ${slot.options.join(', ')}`;
+                savedSpinnerButton.dataset.slotIndex = index;
+                savedSpinnerButton.addEventListener('click', () => {
+                    // When clicked, load these options into Spinner and open its edit modal
+                    if (slot.options.length !== currentCount) {
+                        showMessage(`Cannot load "${slot.name}". It has ${slot.options.length} options, but the current spinner is set for ${currentCount} parts.`, "error");
+                        return;
+                    }
+                    spinnerOptions = [ ...slot.options ];
+                    closeSavedOptionsModal();
+                    showCard(spinnerCard); // Go to spinner card
+                    openSpinnerEditModal(0); // Open edit modal for spinner
+                    showMessage(`Options from "${slot.name}" loaded into Spinner!`, "info");
+                });
+                savedSpinnersList.appendChild(savedSpinnerButton);
             });
         }
 
