@@ -103,10 +103,31 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Transition classes for cards */
+        .card-transition {
+            transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .card-hidden {
+            opacity: 0;
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            /* Added to collapse the card completely when hidden */
+            display: none; /* Hide completely after transition */
+        }
+        .card-visible {
+            opacity: 1;
+            max-height: 1000px; /* Large enough to cover content */
+            display: block; /* Ensure it's displayed */
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
-    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 lg:p-12 space-y-8 relative overflow-hidden">
+    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 lg:p-12 space-y-8">
         <!-- App Header -->
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 tracking-tight mb-2">Decido</h1>
@@ -116,7 +137,7 @@
         <!-- Main Card Container -->
         <div id="mainCardContainer" class="relative">
             <!-- Initial Decision Selection Card -->
-            <section id="decisionSelectionCard" class="bg-gradient-to-br from-purple-500 to-indigo-600 p-6 sm:p-8 rounded-xl shadow-lg text-white text-center space-y-6">
+            <section id="decisionSelectionCard" class="card-transition card-visible bg-gradient-to-br from-purple-500 to-indigo-600 p-6 sm:p-8 rounded-xl shadow-lg text-white text-center space-y-6">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">What's your dilemma?</h2>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <button id="showCoinCardBtn"
@@ -135,7 +156,7 @@
             </section>
 
             <!-- Coin Flip Section -->
-            <section id="coinCard" class="bg-yellow-50 p-6 sm:p-8 rounded-xl shadow-md border border-yellow-200 absolute inset-0 hidden">
+            <section id="coinCard" class="card-transition card-hidden bg-yellow-50 p-6 sm:p-8 rounded-xl shadow-md border border-yellow-200">
                 <h2 class="text-3xl font-bold text-yellow-800 mb-6 text-center">Flip a Coin</h2>
 
                 <!-- Coin Display and Result -->
@@ -189,7 +210,7 @@
             </section>
 
             <!-- Die Roll Section -->
-            <section id="dieCard" class="bg-blue-50 p-6 sm:p-8 rounded-xl shadow-md border border-blue-200 absolute inset-0 hidden">
+            <section id="dieCard" class="card-transition card-hidden bg-blue-50 p-6 sm:p-8 rounded-xl shadow-md border border-blue-200">
                 <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">Roll a Die</h2>
 
                 <!-- Die Display and Result -->
@@ -277,11 +298,21 @@
         const changeToCoinBtn = document.getElementById('changeToCoinBtn');
 
         function showCard(cardToShow) {
-            decisionSelectionCard.classList.add('hidden');
-            coinCard.classList.add('hidden');
-            dieCard.classList.add('hidden');
+            // Hide all cards
+            [decisionSelectionCard, coinCard, dieCard].forEach(card => {
+                card.classList.remove('card-visible');
+                card.classList.add('card-hidden');
+                // Ensure display:none is applied after transition for true collapse
+                setTimeout(() => card.style.display = 'none', 500); // Match transition duration
+            });
 
-            cardToShow.classList.remove('hidden');
+            // Show the target card
+            cardToShow.style.display = 'block'; // Ensure it's block before animating
+            // A small delay might be needed to ensure display: block is processed before transition
+            setTimeout(() => {
+                cardToShow.classList.remove('card-hidden');
+                cardToShow.classList.add('card-visible');
+            }, 10); // Small delay
         }
 
         showCoinCardBtn.addEventListener('click', () => showCard(coinCard));
@@ -295,7 +326,7 @@
         const coinOption2Input = document.getElementById('coinOption2');
         const flipCoinBtn = document.getElementById('flipCoinBtn');
         const customizeCoinBtn = document.getElementById('customizeCoinBtn');
-        const goAgainCoinBtn = document.getElementById('goAgainCoinBtn'); // Renamed from decideAgainCoinBtn
+        const goAgainCoinBtn = document.getElementById('goAgainCoinBtn');
         const coinCustomizationInputs = document.getElementById('coinCustomizationInputs');
         const coinAnimation = document.getElementById('coinAnimation');
         const coinPostDecisionActions = document.getElementById('coinPostDecisionActions');
@@ -364,7 +395,7 @@
         const dieCustomOptionsInput = document.getElementById('dieCustomOptions');
         const rollDieBtn = document.getElementById('rollDieBtn');
         const customizeDieBtn = document.getElementById('customizeDieBtn');
-        const goAgainDieBtn = document.getElementById('goAgainDieBtn'); // Renamed from decideAgainDieBtn
+        const goAgainDieBtn = document.getElementById('goAgainDieBtn');
         const dieCustomizationInputs = document.getElementById('dieCustomizationInputs');
         const dieAnimation = document.getElementById('dieAnimation');
         const diePostDecisionActions = document.getElementById('diePostDecisionActions');
