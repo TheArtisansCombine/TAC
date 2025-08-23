@@ -46,6 +46,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 1.5rem; /* Space between multiple coins/dice */
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
             font-size: 2.5rem;
             font-weight: 700;
             color: #2d3748; /* Darker text */
@@ -116,13 +118,12 @@
             padding-bottom: 0;
             margin-top: 0;
             margin-bottom: 0;
-            /* Added to collapse the card completely when hidden */
-            display: none; /* Hide completely after transition */
+            visibility: hidden; /* Prevent interaction when hidden */
         }
         .card-visible {
             opacity: 1;
             max-height: 1000px; /* Large enough to cover content */
-            display: block; /* Ensure it's displayed */
+            visibility: visible; /* Make interactable when visible */
         }
     </style>
 </head>
@@ -135,18 +136,18 @@
         </header>
 
         <!-- Main Card Container -->
-        <div id="mainCardContainer" class="relative">
+        <div id="mainCardContainer">
             <!-- Initial Decision Selection Card -->
             <section id="decisionSelectionCard" class="card-transition card-visible bg-gradient-to-br from-purple-500 to-indigo-600 p-6 sm:p-8 rounded-xl shadow-lg text-white text-center space-y-6">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">What's your dilemma?</h2>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button id="showCoinCardBtn"
+                    <button id="showCoinCountBtn"
                             class="bg-white text-purple-700 hover:bg-purple-100 font-bold py-4 px-8 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    text-xl w-full sm:w-auto">
                         Flip a Coin
                     </button>
-                    <button id="showDieCardBtn"
+                    <button id="showDieCountBtn"
                             class="bg-white text-indigo-700 hover:bg-indigo-100 font-bold py-4 px-8 rounded-lg shadow-md
                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                    text-xl w-full sm:w-auto">
@@ -155,111 +156,95 @@
                 </div>
             </section>
 
+            <!-- Count Selection Card -->
+            <section id="countSelectionCard" class="card-transition card-hidden" style="display: none;">
+                <div class="bg-gray-100 p-6 sm:p-8 rounded-xl shadow-md border border-gray-200">
+                    <h2 id="countSelectionTitle" class="text-3xl font-bold text-gray-800 mb-6 text-center">How many?</h2>
+                    <div class="flex justify-center gap-4 mb-6">
+                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="1">1</button>
+                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="2">2</button>
+                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="3">3</button>
+                    </div>
+                    <div class="flex justify-center">
+                        <button id="backToMainBtn"
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                       transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                       w-full sm:w-auto text-lg">
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Coin Flip Section -->
-            <section id="coinCard" class="card-transition card-hidden bg-yellow-50 p-6 sm:p-8 rounded-xl shadow-md border border-yellow-200">
-                <h2 class="text-3xl font-bold text-yellow-800 mb-6 text-center">Flip a Coin</h2>
+            <section id="coinCard" class="card-transition card-hidden" style="display: none;">
+                <div class="bg-yellow-50 p-6 sm:p-8 rounded-xl shadow-md border border-yellow-200">
+                    <h2 id="coinCardTitle" class="text-3xl font-bold text-yellow-800 mb-6 text-center">Flip a Coin</h2>
 
-                <!-- Coin Display and Result -->
-                <div id="coinResultDisplay" class="decision-display mb-8 text-yellow-700">
-                    <div id="coinAnimation" class="coin">?</div>
-                </div>
-
-                <!-- Coin Customization Inputs -->
-                <div id="coinCustomizationInputs" class="space-y-4 mb-6 hidden">
-                    <div>
-                        <label for="coinOption1" class="block text-gray-700 text-sm font-semibold mb-2">Option 1:</label>
-                        <input type="text" id="coinOption1" value="Heads"
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    <!-- Coin Display and Result -->
+                    <div id="coinResultDisplay" class="decision-display mb-8 text-yellow-700">
+                        <!-- Coins will be dynamically added here -->
                     </div>
-                    <div>
-                        <label for="coinOption2" class="block text-gray-700 text-sm font-semibold mb-2">Option 2:</label>
-                        <input type="text" id="coinOption2" value="Tails"
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
-                    </div>
-                </div>
 
-                <!-- Coin Actions -->
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button id="flipCoinBtn"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Flip Coin
-                    </button>
-                    <button id="customizeCoinBtn"
-                            class="bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Customize
-                    </button>
-                </div>
-                <div id="coinPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
-                    <button id="goAgainCoinBtn"
-                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Go Again
-                    </button>
-                    <button id="changeToDieBtn"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Change to Die
-                    </button>
+                    <!-- Coin Actions -->
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button id="flipCoinBtn"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Flip
+                        </button>
+                    </div>
+                    <div id="coinPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
+                        <button id="changeCoinCountBtn"
+                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Change Count
+                        </button>
+                        <button id="changeToDieBtn"
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Change to Die
+                        </button>
+                    </div>
                 </div>
             </section>
 
             <!-- Die Roll Section -->
-            <section id="dieCard" class="card-transition card-hidden bg-blue-50 p-6 sm:p-8 rounded-xl shadow-md border border-blue-200">
-                <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">Roll a Die</h2>
+            <section id="dieCard" class="card-transition card-hidden" style="display: none;">
+                <div class="bg-blue-50 p-6 sm:p-8 rounded-xl shadow-md border border-blue-200">
+                    <h2 id="dieCardTitle" class="text-3xl font-bold text-blue-800 mb-6 text-center">Roll a Die</h2>
 
-                <!-- Die Display and Result -->
-                <div id="dieResultDisplay" class="decision-display mb-8 text-blue-700">
-                    <div id="dieAnimation" class="die">?</div>
-                </div>
-
-                <!-- Die Customization Inputs -->
-                <div id="dieCustomizationInputs" class="space-y-4 mb-6 hidden">
-                    <div>
-                        <label for="numberOfSides" class="block text-gray-700 text-sm font-semibold mb-2">Number of Sides:</label>
-                        <input type="number" id="numberOfSides" value="6" min="2"
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <!-- Die Display and Result -->
+                    <div id="dieResultDisplay" class="decision-display mb-8 text-blue-700">
+                        <!-- Dice will be dynamically added here -->
                     </div>
-                    <div>
-                        <label for="dieCustomOptions" class="block text-gray-700 text-sm font-semibold mb-2">Or, Custom Options (comma-separated):</label>
-                        <input type="text" id="dieCustomOptions" placeholder="e.g., Movie A, Movie B, Movie C"
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                </div>
 
-                <!-- Die Actions -->
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button id="rollDieBtn"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Roll Die
-                    </button>
-                    <button id="customizeDieBtn"
-                            class="bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Customize
-                    </button>
-                </div>
-                <div id="diePostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
-                    <button id="goAgainDieBtn"
-                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Go Again
-                    </button>
-                    <button id="changeToCoinBtn"
-                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
-                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                   w-full sm:w-auto text-lg">
-                        Change to Coin
-                    </button>
+                    <!-- Die Actions -->
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button id="rollDieBtn"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Roll
+                        </button>
+                    </div>
+                    <div id="diePostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
+                        <button id="changeDieCountBtn"
+                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Change Count
+                        </button>
+                        <button id="changeToCoinBtn"
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Change to Coin
+                        </button>
+                    </div>
                 </div>
             </section>
         </div>
@@ -289,213 +274,174 @@
 
         // --- Card Visibility Management ---
         const decisionSelectionCard = document.getElementById('decisionSelectionCard');
+        const countSelectionCard = document.getElementById('countSelectionCard');
         const coinCard = document.getElementById('coinCard');
         const dieCard = document.getElementById('dieCard');
 
-        const showCoinCardBtn = document.getElementById('showCoinCardBtn');
-        const showDieCardBtn = document.getElementById('showDieCardBtn');
+        const showCoinCountBtn = document.getElementById('showCoinCountBtn');
+        const showDieCountBtn = document.getElementById('showDieCountBtn');
+        const backToMainBtn = document.getElementById('backToMainBtn');
+        const countSelectionTitle = document.getElementById('countSelectionTitle');
+        const countButtons = document.querySelectorAll('.count-btn');
+
         const changeToDieBtn = document.getElementById('changeToDieBtn');
         const changeToCoinBtn = document.getElementById('changeToCoinBtn');
+        const changeCoinCountBtn = document.getElementById('changeCoinCountBtn');
+        const changeDieCountBtn = document.getElementById('changeDieCountBtn');
 
-        function showCard(cardToShow) {
-            // Hide all cards
-            [decisionSelectionCard, coinCard, dieCard].forEach(card => {
-                card.classList.remove('card-visible');
-                card.classList.add('card-hidden');
-                // Ensure display:none is applied after transition for true collapse
-                setTimeout(() => card.style.display = 'none', 500); // Match transition duration
+        const coinCardTitle = document.getElementById('coinCardTitle'); // Reference to coin card title
+        const dieCardTitle = document.getElementById('dieCardTitle');   // Reference to die card title
+
+
+        let currentDecisionType = ''; // 'coin' or 'die'
+        let currentCount = 1; // Default count for coins/dice
+
+        function showCard(cardToShow, type = '') {
+            // First, process all cards to be hidden
+            [decisionSelectionCard, countSelectionCard, coinCard, dieCard].forEach(card => {
+                if (card !== cardToShow) {
+                    card.classList.remove('card-visible');
+                    card.classList.add('card-hidden');
+                    // After the CSS transition completes, set display to 'none'
+                    setTimeout(() => {
+                        if (card.classList.contains('card-hidden')) { // Only apply if still hidden
+                            card.style.display = 'none';
+                        }
+                    }, 500); // Must match CSS transition duration
+                }
             });
 
-            // Show the target card
-            cardToShow.style.display = 'block'; // Ensure it's block before animating
-            // A small delay might be needed to ensure display: block is processed before transition
+            // Then, immediately prepare and show the target card
+            cardToShow.style.display = 'block'; // Ensure it's in the flow
+            // Small delay to ensure browser registers 'display: block' before animating max-height
             setTimeout(() => {
                 cardToShow.classList.remove('card-hidden');
                 cardToShow.classList.add('card-visible');
-            }, 10); // Small delay
+            }, 10);
+
+            if (cardToShow === countSelectionCard) {
+                currentDecisionType = type;
+                countSelectionTitle.textContent = `How many ${type === 'coin' ? 'coins' : 'dice'}?`;
+            } else if (cardToShow === coinCard) {
+                updateCoinDisplay(); // Ensure display and title are updated when coinCard is shown
+            } else if (cardToShow === dieCard) {
+                updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
+            }
         }
 
-        showCoinCardBtn.addEventListener('click', () => showCard(coinCard));
-        showDieCardBtn.addEventListener('click', () => showCard(dieCard));
-        changeToDieBtn.addEventListener('click', () => showCard(dieCard));
-        changeToCoinBtn.addEventListener('click', () => showCard(coinCard));
+        // Event listeners for initial decision selection
+        showCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
+        showDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
+        backToMainBtn.addEventListener('click', () => showCard(decisionSelectionCard));
+
+        // Event listeners for count selection buttons
+        countButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                currentCount = parseInt(button.dataset.count, 10);
+                if (currentDecisionType === 'coin') {
+                    showCard(coinCard);
+                } else if (currentDecisionType === 'die') {
+                    showCard(dieCard);
+                }
+            });
+        });
+
+        // Event listeners for post-decision actions
+        changeToDieBtn.addEventListener('click', () => showCard(countSelectionCard, 'die')); // Updated
+        changeToCoinBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin')); // Updated
+        changeCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
+        changeDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
 
 
         // --- Coin Flip Logic ---
-        const coinOption1Input = document.getElementById('coinOption1');
-        const coinOption2Input = document.getElementById('coinOption2');
         const flipCoinBtn = document.getElementById('flipCoinBtn');
-        const customizeCoinBtn = document.getElementById('customizeCoinBtn');
-        const goAgainCoinBtn = document.getElementById('goAgainCoinBtn');
-        const coinCustomizationInputs = document.getElementById('coinCustomizationInputs');
-        const coinAnimation = document.getElementById('coinAnimation');
+        const coinResultDisplay = document.getElementById('coinResultDisplay');
         const coinPostDecisionActions = document.getElementById('coinPostDecisionActions');
 
-        let coinOptions = ["Heads", "Tails"]; // Default options
+        // Coin options are now fixed to Heads/Tails
+        const coinOptions = ["Heads", "Tails"];
 
-        // Function to update coin options from input fields
-        function updateCoinOptions() {
-            const opt1 = coinOption1Input.value.trim();
-            const opt2 = coinOption2Input.value.trim();
-            if (opt1 && opt2) {
-                coinOptions = [opt1, opt2];
-            } else if (opt1 || opt2) { // If only one option is provided
-                showMessage("Please provide two options for the coin.", "error");
-                return false;
-            } else {
-                coinOptions = ["Heads", "Tails"]; // Fallback to defaults
+        // Function to update the visual display of coins
+        function updateCoinDisplay(results = []) {
+            coinResultDisplay.innerHTML = ''; // Clear previous coins
+            for (let i = 0; i < currentCount; i++) {
+                const coinDiv = document.createElement('div');
+                coinDiv.classList.add('coin');
+                coinDiv.textContent = results[i] || '?'; // Show result or '?'
+                coinDiv.dataset.index = i; // Store index for animation
+                coinResultDisplay.appendChild(coinDiv);
             }
-            return true;
+            // Update the title based on currentCount
+            coinCardTitle.textContent = currentCount > 1 ? 'Flip Coins' : 'Flip a Coin';
         }
 
         // Event listener for Flip Coin button
         flipCoinBtn.addEventListener('click', () => {
-            if (!updateCoinOptions()) return; // Update options and validate
-            const resultIndex = Math.floor(Math.random() * coinOptions.length);
-            const chosenOption = coinOptions[resultIndex];
-
-            // Start coin flip animation
-            coinAnimation.textContent = '?'; // Reset text
-            coinAnimation.classList.add('flipping');
-            flipCoinBtn.disabled = true; // Disable button during animation
-            customizeCoinBtn.disabled = true;
+            const coinElements = coinResultDisplay.querySelectorAll('.coin');
             coinPostDecisionActions.classList.add('hidden'); // Hide post-decision actions during flip
+            flipCoinBtn.disabled = true; // Disable button during animation
 
-            setTimeout(() => {
-                coinAnimation.classList.remove('flipping');
-                coinAnimation.textContent = chosenOption;
-                flipCoinBtn.disabled = false; // Re-enable button
-                customizeCoinBtn.disabled = false;
-                coinPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
-            }, 1000); // Animation duration
-        });
+            coinElements.forEach((coinEl, index) => {
+                const chosenOption = coinOptions[Math.floor(Math.random() * coinOptions.length)];
 
-        // Event listener for Customize Coin button
-        customizeCoinBtn.addEventListener('click', () => {
-            coinCustomizationInputs.classList.toggle('hidden');
-            if (!coinCustomizationInputs.classList.contains('hidden')) {
-                customizeCoinBtn.textContent = 'Save Options';
-            } else {
-                customizeCoinBtn.textContent = 'Customize';
-                if(updateCoinOptions()) { // Save options and show message if successful
-                    showMessage("Coin options saved!", "info");
-                }
-            }
-        });
+                coinEl.textContent = '?'; // Reset text
+                coinEl.classList.add('flipping');
 
-        // Event listener for Go Again Coin button
-        goAgainCoinBtn.addEventListener('click', () => {
-            // Re-run the flip with the current options
-            flipCoinBtn.click();
+                setTimeout(() => {
+                    coinEl.classList.remove('flipping');
+                    coinEl.textContent = chosenOption;
+                    if (index === coinElements.length - 1) { // Only re-enable after last coin finishes
+                        flipCoinBtn.disabled = false;
+                        coinPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                    }
+                }, 1000 + (index * 100)); // Stagger animations slightly
+            });
         });
 
 
         // --- Die Roll Logic ---
-        const numberOfSidesInput = document.getElementById('numberOfSides');
-        const dieCustomOptionsInput = document.getElementById('dieCustomOptions');
         const rollDieBtn = document.getElementById('rollDieBtn');
-        const customizeDieBtn = document.getElementById('customizeDieBtn');
-        const goAgainDieBtn = document.getElementById('goAgainDieBtn');
-        const dieCustomizationInputs = document.getElementById('dieCustomizationInputs');
-        const dieAnimation = document.getElementById('dieAnimation');
+        const dieResultDisplay = document.getElementById('dieResultDisplay');
         const diePostDecisionActions = document.getElementById('diePostDecisionActions');
 
-        let dieOptions = []; // Will be populated based on user input or number of sides
-        let currentNumberOfSides = 6; // Default
+        // Die will now always roll a 6-sided die
+        const defaultNumberOfSides = 6;
 
-        // Function to update die options from input fields
-        function updateDieOptions() {
-            const customOptsText = dieCustomOptionsInput.value.trim();
-            if (customOptsText) {
-                dieOptions = customOptsText.split(',').map(opt => opt.trim()).filter(opt => opt !== '');
-                if (dieOptions.length < 2) {
-                    showMessage("Please provide at least two custom options for the die, or specify number of sides.", "error");
-                    return false;
-                }
-                numberOfSidesInput.disabled = true; // Disable number of sides if custom options are used
-                numberOfSidesInput.value = ''; // Clear number of sides input
-            } else {
-                dieOptions = []; // Clear custom options
-                numberOfSidesInput.disabled = false;
-                const sides = parseInt(numberOfSidesInput.value, 10);
-                if (isNaN(sides) || sides < 2) {
-                    showMessage("Number of sides must be at least 2.", "error");
-                    currentNumberOfSides = 6; // Reset to default
-                    numberOfSidesInput.value = 6;
-                    dieCustomOptionsInput.disabled = false; // Enable custom options if sides invalid
-                    return false;
-                }
-                currentNumberOfSides = sides;
-                dieCustomOptionsInput.disabled = true; // Disable custom options if number of sides is used
-                dieCustomOptionsInput.value = ''; // Clear custom options input
+        // Function to update the visual display of dice
+        function updateDieDisplay(results = []) {
+            dieResultDisplay.innerHTML = ''; // Clear previous dice
+            for (let i = 0; i < currentCount; i++) {
+                const dieDiv = document.createElement('div');
+                dieDiv.classList.add('die');
+                dieDiv.textContent = results[i] || '?'; // Show result or '?'
+                dieDiv.dataset.index = i; // Store index for animation
+                dieResultDisplay.appendChild(dieDiv);
             }
-            return true;
+            // Update the title based on currentCount
+            dieCardTitle.textContent = currentCount > 1 ? 'Roll Dice' : 'Roll a Die';
         }
 
         // Event listener for Roll Die button
         rollDieBtn.addEventListener('click', () => {
-            if (!updateDieOptions()) return; // Update options and validate
-
-            let chosenOption;
-            if (dieOptions.length > 0) { // If custom options are provided
-                const resultIndex = Math.floor(Math.random() * dieOptions.length);
-                chosenOption = dieOptions[resultIndex];
-            } else { // If rolling a standard die with N sides
-                chosenOption = Math.floor(Math.random() * currentNumberOfSides) + 1;
-            }
-
-            // Start die roll animation
-            dieAnimation.textContent = '?'; // Reset text
-            dieAnimation.classList.add('rolling');
-            rollDieBtn.disabled = true; // Disable button during animation
-            customizeDieBtn.disabled = true;
+            const dieElements = dieResultDisplay.querySelectorAll('.die');
             diePostDecisionActions.classList.add('hidden'); // Hide post-decision actions during roll
+            rollDieBtn.disabled = true; // Disable button during animation
 
-            setTimeout(() => {
-                dieAnimation.classList.remove('rolling');
-                dieAnimation.textContent = chosenOption;
-                rollDieBtn.disabled = false; // Re-enable button
-                customizeDieBtn.disabled = false;
-                diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
-            }, 500); // Animation duration
-        });
+            dieElements.forEach((dieEl, index) => {
+                const chosenOption = Math.floor(Math.random() * defaultNumberOfSides) + 1;
 
-        // Event listener for Customize Die button
-        customizeDieBtn.addEventListener('click', () => {
-            dieCustomizationInputs.classList.toggle('hidden');
-            if (!dieCustomizationInputs.classList.contains('hidden')) {
-                customizeDieBtn.textContent = 'Save Options';
-            } else {
-                customizeDieBtn.textContent = 'Customize';
-                if(updateDieOptions()) { // Save options and show message if successful
-                    showMessage("Die options saved!", "info");
-                }
-            }
-        });
+                dieEl.textContent = '?'; // Reset text
+                dieEl.classList.add('rolling');
 
-        // Event listener for Go Again Die button
-        goAgainDieBtn.addEventListener('click', () => {
-            // Re-run the roll with the current options
-            rollDieBtn.click();
-        });
-
-        // Initial setup for input disabling based on user interaction
-        dieCustomOptionsInput.addEventListener('input', () => {
-            if (dieCustomOptionsInput.value.trim() !== '') {
-                numberOfSidesInput.disabled = true;
-                numberOfSidesInput.value = ''; // Clear number of sides if custom is used
-            } else {
-                numberOfSidesInput.disabled = false;
-            }
-        });
-
-        numberOfSidesInput.addEventListener('input', () => {
-            if (numberOfSidesInput.value.trim() !== '' && parseInt(numberOfSidesInput.value, 10) >= 2) {
-                dieCustomOptionsInput.disabled = true;
-                dieCustomOptionsInput.value = ''; // Clear custom options if number of sides is used
-            } else {
-                dieCustomOptionsInput.disabled = false;
-            }
+                setTimeout(() => {
+                    dieEl.classList.remove('rolling');
+                    dieEl.textContent = chosenOption;
+                    if (index === dieElements.length - 1) { // Only re-enable after last die finishes
+                        rollDieBtn.disabled = false;
+                        diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                    }
+                }, 500 + (index * 100)); // Stagger animations slightly
+            });
         });
     </script>
 </body>
