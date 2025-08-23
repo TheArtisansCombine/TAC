@@ -46,7 +46,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem; /* Space between multiple coins/dice */
+            gap: 1.5rem; /* Space between multiple coins/dice/spinners */
             flex-wrap: wrap; /* Allow items to wrap on smaller screens */
             font-size: 2.5rem;
             font-weight: 700;
@@ -69,7 +69,14 @@
             position: relative;
             transform-style: preserve-3d;
             animation: none; /* Controlled by JS */
+            cursor: pointer; /* Indicate it's clickable */
+            border: 2px solid transparent; /* Subtle border for hover */
+            transition: border-color 0.2s ease-in-out;
         }
+        .coin:hover {
+            border-color: #d97706; /* Amber-600 on hover */
+        }
+        /* Removed .coin.selected style */
 
         .coin.flipping {
             animation: flip 1s ease-out forwards;
@@ -106,6 +113,57 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* CSS for the spinner container (now holds canvas and pointer) */
+        .spinner-container {
+            position: relative;
+            width: 250px; /* Larger size for the wheel */
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: transparent; /* Background for visibility */
+        }
+
+        .spinner-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 3s ease-out; /* Smooth spin transition */
+        }
+
+        .spinner-pointer {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent; /* Larger pointer */
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #dc2626; /* Red pointer, now pointing down */
+            top: -15px; /* Position above the canvas */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10; /* Ensure pointer is on top */
+        }
+
+        /* Optional: Styles for the result text overlay */
+        .spinner-result-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 1.2rem; /* Adjusted for larger wheel */
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            border-radius: 8px;
+            z-index: 11; /* Ensure text is above pointer */
+            word-break: break-word; /* Allow text to wrap */
+            max-width: 80%; /* Limit width of text overlay */
+            text-align: center;
+        }
+
         /* Transition classes for cards */
         .card-transition {
             transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
@@ -124,6 +182,97 @@
             opacity: 1;
             max-height: 1000px; /* Large enough to cover content */
             visibility: visible; /* Make interactable when visible */
+        }
+
+        /* Splash Screen Styles */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            z-index: 2000; /* Above all other content */
+            padding: 20px;
+            box-sizing: border-box;
+            word-break: break-word;
+        }
+
+        .splash-screen.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative; /* Needed for absolute positioning of arrows */
+        }
+
+        /* Arrow button styling within modal */
+        .modal-arrow-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #e2e8f0; /* Gray-200 */
+            color: #2d3748; /* Gray-800 */
+            font-weight: bold;
+            padding: 0.5rem 0.8rem;
+            border-radius: 9999px; /* Full rounded */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            cursor: pointer;
+            font-size: 1.25rem; /* Larger arrow text */
+            line-height: 1; /* Align arrow vertically */
+        }
+        .modal-arrow-button:hover:not(:disabled) {
+            background-color: #cbd5e0; /* Gray-300 */
+            transform: translateY(-50%) scale(1.05);
+        }
+        .modal-arrow-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #prevCoinModalBtn {
+            left: 1rem;
+        }
+        #nextCoinModalBtn {
+            right: 1rem;
         }
     </style>
 </head>
@@ -153,6 +302,12 @@
                                    text-xl w-full sm:w-auto">
                         Roll a Die
                     </button>
+                    <button id="showSpinnerCountBtn"
+                            class="bg-white text-fuchsia-700 hover:bg-fuchsia-100 font-bold py-4 px-8 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   text-xl w-full sm:w-auto">
+                        Spin a Spinner
+                    </button>
                 </div>
             </section>
 
@@ -161,9 +316,7 @@
                 <div class="bg-gray-100 p-6 sm:p-8 rounded-xl shadow-md border border-gray-200">
                     <h2 id="countSelectionTitle" class="text-3xl font-bold text-gray-800 mb-6 text-center">How many?</h2>
                     <div class="flex justify-center gap-4 mb-6">
-                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="1">1</button>
-                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="2">2</button>
-                        <button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="3">3</button>
+                        <!-- Dynamically generated count buttons -->
                     </div>
                     <div class="flex justify-center">
                         <button id="backToMainBtn"
@@ -194,6 +347,12 @@
                                     w-full sm:w-auto text-lg">
                             Flip
                         </button>
+                        <button id="customizeCoinBtn"
+                                class="bg-yellow-300 hover:bg-yellow-400 text-yellow-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Customize
+                        </button>
                     </div>
                     <div id="coinPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
                         <button id="changeCoinCountBtn"
@@ -202,11 +361,11 @@
                                     w-full sm:w-auto text-lg">
                             Change Count
                         </button>
-                        <button id="changeToDieBtn"
+                        <button id="returnToMenuFromCoin"
                                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
-                                    transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
-                                    w-full sm:w-auto text-lg">
-                            Change to Die
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Return to Menu
                         </button>
                     </div>
                 </div>
@@ -238,11 +397,47 @@
                                     w-full sm:w-auto text-lg">
                             Change Count
                         </button>
-                        <button id="changeToCoinBtn"
+                        <button id="returnToMenuFromDie"
                                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Return to Menu
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Spinner Section -->
+            <section id="spinnerCard" class="card-transition card-hidden" style="display: none;">
+                <div class="bg-fuchsia-50 p-6 sm:p-8 rounded-xl shadow-md border border-fuchsia-200">
+                    <h2 id="spinnerCardTitle" class="text-3xl font-bold text-fuchsia-800 mb-6 text-center">Spin a Spinner</h2>
+
+                    <!-- Spinner Display and Result -->
+                    <div id="spinnerResultDisplay" class="decision-display mb-8 text-fuchsia-700">
+                        <!-- Single spinner will be dynamically added here -->
+                    </div>
+
+                    <!-- Spinner Actions -->
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button id="spinSpinnerBtn"
+                                class="bg-fuchsia-500 hover:bg-fuchsia-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
                                     transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
                                     w-full sm:w-auto text-lg">
-                            Change to Coin
+                            Spin
+                        </button>
+                    </div>
+                    <div id="spinnerPostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
+                        <button id="changeSpinnerCountBtn"
+                                class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg
+                                    transition duration-00 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                    w-full sm:w-auto text-lg">
+                            Change Parts
+                        </button>
+                        <button id="returnToMenuFromSpinner"
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Return to Menu
                         </button>
                     </div>
                 </div>
@@ -252,6 +447,50 @@
 
     <!-- Message Box for Alerts -->
     <div id="messageBox" class="message-box"></div>
+
+    <!-- Splash Screen for Result -->
+    <div id="resultSplashScreen" class="splash-screen"></div>
+
+    <!-- Coin Edit Modal -->
+    <div id="coinEditModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="coinEditModalTitle" class="text-2xl font-bold text-gray-800 mb-4">Edit Coin Options</h3>
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label for="modalCoinOption1" class="block text-gray-700 text-sm font-semibold mb-2">Option 1 (Heads):</label>
+                    <input type="text" id="modalCoinOption1"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+                <div>
+                    <label for="modalCoinOption2" class="block text-gray-700 text-sm font-semibold mb-2">Option 2 (Tails):</label>
+                    <input type="text" id="modalCoinOption2"
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                </div>
+            </div>
+            <div class="flex justify-center gap-4 mt-6 relative">
+                <button id="prevCoinModalBtn"
+                        class="modal-arrow-button" style="left: 1rem;">
+                    &larr;
+                </button>
+                <div class="flex gap-4">
+                    <button id="saveCoinOptionsBtn"
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Save
+                    </button>
+                    <button id="cancelCoinOptionsBtn"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Cancel
+                    </button>
+                </div>
+                <button id="nextCoinModalBtn"
+                        class="modal-arrow-button" style="right: 1rem;">
+                    &rarr;
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Utility function to show a custom message box instead of alert()
@@ -272,33 +511,58 @@
             }, duration);
         }
 
+        // --- Splash Screen Logic ---
+        const resultSplashScreen = document.getElementById('resultSplashScreen');
+
+        function showResultSplashScreen(result, callback) {
+            resultSplashScreen.textContent = result;
+            resultSplashScreen.classList.add('show');
+
+            setTimeout(() => {
+                resultSplashScreen.classList.remove('show');
+                setTimeout(() => { // Small delay to ensure fade-out completes
+                    if (callback) callback();
+                }, 500); // Match splash screen transition duration
+            }, 1500); // Display result for 1.5 seconds
+        }
+
+
         // --- Card Visibility Management ---
         const decisionSelectionCard = document.getElementById('decisionSelectionCard');
         const countSelectionCard = document.getElementById('countSelectionCard');
         const coinCard = document.getElementById('coinCard');
         const dieCard = document.getElementById('dieCard');
+        const spinnerCard = document.getElementById('spinnerCard');
 
         const showCoinCountBtn = document.getElementById('showCoinCountBtn');
         const showDieCountBtn = document.getElementById('showDieCountBtn');
+        const showSpinnerCountBtn = document.getElementById('showSpinnerCountBtn');
         const backToMainBtn = document.getElementById('backToMainBtn');
         const countSelectionTitle = document.getElementById('countSelectionTitle');
-        const countButtons = document.querySelectorAll('.count-btn');
+        const countButtonsContainer = countSelectionCard.querySelector('.flex.justify-center.gap-4.mb-6');
 
-        const changeToDieBtn = document.getElementById('changeToDieBtn');
-        const changeToCoinBtn = document.getElementById('changeToCoinBtn');
+
+        // Removed specific "Change to..." buttons
+        const returnToMenuFromCoin = document.getElementById('returnToMenuFromCoin'); // New
+        const returnToMenuFromDie = document.getElementById('returnToMenuFromDie');   // New
+        const returnToMenuFromSpinner = document.getElementById('returnToMenuFromSpinner'); // New
+
         const changeCoinCountBtn = document.getElementById('changeCoinCountBtn');
         const changeDieCountBtn = document.getElementById('changeDieCountBtn');
+        const changeSpinnerCountBtn = document.getElementById('changeSpinnerCountBtn');
 
-        const coinCardTitle = document.getElementById('coinCardTitle'); // Reference to coin card title
-        const dieCardTitle = document.getElementById('dieCardTitle');   // Reference to die card title
+        const coinCardTitle = document.getElementById('coinCardTitle');
+        const dieCardTitle = document.getElementById('dieCardTitle');
+        const spinnerCardTitle = document.getElementById('spinnerCardTitle');
 
 
-        let currentDecisionType = ''; // 'coin' or 'die'
-        let currentCount = 1; // Default count for coins/dice
+        let currentDecisionType = ''; // 'coin', 'die', or 'spinner'
+        let currentCount = 1; // Default count for coins/dice/spinner parts
+
 
         function showCard(cardToShow, type = '') {
             // First, process all cards to be hidden
-            [decisionSelectionCard, countSelectionCard, coinCard, dieCard].forEach(card => {
+            [decisionSelectionCard, countSelectionCard, coinCard, dieCard, spinnerCard].forEach(card => {
                 if (card !== cardToShow) {
                     card.classList.remove('card-visible');
                     card.classList.add('card-hidden');
@@ -321,45 +585,72 @@
 
             if (cardToShow === countSelectionCard) {
                 currentDecisionType = type;
-                countSelectionTitle.textContent = `How many ${type === 'coin' ? 'coins' : 'dice'}?`;
+                let countOptionsHtml = '';
+                if (type === 'coin' || type === 'die') {
+                    countSelectionTitle.textContent = `How many ${type === 'coin' ? 'coins' : 'dice'}?`;
+                    [1, 2, 3].forEach(c => {
+                        countOptionsHtml += `<button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
+                    });
+                } else if (type === 'spinner') {
+                    countSelectionTitle.textContent = `How many parts of the pie chart?`;
+                    [2, 3, 4, 5, 6, 8].forEach(c => {
+                        countOptionsHtml += `<button class="count-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95 text-lg" data-count="${c}">${c}</button>`;
+                    });
+                }
+                countButtonsContainer.innerHTML = countOptionsHtml;
+                // Re-attach event listeners for newly created buttons
+                countButtonsContainer.querySelectorAll('.count-btn').forEach(button => {
+                    button.addEventListener('click', handleCountButtonClick);
+                });
             } else if (cardToShow === coinCard) {
+                // Initialize coinOptions for the new count if needed
+                if (coinOptions.length !== currentCount) {
+                    coinOptions = Array.from({length: currentCount}, () => ({heads: "Heads", tails: "Tails"}));
+                }
                 updateCoinDisplay(); // Ensure display and title are updated when coinCard is shown
             } else if (cardToShow === dieCard) {
                 updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
+            } else if (cardToShow === spinnerCard) {
+                updateSpinnerDisplay(); // Ensure display and title are updated when spinnerCard is shown
             }
         }
+
+        // Central handler for count buttons to avoid re-attaching multiple times
+        function handleCountButtonClick(event) {
+            currentCount = parseInt(event.target.dataset.count, 10);
+            if (currentDecisionType === 'coin') {
+                showCard(coinCard);
+            } else if (currentDecisionType === 'die') {
+                showCard(dieCard);
+            } else if (currentDecisionType === 'spinner') {
+                showCard(spinnerCard);
+            }
+        }
+
 
         // Event listeners for initial decision selection
         showCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
         showDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
+        showSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
         backToMainBtn.addEventListener('click', () => showCard(decisionSelectionCard));
 
-        // Event listeners for count selection buttons
-        countButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                currentCount = parseInt(button.dataset.count, 10);
-                if (currentDecisionType === 'coin') {
-                    showCard(coinCard);
-                } else if (currentDecisionType === 'die') {
-                    showCard(dieCard);
-                }
-            });
-        });
-
         // Event listeners for post-decision actions
-        changeToDieBtn.addEventListener('click', () => showCard(countSelectionCard, 'die')); // Updated
-        changeToCoinBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin')); // Updated
+        returnToMenuFromCoin.addEventListener('click', () => showCard(decisionSelectionCard));
+        returnToMenuFromDie.addEventListener('click', () => showCard(decisionSelectionCard));
+        returnToMenuFromSpinner.addEventListener('click', () => showCard(decisionSelectionCard));
+
         changeCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
         changeDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
+        changeSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
 
 
         // --- Coin Flip Logic ---
         const flipCoinBtn = document.getElementById('flipCoinBtn');
+        const customizeCoinBtn = document.getElementById('customizeCoinBtn');
         const coinResultDisplay = document.getElementById('coinResultDisplay');
         const coinPostDecisionActions = document.getElementById('coinPostDecisionActions');
 
-        // Coin options are now fixed to Heads/Tails
-        const coinOptions = ["Heads", "Tails"];
+        let coinOptions = [{heads: "Heads", tails: "Tails"}]; // Default options, now an array of objects
 
         // Function to update the visual display of coins
         function updateCoinDisplay(results = []) {
@@ -369,20 +660,30 @@
                 coinDiv.classList.add('coin');
                 coinDiv.textContent = results[i] || '?'; // Show result or '?'
                 coinDiv.dataset.index = i; // Store index for animation
+                coinDiv.addEventListener('click', () => openCoinEditModal(i)); // Add click listener
+                // Removed selected class logic
                 coinResultDisplay.appendChild(coinDiv);
             }
             // Update the title based on currentCount
             coinCardTitle.textContent = currentCount > 1 ? 'Flip Coins' : 'Flip a Coin';
+            // Removed updateCoinNavButtons()
         }
+
+        // Removed updateCoinNavButtons function
 
         // Event listener for Flip Coin button
         flipCoinBtn.addEventListener('click', () => {
             const coinElements = coinResultDisplay.querySelectorAll('.coin');
             coinPostDecisionActions.classList.add('hidden'); // Hide post-decision actions during flip
             flipCoinBtn.disabled = true; // Disable button during animation
+            customizeCoinBtn.disabled = true; // Disable customize button during flip
+            // Removed disabling of nav buttons
 
+            const results = []; // Store results for splash screen
             coinElements.forEach((coinEl, index) => {
-                const chosenOption = coinOptions[Math.floor(Math.random() * coinOptions.length)];
+                const currentCoinOptions = coinOptions[index]; // Get options for this specific coin
+                const chosenOption = Math.random() < 0.5 ? currentCoinOptions.heads : currentCoinOptions.tails;
+                results.push(chosenOption);
 
                 coinEl.textContent = '?'; // Reset text
                 coinEl.classList.add('flipping');
@@ -392,10 +693,103 @@
                     coinEl.textContent = chosenOption;
                     if (index === coinElements.length - 1) { // Only re-enable after last coin finishes
                         flipCoinBtn.disabled = false;
-                        coinPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                        customizeCoinBtn.disabled = false; // Re-enable customize button
+                        // Removed re-enabling of nav buttons
+                        // Show splash screen with combined results
+                        showResultSplashScreen(results.join(', '), () => {
+                            coinPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                        });
                     }
                 }, 1000 + (index * 100)); // Stagger animations slightly
             });
+        });
+
+
+        // --- Coin Edit Modal Logic ---
+        const coinEditModal = document.getElementById('coinEditModal');
+        const coinEditModalTitle = document.getElementById('coinEditModalTitle');
+        const modalCoinOption1Input = document.getElementById('modalCoinOption1');
+        const modalCoinOption2Input = document.getElementById('modalCoinOption2');
+        const saveCoinOptionsBtn = document.getElementById('saveCoinOptionsBtn');
+        const cancelCoinOptionsBtn = document.getElementById('cancelCoinOptionsBtn');
+        const prevCoinModalBtn = document.getElementById('prevCoinModalBtn');
+        const nextCoinModalBtn = document.getElementById('nextCoinModalBtn');
+
+        let editingCoinIndex = -1; // To keep track of which coin is being edited
+
+        function openCoinEditModal(index) {
+            editingCoinIndex = index;
+            modalCoinOption1Input.value = coinOptions[index].heads;
+            modalCoinOption2Input.value = coinOptions[index].tails;
+            coinEditModalTitle.textContent = `Edit Options for Coin ${index + 1}`; // Update modal title
+            
+            // Manage navigation button visibility within the modal
+            prevCoinModalBtn.style.display = (editingCoinIndex === 0) ? 'none' : 'block';
+            nextCoinModalBtn.style.display = (editingCoinIndex === currentCount - 1) ? 'none' : 'block';
+
+            coinEditModal.classList.add('show');
+        }
+
+        function closeCoinEditModal() {
+            coinEditModal.classList.remove('show');
+            editingCoinIndex = -1;
+        }
+
+        saveCoinOptionsBtn.addEventListener('click', () => {
+            if (editingCoinIndex !== -1) {
+                const opt1 = modalCoinOption1Input.value.trim();
+                const opt2 = modalCoinOption2Input.value.trim();
+                if (opt1 && opt2) {
+                    coinOptions[editingCoinIndex].heads = opt1;
+                    coinOptions[editingCoinIndex].tails = opt2;
+                    showMessage(`Coin ${editingCoinIndex + 1} options saved!`, "info");
+                } else {
+                    showMessage("Please provide both options for the coin.", "error");
+                    return; // Don't close modal if validation fails
+                }
+            }
+            closeCoinEditModal();
+            updateCoinDisplay(); // Redraw coins with potentially updated text
+        });
+
+        cancelCoinOptionsBtn.addEventListener('click', closeCoinEditModal);
+
+        // Event listener for the main "Customize" button
+        customizeCoinBtn.addEventListener('click', () => {
+            if (currentCount > 0) {
+                openCoinEditModal(0); // Open modal for the first coin
+            } else {
+                showMessage("Please select a count of coins first.", "info");
+            }
+        });
+
+        // Navigation for coins *within the modal*
+        prevCoinModalBtn.addEventListener('click', () => {
+            if (editingCoinIndex > 0) {
+                // Save current edits before navigating
+                if (modalCoinOption1Input.value.trim() && modalCoinOption2Input.value.trim()) {
+                    coinOptions[editingCoinIndex].heads = modalCoinOption1Input.value.trim();
+                    coinOptions[editingCoinIndex].tails = modalCoinOption2Input.value.trim();
+                } else {
+                    showMessage("Please save or cancel current coin edits before navigating.", "error");
+                    return;
+                }
+                openCoinEditModal(editingCoinIndex - 1);
+            }
+        });
+
+        nextCoinModalBtn.addEventListener('click', () => {
+            if (editingCoinIndex < currentCount - 1) {
+                // Save current edits before navigating
+                if (modalCoinOption1Input.value.trim() && modalCoinOption2Input.value.trim()) {
+                    coinOptions[editingCoinIndex].heads = modalCoinOption1Input.value.trim();
+                    coinOptions[editingCoinIndex].tails = modalCoinOption2Input.value.trim();
+                } else {
+                    showMessage("Please save or cancel current coin edits before navigating.", "error");
+                    return;
+                }
+                openCoinEditModal(editingCoinIndex + 1);
+            }
         });
 
 
@@ -427,8 +821,10 @@
             diePostDecisionActions.classList.add('hidden'); // Hide post-decision actions during roll
             rollDieBtn.disabled = true; // Disable button during animation
 
+            const results = []; // Store results for splash screen
             dieElements.forEach((dieEl, index) => {
                 const chosenOption = Math.floor(Math.random() * defaultNumberOfSides) + 1;
+                results.push(chosenOption);
 
                 dieEl.textContent = '?'; // Reset text
                 dieEl.classList.add('rolling');
@@ -438,11 +834,218 @@
                     dieEl.textContent = chosenOption;
                     if (index === dieElements.length - 1) { // Only re-enable after last die finishes
                         rollDieBtn.disabled = false;
-                        diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                        // Show splash screen with combined results
+                        showResultSplashScreen(results.join(', '), () => {
+                            diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                        });
                     }
                 }, 500 + (index * 100)); // Stagger animations slightly
             });
         });
+
+
+        // --- Spinner Logic (Roulette Wheel) ---
+        const spinSpinnerBtn = document.getElementById('spinSpinnerBtn');
+        const spinnerResultDisplay = document.getElementById('spinnerResultDisplay');
+        const spinnerPostDecisionActions = document.getElementById('spinnerPostDecisionActions');
+
+        // Spinner options are now implicitly numbers 1 to currentCount
+        let spinnerOptions = []; // Will be populated dynamically
+
+        // Helper function to wrap text on canvas
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let lines = [];
+
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = context.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    lines.push(line.trim());
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+
+            // Adjust starting Y for vertical centering
+            let currentY = y - (lines.length - 1) * lineHeight / 2;
+            for (let i = 0; i < lines.length; i++) {
+                context.fillText(lines[i], x, currentY + (i * lineHeight));
+            }
+        }
+
+
+        // Function to update the visual display of spinners (roulette wheel)
+        function updateSpinnerDisplay(results = []) {
+            spinnerResultDisplay.innerHTML = ''; // Clear previous spinners
+
+            // Always render one spinner
+            const spinnerContainer = document.createElement('div');
+            spinnerContainer.classList.add('spinner-container');
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 250; // Fixed size for drawing
+            canvas.height = 250;
+            canvas.classList.add('spinner-canvas');
+            canvas.style.transform = 'rotate(0deg)'; // Initial state
+            spinnerContainer.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2;
+
+            // Start drawing from 180 degrees (Math.PI) to visually rotate the wheel
+            let startAngle = Math.PI; 
+            const sliceAngle = (2 * Math.PI) / currentCount; // Use currentCount for number of parts
+
+            const colors = [
+                '#FF6347', '#4682B4', '#3CB371', '#FFD700', '#DA70D6',
+                '#FFA07A', '#20B2AA', '#87CEEB'
+            ]; // 8 distinct colors
+
+            // Draw slices based on currentCount (number of parts)
+            for (let j = 0; j < currentCount; j++) {
+                const endAngle = startAngle + sliceAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[j % colors.length]; // Cycle through colors
+                ctx.fill();
+                ctx.strokeStyle = '#fff'; // White border for slices
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Draw text: number for each slice
+                const optionText = (j + 1).toString(); // Display number
+                const textAngle = startAngle + sliceAngle / 2; // Text angle is relative to the slice's position
+
+                ctx.save();
+                ctx.translate(centerX + Math.cos(textAngle) * (radius / 2.2), centerY + Math.sin(textAngle) * (radius / 2.2));
+                ctx.rotate(textAngle + Math.PI / 2); // Keep text upright relative to the slice
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 18px Inter'; /* Larger font for numbers */
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(optionText, 0, 0); // No wrapping needed for numbers
+                ctx.restore();
+
+                startAngle = endAngle;
+            }
+
+            // Draw the pointer
+            const pointer = document.createElement('div');
+            pointer.classList.add('spinner-pointer');
+            spinnerContainer.appendChild(pointer);
+
+            // Display result text if already spun, otherwise show placeholder
+            const resultTextDiv = document.createElement('div');
+            if (results[0]) { // Only one result since there's one spinner
+                resultTextDiv.textContent = results[0];
+                resultTextDiv.classList.add('spinner-result-text');
+            } else {
+                resultTextDiv.textContent = '?';
+                resultTextDiv.classList.add('spinner-result-text');
+                resultTextDiv.style.backgroundColor = 'transparent';
+                resultTextDiv.style.color = '#2d3748';
+            }
+            spinnerContainer.appendChild(resultTextDiv);
+            
+            spinnerResultDisplay.appendChild(spinnerContainer);
+
+            // Update the title based on currentCount (number of parts)
+            spinnerCardTitle.textContent = `Spin a Spinner (${currentCount} Parts)`;
+        }
+
+        // Function to update spinner options (now implicitly numbers 1 to currentCount)
+        function updateSpinnerOptions() {
+            spinnerOptions = Array.from({length: currentCount}, (_, i) => (i + 1).toString());
+            if (spinnerCard.classList.contains('card-visible')) {
+                updateSpinnerDisplay();
+            }
+            return true;
+        }
+
+        // Event listener for Spin Spinner button
+        spinSpinnerBtn.addEventListener('click', () => {
+            updateSpinnerOptions(); // Ensure spinnerOptions array is up-to-date with numbers
+
+            const spinnerContainer = spinnerResultDisplay.querySelector('.spinner-container');
+            const canvasEl = spinnerContainer.querySelector('.spinner-canvas');
+            const existingResultTextEl = spinnerContainer.querySelector('.spinner-result-text');
+            if (existingResultTextEl) existingResultTextEl.remove(); // Remove any previous result text
+
+            spinnerPostDecisionActions.classList.add('hidden'); // Hide post-decision actions during spin
+            spinSpinnerBtn.disabled = true; // Disable button during animation
+
+            const chosenNumber = Math.floor(Math.random() * currentCount) + 1; // Random number from 1 to currentCount
+            const chosenOption = chosenNumber.toString(); // Convert to string for consistency with results
+
+            // Calculate the target rotation for the chosen option
+            const totalRevolutions = 5; // How many full spins
+            const sliceAngle = (2 * Math.PI) / currentCount; // Use currentCount for number of parts
+            const resultIndex = chosenNumber - 1; // Index is 0-based
+
+            // The pointer is at the top (visually 270 degrees or 3*PI/2 radians on a standard canvas)
+            const targetAngleForPointer = 3 * Math.PI / 2;
+            // The center of the result slice (relative to 0 radians at the right, WITH initial 180 deg offset)
+            const centerOfResultSliceAngle = (Math.PI + resultIndex * sliceAngle) + (sliceAngle / 2); // Adjusted for initial draw offset
+            
+            // Calculate the rotation needed to bring the center of the result slice to the pointer's position
+            let rotationOffset = targetAngleForPointer - centerOfResultSliceAngle;
+            
+            // Normalize rotationOffset to be positive and within 0 to 2*PI
+            rotationOffset = (rotationOffset % (2 * Math.PI) + (2 * Math.PI)) % (2 * Math.PI);
+            
+            // Add full revolutions for visual effect
+            const finalRotation = rotationOffset + (totalRevolutions * 2 * Math.PI);
+
+            // Apply initial reset (no transition)
+            canvasEl.style.transition = 'none';
+            canvasEl.style.transform = `rotate(0deg)`;
+            void canvasEl.offsetWidth; // Trigger reflow
+
+            // Apply the spinning animation
+            canvasEl.style.transition = `transform 3s ease-out`;
+            canvasEl.style.transform = `rotate(${finalRotation}rad)`;
+
+            setTimeout(() => {
+                canvasEl.style.transition = 'none'; // Remove transition after it's done
+
+                // Display the result text overlay
+                const finalResultTextDiv = document.createElement('div');
+                finalResultTextDiv.textContent = chosenOption;
+                finalResultTextDiv.classList.add('spinner-result-text');
+                spinnerContainer.appendChild(finalResultTextDiv);
+
+                spinSpinnerBtn.disabled = false;
+                showResultSplashScreen(chosenOption, () => {
+                    spinnerPostDecisionActions.classList.remove('hidden'); // Show post-decision actions
+                });
+            }, 3000); // Match animation duration
+        });
+
+        // Initial calls for cleaner start if cards are initially visible
+        if (spinnerCard.classList.contains('card-visible')) {
+            updateSpinnerOptions(); // Ensure spinnerOptions are set for initial display
+            updateSpinnerDisplay();
+        }
+        if (coinCard.classList.contains('card-visible')) {
+            // Initialize coinOptions for the new count if needed
+            if (coinOptions.length !== currentCount) {
+                coinOptions = Array.from({length: currentCount}, () => ({heads: "Heads", tails: "Tails"}));
+            }
+            updateCoinDisplay();
+        }
+        if (dieCard.classList.contains('card-visible')) {
+            updateDieDisplay();
+        }
     </script>
 </body>
 </html>
