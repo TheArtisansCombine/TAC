@@ -102,6 +102,12 @@
             color: #2d3748;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: none; /* Controlled by JS */
+            cursor: pointer; /* Indicate it's clickable */
+            border: 2px solid transparent; /* Subtle border for hover */
+            transition: border-color 0.2s ease-in-out;
+        }
+        .die:hover {
+            border-color: #3b82f6; /* Blue-500 on hover */
         }
 
         .die.rolling {
@@ -268,11 +274,37 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
-        #prevCoinModalBtn {
+        #prevCoinModalBtn, #prevDieModalBtn {
             left: 1rem;
         }
-        #nextCoinModalBtn {
+        #nextCoinModalBtn, #nextDieModalBtn {
             right: 1rem;
+        }
+
+        /* Saved Slot Button Style */
+        .saved-slot-btn {
+            background-color: #fcd34d; /* Yellow-300 for coin, adjusted for die */
+            color: #3b444b; /* Dark text */
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            cursor: pointer;
+            width: 100%; /* Make it fill the container */
+            text-align: center;
+            border: none;
+        }
+        .saved-slot-btn:hover {
+            background-color: #fbbf24; /* Yellow-400 for coin, adjusted for die */
+            transform: translateY(-1px);
+        }
+        .saved-die-slot-btn {
+            background-color: #93c5fd; /* Blue-300 */
+            color: #1e3a8a; /* Dark blue text */
+        }
+        .saved-die-slot-btn:hover {
+            background-color: #60a5fa; /* Blue-400 */
         }
     </style>
 </head>
@@ -389,6 +421,12 @@
                                     w-full sm:w-auto text-lg">
                             Roll
                         </button>
+                        <button id="customizeDieBtn"
+                                class="bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-3 px-6 rounded-lg shadow-lg
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95
+                                   w-full sm:w-auto text-lg">
+                            Customize
+                        </button>
                     </div>
                     <div id="diePostDecisionActions" class="flex flex-col sm:flex-row justify-center gap-4 mt-4 hidden">
                         <button id="changeDieCountBtn"
@@ -497,6 +535,80 @@
                     </button>
                 </div>
                 <button id="nextCoinModalBtn"
+                        class="modal-arrow-button" style="right: 1rem;">
+                    &rarr;
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Die Edit Modal -->
+    <div id="dieEditModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="dieEditModalTitle" class="text-2xl font-bold text-gray-800 mb-4">Edit Die Options</h3>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Input fields for 6 die faces -->
+                <div>
+                    <label for="modalDieOption1" class="block text-gray-700 text-sm font-semibold mb-1">Face 1:</label>
+                    <input type="text" id="modalDieOption1"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="modalDieOption2" class="block text-gray-700 text-sm font-semibold mb-1">Face 2:</label>
+                    <input type="text" id="modalDieOption2"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="modalDieOption3" class="block text-gray-700 text-sm font-semibold mb-1">Face 3:</label>
+                    <input type="text" id="modalDieOption3"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="modalDieOption4" class="block text-gray-700 text-sm font-semibold mb-1">Face 4:</label>
+                    <input type="text" id="modalDieOption4"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="modalDieOption5" class="block text-gray-700 text-sm font-semibold mb-1">Face 5:</label>
+                    <input type="text" id="modalDieOption5"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="modalDieOption6" class="block text-gray-700 text-sm font-semibold mb-1">Face 6:</label>
+                    <input type="text" id="modalDieOption6"
+                           class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <!-- Saved Die Options within Modal -->
+            <div class="bg-blue-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 text-center">Saved Die Options</h4>
+                <button id="saveCurrentDieOptionsBtn"
+                        class="bg-blue-400 hover:bg-blue-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4">
+                    Save Current Die
+                </button>
+                <div id="dieSaveSlotsContainerInModal" class="space-y-3">
+                    <!-- Saved slots will be dynamically generated here -->
+                </div>
+            </div>
+            <div class="flex justify-between gap-4 mt-6 relative">
+                <button id="prevDieModalBtn"
+                        class="modal-arrow-button" style="left: 1rem;">
+                    &larr;
+                </button>
+                <div class="flex gap-4">
+                    <button id="saveDieOptionsBtn"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Save
+                    </button>
+                    <button id="cancelDieOptionsBtn"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md
+                                   transition duration-300 ease-in-out transform hover:-translate-y-1 active:scale-95">
+                        Cancel
+                    </button>
+                </div>
+                <button id="nextDieModalBtn"
                         class="modal-arrow-button" style="right: 1rem;">
                     &rarr;
                 </button>
@@ -621,9 +733,13 @@
                 }
                 updateCoinDisplay(); // Ensure display and title are updated when coinCard is shown
                 loadSavedCoinSlots(); // Load saved slots on coin card display
-                renderCoinSaveSlots(); // Render save slot buttons
             } else if (cardToShow === dieCard) {
+                // Initialize dieOptions for the new count if needed
+                if (dieOptions.length !== currentCount) {
+                    dieOptions = Array.from({length: currentCount}, () => ({faces: ["1", "2", "3", "4", "5", "6"]}));
+                }
                 updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
+                loadSavedDieSlots(); // Load saved slots on die card display
             } else if (cardToShow === spinnerCard) {
                 updateSpinnerDisplay(); // Ensure display and title are updated when spinnerCard is shown
             }
@@ -811,7 +927,6 @@
 
 
         // --- Saved Coin Slots Logic ---
-        const NUM_COIN_SAVE_SLOTS = 3;
         let savedCoinSlots = []; // Array to store saved options
 
         // Function to load saved slots from localStorage
@@ -821,7 +936,7 @@
                 savedCoinSlots = JSON.parse(savedData);
             } else {
                 // Initialize with empty slots if no data found
-                savedCoinSlots = []; // Start empty, not with fixed number of empty slots
+                savedCoinSlots = []; // Start empty
             }
         }
 
@@ -838,37 +953,25 @@
             }
 
             savedCoinSlots.forEach((slot, index) => {
-                const slotDiv = document.createElement('div');
-                slotDiv.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-center', 'justify-between', 'gap-2', 'p-3', 'bg-yellow-50', 'rounded-lg', 'border', 'border-yellow-200');
-                
-                const slotContent = slot.heads && slot.tails ? `${slot.name}: ${slot.heads} / ${slot.tails}` : 'Empty Slot';
-                
-                slotDiv.innerHTML = `
-                    <span class="text-sm font-medium text-yellow-700 w-full sm:w-auto text-center sm:text-left">${slotContent}</span>
-                    <div class="flex gap-2">
-                        <button class="recall-slot-btn bg-yellow-300 hover:bg-yellow-400 text-yellow-800 text-xs font-bold py-1 px-3 rounded-md transition duration-200" data-slot-index="${index}" ${!slot.heads || !slot.tails ? 'disabled' : ''}>Recall</button>
-                    </div>
-                `;
-                coinSaveSlotsContainerInModal.appendChild(slotDiv);
-            });
+                const savedCoinButton = document.createElement('button');
+                savedCoinButton.classList.add('saved-slot-btn', 'text-sm', 'font-medium', 'text-yellow-700', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-yellow-200', 'w-full', 'mb-2');
+                savedCoinButton.textContent = `${slot.name}: ${slot.options.heads} / ${slot.options.tails}`;
+                savedCoinButton.dataset.slotIndex = index;
 
-            // Attach event listeners to new buttons
-            coinSaveSlotsContainerInModal.querySelectorAll('.recall-slot-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
+                savedCoinButton.addEventListener('click', (event) => {
                     const slotIndex = parseInt(event.target.dataset.slotIndex, 10);
-                    if (editingCoinIndex !== -1 && savedCoinSlots[slotIndex].heads && savedCoinSlots[slotIndex].tails) {
+                    if (editingCoinIndex !== -1 && savedCoinSlots[slotIndex].options.heads && savedCoinSlots[slotIndex].options.tails) {
                         // Apply recalled options to the currently edited coin
                         coinOptions[editingCoinIndex] = { ...savedCoinSlots[slotIndex].options }; // Load a copy of options
                         // Update modal inputs with recalled options
                         modalCoinOption1Input.value = coinOptions[editingCoinIndex].heads;
                         modalCoinOption2Input.value = coinOptions[editingCoinIndex].tails;
                         showMessage(`Options from "${savedCoinSlots[slotIndex].name}" recalled for Coin ${editingCoinIndex + 1}!`, "info");
-                        // No need to close modal, user might want to save/continue editing
-                        // updateCoinDisplay(); // Don't redraw main card until modal is closed and saved
                     } else {
                         showMessage("No options saved in this slot to recall.", "error");
                     }
                 });
+                coinSaveSlotsContainerInModal.appendChild(savedCoinButton);
             });
         }
 
@@ -909,11 +1012,11 @@
 
         // --- Die Roll Logic ---
         const rollDieBtn = document.getElementById('rollDieBtn');
+        const customizeDieBtn = document.getElementById('customizeDieBtn'); // New
         const dieResultDisplay = document.getElementById('dieResultDisplay');
         const diePostDecisionActions = document.getElementById('diePostDecisionActions');
-
-        // Die will now always roll a 6-sided die
-        const defaultNumberOfSides = 6;
+        
+        let dieOptions = [{faces: ["1", "2", "3", "4", "5", "6"]}]; // Default options, now an array of objects
 
         // Function to update the visual display of dice
         function updateDieDisplay(results = []) {
@@ -923,6 +1026,7 @@
                 dieDiv.classList.add('die');
                 dieDiv.textContent = results[i] || '?'; // Show result or '?'
                 dieDiv.dataset.index = i; // Store index for animation
+                dieDiv.addEventListener('click', () => openDieEditModal(i)); // Add click listener
                 dieResultDisplay.appendChild(dieDiv);
             }
             // Update the title based on currentCount
@@ -934,10 +1038,12 @@
             const dieElements = dieResultDisplay.querySelectorAll('.die');
             diePostDecisionActions.classList.add('hidden'); // Hide post-decision actions during roll
             rollDieBtn.disabled = true; // Disable button during animation
+            customizeDieBtn.disabled = true; // Disable customize button during roll
 
             const results = []; // Store results for splash screen
             dieElements.forEach((dieEl, index) => {
-                const chosenOption = Math.floor(Math.random() * defaultNumberOfSides) + 1;
+                const currentDieFaces = dieOptions[index].faces; // Get faces for this specific die
+                const chosenOption = currentDieFaces[Math.floor(Math.random() * currentDieFaces.length)];
                 results.push(chosenOption);
 
                 dieEl.textContent = '?'; // Reset text
@@ -948,6 +1054,7 @@
                     dieEl.textContent = chosenOption;
                     if (index === dieElements.length - 1) { // Only re-enable after last die finishes
                         rollDieBtn.disabled = false;
+                        customizeDieBtn.disabled = false; // Re-enable customize button
                         // Show splash screen with combined results
                         showResultSplashScreen(results.join(', '), () => {
                             diePostDecisionActions.classList.remove('hidden'); // Show post-decision actions
@@ -955,6 +1062,174 @@
                     }
                 }, 500 + (index * 100)); // Stagger animations slightly
             });
+        });
+
+        // --- Die Edit Modal Logic ---
+        const dieEditModal = document.getElementById('dieEditModal');
+        const dieEditModalTitle = document.getElementById('dieEditModalTitle');
+        const modalDieOptionInputs = []; // Array to store references to face input fields
+        for (let i = 1; i <= 6; i++) {
+            modalDieOptionInputs.push(document.getElementById(`modalDieOption${i}`));
+        }
+        const saveDieOptionsBtn = document.getElementById('saveDieOptionsBtn');
+        const cancelDieOptionsBtn = document.getElementById('cancelDieOptionsBtn');
+        const prevDieModalBtn = document.getElementById('prevDieModalBtn');
+        const nextDieModalBtn = document.getElementById('nextDieModalBtn');
+        const saveCurrentDieOptionsBtn = document.getElementById('saveCurrentDieOptionsBtn'); // New
+        const dieSaveSlotsContainerInModal = document.getElementById('dieSaveSlotsContainerInModal'); // New
+
+        let editingDieIndex = -1; // To keep track of which die is being edited
+
+        function openDieEditModal(index) {
+            editingDieIndex = index;
+            const currentFaces = dieOptions[index].faces;
+            modalDieOptionInputs.forEach((input, i) => {
+                input.value = currentFaces[i] || (i + 1).toString(); // Populate with current or default
+            });
+            dieEditModalTitle.textContent = `Edit Options for Die ${index + 1}`; // Update modal title
+
+            // Manage navigation button visibility within the modal
+            prevDieModalBtn.style.display = (editingDieIndex === 0) ? 'none' : 'block';
+            nextDieModalBtn.style.display = (editingDieIndex === currentCount - 1) ? 'none' : 'block';
+
+            renderDieSaveSlotsInModal(); // Render saved slots inside the modal
+            dieEditModal.classList.add('show');
+        }
+
+        function closeDieEditModal() {
+            dieEditModal.classList.remove('show');
+            editingDieIndex = -1;
+        }
+
+        saveDieOptionsBtn.addEventListener('click', () => {
+            if (editingDieIndex !== -1) {
+                const newFaces = modalDieOptionInputs.map(input => input.value.trim());
+                if (newFaces.every(face => face !== '')) { // Ensure all faces have a value
+                    dieOptions[editingDieIndex].faces = newFaces;
+                    showMessage(`Die ${editingDieIndex + 1} options saved!`, "info");
+                } else {
+                    showMessage("Please provide a value for all 6 faces of the die.", "error");
+                    return; // Don't close modal if validation fails
+                }
+            }
+            closeDieEditModal();
+            updateDieDisplay(); // Redraw dice with potentially updated text
+        });
+
+        cancelDieOptionsBtn.addEventListener('click', closeDieEditModal);
+
+        // Event listener for the main "Customize" button
+        customizeDieBtn.addEventListener('click', () => {
+            if (currentCount > 0) {
+                openDieEditModal(0); // Open modal for the first die
+            } else {
+                showMessage("Please select a count of dice first.", "info");
+            }
+        });
+
+        // Navigation for dice *within the modal*
+        prevDieModalBtn.addEventListener('click', () => {
+            if (editingDieIndex > 0) {
+                // Save current edits before navigating
+                const newFaces = modalDieOptionInputs.map(input => input.value.trim());
+                if (newFaces.every(face => face !== '')) {
+                    dieOptions[editingDieIndex].faces = newFaces;
+                } else {
+                    showMessage("Please save or cancel current die edits before navigating.", "error");
+                    return;
+                }
+                openDieEditModal(editingDieIndex - 1);
+            }
+        });
+
+        nextDieModalBtn.addEventListener('click', () => {
+            if (editingDieIndex < currentCount - 1) {
+                // Save current edits before navigating
+                const newFaces = modalDieOptionInputs.map(input => input.value.trim());
+                if (newFaces.every(face => face !== '')) {
+                    dieOptions[editingDieIndex].faces = newFaces;
+                } else {
+                    showMessage("Please save or cancel current die edits before navigating.", "error");
+                    return;
+                }
+                openDieEditModal(editingDieIndex + 1);
+            }
+        });
+
+        // --- Saved Die Slots Logic ---
+        let savedDieSlots = []; // Array to store saved die options
+
+        function loadSavedDieSlots() {
+            const savedData = localStorage.getItem('decidoDieSlots');
+            if (savedData) {
+                savedDieSlots = JSON.parse(savedData);
+            } else {
+                savedDieSlots = [];
+            }
+        }
+
+        function saveDieSlotsToLocalStorage() {
+            localStorage.setItem('decidoDieSlots', JSON.stringify(savedDieSlots));
+        }
+
+        function renderDieSaveSlotsInModal() {
+            dieSaveSlotsContainerInModal.innerHTML = '';
+            if (savedDieSlots.length === 0) {
+                dieSaveSlotsContainerInModal.innerHTML = '<p class="text-sm text-gray-600">No saved options yet.</p>';
+            }
+
+            savedDieSlots.forEach((slot, index) => {
+                const savedDieButton = document.createElement('button');
+                savedDieButton.classList.add('saved-slot-btn', 'saved-die-slot-btn', 'text-sm', 'font-medium', 'py-2', 'px-3', 'rounded-lg', 'border', 'border-blue-200', 'w-full', 'mb-2');
+                savedDieButton.textContent = `${slot.name}: ${slot.options.faces.join(', ')}`;
+                savedDieButton.dataset.slotIndex = index;
+
+                savedDieButton.addEventListener('click', (event) => {
+                    const slotIndex = parseInt(event.target.dataset.slotIndex, 10);
+                    if (editingDieIndex !== -1 && savedDieSlots[slotIndex].options.faces.every(face => face !== '')) {
+                        dieOptions[editingDieIndex] = { ...savedDieSlots[slotIndex].options };
+                        modalDieOptionInputs.forEach((input, i) => {
+                            input.value = dieOptions[editingDieIndex].faces[i];
+                        });
+                        showMessage(`Options from "${savedDieSlots[slotIndex].name}" recalled for Die ${editingDieIndex + 1}!`, "info");
+                    } else {
+                        showMessage("No valid options saved in this slot to recall.", "error");
+                    }
+                });
+                dieSaveSlotsContainerInModal.appendChild(savedDieButton);
+            });
+        }
+
+        // Event listener for the "Save Current Die" button inside the modal
+        saveCurrentDieOptionsBtn.addEventListener('click', () => {
+            if (editingDieIndex !== -1) {
+                const currentFaces = modalDieOptionInputs.map(input => input.value.trim());
+                if (currentFaces.every(face => face !== '')) {
+                    const saveName = prompt("Name this saved die option (e.g., 'D&D', 'Yes/No/Maybe'):");
+                    if (saveName) {
+                        const newSavedOption = {
+                            name: saveName.trim(),
+                            options: { faces: currentFaces }
+                        };
+                        const existingIndex = savedDieSlots.findIndex(slot => slot.name === newSavedOption.name);
+                        if (existingIndex !== -1) {
+                            savedDieSlots[existingIndex] = newSavedOption;
+                            showMessage(`Updated saved options for "${newSavedOption.name}"!`, "info");
+                        } else {
+                            savedDieSlots.push(newSavedOption);
+                            showMessage(`Saved options "${newSavedOption.name}"!`, "info");
+                        }
+                        saveDieSlotsToLocalStorage();
+                        renderDieSaveSlotsInModal();
+                    } else {
+                        showMessage("Save operation cancelled. Please provide a name.", "info");
+                    }
+                } else {
+                    showMessage("Please provide a value for all 6 faces of the die before saving.", "error");
+                }
+            } else {
+                showMessage("No die is currently being edited.", "error");
+            }
         });
 
 
@@ -1157,10 +1432,14 @@
             }
             updateCoinDisplay();
             loadSavedCoinSlots(); // Load saved slots on coin card display
-            renderCoinSaveSlots(); // Render save slot buttons
         }
         if (dieCard.classList.contains('card-visible')) {
+            // Initialize dieOptions for the new count if needed
+            if (dieOptions.length !== currentCount) {
+                dieOptions = Array.from({length: currentCount}, () => ({faces: ["1", "2", "3", "4", "5", "6"]}));
+            }
             updateDieDisplay();
+            loadSavedDieSlots(); // Load saved slots on die card display
         }
     </script>
 </body>
