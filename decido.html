@@ -467,7 +467,19 @@
                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                 </div>
             </div>
-            <div class="flex justify-center gap-4 mt-6 relative">
+            <!-- Saved Coin Options within Modal -->
+            <div class="bg-yellow-100 p-4 rounded-lg mt-6 shadow-inner">
+                <h4 class="text-xl font-bold text-yellow-800 mb-4 text-center">Saved Coin Options</h4>
+                <button id="saveCurrentCoinOptionsBtn"
+                        class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-bold py-2 px-4 rounded-lg shadow-md
+                               transition duration-200 mb-4">
+                    Save Current Coin
+                </button>
+                <div id="coinSaveSlotsContainerInModal" class="space-y-3">
+                    <!-- Saved slots will be dynamically generated here -->
+                </div>
+            </div>
+            <div class="flex justify-between gap-4 mt-6 relative">
                 <button id="prevCoinModalBtn"
                         class="modal-arrow-button" style="left: 1rem;">
                     &larr;
@@ -608,6 +620,8 @@
                     coinOptions = Array.from({length: currentCount}, () => ({heads: "Heads", tails: "Tails"}));
                 }
                 updateCoinDisplay(); // Ensure display and title are updated when coinCard is shown
+                loadSavedCoinSlots(); // Load saved slots on coin card display
+                renderCoinSaveSlots(); // Render save slot buttons
             } else if (cardToShow === dieCard) {
                 updateDieDisplay(); // Ensure display and title are updated when dieCard is shown
             } else if (cardToShow === spinnerCard) {
@@ -714,6 +728,8 @@
         const cancelCoinOptionsBtn = document.getElementById('cancelCoinOptionsBtn');
         const prevCoinModalBtn = document.getElementById('prevCoinModalBtn');
         const nextCoinModalBtn = document.getElementById('nextCoinModalBtn');
+        const saveCurrentCoinOptionsBtn = document.getElementById('saveCurrentCoinOptionsBtn'); // New
+        const coinSaveSlotsContainerInModal = document.getElementById('coinSaveSlotsContainerInModal'); // New
 
         let editingCoinIndex = -1; // To keep track of which coin is being edited
 
@@ -727,6 +743,7 @@
             prevCoinModalBtn.style.display = (editingCoinIndex === 0) ? 'none' : 'block';
             nextCoinModalBtn.style.display = (editingCoinIndex === currentCount - 1) ? 'none' : 'block';
 
+            renderCoinSaveSlotsInModal(); // Render saved slots inside the modal
             coinEditModal.classList.add('show');
         }
 
@@ -789,6 +806,103 @@
                     return;
                 }
                 openCoinEditModal(editingCoinIndex + 1);
+            }
+        });
+
+
+        // --- Saved Coin Slots Logic ---
+        const NUM_COIN_SAVE_SLOTS = 3;
+        let savedCoinSlots = []; // Array to store saved options
+
+        // Function to load saved slots from localStorage
+        function loadSavedCoinSlots() {
+            const savedData = localStorage.getItem('decidoCoinSlots');
+            if (savedData) {
+                savedCoinSlots = JSON.parse(savedData);
+            } else {
+                // Initialize with empty slots if no data found
+                savedCoinSlots = []; // Start empty, not with fixed number of empty slots
+            }
+        }
+
+        // Function to save slots to localStorage
+        function saveCoinSlotsToLocalStorage() {
+            localStorage.setItem('decidoCoinSlots', JSON.stringify(savedCoinSlots));
+        }
+
+        // Function to render the save/recall buttons and their content INSIDE THE MODAL
+        function renderCoinSaveSlotsInModal() {
+            coinSaveSlotsContainerInModal.innerHTML = ''; // Clear existing
+            if (savedCoinSlots.length === 0) {
+                coinSaveSlotsContainerInModal.innerHTML = '<p class="text-sm text-gray-600">No saved options yet.</p>';
+            }
+
+            savedCoinSlots.forEach((slot, index) => {
+                const slotDiv = document.createElement('div');
+                slotDiv.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-center', 'justify-between', 'gap-2', 'p-3', 'bg-yellow-50', 'rounded-lg', 'border', 'border-yellow-200');
+                
+                const slotContent = slot.heads && slot.tails ? `${slot.name}: ${slot.heads} / ${slot.tails}` : 'Empty Slot';
+                
+                slotDiv.innerHTML = `
+                    <span class="text-sm font-medium text-yellow-700 w-full sm:w-auto text-center sm:text-left">${slotContent}</span>
+                    <div class="flex gap-2">
+                        <button class="recall-slot-btn bg-yellow-300 hover:bg-yellow-400 text-yellow-800 text-xs font-bold py-1 px-3 rounded-md transition duration-200" data-slot-index="${index}" ${!slot.heads || !slot.tails ? 'disabled' : ''}>Recall</button>
+                    </div>
+                `;
+                coinSaveSlotsContainerInModal.appendChild(slotDiv);
+            });
+
+            // Attach event listeners to new buttons
+            coinSaveSlotsContainerInModal.querySelectorAll('.recall-slot-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const slotIndex = parseInt(event.target.dataset.slotIndex, 10);
+                    if (editingCoinIndex !== -1 && savedCoinSlots[slotIndex].heads && savedCoinSlots[slotIndex].tails) {
+                        // Apply recalled options to the currently edited coin
+                        coinOptions[editingCoinIndex] = { ...savedCoinSlots[slotIndex].options }; // Load a copy of options
+                        // Update modal inputs with recalled options
+                        modalCoinOption1Input.value = coinOptions[editingCoinIndex].heads;
+                        modalCoinOption2Input.value = coinOptions[editingCoinIndex].tails;
+                        showMessage(`Options from "${savedCoinSlots[slotIndex].name}" recalled for Coin ${editingCoinIndex + 1}!`, "info");
+                        // No need to close modal, user might want to save/continue editing
+                        // updateCoinDisplay(); // Don't redraw main card until modal is closed and saved
+                    } else {
+                        showMessage("No options saved in this slot to recall.", "error");
+                    }
+                });
+            });
+        }
+
+        // Event listener for the "Save Current Coin" button inside the modal
+        saveCurrentCoinOptionsBtn.addEventListener('click', () => {
+            if (editingCoinIndex !== -1) {
+                const opt1 = modalCoinOption1Input.value.trim();
+                const opt2 = modalCoinOption2Input.value.trim();
+                if (opt1 && opt2) {
+                    const saveName = prompt("Name this saved coin option (e.g., 'Yes/No', 'Coffee/Tea'):");
+                    if (saveName) {
+                        const newSavedOption = {
+                            name: saveName.trim(),
+                            options: { heads: opt1, tails: opt2 }
+                        };
+                        // Check if name already exists and replace, or add new
+                        const existingIndex = savedCoinSlots.findIndex(slot => slot.name === newSavedOption.name);
+                        if (existingIndex !== -1) {
+                            savedCoinSlots[existingIndex] = newSavedOption;
+                            showMessage(`Updated saved options for "${newSavedOption.name}"!`, "info");
+                        } else {
+                            savedCoinSlots.push(newSavedOption);
+                            showMessage(`Saved options "${newSavedOption.name}"!`, "info");
+                        }
+                        saveCoinSlotsToLocalStorage();
+                        renderCoinSaveSlotsInModal(); // Update display of saved slots
+                    } else {
+                        showMessage("Save operation cancelled. Please provide a name.", "info");
+                    }
+                } else {
+                    showMessage("Please provide both options for the coin before saving.", "error");
+                }
+            } else {
+                showMessage("No coin is currently being edited.", "error");
             }
         });
 
@@ -1042,6 +1156,8 @@
                 coinOptions = Array.from({length: currentCount}, () => ({heads: "Heads", tails: "Tails"}));
             }
             updateCoinDisplay();
+            loadSavedCoinSlots(); // Load saved slots on coin card display
+            renderCoinSaveSlots(); // Render save slot buttons
         }
         if (dieCard.classList.contains('card-visible')) {
             updateDieDisplay();
