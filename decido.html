@@ -2538,7 +2538,7 @@
                     spinnerOptions = newOptions;
                     showMessage(`Spinner options saved!`, "info");
                 } else {
-                    showMessage(`Please provide a valid name and a non-negative weight for all ${currentCount} parts of the spinner.`, "error");
+                    showMessage(`Please provide a valid name and a non-negative weight for all ${currentCount} parts of the spinner before saving.`, "error");
                     return; // Don't close modal if validation fails
                 }
             }
@@ -3174,22 +3174,22 @@
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('delete-saved-option-btn');
-                deleteButton.textContent = 'x';
-                deleteButton.dataset.slotIndex = index;
-                deleteButton.addEventListener('click', (event) => {
-                    const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
-                    showConfirmationModal(
-                        "Delete Saved Deck",
-                        `Are you sure you want to delete "${savedDeckSlots[idxToDelete].name}"?`,
-                        () => {
-                            savedDeckSlots.splice(idxToDelete, 1);
-                            saveDeckSlotsToLocalStorage();
-                            renderSavedDeckListOptions(); // Re-render the list in Options card
-                            renderSavedDeckListCardGame(); // Update display on card game page
-                            showMessage("Saved deck deleted!", "info");
-                        }
-                    );
-                });
+                    deleteButton.textContent = 'x';
+                    deleteButton.dataset.slotIndex = index;
+                    deleteButton.addEventListener('click', (event) => {
+                        const idxToDelete = parseInt(event.target.dataset.slotIndex, 10);
+                        showConfirmationModal(
+                            "Delete Saved Deck",
+                            `Are you sure you want to delete "${savedDeckSlots[idxToDelete].name}"?`,
+                            () => {
+                                savedDeckSlots.splice(idxToDelete, 1);
+                                saveDeckSlotsToLocalStorage();
+                                renderSavedDeckListOptions(); // Re-render the list in Options card
+                                renderSavedDeckListCardGame(); // Update display on card game page
+                                showMessage("Saved deck deleted!", "info");
+                            }
+                        );
+                    });
                 slotWrapper.appendChild(deleteButton);
                 savedDeckListOptions.appendChild(slotWrapper);
             });
