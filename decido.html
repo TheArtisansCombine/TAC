@@ -26,6 +26,7 @@
         body.theme-natural {
             background-color: #f8fbf8; /* Light sage/off-white background */
             color: #343a40; /* Darker text for contrast */
+            --card-back-color-theme: #fca5a5; /* Red-300 as a consistent card back */
         }
         .theme-natural .decision-selection-card {
             background: linear-gradient(to bottom right, #ecfccb, #a7f3d0); /* from-lime-50 to-emerald-100 */
@@ -105,6 +106,7 @@
         body.theme-bold {
             background-color: #1a202c; /* Deep blue-gray background */
             color: #e2e8f0; /* Light text for contrast */
+            --card-back-color-theme: #ef4444; /* Red-500 as a consistent card back */
         }
         .theme-bold .decision-selection-card {
             background: linear-gradient(to bottom right, #6b21a8, #4338ca); /* from-purple-700 to-indigo-800 */
@@ -184,6 +186,7 @@
         body.theme-modern {
             background-color: #f0f4f8; /* Light blue-gray background */
             color: #2d3748; /* Darker text */
+            --card-back-color-theme: #fed7d7; /* Red-200 as a consistent card back */
         }
         .theme-modern .decision-selection-card {
             background: linear-gradient(to bottom right, #4299e1, #667eea); /* from-blue-500 to-indigo-600 */
@@ -459,19 +462,43 @@
             @apply card-base-style; /* Use apply to include base styles */
             position: absolute;
             transform-origin: center center;
-            overflow: hidden; /* Hide text if too long */
+            /* Removed overflow: hidden to allow text wrapping */
         }
         #cardDeckDisplay .card-in-deck:hover {
             transform: translateY(-8px) scale(1.05); /* Lift and slightly enlarge on hover */
             z-index: 10; /* Bring to front on hover */
         }
+        /* Style for the text content within each stacked card */
         #cardDeckDisplay .card-in-deck .card-text {
-            display: none; /* Hide text on stacked cards */
+            /* This will be the content for each card in the stack */
+            display: flex; /* Centering content */
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            word-break: break-word;
+            color: white; /* Text color, should contrast with card back */
+            background-color: var(--card-back-color-theme); /* Ensure background for text for consistency */
+            border-radius: 8px; /* Match card border radius */
+            /* Start hidden, transition to visible */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
+
+        /* Show text for the top card in the stack */
         #cardDeckDisplay .card-in-deck:last-child .card-text {
-            display: block; /* Show text only on the top card */
-            font-size: 0.8rem; /* Smaller text for "Deck" label */
+            opacity: 1;
         }
+
+        /* Show text for any card on hover */
+        #cardDeckDisplay .card-in-deck:hover .card-text {
+            opacity: 1;
+        }
+
         #cardDeckDisplay.empty-deck { /* When empty, it's just the container */
             background-color: #e2e8f0; /* Light gray for empty deck area */
             border-radius: 8px;
@@ -506,19 +533,39 @@
             @apply card-base-style;
             position: absolute;
             transform-origin: center center;
-            overflow: hidden;
+            /* Removed overflow: hidden for consistency */
         }
         .card-pile-container .card-in-pile:hover {
             transform: translateY(-5px) scale(1.05); /* Lift and slightly enlarge on hover */
             z-index: 10;
         }
+        /* Style for the text content within each split pile card */
         .card-pile-container .card-in-pile .card-text {
-            display: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 0.8rem; /* Slightly smaller for split piles */
+            font-weight: 600;
+            text-align: center;
+            word-break: break-word;
+            color: white;
+            background-color: var(--card-back-color-theme);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
+        /* Show text for the top card in the split pile */
         .card-pile-container .card-in-pile:last-child .card-text {
-            display: block;
-            font-size: 0.8rem;
+            opacity: 1;
         }
+        /* Show text on hover for any card in the split pile */
+        .card-pile-container .card-in-pile:hover .card-text {
+            opacity: 1;
+        }
+
         .card-pile-container .card-in-pile.empty {
             @apply card-base-style empty;
             position: relative; /* Not absolute when empty */
@@ -1556,6 +1603,11 @@
         changeCoinCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'coin'));
         changeDieCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'die'));
         changeSpinnerCountBtn.addEventListener('click', () => showCard(countSelectionCard, 'spinner'));
+
+        // Apply theme on initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(currentTheme);
+        });
 
 
         // --- Theme Management ---
@@ -2854,7 +2906,7 @@
             currentDeckCountSpan.textContent = currentDeck.length;
 
             // Get theme-specific card back color
-            const cardBackColor = getComputedStyle(document.body).getPropertyValue('--card-back-color-theme') || '#a78bfa'; // Default if not set
+            const cardBackColor = getComputedStyle(document.body).getPropertyValue('--card-back-color-theme');
 
             if (currentDeck.length === 0) {
                 cardDeckDisplay.classList.add('empty-deck');
@@ -2878,12 +2930,12 @@
                     cardElement.style.left = `calc(50% + ${baseLeft}px + ${i * stackOffset}px)`;
                     cardElement.style.top = `calc(50% + ${baseTop}px + ${i * stackOffset}px)`;
                     
-                    if (i === currentDeck.length - 1) { // Only the top card shows "Deck"
-                        const cardText = document.createElement('span');
-                        cardText.classList.add('card-text');
-                        cardText.textContent = `Deck (${currentDeck.length})`;
-                        cardElement.appendChild(cardText);
-                    }
+                    // Add the actual card name for each card in the stack
+                    const cardText = document.createElement('span');
+                    cardText.classList.add('card-text'); // This class now controls visibility based on position/hover
+                    cardText.textContent = currentDeck[i];
+                    cardElement.appendChild(cardText);
+                    
                     cardDeckDisplay.appendChild(cardElement);
                 }
                 drawCardBtn.disabled = false;
@@ -2994,12 +3046,12 @@
                         cardElement.style.left = `0px`; // Position relative to pileContainer
                         cardElement.style.top = `0px`;
 
-                        if (i === deck.length - 1) { // Only the top card shows "Deck"
-                            const cardText = document.createElement('span');
-                            cardText.classList.add('card-text');
-                            cardText.textContent = `Deck`; // Just "Deck" for split piles
-                            cardElement.appendChild(cardText);
-                        }
+                        // Add the actual card name for each card in the split pile stack
+                        const cardText = document.createElement('span');
+                        cardText.classList.add('card-text'); // This class now controls visibility based on position/hover
+                        cardText.textContent = deck[i];
+                        cardElement.appendChild(cardText);
+                        
                         pileContainer.appendChild(cardElement);
                     }
                 }
