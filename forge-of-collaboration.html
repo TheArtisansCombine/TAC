@@ -259,6 +259,20 @@
         <section class="bg-white rounded-lg shadow-md p-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Our Valued Partners</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- NEW Partner Card: DWVisuals -->
+                <a href="dwvisuals.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
+                    <div class="partner-logo-container">
+                        <img src="images/dwv_logo.jpg" alt="DWVisuals Logo" class="w-24 h-24 mx-auto object-contain">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">DWVisuals</h3>
+                        <p class="text-fuchsia-600 font-medium text-sm mb-3">Professional Photography & Videography</p>
+                        <p class="text-gray-600 text-sm">
+                            A creative powerhouse dedicated to capturing compelling stories and moments with an artistic and meticulous eye.
+                        </p>
+                        <span class="text-teal-600 hover:underline text-sm mt-4 inline-block">Learn More <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                    </div>
+                </a>
                 <!-- NEW Partner Card: GetFabb with Ari / Ari Jays Designs -->
                 <a href="ari_services.html" class="block bg-white rounded-lg shadow-md overflow-hidden card-hover-effect">
                     <div class="partner-logo-container flex justify-center items-center">
@@ -373,7 +387,93 @@
                             <a href="events.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Events</a>
                             <a href="opportunities.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Opportunities</a>
                             <p class="text-white font-semibold mt-2">About Us</p>
-                            <a href="aboutus.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
-                            <a href="aboutus.html#where-we-are-from" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
-                            <a href="aboutus.html#testimonials" class="text-gray-300 hover:t
+                            <a href="index.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
+                            <a href="where-we-are-from.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
+                            <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Copyright Notice -->
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                <p>&copy; 2025 The Artisans Combine. All rights-reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('nav a');
+
+            // Toggle mobile menu visibility
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Highlight active navigation link and its parent dropdown
+            const currentPath = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            const dropdownParents = document.querySelectorAll('.dropdown');
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href');
+                // Normalize href for comparison (remove #anchors for main page links)
+                if (linkHref.includes('#')) {
+                    linkHref = link.split('#')[0];
+                }
+
+                if (currentPath === 'stashspot.html' && linkHref.includes('forge-of-collaboration.html')) {
+                    link.classList.add('active');
+                    // Find the parent dropdown and activate it
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle dropdown active states for other pages (already handled by the above logic)
+            dropdownParents.forEach(dropdown => {
+                const dropdownLinks = dropdown.querySelectorAll('.dropdown-content a');
+                let isDropdownActive = false;
+                dropdownLinks.forEach(link => {
+                    let linkHref = link.getAttribute('href');
+                    if (linkHref.includes('#')) {
+                        linkHref = link.split('#')[0];
+                    }
+
+                    if (currentPath === linkHref) {
+                        isDropdownActive = true;
+                        link.classList.add('active'); // Highlight the specific dropdown item
+                    }
+                });
+                if (isDropdownActive) {
+                    // Add active class to the dropdown title itself
+                    dropdown.querySelector('.nav-link').classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
