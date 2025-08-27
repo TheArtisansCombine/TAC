@@ -299,7 +299,7 @@
                 <p class="text-lg mb-8 max-w-xl mx-auto">
                     From captivating photography to compelling video content, see how DWVisuals brings stories to life.
                 </p>
-                <a href="https://www.facebook.com/DewayneVisuals" target="_blank" class="bg-white text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors">
+                <a href="dwvisuals.html" class="bg-white text-gray-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-colors">
                     Check out DWVisuals
                 </a>
             </div>
@@ -362,7 +362,8 @@
                             <p class="text-white font-semibold mt-2">About Us</p>
                             <a href="index.html#our-mission" class="text-gray-300 hover:text-white transition-colors block ml-4">Our Mission</a>
                             <a href="where-we-are-from.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Where We're From</a>
-                            <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
+                            <a href="index.html#testimonials" class="text-gray-300 hover:text-white transition-colors block ml-4">Testimonials</a>
+                            <a href="contact.html" class="text-gray-300 hover:text-white transition-colors block ml-4">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -413,7 +414,13 @@
                     linkHref = link.split('#')[0];
                 }
 
-                if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
+                if (currentPath === 'dwvisuals.html' && linkHref.includes('forge-of-collaboration.html')) {
+                    link.classList.add('active');
+                    let parentDropdown = link.closest('.dropdown');
+                    if (parentDropdown) {
+                        parentDropdown.querySelector('.nav-link').classList.add('active');
+                    }
+                } else if (currentPath === linkHref || (currentPath === '' && linkHref === 'index.html')) {
                     link.classList.add('active');
                 }
             });
